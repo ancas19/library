@@ -1,0 +1,13 @@
+plugins {
+    id 'java'
+    id 'org.springframework.boot' version '3.3.4'
+}
+
+dependencies {
+    implementation project(':models')
+    implementation project(':postgres')
+    implementation project(':uses-cases')
+
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+}
