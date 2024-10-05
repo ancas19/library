@@ -49,7 +49,7 @@ public class PostgresConnection {
     }
 
 
-    @Bean(name = "secutiryEntityManager")
+    @Bean(name = "libraryEntityManager")
     public LocalContainerEntityManagerFactoryBean entityManagerFactory() {
         LocalContainerEntityManagerFactoryBean em = new LocalContainerEntityManagerFactoryBean();
         em.setDataSource(dataSource());
