@@ -8,15 +8,18 @@ import co.com.ancas.response.GeneralResponse;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.HttpRequestMethodNotSupportedException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.context.request.WebRequest;
+import org.springframework.web.servlet.NoHandlerFoundException;
+import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
 import java.time.LocalDate;
 
 @Slf4j
 @RestControllerAdvice
-public class CustomExceptionHandler {
+public class CustomExceptionHandler extends ResponseEntityExceptionHandler {
 
     @ExceptionHandler(BadRequestException.class)
     public ResponseEntity<GeneralResponse<ErrorResponse>> handleBadRequestException(BadRequestException ex, WebRequest request) {
@@ -54,7 +57,26 @@ public class CustomExceptionHandler {
                 );
     }
 
-    @ExceptionHandler(Exception.class)
+
+    @ExceptionHandler(HttpRequestMethodNotSupportedException.class)
+    public ResponseEntity<GeneralResponse<ErrorResponse>> handleMethodNotSupported(HttpRequestMethodNotSupportedException ex, WebRequest request) {
+        log.error("Method Not Supported: {}", ex.getMessage());
+        return ResponseEntity.status(HttpStatus.METHOD_NOT_ALLOWED).
+                body(
+                        GeneralResponse.<ErrorResponse>builder()
+                                .message(Messages.MESSAGE_GENERAL_NOT_FOUND.getMessage())
+                                .data(
+                                        ErrorResponse.builder()
+                                                .timeStamp(LocalDate.now())
+                                                .details(request.getDescription(false))
+                                                .message(ex.getMessage())
+                                                .build()
+                                )
+                                .build()
+                );
+    }
+
+    //@ExceptionHandler(Exception.class)
     public ResponseEntity<GeneralResponse<ErrorResponse>> handelGeneralException(Exception ex, WebRequest request) {
         log.error("Internal Server Exception: {}", ex.getMessage());
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).

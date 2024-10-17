@@ -17,7 +17,6 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @NoArgsConstructor
 @MappedSuperclass
-@SuperBuilder
 public class AuditEntity {
     @Column(name = "user_created", nullable = false, updatable = false)
     private String userCreated;
