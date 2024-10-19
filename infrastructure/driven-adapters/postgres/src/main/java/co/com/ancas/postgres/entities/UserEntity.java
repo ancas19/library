@@ -17,7 +17,7 @@ public class UserEntity {
     private Long id;
 
     @Column(name = "person_id", nullable = false)
-    private Integer personId;
+    private Long personId;
 
     @Column(name = "username", nullable = false, unique = true)
     private String username;
@@ -26,8 +26,14 @@ public class UserEntity {
     private String password;
 
     @Column(name = "role_id", nullable = false)
-    private Integer roleId;
+    private Long roleId;
 
     @Column(name = "membership_id", nullable = false)
-    private Integer membershipId;
+    private Long membershipId;
+
+    @Column(name = "email_verified", nullable = false)
+    private boolean emailVerified;
+
+    @Column(name = "change_password", nullable = false)
+    private boolean changePassword;
 }

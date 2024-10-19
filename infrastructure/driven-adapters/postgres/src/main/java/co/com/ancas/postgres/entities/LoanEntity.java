@@ -17,10 +17,10 @@ public class LoanEntity {
     private Long id;
 
     @Column(name = "user_id", nullable = false)
-    private Integer userId;
+    private Long userId;
 
     @Column(name = "book_id", nullable = false)
-    private Integer bookId;
+    private Long bookId;
 
     @Column(name = "loan_date")
     private String loanDate;

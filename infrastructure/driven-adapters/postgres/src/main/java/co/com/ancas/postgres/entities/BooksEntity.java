@@ -23,7 +23,7 @@ public class BooksEntity {
     private String isbn;
 
     @Column(name = "author_id", nullable = false)
-    private Integer authorId;
+    private Long authorId;
 
     @Column(name = "publish_date")
     private String publishDate;
@@ -35,5 +35,5 @@ public class BooksEntity {
     private Integer availableCopies;
 
     @Column(name = "image_id", nullable = false)
-    private Integer imageId;
+    private Long imageId;
 }

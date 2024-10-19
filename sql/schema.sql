@@ -70,6 +70,8 @@ CREATE TABLE users (
   password VARCHAR(255),
   role_id INT not null,
   membership_id INT not null,
+  email_verified bool not null,
+  change_password bool not null,
   created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
   user_created VARCHAR(255),
   updated_user VARCHAR(255),
