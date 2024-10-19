@@ -7,11 +7,11 @@ import lombok.*;
 @Builder
 @Getter
 @Setter
-public class People {
-    private Long id;
+public class PeopleCreation {
     private String dni;
     private String firstName;
     private String lastName;
     private String email;
     private String phone;
+    private String userType;
 }
