@@ -40,7 +40,7 @@ public class CreateUserAdapter implements IUseCaseVoid<UserCreation> {
     }
 
     private String createPassword(Integer length) {
-        String characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$&*";
+        String characters = CHARACTERS.getConstant();
         SecureRandom random = new SecureRandom();
         StringBuilder password = new StringBuilder(length);
         for (int i = 0; i < length; i++) {

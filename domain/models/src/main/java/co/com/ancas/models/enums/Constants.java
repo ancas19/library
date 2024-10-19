@@ -3,7 +3,8 @@ package co.com.ancas.models.enums;
 public enum Constants {
     NORMAL("NORMAL"),
     USER("USER"),
-    EMPLOYEE("EMPLOYEE"),;
+    EMPLOYEE("EMPLOYEE"),
+    CHARACTERS("ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$&*"),;
 
     private final String constant;
 
