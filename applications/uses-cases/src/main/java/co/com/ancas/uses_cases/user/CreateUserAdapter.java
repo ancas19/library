@@ -5,6 +5,7 @@ import co.com.ancas.models.model.User;
 import co.com.ancas.models.model.UserCreation;
 import co.com.ancas.models.repositories.UserRepositoryport;
 import co.com.ancas.uses_cases.interfaces.IUseCaseVoid;
+import co.com.ancas.uses_cases.membership.FindIdMembershipByNameAdapter;
 import co.com.ancas.uses_cases.roles.FindIdRoleByNameAdapter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
@@ -17,7 +18,7 @@ import static co.com.ancas.models.enums.Constants.*;
 @Component
 public class CreateUserAdapter implements IUseCaseVoid<UserCreation> {
     private final FindIdRoleByNameAdapter findIdRoleByNameAdapter;
-    private final FindIdRoleByNameAdapter findIdMembershipByNameAdapter;
+    private final FindIdMembershipByNameAdapter findIdMembershipByNameAdapter;
     private final UserRepositoryport userRepositoryport;
 
     @Override
@@ -28,7 +29,7 @@ public class CreateUserAdapter implements IUseCaseVoid<UserCreation> {
         this.userRepositoryport.save(
                 User.builder()
                         .personId(userCreation.getId())
-                        .username(userName)
+                        .username(userName.toString())
                         .password(createPassword(12))
                         .roleId(this.findIdRoleByNameAdapter.execute(role))
                         .membershipId(this.findIdMembershipByNameAdapter.execute(membership))
@@ -54,8 +55,8 @@ public class CreateUserAdapter implements IUseCaseVoid<UserCreation> {
         Integer contador=1;
         String userName;
         do{
-            userName="%s.%s%s".formatted(people.getFirstName().split(" "),people.getLastName().split(" "),contador);
-        }while (!userRepositoryport.verifyExistsUserName(userName));
+            userName="%s.%s%s".formatted(people.getFirstName().split(" ")[0],people.getLastName().split(" ")[0],contador);
+        }while (userRepositoryport.verifyExistsUserName(userName));
         return userName;
     }
 

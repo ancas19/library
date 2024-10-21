@@ -12,7 +12,7 @@ public interface RolesRepository extends JpaRepository<RolesEntity, Long> {
            """
            SELECT r.id
            FROM RolesEntity r
-           WHERE r.role_name = :roleName
+           WHERE r.roleName = :roleName
            """
     )
     Long findIdRoleByName(@Param("roleName") String roleName);

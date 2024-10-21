@@ -12,7 +12,7 @@ public interface MembershipRepository extends JpaRepository<MembershipEntity, Lo
             """
             SELECT m.id
             FROM MembershipEntity m
-            WHERE m.membership_type = :membershipName
+            WHERE m.membershipType = :membershipName
             """
     )
     Long findIdMembershipByName(@Param("membershipName") String membershipName);

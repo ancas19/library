@@ -9,7 +9,8 @@ public enum Messages {
     MESSAGE_ROLE_NOT_FOUND("Role %s not found"),
     MESSAGES_MEMBER_NOT_FOUND("Membership %s not found"),
     MESSAGE_ERROR_EMAIL_ALREADY_EXISTS("Email already exists"),
-    MESSAGE_HEALTH_CHECK("Service is up and running");
+    MESSAGE_HEALTH_CHECK("Service is up and running"),
+    MESSAGE_ERROR_DATA_INCORRECT("Data sent is incorrect");
     private final String message;
 
     Messages(String message) {

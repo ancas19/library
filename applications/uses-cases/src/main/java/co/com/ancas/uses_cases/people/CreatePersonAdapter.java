@@ -3,8 +3,10 @@ package co.com.ancas.uses_cases.people;
 import co.com.ancas.models.exceptions.BadRequestException;
 import co.com.ancas.models.model.People;
 import co.com.ancas.models.model.PeopleCreation;
+import co.com.ancas.models.model.UserCreation;
 import co.com.ancas.models.repositories.PeopleRepositoryPort;
 import co.com.ancas.uses_cases.interfaces.IUseCase;
+import co.com.ancas.uses_cases.user.CreateUserAdapter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
@@ -15,6 +17,7 @@ import static co.com.ancas.models.enums.Messages.MESSAGE_ERROR_EMAIL_ALREADY_EXI
 @RequiredArgsConstructor
 public class CreatePersonAdapter implements IUseCase<PeopleCreation,People> {
     private final PeopleRepositoryPort peopleRepositoryPort;
+    private final CreateUserAdapter createUserAdapter;
     @Override
     public People execute(PeopleCreation people) {
         if(this.peopleRepositoryPort.verifyDni(people.getDni())){
@@ -24,6 +27,15 @@ public class CreatePersonAdapter implements IUseCase<PeopleCreation,People> {
             throw new BadRequestException(MESSAGE_ERROR_EMAIL_ALREADY_EXISTS.getMessage());
         }
         People peopleSaved=this.peopleRepositoryPort.save(people);
+        this.createUserAdapter.execute(
+                UserCreation.builder()
+                        .id(peopleSaved.getId())
+                        .firstName(peopleSaved.getFirstName())
+                        .lastName(people.getLastName())
+                        .email(people.getEmail())
+                        .userType(people.getUserType())
+                        .build()
+        );
         return peopleSaved;
     }
 }

@@ -26,9 +26,4 @@ public  class Mapper {
                 .map(entity -> map(entity, dto))
                 .toList();
     }
-
-    public static <S, D> D map(final S source, D destination) {
-        modelMapper.map(source, destination);
-        return destination;
-    }
 }

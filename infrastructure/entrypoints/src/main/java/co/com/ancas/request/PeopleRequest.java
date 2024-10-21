@@ -16,7 +16,7 @@ import lombok.NoArgsConstructor;
 public class PeopleRequest {
     @NotNull(message = "DNI is required")
     @NotEmpty(message = "DNI is required")
-    @Pattern(regexp = "^[0-9]{15}$", message = "DNI must have 8 digits")
+    @Pattern(regexp = "^[0-9]{10,15}$", message = "DNI must have beetween 10 and 15 digits")
     private String dni;
     @NotNull(message = "Name is required")
     @NotEmpty(message = "Name is required")
@@ -32,4 +32,7 @@ public class PeopleRequest {
     private String email;
     @Pattern(regexp = "^\\+[1-9][0-9]{1,3}[0-9]{6,14}$", message = "Phone must have 10 digits")
     private String phone;
+    @Pattern(regexp = "EMPLOYEE|USER", message = "User type must be 'EMPLOYEE' or 'USER'")
+    @NotNull
+    private String userType;
 }

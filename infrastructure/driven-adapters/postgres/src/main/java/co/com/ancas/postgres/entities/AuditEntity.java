@@ -21,7 +21,7 @@ public class AuditEntity {
     @Column(name = "user_created", nullable = false, updatable = false)
     private String userCreated;
 
-    @Column(name = "user_updated")
+    @Column(name = "updated_user")
     private String userUpdated;
 
     @Column(name = "created_at", nullable = false, updatable = false)
