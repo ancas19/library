@@ -2,6 +2,6 @@ bootJar { enabled = false }
 
 dependencies {
     implementation project(':models')
-    implementation group: 'org.springframework.boot', name: 'spring-boot-starter-mail', version: '3.3.4'
+
 
 }
