@@ -157,7 +157,7 @@ CREATE INDEX idx_loans_created_at ON loans(created_at);
 
 CREATE TABLE email_templates (
     id SERIAL PRIMARY KEY,
-    subject VARCHAR(255) NOT NULL,
+    subject VARCHAR(255) NOT NULL UNIQUE,
     body TEXT NOT NULL,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP

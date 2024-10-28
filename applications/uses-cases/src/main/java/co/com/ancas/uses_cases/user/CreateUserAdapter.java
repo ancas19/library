@@ -1,12 +1,17 @@
 package co.com.ancas.uses_cases.user;
 
+import co.com.ancas.models.enums.Constants;
+import co.com.ancas.models.model.Email;
 import co.com.ancas.models.model.People;
 import co.com.ancas.models.model.User;
 import co.com.ancas.models.model.UserCreation;
+import co.com.ancas.models.repositories.EmailRepositoryPort;
+import co.com.ancas.models.repositories.EmailTemplateRepositoryPort;
 import co.com.ancas.models.repositories.UserRepositoryport;
 import co.com.ancas.uses_cases.interfaces.IUseCaseVoid;
 import co.com.ancas.uses_cases.membership.FindIdMembershipByNameAdapter;
 import co.com.ancas.uses_cases.roles.FindIdRoleByNameAdapter;
+import jakarta.mail.MessagingException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
@@ -20,9 +25,11 @@ public class CreateUserAdapter implements IUseCaseVoid<UserCreation> {
     private final FindIdRoleByNameAdapter findIdRoleByNameAdapter;
     private final FindIdMembershipByNameAdapter findIdMembershipByNameAdapter;
     private final UserRepositoryport userRepositoryport;
+    private final EmailTemplateRepositoryPort emailTemplateRepositoryPort;
+    private final EmailRepositoryPort emailRepositoryPort;
 
     @Override
-    public void execute(UserCreation userCreation) {
+    public void execute(UserCreation userCreation) throws MessagingException {
         String userName=createUserName(userCreation);
         String membership=userCreation.getUserType().equals(USER.getConstant())?NORMAL.getConstant():EMPLOYEE.getConstant();
         String role=userCreation.getUserType().equals(USER.getConstant())?USER.getConstant():EMPLOYEE.getConstant();
@@ -37,7 +44,24 @@ public class CreateUserAdapter implements IUseCaseVoid<UserCreation> {
                         .changePassword(true)
                         .build()
         );
-        //TODO:Send email.
+        String templateFound=emailTemplateRepositoryPort.findEmailTemplateBySubject(USER_AND_PASSWORD.getConstant());
+        templateFound=templateFound.replace(":name",userCreation.getFirstName());
+        templateFound=templateFound.replace(":userName",userName);
+        templateFound=templateFound.replace(":password",createPassword(12));
+        this.emailRepositoryPort.sendEmail(
+                Email.builder()
+                        .recipient(userCreation.getEmail())
+                        .subject(USER_AND_PASSWORD.getConstant())
+                        .body(templateFound)
+                        .build()
+        );
+        this.emailRepositoryPort.sendEmail(
+                Email.builder()
+                        .recipient(userCreation.getEmail())
+                        .subject(SUBJECT_USER_AND_PASSWORD.getConstant())
+                        .body(templateFound)
+                        .build()
+        );
     }
 
     private String createPassword(Integer length) {

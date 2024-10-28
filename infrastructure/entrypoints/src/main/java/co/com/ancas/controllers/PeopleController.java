@@ -6,6 +6,7 @@ import co.com.ancas.response.PeopleResponse;
 import co.com.ancas.service.PeopleAppService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.mail.MessagingException;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -27,7 +28,7 @@ public class PeopleController {
     @Operation(summary = "Create People", description = "Endpoint to create People")
     public ResponseEntity<GeneralResponse<PeopleResponse>> createPeople(
             @Valid @RequestBody PeopleRequest request
-    ) {
+    ) throws MessagingException {
         return ResponseEntity
                 .status(HttpStatus.CREATED)
                 .body(

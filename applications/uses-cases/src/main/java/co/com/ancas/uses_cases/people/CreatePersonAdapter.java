@@ -7,6 +7,7 @@ import co.com.ancas.models.model.UserCreation;
 import co.com.ancas.models.repositories.PeopleRepositoryPort;
 import co.com.ancas.uses_cases.interfaces.IUseCase;
 import co.com.ancas.uses_cases.user.CreateUserAdapter;
+import jakarta.mail.MessagingException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
@@ -19,7 +20,7 @@ public class CreatePersonAdapter implements IUseCase<PeopleCreation,People> {
     private final PeopleRepositoryPort peopleRepositoryPort;
     private final CreateUserAdapter createUserAdapter;
     @Override
-    public People execute(PeopleCreation people) {
+    public People execute(PeopleCreation people) throws MessagingException {
         if(this.peopleRepositoryPort.verifyDni(people.getDni())){
             throw new BadRequestException(MESSAGE_ERROR_DNI_ALREADY_EXISTS.getMessage());
         }
