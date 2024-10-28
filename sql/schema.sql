@@ -153,3 +153,13 @@ CREATE TABLE loans (
 CREATE INDEX idx_loans_user_id ON loans(user_id);
 CREATE INDEX idx_loans_book_id ON loans(book_id);
 CREATE INDEX idx_loans_created_at ON loans(created_at);
+
+
+CREATE TABLE email_templates (
+    id SERIAL PRIMARY KEY,
+    subject VARCHAR(255) NOT NULL,
+    body TEXT NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
