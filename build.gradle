@@ -38,10 +38,12 @@ subprojects {
 
 	dependencies {
 		implementation "org.springframework.boot:spring-boot-starter-web:${springVersion}"
-		compileOnly 'org.projectlombok:lombok'
-		annotationProcessor 'org.projectlombok:lombok'
+		compileOnly "org.projectlombok:lombok:${lombokVersion}"
+		annotationProcessor "org.projectlombok:lombok:${lombokVersion}"
 		testImplementation "org.springframework.boot:spring-boot-starter-test:${springVersion}"
 		testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+		implementation group: 'org.thymeleaf', name: 'thymeleaf', version: '3.1.2.RELEASE'
+		implementation "org.springframework.boot:spring-boot-starter-mail:${springVersion}"
 	}
 
 	sourceSets {
