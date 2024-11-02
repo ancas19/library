@@ -46,15 +46,8 @@ public class CreateUserAdapter implements IUseCaseVoid<UserCreation> {
         );
         String templateFound=emailTemplateRepositoryPort.findEmailTemplateBySubject(USER_AND_PASSWORD.getConstant());
         templateFound=templateFound.replace(":name",userCreation.getFirstName());
-        templateFound=templateFound.replace(":userName",userName);
+        templateFound=templateFound.replace(":username",userName);
         templateFound=templateFound.replace(":password",createPassword(12));
-        this.emailRepositoryPort.sendEmail(
-                Email.builder()
-                        .recipient(userCreation.getEmail())
-                        .subject(USER_AND_PASSWORD.getConstant())
-                        .body(templateFound)
-                        .build()
-        );
         this.emailRepositoryPort.sendEmail(
                 Email.builder()
                         .recipient(userCreation.getEmail())

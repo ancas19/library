@@ -42,3 +42,7 @@ postgres:
   url: jdbc:postgresql://${POSTGRES_HOST}:${POSTGRES_PORT}/${POSTGRES_DB}
   user: ${POSTGRES_USER}
   pass: ${POSTGRES_PASSWORD}
+
+mail:
+  user: ${EMAIL_USER}
+  password: ${EMAIL_PASSWORD}

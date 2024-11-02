@@ -1,7 +1,7 @@
 plugins {
 	id 'java'
     id 'jacoco'
-	id 'org.springframework.boot' version '3.3.4'
+	id 'org.springframework.boot' version '3.3.5'
 	id 'io.spring.dependency-management' version '1.1.6'
 }
 
@@ -44,6 +44,7 @@ subprojects {
 		testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
 		implementation group: 'org.thymeleaf', name: 'thymeleaf', version: '3.1.2.RELEASE'
 		implementation "org.springframework.boot:spring-boot-starter-mail:${springVersion}"
+		implementation "org.springframework.boot:spring-boot-starter-thymeleaf:${springVersion}"
 	}
 
 	sourceSets {

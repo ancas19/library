@@ -11,6 +11,7 @@ import lombok.*;
 @Getter
 @Setter
 public class EmailTemplateEntity {
+    @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Long id;
