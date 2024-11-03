@@ -27,6 +27,7 @@ public interface PeopleRepository extends JpaRepository<PeopleEntity,Long> {
             WHERE (Lower(CONCAT(p.firstName, ' ', p.lastName)) LIKE :search 
             OR p.dni LIKE :search OR LOWER(u.username) LIKE :search)
             and r.roleName = :role
+            AND p.status = 'ACTIVE'
             ORDER BY p.id
             """
     )
@@ -48,13 +49,15 @@ public interface PeopleRepository extends JpaRepository<PeopleEntity,Long> {
                     FROM ImagesEntity i
                     WHERE i.id=p.profileImage
                 ),
-                u.username
+                u.username,
+                p.status
             )
             FROM PeopleEntity p
             INNER JOIN UserEntity u ON p.id = u.personId
             INNER JOIN RolesEntity r ON r.id = u.roleId
             INNER JOIN MembershipEntity m ON m.id = u.membershipId
             WHERE p.id = :idPeople
+            AND p.status = 'ACTIVE'
             """
     )
     Optional<PeopleFullInfomration> findPeopleById(Long idPeople);

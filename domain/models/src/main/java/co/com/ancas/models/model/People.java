@@ -14,4 +14,5 @@ public class People {
     private String lastName;
     private String email;
     private String phone;
+    private String status;
 }

@@ -33,4 +33,7 @@ public class PeopleEntity extends AuditEntity {
 
     @Column(name = "profile_image")
     private Integer profileImage;
+
+    @Column(name = "status", nullable = false)
+    private String status;
 }

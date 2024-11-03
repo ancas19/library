@@ -20,4 +20,5 @@ public class PeopleFullInfomrationResponse  implements Serializable {
     private String membership;
     private String profileImage;
     private String username;
+    private String status;
 }

@@ -11,6 +11,7 @@ import jakarta.mail.MessagingException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
+import static co.com.ancas.models.enums.Constants.ACTIVE;
 import static co.com.ancas.models.enums.Messages.MESSAGE_ERROR_DNI_ALREADY_EXISTS;
 import static co.com.ancas.models.enums.Messages.MESSAGE_ERROR_EMAIL_ALREADY_EXISTS;
 
@@ -27,6 +28,7 @@ public class CreatePersonAdapter implements IUseCase<PeopleCreation,People> {
         if(this.peopleRepositoryPort.verifyEmail(people.getEmail())){
             throw new BadRequestException(MESSAGE_ERROR_EMAIL_ALREADY_EXISTS.getMessage());
         }
+        people.setStatus(ACTIVE.getConstant());
         People peopleSaved=this.peopleRepositoryPort.save(people);
         this.createUserAdapter.execute(
                 UserCreation.builder()

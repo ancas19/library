@@ -14,4 +14,5 @@ public class PeopleCreation {
     private String email;
     private String phone;
     private String userType;
+    private String status;
 }

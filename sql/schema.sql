@@ -19,6 +19,7 @@ CREATE TABLE people (
   email VARCHAR(255),
   phone VARCHAR(20),
   profile_image INT,
+  status VARCHAR(255),
   created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
   user_created VARCHAR(255),
   updated_user VARCHAR(255),
