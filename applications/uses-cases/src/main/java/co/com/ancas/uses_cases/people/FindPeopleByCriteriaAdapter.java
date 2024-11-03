@@ -13,7 +13,7 @@ import org.springframework.stereotype.Component;
 
 @RequiredArgsConstructor
 @Component
-public class FindPeopleAdapter implements IUseCase<PeopleSearchCriteria, Page<People>> {
+public class FindPeopleByCriteriaAdapter implements IUseCase<PeopleSearchCriteria, Page<People>> {
     private final PeopleRepositoryPort peopleRepositoryPort;
     @Override
     public Page<People> execute(PeopleSearchCriteria peopleSearchCriteria) throws MessagingException {

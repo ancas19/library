@@ -20,9 +20,9 @@ public interface PeopleRepository extends JpaRepository<PeopleEntity,Long> {
             SELECT p
             FROM PeopleEntity p
             INNER JOIN UserEntity u ON p.id = u.personId
-            INNER JOIN RoleEntity r ON r.id = u.roleId
-            WHERE (CONCAT(p.firstName, ' ', p.lastName) LIKE :search 
-            OR p.dni LIKE :search)
+            INNER JOIN RolesEntity r ON r.id = u.roleId
+            WHERE (Lower(CONCAT(p.firstName, ' ', p.lastName)) LIKE :search 
+            OR p.dni LIKE :search OR LOWER(u.username) LIKE :search)
             and r.roleName = :role
             ORDER BY p.id
             """

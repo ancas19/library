@@ -41,6 +41,6 @@ public class PeopleRepositoryAdapter implements PeopleRepositoryPort {
                 .map(peopleEntity -> Mapper.map(peopleEntity, People.class));
     }
     private String formatString(String string) {
-        return "%%%s%%".formatted(string);
+        return "%%%s%%".formatted(string.toLowerCase());
     }
 }
