@@ -12,7 +12,8 @@ public enum Messages {
     MESSAGE_HEALTH_CHECK("Service is up and running"),
     MESSAGE_ERROR_DATA_INCORRECT("Data sent is incorrect"),
     MESSAGES_EMAIL_TEMPLATE_NOT_FOUND("Error sending email, please try again later or contact with support"),
-    MESSAGE_PEOPLE_NOT_FOUND("No people found matching the specified criteria."),;
+    MESSAGE_PEOPLE_NOT_FOUND("No people found matching the specified criteria."),
+    MESSAGE_PEOPLE_FULL_INFOMRATION("Person found successfully"),;
     private final String message;
 
     Messages(String message) {

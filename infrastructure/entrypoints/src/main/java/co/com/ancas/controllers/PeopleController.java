@@ -1,10 +1,12 @@
 package co.com.ancas.controllers;
 
+import co.com.ancas.models.enums.Messages;
 import co.com.ancas.models.model.PeopleSearchCriteria;
 import co.com.ancas.request.PeopleRequest;
 import co.com.ancas.request.PeopleSearchCriteriaRequest;
 import co.com.ancas.response.GeneralResponse;
 import co.com.ancas.response.PaginationResponse;
+import co.com.ancas.response.PeopleFullInfomrationResponse;
 import co.com.ancas.response.PeopleResponse;
 import co.com.ancas.service.PeopleAppService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -55,6 +57,21 @@ public class PeopleController {
                         GeneralResponse.<PaginationResponse<PeopleResponse>>builder()
                                 .message("People found successfully")
                                 .data(peopleService.findAllByCriteria(request, pageable))
+                                .build()
+                );
+    }
+
+    @GetMapping("/{id}")
+    @Operation(summary = "Find People by id", description = "Endpoint to find People by id")
+    public ResponseEntity<GeneralResponse<PeopleFullInfomrationResponse>> findById(
+            @PathVariable Long id
+    ) throws MessagingException {
+        return ResponseEntity
+                .status(HttpStatus.OK)
+                .body(
+                        GeneralResponse.<PeopleFullInfomrationResponse>builder()
+                                .message(Messages.MESSAGE_PEOPLE_FULL_INFOMRATION.getMessage())
+                                .data(peopleService.findById(id))
                                 .build()
                 );
     }

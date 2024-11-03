@@ -2,6 +2,7 @@ package co.com.ancas.postgres.adapters;
 
 import co.com.ancas.models.model.People;
 import co.com.ancas.models.model.PeopleCreation;
+import co.com.ancas.models.model.PeopleFullInfomration;
 import co.com.ancas.models.model.PeopleSearchCriteria;
 import co.com.ancas.models.repositories.PeopleRepositoryPort;
 import co.com.ancas.models.utils.Mapper;
@@ -10,6 +11,8 @@ import co.com.ancas.postgres.repositories.PeopleRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
+
+import java.util.Optional;
 
 @RequiredArgsConstructor
 @Service
@@ -40,6 +43,13 @@ public class PeopleRepositoryAdapter implements PeopleRepositoryPort {
                 )
                 .map(peopleEntity -> Mapper.map(peopleEntity, People.class));
     }
+
+    @Override
+    public Optional<PeopleFullInfomration> findPeopleById(Long idPeople) {
+        return this.peopleRepository
+                .findPeopleById(idPeople);
+    }
+
     private String formatString(String string) {
         return "%%%s%%".formatted(string.toLowerCase());
     }
