@@ -8,6 +8,7 @@ dependencies {
     implementation project(':postgres')
     implementation project(':email')
     implementation project(':uses-cases')
+    implementation project(':images')
 
     implementation "org.springframework.boot:spring-boot-starter-web:${springVersion}"
     testImplementation "org.springframework.boot:spring-boot-starter-test:${springVersion}"

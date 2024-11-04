@@ -13,7 +13,7 @@ import java.util.Optional;
 
 @RequiredArgsConstructor
 @Component
-public class FindPeopleByIdAdapter  implements IUseCase<Long, PeopleFullInfomration> {
+public class FindPeopleFullInformationAdapter implements IUseCase<Long, PeopleFullInfomration> {
     private final PeopleRepositoryPort peopleRepositoryPort;
     @Override
     public PeopleFullInfomration execute(Long idPeople) throws MessagingException {

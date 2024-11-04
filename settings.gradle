@@ -4,6 +4,7 @@ include ':postgres'
 include ':models'
 include ':uses-cases'
 include ':email'
+include ':images'
 
 
 project(':entrypoints')?.projectDir = file('./infrastructure/entrypoints')
@@ -11,4 +12,5 @@ project(':postgres')?.projectDir = file('./infrastructure/driven-adapters/postgr
 project(':models')?.projectDir = file('./domain/models')
 project(':uses-cases')?.projectDir = file('./applications/uses-cases')
 project(':email')?.projectDir = file('./infrastructure/driven-adapters/email')
+project(':images')?.projectDir = file('./infrastructure/driven-adapters/images')
 
