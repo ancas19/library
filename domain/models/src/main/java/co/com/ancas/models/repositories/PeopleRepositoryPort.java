@@ -13,5 +13,7 @@ public interface PeopleRepositoryPort {
     boolean verifyDni(String dni);
     boolean verifyEmail(String email);
     Page<People> findPeopleByCriteria(PeopleSearchCriteria peopleSearchCriteria);
-    Optional<PeopleFullInfomration> findPeopleById(Long idPeople);
+    Optional<PeopleFullInfomration> findPeopleFullInformation(Long idPeople);
+    Optional<People> findPeopleById(Long aLong);
+    void update(People people);
 }

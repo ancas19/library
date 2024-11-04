@@ -2,6 +2,7 @@ package co.com.ancas.controllers;
 
 import co.com.ancas.models.enums.Messages;
 import co.com.ancas.models.model.PeopleSearchCriteria;
+import co.com.ancas.request.ImageUploadRequest;
 import co.com.ancas.request.PeopleRequest;
 import co.com.ancas.request.PeopleSearchCriteriaRequest;
 import co.com.ancas.response.GeneralResponse;
@@ -19,6 +20,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+
+import java.io.IOException;
 
 @Tag(name = "People")
 @RestController
@@ -72,6 +75,22 @@ public class PeopleController {
                         GeneralResponse.<PeopleFullInfomrationResponse>builder()
                                 .message(Messages.MESSAGE_PEOPLE_FULL_INFOMRATION.getMessage())
                                 .data(peopleService.findById(id))
+                                .build()
+                );
+    }
+
+    @PostMapping("/profile-image")
+    @Operation(summary = "Upload profile image", description = "Endpoint to upload profile image")
+    public ResponseEntity<GeneralResponse<String>> uploadProfileImage(
+            @Valid @RequestBody ImageUploadRequest imageUpload
+    ) throws MessagingException, IOException {
+        peopleService.uploadProfileImage(imageUpload);
+        return ResponseEntity
+                .status(HttpStatus.OK)
+                .body(
+                        GeneralResponse.<String>builder()
+                                .message("Image uploaded successfully")
+                                .data("Image uploaded successfully")
                                 .build()
                 );
     }

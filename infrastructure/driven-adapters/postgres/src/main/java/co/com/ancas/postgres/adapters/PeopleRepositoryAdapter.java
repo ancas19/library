@@ -45,9 +45,19 @@ public class PeopleRepositoryAdapter implements PeopleRepositoryPort {
     }
 
     @Override
-    public Optional<PeopleFullInfomration> findPeopleById(Long idPeople) {
+    public Optional<PeopleFullInfomration> findPeopleFullInformation(Long idPeople) {
         return this.peopleRepository
-                .findPeopleById(idPeople);
+                .findPeopleFullInformation(idPeople);
+    }
+
+    @Override
+    public Optional<People> findPeopleById(Long aLong) {
+        return this.peopleRepository.findById(aLong).map(peopleEntity -> Mapper.map(peopleEntity, People.class));
+    }
+
+    @Override
+    public void update(People people) {
+        this.peopleRepository.save(Mapper.map(people, PeopleEntity.class));
     }
 
     private String formatString(String string) {

@@ -60,5 +60,5 @@ public interface PeopleRepository extends JpaRepository<PeopleEntity,Long> {
             AND p.status = 'ACTIVE'
             """
     )
-    Optional<PeopleFullInfomration> findPeopleById(Long idPeople);
+    Optional<PeopleFullInfomration> findPeopleFullInformation(Long idPeople);
 }

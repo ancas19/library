@@ -21,4 +21,7 @@ public class ImagesEntity  extends AuditEntity {
 
     @Column(name = "file_path", nullable = false)
     private String filePath;
+
+    @Column(name = "id_server", nullable = false)
+    private String idServer;
 }
