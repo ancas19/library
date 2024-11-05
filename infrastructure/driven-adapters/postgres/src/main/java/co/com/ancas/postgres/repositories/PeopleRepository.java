@@ -61,4 +61,5 @@ public interface PeopleRepository extends JpaRepository<PeopleEntity,Long> {
             """
     )
     Optional<PeopleFullInfomration> findPeopleFullInformation(Long idPeople);
+    boolean existsByDniAndNotId(String dni, Long id);
 }

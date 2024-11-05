@@ -1,6 +1,7 @@
 package co.com.ancas.service;
 
 import co.com.ancas.models.model.ImageUpload;
+import co.com.ancas.models.model.People;
 import co.com.ancas.models.model.PeopleCreation;
 import co.com.ancas.models.model.PeopleSearchCriteria;
 import co.com.ancas.models.utils.Mapper;
@@ -10,10 +11,7 @@ import co.com.ancas.request.PeopleSearchCriteriaRequest;
 import co.com.ancas.response.PaginationResponse;
 import co.com.ancas.response.PeopleFullInfomrationResponse;
 import co.com.ancas.response.PeopleResponse;
-import co.com.ancas.uses_cases.people.CreatePersonAdapter;
-import co.com.ancas.uses_cases.people.FindPeopleByCriteriaAdapter;
-import co.com.ancas.uses_cases.people.FindPeopleFullInformationAdapter;
-import co.com.ancas.uses_cases.people.UploadProfileImageAdapter;
+import co.com.ancas.uses_cases.people.*;
 import co.com.ancas.utils.Pagination;
 import jakarta.mail.MessagingException;
 import lombok.RequiredArgsConstructor;
@@ -30,6 +28,7 @@ public class PeopleAppService {
     private final FindPeopleByCriteriaAdapter findPeopleByCriteriaAdapter;
     private final FindPeopleFullInformationAdapter findPeopleByIdAdapter;
     private final UploadProfileImageAdapter uploadProfileImageAdapter;
+    private final UpdatePersonAdapter updatePersonAdapter;
     @Transactional(value = "libraryTransactionManager",rollbackFor = Exception.class)
     public PeopleResponse createPeople(PeopleRequest request) throws MessagingException {
         return Mapper.map(createPersonAdapter.execute(Mapper.map(request, PeopleCreation.class)), PeopleResponse.class);
@@ -50,5 +49,10 @@ public class PeopleAppService {
     @Transactional(value = "libraryTransactionManager",rollbackFor = Exception.class)
     public void uploadProfileImage(ImageUploadRequest imageUpload) throws MessagingException, IOException {
         this.uploadProfileImageAdapter.execute(Mapper.map(imageUpload, ImageUpload.class));
+    }
+
+    @Transactional(value = "libraryTransactionManager",rollbackFor = Exception.class)
+    public PeopleResponse updatePeople(PeopleRequest request) throws MessagingException, IOException {
+        return Mapper.map(updatePersonAdapter.execute(Mapper.map(request, People.class)), PeopleResponse.class);
     }
 }

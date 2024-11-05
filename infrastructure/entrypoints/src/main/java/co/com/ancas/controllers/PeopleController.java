@@ -23,6 +23,8 @@ import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
 
+import static co.com.ancas.models.enums.Messages.*;
+
 @Tag(name = "People")
 @RestController
 @RequiredArgsConstructor
@@ -39,8 +41,23 @@ public class PeopleController {
                 .status(HttpStatus.CREATED)
                 .body(
                         GeneralResponse.<PeopleResponse>builder()
-                                .message("People created successfully")
+                                .message(MESSAGE_PEOPLE_CREATED.getMessage())
                                 .data(peopleService.createPeople(request))
+                                .build()
+                );
+    }
+
+    @PatchMapping
+    @Operation(summary = "Update People", description = "Endpoint to update People")
+    public ResponseEntity<GeneralResponse<PeopleResponse>> updatePeople(
+            @Valid @RequestBody PeopleRequest request
+    ) throws MessagingException, IOException {
+        return ResponseEntity
+                .status(HttpStatus.OK)
+                .body(
+                        GeneralResponse.<PeopleResponse>builder()
+                                .message(MESSAGE_PEOPLE_UPDATED.getMessage())
+                                .data(peopleService.updatePeople(request))
                                 .build()
                 );
     }
@@ -58,7 +75,7 @@ public class PeopleController {
                 .status(HttpStatus.OK)
                 .body(
                         GeneralResponse.<PaginationResponse<PeopleResponse>>builder()
-                                .message("People found successfully")
+                                .message(MESSAGE_PEOPLE_FOUND.getMessage())
                                 .data(peopleService.findAllByCriteria(request, pageable))
                                 .build()
                 );
@@ -89,9 +106,12 @@ public class PeopleController {
                 .status(HttpStatus.OK)
                 .body(
                         GeneralResponse.<String>builder()
-                                .message("Image uploaded successfully")
-                                .data("Image uploaded successfully")
+                                .message(MESSAGE_IMAGE_UPLOAD.getMessage())
+                                .data(MESSAGE_IMAGE_UPLOAD.getMessage())
                                 .build()
                 );
     }
+
+
+
 }
