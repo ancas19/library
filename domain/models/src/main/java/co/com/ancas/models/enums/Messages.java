@@ -12,6 +12,8 @@ public enum Messages {
     MESSAGE_PEOPLE_NOT_FOUND("No people found matching the specified criteria."),
     MESSAGE_ERROR_DATA_INCORRECT("Data sent is incorrect"),
     MESSAGES_EMAIL_TEMPLATE_NOT_FOUND("Error sending email, please try again later or contact with support"),
+    MESSAGE_USER_NOT_FOUND("User not exist"),
+    MESSAGE_ERROR_PASSWORDS_DO_NOT_MATCH("Passwords do not match"),
 
     //Success messages
     MESSAGE_PEOPLE_FULL_INFOMRATION("Person found successfully"),
@@ -20,7 +22,8 @@ public enum Messages {
     MESSAGE_PEOPLE_FOUND("People found successfully"),
     MESSAGE_IMAGE_UPLOAD("Image uploaded successfully"),
     MESSAGE_PEOPLE_UPDATED("Person updated successfully"),
-    MESSAGE_PEOPLE_BLOCKED("Person blocked successfully"),;
+    MESSAGE_PEOPLE_BLOCKED("Person blocked successfully"),
+    MESSAGE_PASSWORD_UPDATED("Password updated successfully"),;
     private final String message;
 
     Messages(String message) {

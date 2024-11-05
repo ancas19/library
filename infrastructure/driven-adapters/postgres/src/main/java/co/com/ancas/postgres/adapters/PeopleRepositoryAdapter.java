@@ -14,6 +14,8 @@ import org.springframework.stereotype.Service;
 
 import java.util.Optional;
 
+import static co.com.ancas.postgres.utils.Utils.forrmatStringSearch;
+
 @RequiredArgsConstructor
 @Service
 public class PeopleRepositoryAdapter implements PeopleRepositoryPort {
@@ -37,7 +39,7 @@ public class PeopleRepositoryAdapter implements PeopleRepositoryPort {
     public Page<People> findPeopleByCriteria(PeopleSearchCriteria peopleSearchCriteria) {
         return this.peopleRepository
                 .findPeopleByCriteria(
-                        formatString(peopleSearchCriteria.getSearch()),
+                        forrmatStringSearch(peopleSearchCriteria.getSearch()),
                         peopleSearchCriteria.getRole(),
                         peopleSearchCriteria.getPageable()
                 )
@@ -65,7 +67,4 @@ public class PeopleRepositoryAdapter implements PeopleRepositoryPort {
         return this.peopleRepository.existsByDniAndNotId(dni,id);
     }
 
-    private String formatString(String string) {
-        return "%%%s%%".formatted(string.toLowerCase());
-    }
 }

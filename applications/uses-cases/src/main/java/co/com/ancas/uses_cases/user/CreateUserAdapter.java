@@ -1,13 +1,11 @@
 package co.com.ancas.uses_cases.user;
 
-import co.com.ancas.models.enums.Constants;
 import co.com.ancas.models.model.Email;
-import co.com.ancas.models.model.People;
 import co.com.ancas.models.model.User;
 import co.com.ancas.models.model.UserCreation;
 import co.com.ancas.models.repositories.EmailRepositoryPort;
 import co.com.ancas.models.repositories.EmailTemplateRepositoryPort;
-import co.com.ancas.models.repositories.UserRepositoryport;
+import co.com.ancas.models.repositories.UserRepositoryPort;
 import co.com.ancas.uses_cases.interfaces.IUseCaseVoid;
 import co.com.ancas.uses_cases.membership.FindIdMembershipByNameAdapter;
 import co.com.ancas.uses_cases.roles.FindIdRoleByNameAdapter;
@@ -24,7 +22,7 @@ import static co.com.ancas.models.enums.Constants.*;
 public class CreateUserAdapter implements IUseCaseVoid<UserCreation> {
     private final FindIdRoleByNameAdapter findIdRoleByNameAdapter;
     private final FindIdMembershipByNameAdapter findIdMembershipByNameAdapter;
-    private final UserRepositoryport userRepositoryport;
+    private final UserRepositoryPort userRepositoryport;
     private final EmailTemplateRepositoryPort emailTemplateRepositoryPort;
     private final EmailRepositoryPort emailRepositoryPort;
 
@@ -33,11 +31,13 @@ public class CreateUserAdapter implements IUseCaseVoid<UserCreation> {
         String userName=createUserName(userCreation);
         String membership=userCreation.getUserType().equals(USER.getConstant())?NORMAL.getConstant():EMPLOYEE.getConstant();
         String role=userCreation.getUserType().equals(USER.getConstant())?USER.getConstant():EMPLOYEE.getConstant();
+        String password=createPassword(12);
+        //TODO: Encrypt password
         this.userRepositoryport.save(
                 User.builder()
                         .personId(userCreation.getId())
                         .username(userName.toString())
-                        .password(createPassword(12))
+                        .password(password)
                         .roleId(this.findIdRoleByNameAdapter.execute(role))
                         .membershipId(this.findIdMembershipByNameAdapter.execute(membership))
                         .emailVerified(false)
@@ -47,7 +47,7 @@ public class CreateUserAdapter implements IUseCaseVoid<UserCreation> {
         String templateFound=emailTemplateRepositoryPort.findEmailTemplateBySubject(USER_AND_PASSWORD.getConstant());
         templateFound=templateFound.replace(":name",userCreation.getFirstName());
         templateFound=templateFound.replace(":username",userName);
-        templateFound=templateFound.replace(":password",createPassword(12));
+        templateFound=templateFound.replace(":password",password);
         this.emailRepositoryPort.sendEmail(
                 Email.builder()
                         .recipient(userCreation.getEmail())
