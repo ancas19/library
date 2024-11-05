@@ -112,6 +112,17 @@ public class PeopleController {
                 );
     }
 
-
-
+    @DeleteMapping("/{id}")
+    @Operation(summary = "Block a person", description = "Endpoint to delete block a person")
+    public ResponseEntity<GeneralResponse<String>> blockPeople(@PathVariable Long id) throws MessagingException, IOException {
+        peopleService.blockPeople(id);
+        return ResponseEntity
+                .status(HttpStatus.OK)
+                .body(
+                        GeneralResponse.<String>builder()
+                                .message(MESSAGE_PEOPLE_BLOCKED.getMessage())
+                                .data(MESSAGE_PEOPLE_BLOCKED.getMessage())
+                                .build()
+                );
+    }
 }

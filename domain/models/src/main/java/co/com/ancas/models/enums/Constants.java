@@ -7,7 +7,8 @@ public enum Constants {
     EMPLOYEE("EMPLOYEE"),
     USER_AND_PASSWORD("USER_AND_PASSWORD"),
     SUBJECT_USER_AND_PASSWORD("User and password"),
-    CHARACTERS("ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$&*"),;
+    CHARACTERS("ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$&*"),
+    INACTIVE("INACTIVE"),;
 
     private final String constant;
 

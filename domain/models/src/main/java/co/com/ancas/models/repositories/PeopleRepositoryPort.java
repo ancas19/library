@@ -15,5 +15,6 @@ public interface PeopleRepositoryPort {
     Page<People> findPeopleByCriteria(PeopleSearchCriteria peopleSearchCriteria);
     Optional<PeopleFullInfomration> findPeopleFullInformation(Long idPeople);
     Optional<People> findPeopleById(Long aLong);
-    void update(People people);
+    People update(People people);
+    boolean verifyDniExists(String dni, Long id);
 }

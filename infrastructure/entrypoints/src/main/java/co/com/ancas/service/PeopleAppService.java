@@ -29,6 +29,7 @@ public class PeopleAppService {
     private final FindPeopleFullInformationAdapter findPeopleByIdAdapter;
     private final UploadProfileImageAdapter uploadProfileImageAdapter;
     private final UpdatePersonAdapter updatePersonAdapter;
+    private final ChangeStatusPersonAdapter changeStatusPersonAdapter;
     @Transactional(value = "libraryTransactionManager",rollbackFor = Exception.class)
     public PeopleResponse createPeople(PeopleRequest request) throws MessagingException {
         return Mapper.map(createPersonAdapter.execute(Mapper.map(request, PeopleCreation.class)), PeopleResponse.class);
@@ -54,5 +55,10 @@ public class PeopleAppService {
     @Transactional(value = "libraryTransactionManager",rollbackFor = Exception.class)
     public PeopleResponse updatePeople(PeopleRequest request) throws MessagingException, IOException {
         return Mapper.map(updatePersonAdapter.execute(Mapper.map(request, People.class)), PeopleResponse.class);
+    }
+
+    @Transactional(value = "libraryTransactionManager",rollbackFor = Exception.class)
+    public void blockPeople(Long id) throws MessagingException, IOException {
+        changeStatusPersonAdapter.execute(id);
     }
 }

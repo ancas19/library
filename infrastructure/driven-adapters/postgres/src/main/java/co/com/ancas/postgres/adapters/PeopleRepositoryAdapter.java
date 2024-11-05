@@ -56,8 +56,13 @@ public class PeopleRepositoryAdapter implements PeopleRepositoryPort {
     }
 
     @Override
-    public void update(People people) {
-        this.peopleRepository.save(Mapper.map(people, PeopleEntity.class));
+    public People update(People people) {
+        return Mapper.map(this.peopleRepository.save(Mapper.map(people, PeopleEntity.class)),People.class);
+    }
+
+    @Override
+    public boolean verifyDniExists(String dni, Long id) {
+        return this.peopleRepository.existsByDniAndNotId(dni,id);
     }
 
     private String formatString(String string) {
