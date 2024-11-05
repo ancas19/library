@@ -3,6 +3,7 @@ package co.com.ancas.service;
 import co.com.ancas.models.model.UpdatePassword;
 import co.com.ancas.models.utils.Mapper;
 import co.com.ancas.request.ChangePasswordRequest;
+import co.com.ancas.response.UserResponse;
 import co.com.ancas.uses_cases.user.UpdatePasswordAdapter;
 import jakarta.mail.MessagingException;
 import lombok.RequiredArgsConstructor;
@@ -19,5 +20,10 @@ public class UserAppService {
     @Transactional(value = "libraryTransactionManager",rollbackFor = Exception.class)
     public void updatePassword(ChangePasswordRequest request) throws MessagingException, IOException {
         updatePasswordAdapter.execute(Mapper.map(request, UpdatePassword.class));
+    }
+
+    @Transactional(value = "libraryTransactionManager",readOnly = true,rollbackFor = Exception.class)
+    public UserResponse findUserByPersonid(Long id) {
+        return null;
     }
 }

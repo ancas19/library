@@ -17,6 +17,7 @@ public enum Messages {
 
     //Success messages
     MESSAGE_PEOPLE_FULL_INFOMRATION("Person found successfully"),
+    MESSAGE_USER_INFOMRATION("User found successfully"),
     MESSAGE_HEALTH_CHECK("Service is up and running"),
     MESSAGE_PEOPLE_CREATED("Person created successfully"),
     MESSAGE_PEOPLE_FOUND("People found successfully"),
