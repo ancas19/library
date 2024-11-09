@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.Optional;
 
+import static co.com.ancas.models.enums.Constants.ACTIVE;
 import static co.com.ancas.postgres.utils.Utils.forrmatStringSearch;
 
 @RequiredArgsConstructor
@@ -54,7 +55,7 @@ public class PeopleRepositoryAdapter implements PeopleRepositoryPort {
 
     @Override
     public Optional<People> findPeopleById(Long aLong) {
-        return this.peopleRepository.findById(aLong).map(peopleEntity -> Mapper.map(peopleEntity, People.class));
+        return this.peopleRepository.findByIdAndStatus(aLong,ACTIVE.getConstant()).map(peopleEntity -> Mapper.map(peopleEntity, People.class));
     }
 
     @Override

@@ -2,6 +2,7 @@ package co.com.ancas.postgres.repositories;
 
 import co.com.ancas.models.model.People;
 import co.com.ancas.models.model.PeopleFullInfomration;
+import co.com.ancas.models.utils.Mapper;
 import co.com.ancas.postgres.entities.PeopleEntity;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -27,7 +28,6 @@ public interface PeopleRepository extends JpaRepository<PeopleEntity,Long> {
             WHERE (Lower(CONCAT(p.firstName, ' ', p.lastName)) LIKE :search 
             OR p.dni LIKE :search OR LOWER(u.username) LIKE :search)
             and r.roleName = :role
-            AND p.status = 'ACTIVE'
             ORDER BY p.id
             """
     )
@@ -57,10 +57,11 @@ public interface PeopleRepository extends JpaRepository<PeopleEntity,Long> {
             INNER JOIN RolesEntity r ON r.id = u.roleId
             INNER JOIN MembershipEntity m ON m.id = u.membershipId
             WHERE p.id = :idPeople
-            AND p.status = 'ACTIVE'
             """
     )
     Optional<PeopleFullInfomration> findPeopleFullInformation(Long idPeople);
     @Query("SELECT COUNT(p) > 0 FROM PeopleEntity p WHERE p.dni = :dni AND p.id <> :id")
     boolean existsByDniAndNotId(@Param("dni") String dni, @Param("id") Long id);
+
+    Optional<PeopleEntity> findByIdAndStatus(Long aLong, String constant);
 }
