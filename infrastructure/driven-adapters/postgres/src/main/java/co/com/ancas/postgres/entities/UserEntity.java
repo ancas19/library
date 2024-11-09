@@ -10,7 +10,7 @@ import lombok.*;
 @Builder
 @Getter
 @Setter
-public class UserEntity {
+public class UserEntity extends AuditEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")

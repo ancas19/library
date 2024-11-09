@@ -1,9 +1,11 @@
 package co.com.ancas.service;
 
 import co.com.ancas.models.model.UpdatePassword;
+import co.com.ancas.models.model.UserInformation;
 import co.com.ancas.models.utils.Mapper;
 import co.com.ancas.request.ChangePasswordRequest;
-import co.com.ancas.response.UserResponse;
+import co.com.ancas.response.UserInformationResponse;
+import co.com.ancas.uses_cases.user.FindUserByPersonIdAdapter;
 import co.com.ancas.uses_cases.user.UpdatePasswordAdapter;
 import jakarta.mail.MessagingException;
 import lombok.RequiredArgsConstructor;
@@ -16,6 +18,7 @@ import java.io.IOException;
 @RequiredArgsConstructor
 public class UserAppService {
     private final UpdatePasswordAdapter updatePasswordAdapter;
+    private final FindUserByPersonIdAdapter findUserByPersonIdAdapter;
 
     @Transactional(value = "libraryTransactionManager",rollbackFor = Exception.class)
     public void updatePassword(ChangePasswordRequest request) throws MessagingException, IOException {
@@ -23,7 +26,7 @@ public class UserAppService {
     }
 
     @Transactional(value = "libraryTransactionManager",readOnly = true,rollbackFor = Exception.class)
-    public UserResponse findUserByPersonid(Long id) {
-        return null;
+    public UserInformationResponse findUserByPersonid(Long id) throws MessagingException, IOException {
+        return Mapper.map(this.findUserByPersonIdAdapter.execute(id),UserInformationResponse.class);
     }
 }

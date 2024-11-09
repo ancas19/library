@@ -17,10 +17,10 @@ public class ChangePasswordRequest {
     private String username;
     @NotNull(message = "Password is required")
     @NotEmpty(message = "Password is required")
-    @Pattern(regexp = "^(?=.*[A-Z])(?=.*[a-z])(?=.*\\\\d)(?=.*[@#$%^&+=!]).{8,}$", message = "Password must have at least one uppercase letter, one lowercase letter, one number and one special character")
+    @Pattern(regexp = "^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$", message = "Password must have at least one uppercase letter, one lowercase letter, one number and one special character")
     private String password;
     @NotNull(message = "Confirm password is required")
     @NotEmpty(message = "Confirm password is required")
-    @Pattern(regexp = "^(?=.*[A-Z])(?=.*[a-z])(?=.*\\\\d)(?=.*[@#$%^&+=!]).{8,}$", message = "Password must have at least one uppercase letter, one lowercase letter, one number and one special character")
+    @Pattern(regexp = "^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$", message = "Password must have at least one uppercase letter, one lowercase letter, one number and one special character")
     private String confirmPassword;
 }

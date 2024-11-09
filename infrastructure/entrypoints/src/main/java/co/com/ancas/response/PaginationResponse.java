@@ -2,6 +2,7 @@ package co.com.ancas.response;
 
 import lombok.*;
 
+import java.io.Serializable;
 import java.util.List;
 
 @AllArgsConstructor
@@ -9,7 +10,7 @@ import java.util.List;
 @Builder
 @Getter
 @Setter
-public class PaginationResponse<T> {
+public class PaginationResponse<T> implements Serializable {
     private List<T> content;
     private Long totalElements;
     private Integer totalPages;

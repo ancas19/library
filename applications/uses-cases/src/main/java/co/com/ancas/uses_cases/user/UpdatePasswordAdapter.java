@@ -26,6 +26,7 @@ public class UpdatePasswordAdapter implements IUseCaseVoid<UpdatePassword> {
         User userFound = findUserByUsernameAdapter.execute(updatePassword.getUsername());
        // TODO: encrypt password
         userFound.setPassword(updatePassword.getPassword());
+        userFound.setChangePassword(false);
         userRepositoryPort.save(userFound);
     }
 }

@@ -6,6 +6,7 @@ import co.com.ancas.models.model.PeopleCreation;
 import co.com.ancas.models.model.PeopleSearchCriteria;
 import co.com.ancas.models.utils.Mapper;
 import co.com.ancas.request.ImageUploadRequest;
+import co.com.ancas.request.PeopleInformationRequest;
 import co.com.ancas.request.PeopleRequest;
 import co.com.ancas.request.PeopleSearchCriteriaRequest;
 import co.com.ancas.response.PaginationResponse;
@@ -53,7 +54,7 @@ public class PeopleAppService {
     }
 
     @Transactional(value = "libraryTransactionManager",rollbackFor = Exception.class)
-    public PeopleResponse updatePeople(PeopleRequest request) throws MessagingException, IOException {
+    public PeopleResponse updatePeople(PeopleInformationRequest request) throws MessagingException, IOException {
         return Mapper.map(updatePersonAdapter.execute(Mapper.map(request, People.class)), PeopleResponse.class);
     }
 

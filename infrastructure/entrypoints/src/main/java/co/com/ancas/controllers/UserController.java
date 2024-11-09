@@ -3,7 +3,7 @@ package co.com.ancas.controllers;
 import co.com.ancas.models.enums.Messages;
 import co.com.ancas.request.ChangePasswordRequest;
 import co.com.ancas.response.GeneralResponse;
-import co.com.ancas.response.UserResponse;
+import co.com.ancas.response.UserInformationResponse;
 import co.com.ancas.service.UserAppService;
 import io.swagger.v3.oas.annotations.Operation;
 import jakarta.mail.MessagingException;
@@ -40,11 +40,11 @@ public class UserController {
 
     @GetMapping("/{id}/people")
     @Operation(summary = "Find user information by id person", description = "Endpoint to find user information by id person")
-    public ResponseEntity<GeneralResponse<UserResponse>> findUserByPersonid(@PathVariable Long id) {
+    public ResponseEntity<GeneralResponse<UserInformationResponse>> findUserByPersonid(@PathVariable Long id) throws MessagingException, IOException {
         return ResponseEntity
                 .status(HttpStatus.OK)
                 .body(
-                        GeneralResponse.<UserResponse>builder()
+                        GeneralResponse.<UserInformationResponse>builder()
                                 .message(Messages.MESSAGE_USER_INFOMRATION.getMessage())
                                 .data(userAppService.findUserByPersonid(id))
                                 .build()

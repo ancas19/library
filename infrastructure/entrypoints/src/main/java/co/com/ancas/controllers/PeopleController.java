@@ -3,6 +3,7 @@ package co.com.ancas.controllers;
 import co.com.ancas.models.enums.Messages;
 import co.com.ancas.models.model.PeopleSearchCriteria;
 import co.com.ancas.request.ImageUploadRequest;
+import co.com.ancas.request.PeopleInformationRequest;
 import co.com.ancas.request.PeopleRequest;
 import co.com.ancas.request.PeopleSearchCriteriaRequest;
 import co.com.ancas.response.GeneralResponse;
@@ -50,7 +51,7 @@ public class PeopleController {
     @PatchMapping
     @Operation(summary = "Update People", description = "Endpoint to update People")
     public ResponseEntity<GeneralResponse<PeopleResponse>> updatePeople(
-            @Valid @RequestBody PeopleRequest request
+            @Valid @RequestBody PeopleInformationRequest request
     ) throws MessagingException, IOException {
         return ResponseEntity
                 .status(HttpStatus.OK)
@@ -112,7 +113,7 @@ public class PeopleController {
                 );
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/status/{id}")
     @Operation(summary = "Block a person", description = "Endpoint to delete block a person")
     public ResponseEntity<GeneralResponse<String>> blockPeople(@PathVariable Long id) throws MessagingException, IOException {
         peopleService.blockPeople(id);
