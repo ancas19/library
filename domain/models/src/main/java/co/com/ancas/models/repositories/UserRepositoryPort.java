@@ -11,4 +11,5 @@ public interface UserRepositoryPort {
     void save(User build);
     Optional<User> findUserByUsername(String username);
     Optional<UserInformation> findUserByPersonId(Long idPersona);
+    String findRoleByUserId(Long id);
 }

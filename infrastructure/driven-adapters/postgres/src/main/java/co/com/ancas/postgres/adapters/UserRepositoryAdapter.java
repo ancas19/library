@@ -38,4 +38,9 @@ public class UserRepositoryAdapter implements UserRepositoryPort {
     public Optional<UserInformation> findUserByPersonId(Long idPersona) {
         return this.userRepository.findUserByPersonId(idPersona);
     }
+
+    @Override
+    public String findRoleByUserId(Long id) {
+        return this.userRepository.findRoleByUserId(id);
+    }
 }

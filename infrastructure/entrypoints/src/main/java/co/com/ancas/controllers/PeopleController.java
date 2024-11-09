@@ -33,7 +33,7 @@ import static co.com.ancas.models.enums.Messages.*;
 @Validated
 public class PeopleController {
     private final PeopleAppService peopleService;
-    @PostMapping
+    @PostMapping("/sing-up")
     @Operation(summary = "Create People", description = "Endpoint to create People")
     public ResponseEntity<GeneralResponse<PeopleResponse>> createPeople(
             @Valid @RequestBody PeopleRequest request

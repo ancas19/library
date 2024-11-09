@@ -11,6 +11,8 @@ import co.com.ancas.uses_cases.membership.FindIdMembershipByNameAdapter;
 import co.com.ancas.uses_cases.roles.FindIdRoleByNameAdapter;
 import jakarta.mail.MessagingException;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
 import java.security.SecureRandom;
@@ -25,6 +27,7 @@ public class CreateUserAdapter implements IUseCaseVoid<UserCreation> {
     private final UserRepositoryPort userRepositoryport;
     private final EmailTemplateRepositoryPort emailTemplateRepositoryPort;
     private final EmailRepositoryPort emailRepositoryPort;
+    private final BCryptPasswordEncoder passwordEncoder;
 
     @Override
     public void execute(UserCreation userCreation) throws MessagingException {
@@ -32,12 +35,11 @@ public class CreateUserAdapter implements IUseCaseVoid<UserCreation> {
         String membership=userCreation.getUserType().equals(USER.getConstant())?NORMAL.getConstant():EMPLOYEE.getConstant();
         String role=userCreation.getUserType().equals(USER.getConstant())?USER.getConstant():EMPLOYEE.getConstant();
         String password=createPassword(12);
-        //TODO: Encrypt password
         this.userRepositoryport.save(
                 User.builder()
                         .personId(userCreation.getId())
                         .username(userName.toString())
-                        .password(password)
+                        .password(passwordEncoder.encode(password))
                         .roleId(this.findIdRoleByNameAdapter.execute(role))
                         .membershipId(this.findIdMembershipByNameAdapter.execute(membership))
                         .emailVerified(false)

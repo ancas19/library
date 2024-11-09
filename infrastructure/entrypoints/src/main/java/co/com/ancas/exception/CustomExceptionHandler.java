@@ -8,6 +8,7 @@ import co.com.ancas.response.GeneralResponse;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.InternalAuthenticationServiceException;
 import org.springframework.validation.FieldError;
 import org.springframework.web.HttpRequestMethodNotSupportedException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
@@ -18,6 +19,7 @@ import org.springframework.web.servlet.NoHandlerFoundException;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -98,6 +100,24 @@ public class CustomExceptionHandler {
                 );
     }
 
+
+    @ExceptionHandler(InternalAuthenticationServiceException.class)
+    public ResponseEntity<GeneralResponse<ErrorResponse>> handleInternalAuthenticationServiceException(InternalAuthenticationServiceException ex, WebRequest request) {
+        log.error("Internal Authentication Service Exception: {}", ex.getMessage(),ex);
+        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).
+                body(
+                        GeneralResponse.<ErrorResponse>builder()
+                                .message("Internal Authentication Service Exception")
+                                .data(
+                                        ErrorResponse.builder()
+                                                .timeStamp(LocalDate.now())
+                                                .details(request.getDescription(false))
+                                                .message(ex.getMessage())
+                                                .build()
+                                )
+                                .build()
+                );
+    }
     @ExceptionHandler(Exception.class)
     public ResponseEntity<GeneralResponse<ErrorResponse>> handelGeneralException(Exception ex, WebRequest request) {
         log.error("Internal Server Exception: {}", ex.getMessage(),ex);

@@ -33,4 +33,14 @@ public interface UserRepository extends JpaRepository<UserEntity, Long> {
     )
 
     Optional<UserInformation> findUserByPersonId(@Param("idPersona") Long idPersona);
+
+    @Query(
+           """
+           SELECT r.roleName
+           FROM UserEntity u
+           INNER JOIN RolesEntity r ON r.id = u.roleId
+           WHERE u.id = :id
+           """
+    )
+    String findRoleByUserId(Long id);
 }
