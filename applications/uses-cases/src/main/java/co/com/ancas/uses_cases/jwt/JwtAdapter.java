@@ -1,16 +1,18 @@
 package co.com.ancas.uses_cases.jwt;
 
-import co.com.ancas.models.model.User;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.stereotype.Component;
 
 import javax.crypto.SecretKey;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @Component
@@ -21,17 +23,20 @@ public class JwtAdapter {
     private Integer expirationTime;
 
 
-    public String generateToken(User userEntity) {
+    public String generateToken(Authentication authentication ) {
         Date issuedAt = new Date(System.currentTimeMillis());
         Date expiration = new Date(issuedAt.getTime() + expirationTime * 60 * 1000);
         Map<String, Object> claims = new HashMap<>();
-        claims.put("username", userEntity.getUsername());
-        claims.put("id", userEntity.getId());
+        claims.put("username", authentication.getName());
+        List<String> roles = authentication.getAuthorities().stream()
+                .map(GrantedAuthority::getAuthority)
+                .toList();
+        claims.put("roles", roles);
         return Jwts.builder()
                 .header()
                 .type("JWT")
                 .and()
-                .subject(userEntity.getUsername())
+                .subject(authentication.getName())
                 .issuedAt(issuedAt)
                 .expiration(expiration)
                 .claims(claims)
@@ -48,6 +53,10 @@ public class JwtAdapter {
         return extractAllClaims(token).getSubject();
     }
 
+    public List<String> extractRoles(String token) {
+        Claims claims = extractAllClaims(token);
+        return  claims.get("roles", List.class);
+    }
     private Claims extractAllClaims(String token) {
         return Jwts
                 .parser()

@@ -30,8 +30,7 @@ public class LoginAdapter implements IUseCase<AuthLogin, AuthToken> {
                 )
         );
         SecurityContextHolder.getContext().setAuthentication(authentication);
-        User user= this.findUserByUsernameAdapter.execute(authLogin.getUsername());
-        String token = jwtAdapter.generateToken(user);
+        String token = jwtAdapter.generateToken(authentication);
         return AuthToken.builder()
                 .token(token)
                 .message("Login successful")
