@@ -14,6 +14,9 @@ public enum Messages {
     MESSAGES_EMAIL_TEMPLATE_NOT_FOUND("Error sending email, please try again later or contact with support"),
     MESSAGE_USER_NOT_FOUND("User not exist"),
     MESSAGE_ERROR_PASSWORDS_DO_NOT_MATCH("Passwords do not match"),
+    MESSAGE_GENERAL_FORBIDDEN("Forbidden, you don't have permission to access this resource"),
+    MESSAGE_GENERAL_UNAUTHORIZED("Unauthorized"),
+    MESSAGE_USER_BLOCKED("User is blocked, please unblocked first to login"),
 
     //Success messages
     MESSAGE_PEOPLE_FULL_INFOMRATION("Person found successfully"),

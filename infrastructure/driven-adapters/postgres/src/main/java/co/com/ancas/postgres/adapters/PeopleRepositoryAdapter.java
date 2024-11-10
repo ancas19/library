@@ -15,6 +15,7 @@ import org.springframework.stereotype.Service;
 import java.util.Optional;
 
 import static co.com.ancas.models.enums.Constants.ACTIVE;
+import static co.com.ancas.models.enums.Constants.INACTIVE;
 import static co.com.ancas.postgres.utils.Utils.forrmatStringSearch;
 
 @RequiredArgsConstructor
@@ -66,6 +67,11 @@ public class PeopleRepositoryAdapter implements PeopleRepositoryPort {
     @Override
     public boolean verifyDniExists(String dni, Long id) {
         return this.peopleRepository.existsByDniAndNotId(dni,id);
+    }
+
+    @Override
+    public boolean verifyPersonBlocked(Long personId) {
+        return this.peopleRepository.existsByIdAndStatus(personId,INACTIVE.getConstant());
     }
 
 }

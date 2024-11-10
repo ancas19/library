@@ -64,4 +64,6 @@ public interface PeopleRepository extends JpaRepository<PeopleEntity,Long> {
     boolean existsByDniAndNotId(@Param("dni") String dni, @Param("id") Long id);
 
     Optional<PeopleEntity> findByIdAndStatus(Long aLong, String constant);
+
+    boolean existsByIdAndStatus(Long personId, String constant);
 }

@@ -8,7 +8,8 @@ public enum Constants {
     USER_AND_PASSWORD("USER_AND_PASSWORD"),
     SUBJECT_USER_AND_PASSWORD("User and password"),
     CHARACTERS("ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$&*"),
-    INACTIVE("INACTIVE");
+    INACTIVE("INACTIVE"),
+    ROLE("ROLE_%s"),;
 
     private final String constant;
 
