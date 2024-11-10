@@ -74,4 +74,9 @@ public class PeopleRepositoryAdapter implements PeopleRepositoryPort {
         return this.peopleRepository.existsByIdAndStatus(personId,INACTIVE.getConstant());
     }
 
+    @Override
+    public Optional<People> findPeopleByEmail(String email) {
+        return this.peopleRepository.findByEmailAndStatus(email,INACTIVE.getConstant()).map(peopleEntity -> Mapper.map(peopleEntity, People.class));
+    }
+
 }

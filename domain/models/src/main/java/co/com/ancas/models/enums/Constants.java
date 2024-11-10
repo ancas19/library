@@ -7,9 +7,11 @@ public enum Constants {
     EMPLOYEE("EMPLOYEE"),
     USER_AND_PASSWORD("USER_AND_PASSWORD"),
     SUBJECT_USER_AND_PASSWORD("User and password"),
+    CODE_UNBLOCK_PERSON("Code to unblock person"),
     CHARACTERS("ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$&*"),
     INACTIVE("INACTIVE"),
-    ROLE("ROLE_%s"),;
+    ROLE("ROLE_%s"),
+    UNBLOCK_USER("UNBLOCK_USER"),;
 
     private final String constant;
 

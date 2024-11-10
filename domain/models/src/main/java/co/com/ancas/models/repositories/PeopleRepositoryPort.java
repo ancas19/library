@@ -18,4 +18,5 @@ public interface PeopleRepositoryPort {
     People update(People people);
     boolean verifyDniExists(String dni, Long id);
     boolean verifyPersonBlocked(Long personId);
+    Optional<People> findPeopleByEmail(String email);
 }

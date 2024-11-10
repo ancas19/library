@@ -17,6 +17,9 @@ public enum Messages {
     MESSAGE_GENERAL_FORBIDDEN("Forbidden, you don't have permission to access this resource"),
     MESSAGE_GENERAL_UNAUTHORIZED("Unauthorized"),
     MESSAGE_USER_BLOCKED("User is blocked, please unblocked first to login"),
+    MESSAGES_EMAIL_NOT_FOUND("The email address you entered is not registered. Please double-check or sign up for a new account."),
+
+
 
     //Success messages
     MESSAGE_PEOPLE_FULL_INFOMRATION("Person found successfully"),
@@ -27,7 +30,10 @@ public enum Messages {
     MESSAGE_IMAGE_UPLOAD("Image uploaded successfully"),
     MESSAGE_PEOPLE_UPDATED("Person updated successfully"),
     MESSAGE_PEOPLE_BLOCKED("Person blocked successfully"),
-    MESSAGE_PASSWORD_UPDATED("Password updated successfully"),;
+    MESSAGE_PEOPLE_UNBLOCKED("Person unblocked successfully"),
+    MESSAGE_SEND_CODE("Please check your email for further instructions."),
+    MESSAGE_PASSWORD_UPDATED("Password updated successfully"),
+    ;
     private final String message;
 
     Messages(String message) {

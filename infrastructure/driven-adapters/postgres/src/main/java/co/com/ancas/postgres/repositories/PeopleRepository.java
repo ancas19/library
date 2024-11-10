@@ -66,4 +66,6 @@ public interface PeopleRepository extends JpaRepository<PeopleEntity,Long> {
     Optional<PeopleEntity> findByIdAndStatus(Long aLong, String constant);
 
     boolean existsByIdAndStatus(Long personId, String constant);
+
+    Optional<PeopleEntity> findByEmailAndStatus(String email, String constant);
 }

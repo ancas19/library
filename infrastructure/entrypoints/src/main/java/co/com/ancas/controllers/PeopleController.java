@@ -2,10 +2,7 @@ package co.com.ancas.controllers;
 
 import co.com.ancas.models.enums.Messages;
 import co.com.ancas.models.model.PeopleSearchCriteria;
-import co.com.ancas.request.ImageUploadRequest;
-import co.com.ancas.request.PeopleInformationRequest;
-import co.com.ancas.request.PeopleRequest;
-import co.com.ancas.request.PeopleSearchCriteriaRequest;
+import co.com.ancas.request.*;
 import co.com.ancas.response.GeneralResponse;
 import co.com.ancas.response.PaginationResponse;
 import co.com.ancas.response.PeopleFullInfomrationResponse;
@@ -112,6 +109,39 @@ public class PeopleController {
                                 .build()
                 );
     }
+
+    @PostMapping("/code")
+    @Operation(summary = "Send code to unblock people", description = "Endpoint to send code to unblock people")
+    public ResponseEntity<GeneralResponse<String>> sendCodeToUnblockPeople(
+            @Valid @RequestBody PersonAccessRequest personAccessRequest
+    ) throws MessagingException, IOException {
+        peopleService.sendCodeToUnblockPeople(personAccessRequest);
+        return ResponseEntity
+                .status(HttpStatus.OK)
+                .body(
+                        GeneralResponse.<String>builder()
+                                .message(MESSAGE_SEND_CODE.getMessage())
+                                .data(MESSAGE_SEND_CODE.getMessage())
+                                .build()
+                );
+    }
+
+    @PostMapping("/access")
+    @Operation(summary = "Unblock a person", description = "Endpoint to unblock a person")
+    public ResponseEntity<GeneralResponse<String>> unblockPeople(
+            @Valid @RequestBody PersonCodeRequest personCodeRequest
+    ) throws MessagingException, IOException {
+        peopleService.unblockPeople(personCodeRequest);
+        return ResponseEntity
+                .status(HttpStatus.OK)
+                .body(
+                        GeneralResponse.<String>builder()
+                                .message(MESSAGE_PEOPLE_UNBLOCKED.getMessage())
+                                .data(MESSAGE_PEOPLE_UNBLOCKED.getMessage())
+                                .build()
+                );
+    }
+
 
     @DeleteMapping("/status/{id}")
     @Operation(summary = "Block a person", description = "Endpoint to delete block a person")

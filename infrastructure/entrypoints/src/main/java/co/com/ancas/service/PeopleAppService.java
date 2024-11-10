@@ -1,14 +1,8 @@
 package co.com.ancas.service;
 
-import co.com.ancas.models.model.ImageUpload;
-import co.com.ancas.models.model.People;
-import co.com.ancas.models.model.PeopleCreation;
-import co.com.ancas.models.model.PeopleSearchCriteria;
+import co.com.ancas.models.model.*;
 import co.com.ancas.models.utils.Mapper;
-import co.com.ancas.request.ImageUploadRequest;
-import co.com.ancas.request.PeopleInformationRequest;
-import co.com.ancas.request.PeopleRequest;
-import co.com.ancas.request.PeopleSearchCriteriaRequest;
+import co.com.ancas.request.*;
 import co.com.ancas.response.PaginationResponse;
 import co.com.ancas.response.PeopleFullInfomrationResponse;
 import co.com.ancas.response.PeopleResponse;
@@ -31,6 +25,8 @@ public class PeopleAppService {
     private final UploadProfileImageAdapter uploadProfileImageAdapter;
     private final UpdatePersonAdapter updatePersonAdapter;
     private final ChangeStatusPersonAdapter changeStatusPersonAdapter;
+    private final SendCodeToUnblockPersonAdapter sendCodeToUnblockPersonAdapter;
+    private final UnblockPeopleAdapter unblockPeopleAdapter;
     @Transactional(value = "libraryTransactionManager",rollbackFor = Exception.class)
     public PeopleResponse createPeople(PeopleRequest request) throws MessagingException {
         return Mapper.map(createPersonAdapter.execute(Mapper.map(request, PeopleCreation.class)), PeopleResponse.class);
@@ -61,5 +57,15 @@ public class PeopleAppService {
     @Transactional(value = "libraryTransactionManager",rollbackFor = Exception.class)
     public void blockPeople(Long id) throws MessagingException, IOException {
         changeStatusPersonAdapter.execute(id);
+    }
+
+    @Transactional(value = "libraryTransactionManager",rollbackFor = Exception.class)
+    public void sendCodeToUnblockPeople(PersonAccessRequest personAccessRequest) throws MessagingException, IOException {
+        sendCodeToUnblockPersonAdapter.execute(Mapper.map(personAccessRequest, PersonAcces.class));
+    }
+
+    @Transactional(value = "libraryTransactionManager",rollbackFor = Exception.class)
+    public void unblockPeople(PersonCodeRequest personCodeRequest) throws MessagingException, IOException {
+        this.unblockPeopleAdapter.execute(Mapper.map(personCodeRequest, PersonCode.class));
     }
 }

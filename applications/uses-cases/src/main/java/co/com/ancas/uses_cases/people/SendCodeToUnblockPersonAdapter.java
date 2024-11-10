@@ -1,0 +1,50 @@
+package co.com.ancas.uses_cases.people;
+
+import co.com.ancas.models.enums.Messages;
+import co.com.ancas.models.exceptions.BadRequestException;
+import co.com.ancas.models.model.Email;
+import co.com.ancas.models.model.People;
+import co.com.ancas.models.model.PersonAcces;
+import co.com.ancas.models.repositories.EmailRepositoryPort;
+import co.com.ancas.models.repositories.PeopleRepositoryPort;
+import co.com.ancas.uses_cases.email_template.FindEmailTemplateBySubjectAdapter;
+import co.com.ancas.uses_cases.interfaces.IUseCaseVoid;
+import co.com.ancas.uses_cases.util.RandomCode;
+import jakarta.mail.MessagingException;
+import lombok.RequiredArgsConstructor;
+import org.aspectj.weaver.Utils;
+import org.springframework.stereotype.Component;
+
+import java.io.IOException;
+import java.util.Optional;
+
+import static co.com.ancas.models.enums.Constants.*;
+
+@RequiredArgsConstructor
+@Component
+public class SendCodeToUnblockPersonAdapter implements IUseCaseVoid<PersonAcces> {
+    private final PeopleRepositoryPort peopleRepositoryPort;
+    private final FindEmailTemplateBySubjectAdapter findEmailTemplateBySubjectAdapter;
+    private final EmailRepositoryPort emailRepositoryPort;
+    @Override
+    public void execute(PersonAcces personAcces) throws MessagingException, IOException {
+        Optional<People> peopleFound = peopleRepositoryPort.findPeopleByEmail(personAcces.getEmail());
+        if(peopleFound.isEmpty()){
+            throw new BadRequestException(Messages.MESSAGES_EMAIL_NOT_FOUND.getMessage());
+        }
+        String code= RandomCode.generateRandomCode();
+        String emailTemplate = findEmailTemplateBySubjectAdapter.execute(UNBLOCK_USER.getConstant());
+        emailTemplate = emailTemplate.replace(":verification_code", code);
+        emailTemplate = emailTemplate.replace(":name", peopleFound.get().getFirstName());
+        this.emailRepositoryPort.sendEmail(
+                Email.builder()
+                        .recipient(peopleFound.get().getEmail())
+                        .subject(CODE_UNBLOCK_PERSON.getConstant())
+                        .body(emailTemplate)
+                        .build()
+        );
+        //TODO: Save code in redis
+    }
+
+
+}
