@@ -2,7 +2,9 @@ package co.com.ancas.exception;
 
 import co.com.ancas.models.enums.Messages;
 import co.com.ancas.models.exceptions.BadRequestException;
+import co.com.ancas.models.exceptions.ForbiddenException;
 import co.com.ancas.models.exceptions.NotFoundException;
+import co.com.ancas.models.exceptions.UnauthorizedException;
 import co.com.ancas.response.ErrorResponse;
 import co.com.ancas.response.GeneralResponse;
 import lombok.extern.slf4j.Slf4j;
@@ -81,6 +83,41 @@ public class CustomExceptionHandler {
                 );
     }
 
+    @ExceptionHandler(ForbiddenException.class)
+    public ResponseEntity<GeneralResponse<ErrorResponse>> handleForbiddenException(ForbiddenException ex, WebRequest request) {
+        log.error("Forbidden Exception: {}", ex.getMessage(),ex);
+        return ResponseEntity.status(HttpStatus.FORBIDDEN).
+                body(
+                        GeneralResponse.<ErrorResponse>builder()
+                                .message(Messages.MESSAGE_GENERAL_FORBIDDEN.getMessage())
+                                .data(
+                                        ErrorResponse.builder()
+                                                .timeStamp(LocalDate.now())
+                                                .details(request.getDescription(false))
+                                                .message(ex.getMessage())
+                                                .build()
+                                )
+                                .build()
+                );
+    }
+
+    @ExceptionHandler(UnauthorizedException.class)
+    public ResponseEntity<GeneralResponse<ErrorResponse>> handleNoHandlerFoundException(UnauthorizedException ex, WebRequest request) {
+        log.error("No Handler Found Exception: {}", ex.getMessage(),ex);
+        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).
+                body(
+                        GeneralResponse.<ErrorResponse>builder()
+                                .message(Messages.MESSAGE_GENERAL_UNAUTHORIZED.getMessage())
+                                .data(
+                                        ErrorResponse.builder()
+                                                .timeStamp(LocalDate.now())
+                                                .details(request.getDescription(false))
+                                                .message(ex.getMessage())
+                                                .build()
+                                )
+                                .build()
+                );
+    }
 
     @ExceptionHandler(HttpRequestMethodNotSupportedException.class)
     public ResponseEntity<GeneralResponse<ErrorResponse>> handleMethodNotSupported(HttpRequestMethodNotSupportedException ex, WebRequest request) {
