@@ -74,7 +74,7 @@ public class PeopleController {
                 .body(
                         GeneralResponse.<PaginationResponse<PeopleResponse>>builder()
                                 .message(MESSAGE_PEOPLE_FOUND.getMessage())
-                                .data(peopleService.findAllByCriteria(request, pageable))
+                                .data(peopleService.findAllByCriteria(request, page, size))
                                 .build()
                 );
     }

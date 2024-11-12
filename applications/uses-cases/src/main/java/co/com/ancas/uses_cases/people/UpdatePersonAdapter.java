@@ -8,6 +8,7 @@ import co.com.ancas.models.repositories.PeopleRepositoryPort;
 import co.com.ancas.uses_cases.interfaces.IUseCase;
 import jakarta.mail.MessagingException;
 import lombok.RequiredArgsConstructor;
+import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.stereotype.Component;
 
 import java.io.IOException;
@@ -19,6 +20,7 @@ public class UpdatePersonAdapter implements IUseCase<People,People> {
     private final FindPeopleByIdAdapter findPeopleByIdAdapter;
     private final PeopleRepositoryPort peopleRepositoryPort;
     @Override
+    @CacheEvict(value = "people", allEntries = true)
     public People execute(People people) throws MessagingException, IOException {
         People peopleFound=findPeopleByIdAdapter.execute(people.getId());
         if(this.peopleRepositoryPort.verifyDniExists(people.getDni(),people.getId())){

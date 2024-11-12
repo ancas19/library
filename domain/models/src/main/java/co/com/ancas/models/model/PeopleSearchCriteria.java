@@ -1,7 +1,6 @@
 package co.com.ancas.models.model;
 
 import lombok.*;
-import org.springframework.data.domain.Pageable;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -11,5 +10,17 @@ import org.springframework.data.domain.Pageable;
 public class PeopleSearchCriteria {
     private String search;
     private String role;
-    private Pageable pageable;
+    private int page;
+    private int size;
+
+
+    @Override
+    public String toString() {
+        return "PeopleSearchCriteria{" +
+                "search='" + search + '\'' +
+                ", role='" + role + '\'' +
+                ", page=" + page +
+                ", size=" + size +
+                '}';
+    }
 }

@@ -33,9 +33,10 @@ public class PeopleAppService {
     }
 
     @Transactional(value = "libraryTransactionManager",rollbackFor = Exception.class ,readOnly = true)
-    public PaginationResponse<PeopleResponse> findAllByCriteria(PeopleSearchCriteriaRequest request, Pageable pageable) throws MessagingException {
+    public PaginationResponse<PeopleResponse> findAllByCriteria(PeopleSearchCriteriaRequest request, Integer page,Integer size) throws MessagingException {
        PeopleSearchCriteria peopleSearchCriteria = Mapper.map(request, PeopleSearchCriteria.class);
-       peopleSearchCriteria.setPageable(pageable);
+       peopleSearchCriteria.setPage(page);
+       peopleSearchCriteria.setSize(size);
        return Pagination.getPaginationResponse(findPeopleByCriteriaAdapter.execute(peopleSearchCriteria), PeopleResponse.class);
     }
 

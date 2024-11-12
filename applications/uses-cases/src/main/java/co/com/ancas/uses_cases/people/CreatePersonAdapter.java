@@ -9,6 +9,7 @@ import co.com.ancas.uses_cases.interfaces.IUseCase;
 import co.com.ancas.uses_cases.user.CreateUserAdapter;
 import jakarta.mail.MessagingException;
 import lombok.RequiredArgsConstructor;
+import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.stereotype.Component;
 
 import static co.com.ancas.models.enums.Constants.ACTIVE;
@@ -21,6 +22,7 @@ public class CreatePersonAdapter implements IUseCase<PeopleCreation,People> {
     private final PeopleRepositoryPort peopleRepositoryPort;
     private final CreateUserAdapter createUserAdapter;
     @Override
+    @CacheEvict(value = "people", allEntries = true)
     public People execute(PeopleCreation people) throws MessagingException {
         if(this.peopleRepositoryPort.verifyDni(people.getDni())){
             throw new BadRequestException(MESSAGE_ERROR_DNI_ALREADY_EXISTS.getMessage());

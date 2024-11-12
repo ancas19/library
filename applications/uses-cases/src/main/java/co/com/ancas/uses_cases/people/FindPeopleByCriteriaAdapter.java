@@ -8,6 +8,7 @@ import co.com.ancas.models.repositories.PeopleRepositoryPort;
 import co.com.ancas.uses_cases.interfaces.IUseCase;
 import jakarta.mail.MessagingException;
 import lombok.RequiredArgsConstructor;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Component;
 
@@ -16,6 +17,7 @@ import org.springframework.stereotype.Component;
 public class FindPeopleByCriteriaAdapter implements IUseCase<PeopleSearchCriteria, Page<People>> {
     private final PeopleRepositoryPort peopleRepositoryPort;
     @Override
+    @Cacheable(value = "people", key = "#peopleSearchCriteria.toString()")
     public Page<People> execute(PeopleSearchCriteria peopleSearchCriteria) throws MessagingException {
         Page<People> peopleFound=peopleRepositoryPort.findPeopleByCriteria(peopleSearchCriteria);
         if(peopleFound.getContent().isEmpty()){
