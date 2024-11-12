@@ -5,6 +5,7 @@ include ':models'
 include ':uses-cases'
 include ':email'
 include ':images'
+include ':redis'
 
 
 project(':entrypoints')?.projectDir = file('./infrastructure/entrypoints')
@@ -13,4 +14,5 @@ project(':models')?.projectDir = file('./domain/models')
 project(':uses-cases')?.projectDir = file('./applications/uses-cases')
 project(':email')?.projectDir = file('./infrastructure/driven-adapters/email')
 project(':images')?.projectDir = file('./infrastructure/driven-adapters/images')
+project(':redis')?.projectDir = file('./infrastructure/driven-adapters/redis')
 
