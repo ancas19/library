@@ -1,5 +1,6 @@
 package co.com.ancas.controllers;
 
+import co.com.ancas.models.enums.Messages;
 import co.com.ancas.request.AuthLoginRequest;
 import co.com.ancas.response.AuthTokenResponse;
 import co.com.ancas.response.GeneralResponse;
@@ -10,10 +11,7 @@ import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
 
@@ -32,6 +30,20 @@ public class AuthLoginController {
                 GeneralResponse.<AuthTokenResponse>builder()
                         .data(authService.login(request))
                         .message("Login successful")
+                        .build()
+        );
+    }
+
+    @PostMapping("/logout")
+    public ResponseEntity<GeneralResponse<String>> logout(
+            @RequestParam("Authorization") String token
+    ) {
+        token = token.replace("Bearer ", "");
+        authService.logout(token);
+        return ResponseEntity.ok(
+                GeneralResponse.<String>builder()
+                        .message(Messages.MESSAGE_LOGOUT_SUCCESSFUL.getMessage())
+                        .data(Messages.MESSAGE_LOGOUT_SUCCESSFUL.getMessage())
                         .build()
         );
     }
