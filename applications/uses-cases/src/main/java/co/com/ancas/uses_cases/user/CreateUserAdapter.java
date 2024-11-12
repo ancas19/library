@@ -38,7 +38,7 @@ public class CreateUserAdapter implements IUseCaseVoid<UserCreation> {
         this.userRepositoryport.save(
                 User.builder()
                         .personId(userCreation.getId())
-                        .username(userName.toString())
+                        .username(userName)
                         .password(passwordEncoder.encode(password))
                         .roleId(this.findIdRoleByNameAdapter.execute(role))
                         .membershipId(this.findIdMembershipByNameAdapter.execute(membership))
