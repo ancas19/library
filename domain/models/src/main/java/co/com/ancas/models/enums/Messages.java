@@ -18,7 +18,7 @@ public enum Messages {
     MESSAGE_GENERAL_UNAUTHORIZED("Unauthorized"),
     MESSAGE_USER_BLOCKED("User is blocked, please unblocked first to login"),
     MESSAGES_EMAIL_NOT_FOUND("The email address you entered is not registered. Please double-check or sign up for a new account."),
-
+    MESSAGE_LOGIN_FAILED("Login failed, please check your credentials"),
 
 
     //Success messages
@@ -33,7 +33,9 @@ public enum Messages {
     MESSAGE_PEOPLE_UNBLOCKED("Person unblocked successfully"),
     MESSAGE_SEND_CODE("Please check your email for further instructions."),
     MESSAGE_PASSWORD_UPDATED("Password updated successfully"),
-    ;
+    MESSAGES_CODE_NOT_FOUND("Error, code is incorrect,please try again"),
+    MESSAGE_LOGIN_SUCCESS("Login success"),
+    MESSAGE_LOGOUT_SUCCESSFUL("Logout successful"),;
     private final String message;
 
     Messages(String message) {

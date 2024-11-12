@@ -26,6 +26,12 @@ spring:
       idle-timeout: 10000
       max-lifetime: 1000
       auto-commit: true
+  data:
+    redis:
+      host: ${REDIS_HOST}
+      port: ${REDIS_PORT}
+      timeout: ${REDIS_TIMEOUT}
+      password: ${REDIS_PASS}
 
 ## Logging Configuration
 logging:
