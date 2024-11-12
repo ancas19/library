@@ -27,7 +27,7 @@ public class UserDetailsAdapter implements UserDetailsService {
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         Optional<User> userFound=userRepositoryPort.findUserByUsername(username);
         if(userFound.isEmpty()){
-            throw new UsernameNotFoundException(Messages.MESSAGE_USER_NOT_FOUND.getMessage());
+            throw new UnauthorizedException(Messages.MESSAGE_USER_NOT_FOUND.getMessage());
         }
         if(peopleRepositoryPort.verifyPersonBlocked(userFound.get().getPersonId())){
             throw new UnauthorizedException(Messages.MESSAGE_USER_BLOCKED.getMessage());
