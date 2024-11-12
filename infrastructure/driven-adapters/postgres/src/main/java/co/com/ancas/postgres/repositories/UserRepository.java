@@ -43,4 +43,13 @@ public interface UserRepository extends JpaRepository<UserEntity, Long> {
            """
     )
     String findRoleByUserId(Long id);
+
+    @Query(
+           """
+           SELECT u.personId
+           FROM UserEntity u
+           WHERE u.username = :username
+           """
+    )
+    Long findPersonIdByUsername(String username);
 }

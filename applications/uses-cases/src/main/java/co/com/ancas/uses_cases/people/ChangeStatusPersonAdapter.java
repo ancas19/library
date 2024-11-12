@@ -2,12 +2,9 @@ package co.com.ancas.uses_cases.people;
 
 import co.com.ancas.models.model.People;
 import co.com.ancas.models.repositories.PeopleRepositoryPort;
-import co.com.ancas.uses_cases.interfaces.IUseCase;
 import co.com.ancas.uses_cases.interfaces.IUseCaseVoid;
 import jakarta.mail.MessagingException;
-import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
-import org.hibernate.annotations.processing.Find;
 import org.springframework.stereotype.Component;
 
 import java.io.IOException;

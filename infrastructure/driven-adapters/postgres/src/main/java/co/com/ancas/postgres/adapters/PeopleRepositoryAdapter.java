@@ -10,6 +10,7 @@ import co.com.ancas.postgres.entities.PeopleEntity;
 import co.com.ancas.postgres.repositories.PeopleRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
@@ -43,7 +44,7 @@ public class PeopleRepositoryAdapter implements PeopleRepositoryPort {
                 .findPeopleByCriteria(
                         forrmatStringSearch(peopleSearchCriteria.getSearch()),
                         peopleSearchCriteria.getRole(),
-                        peopleSearchCriteria.getPageable()
+                        Pageable.ofSize(peopleSearchCriteria.getSize()).withPage(peopleSearchCriteria.getPage())
                 )
                 .map(peopleEntity -> Mapper.map(peopleEntity, People.class));
     }

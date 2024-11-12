@@ -5,6 +5,7 @@ import co.com.ancas.models.exceptions.BadRequestException;
 import co.com.ancas.models.model.Email;
 import co.com.ancas.models.model.People;
 import co.com.ancas.models.model.PersonAcces;
+import co.com.ancas.models.repositories.CodeRepositoryPort;
 import co.com.ancas.models.repositories.EmailRepositoryPort;
 import co.com.ancas.models.repositories.PeopleRepositoryPort;
 import co.com.ancas.uses_cases.email_template.FindEmailTemplateBySubjectAdapter;
@@ -26,6 +27,7 @@ public class SendCodeToUnblockPersonAdapter implements IUseCaseVoid<PersonAcces>
     private final PeopleRepositoryPort peopleRepositoryPort;
     private final FindEmailTemplateBySubjectAdapter findEmailTemplateBySubjectAdapter;
     private final EmailRepositoryPort emailRepositoryPort;
+    private final CodeRepositoryPort codeRepositoryPort;
     @Override
     public void execute(PersonAcces personAcces) throws MessagingException, IOException {
         Optional<People> peopleFound = peopleRepositoryPort.findPeopleByEmail(personAcces.getEmail());
@@ -43,7 +45,10 @@ public class SendCodeToUnblockPersonAdapter implements IUseCaseVoid<PersonAcces>
                         .body(emailTemplate)
                         .build()
         );
-        //TODO: Save code in redis
+        codeRepositoryPort.save(co.com.ancas.models.model.Code.builder()
+                .code(code)
+                .email(peopleFound.get().getEmail())
+                .build());
     }
 
 
