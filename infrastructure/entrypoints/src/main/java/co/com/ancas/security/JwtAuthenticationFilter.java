@@ -32,13 +32,17 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
     private final UserDetailsAppService userDetailsAppService;
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
-         log.info("ENTRÓ EL FILTRO JWT");
+         log.info("Enters to doFilterInternal");
             String authorizationHeader = request.getHeader("Authorization");
             if(Objects.isNull(authorizationHeader) || !authorizationHeader.startsWith("Bearer ")){
                 filterChain.doFilter(request,response);
                 return;
             }
             String token = authorizationHeader.substring(7);
+            if(jwtService.validateToken(token)){
+                filterChain.doFilter(request,response);
+                return;
+            }
             String username = jwtService.extractUsername(token);
             List<String> roles = jwtService.extractRoles(token);
             UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(username,null,getAuthorities(roles));

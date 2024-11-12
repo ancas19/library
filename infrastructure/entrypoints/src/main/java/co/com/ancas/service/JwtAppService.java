@@ -18,4 +18,8 @@ public class JwtAppService {
     public List extractRoles(String token) {
         return jwtAdapter.extractRoles(token);
     }
+
+    public boolean validateToken(String token) {
+        return jwtAdapter.verifyToken(token);
+    }
 }
