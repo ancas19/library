@@ -16,6 +16,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
@@ -30,36 +31,6 @@ import static co.com.ancas.models.enums.Messages.*;
 @Validated
 public class PeopleController {
     private final PeopleAppService peopleService;
-    @PostMapping("/sing-up")
-    @Operation(summary = "Create People", description = "Endpoint to create People")
-    public ResponseEntity<GeneralResponse<PeopleResponse>> createPeople(
-            @Valid @RequestBody PeopleRequest request
-    ) throws MessagingException {
-        return ResponseEntity
-                .status(HttpStatus.CREATED)
-                .body(
-                        GeneralResponse.<PeopleResponse>builder()
-                                .message(MESSAGE_PEOPLE_CREATED.getMessage())
-                                .data(peopleService.createPeople(request))
-                                .build()
-                );
-    }
-
-    @PatchMapping
-    @Operation(summary = "Update People", description = "Endpoint to update People")
-    public ResponseEntity<GeneralResponse<PeopleResponse>> updatePeople(
-            @Valid @RequestBody PeopleInformationRequest request
-    ) throws MessagingException, IOException {
-        return ResponseEntity
-                .status(HttpStatus.OK)
-                .body(
-                        GeneralResponse.<PeopleResponse>builder()
-                                .message(MESSAGE_PEOPLE_UPDATED.getMessage())
-                                .data(peopleService.updatePeople(request))
-                                .build()
-                );
-    }
-
 
     @PostMapping("/find-all")
     @Operation(summary = "Find all People", description = "Endpoint to find all People")
@@ -68,7 +39,6 @@ public class PeopleController {
             @RequestParam(defaultValue = "0", required = false, name = "page") Integer page,
             @RequestParam(defaultValue = "10", required = false, name = "size") Integer size
     ) throws MessagingException {
-        Pageable pageable = Pageable.ofSize(size).withPage(page);
         return ResponseEntity
                 .status(HttpStatus.OK)
                 .body(
@@ -78,7 +48,7 @@ public class PeopleController {
                                 .build()
                 );
     }
-
+    //TODO: Determinate rolwe to update all people or only myself
     @GetMapping("/{id}")
     @Operation(summary = "Find People by id", description = "Endpoint to find People by id")
     public ResponseEntity<GeneralResponse<PeopleFullInfomrationResponse>> findById(
@@ -90,6 +60,22 @@ public class PeopleController {
                         GeneralResponse.<PeopleFullInfomrationResponse>builder()
                                 .message(Messages.MESSAGE_PEOPLE_FULL_INFOMRATION.getMessage())
                                 .data(peopleService.findById(id))
+                                .build()
+                );
+    }
+
+    //@PreAuthorize("hasRole('ADMIN')")
+    @PatchMapping
+    @Operation(summary = "Update People", description = "Endpoint to update People")
+    public ResponseEntity<GeneralResponse<PeopleResponse>> updatePeople(
+            @Valid @RequestBody PeopleInformationRequest request
+    ) throws MessagingException, IOException {
+        return ResponseEntity
+                .status(HttpStatus.OK)
+                .body(
+                        GeneralResponse.<PeopleResponse>builder()
+                                .message(MESSAGE_PEOPLE_UPDATED.getMessage())
+                                .data(peopleService.updatePeople(request))
                                 .build()
                 );
     }
@@ -110,37 +96,6 @@ public class PeopleController {
                 );
     }
 
-    @PostMapping("/code")
-    @Operation(summary = "Send code to unblock people", description = "Endpoint to send code to unblock people")
-    public ResponseEntity<GeneralResponse<String>> sendCodeToUnblockPeople(
-            @Valid @RequestBody PersonAccessRequest personAccessRequest
-    ) throws MessagingException, IOException {
-        peopleService.sendCodeToUnblockPeople(personAccessRequest);
-        return ResponseEntity
-                .status(HttpStatus.OK)
-                .body(
-                        GeneralResponse.<String>builder()
-                                .message(MESSAGE_SEND_CODE.getMessage())
-                                .data(MESSAGE_SEND_CODE.getMessage())
-                                .build()
-                );
-    }
-
-    @PostMapping("/access")
-    @Operation(summary = "Unblock a person", description = "Endpoint to unblock a person")
-    public ResponseEntity<GeneralResponse<String>> unblockPeople(
-            @Valid @RequestBody PersonCodeRequest personCodeRequest
-    ) throws MessagingException, IOException {
-        peopleService.unblockPeople(personCodeRequest);
-        return ResponseEntity
-                .status(HttpStatus.OK)
-                .body(
-                        GeneralResponse.<String>builder()
-                                .message(MESSAGE_PEOPLE_UNBLOCKED.getMessage())
-                                .data(MESSAGE_PEOPLE_UNBLOCKED.getMessage())
-                                .build()
-                );
-    }
 
 
     @DeleteMapping("/status/{id}")

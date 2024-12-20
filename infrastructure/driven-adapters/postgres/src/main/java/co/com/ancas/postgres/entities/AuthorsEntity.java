@@ -12,21 +12,19 @@ import java.time.LocalDate;
 @Builder
 @Getter
 @Setter
-public class AuthorsEntiry extends AuditEntity {
+public class AuthorsEntity extends AuditEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Long id;
-
     @Column(name = "full_name", nullable = false)
     private String fullName;
-
-    @Column
+    @Column(name = "nationality")
     private String nationality;
-
-    @Column
+    @Column(name = "birthdate")
     private LocalDate birthdate;
-
-    @Column
+    @Column(name = "bio")
     private String bio;
+    @Column(name = "image_id")
+    private Long imageId;
 }

@@ -100,10 +100,12 @@ CREATE TABLE authors (
   nationality VARCHAR(255),
   birthdate DATE,
   bio TEXT,
+  image_id INT not null,
   created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
   user_created VARCHAR(255),
   updated_user VARCHAR(255),
-  updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+  updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    constraint fk_authors_images foreign key (image_id) references images(id)
 );
 
 -- Add indexes

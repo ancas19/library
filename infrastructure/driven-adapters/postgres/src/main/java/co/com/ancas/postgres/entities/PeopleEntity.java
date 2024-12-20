@@ -32,7 +32,7 @@ public class PeopleEntity extends AuditEntity {
     private String phone;
 
     @Column(name = "profile_image")
-    private Integer profileImage;
+    private Long profileImage;
 
     @Column(name = "status", nullable = false)
     private String status;
