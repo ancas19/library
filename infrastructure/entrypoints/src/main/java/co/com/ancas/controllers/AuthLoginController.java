@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
 
-@Tag(name = "People")
+@Tag(name = "Auth")
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/v1.0/auth")

@@ -28,7 +28,7 @@ public class PeopleAppService {
     private final SendCodeToUnblockPersonAdapter sendCodeToUnblockPersonAdapter;
     private final UnblockPeopleAdapter unblockPeopleAdapter;
     @Transactional(value = "libraryTransactionManager",rollbackFor = Exception.class)
-    public PeopleResponse createPeople(PeopleRequest request) throws MessagingException {
+    public PeopleResponse createPeople(PeopleRequest request) throws MessagingException, IOException {
         return Mapper.map(createPersonAdapter.execute(Mapper.map(request, PeopleCreation.class)), PeopleResponse.class);
     }
 

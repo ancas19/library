@@ -6,6 +6,7 @@ import co.com.ancas.response.GeneralResponse;
 import co.com.ancas.response.UserInformationResponse;
 import co.com.ancas.service.UserAppService;
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.mail.MessagingException;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -18,6 +19,7 @@ import java.io.IOException;
 import static co.com.ancas.models.enums.Messages.MESSAGE_PASSWORD_UPDATED;
 
 @RestController
+@Tag(name = "Users")
 @RequiredArgsConstructor
 @RequestMapping("/v1.0/users")
 public class UserController {

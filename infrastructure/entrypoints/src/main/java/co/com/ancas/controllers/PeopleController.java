@@ -32,7 +32,7 @@ import static co.com.ancas.models.enums.Messages.*;
 public class PeopleController {
     private final PeopleAppService peopleService;
 
-    @PostMapping("/find-all")
+    @PostMapping("/all")
     @Operation(summary = "Find all People", description = "Endpoint to find all People")
     public ResponseEntity<GeneralResponse<PaginationResponse<PeopleResponse>>> findAll(
             @Valid @RequestBody PeopleSearchCriteriaRequest request,

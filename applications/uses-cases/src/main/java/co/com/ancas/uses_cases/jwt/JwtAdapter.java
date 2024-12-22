@@ -38,7 +38,7 @@ public class JwtAdapter {
     }
     public String generateToken(UserDetails userDetails ) {
         Date issuedAt = new Date(System.currentTimeMillis());
-        Date expiration = new Date(issuedAt.getTime() + expirationTime * 60 * 1000);
+        Date expiration = new Date(issuedAt.getTime() + expirationTime * 60* 60 * 1000);
         Map<String, Object> claims = new HashMap<>();
         claims.put("username", userDetails.getUsername());
         List<String> roles = userDetails.getAuthorities().stream()

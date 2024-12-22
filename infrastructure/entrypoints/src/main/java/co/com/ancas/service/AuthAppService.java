@@ -1,12 +1,11 @@
 package co.com.ancas.service;
 
 import co.com.ancas.models.model.AuthLogin;
-import co.com.ancas.models.model.AuthToken;
 import co.com.ancas.models.utils.Mapper;
 import co.com.ancas.request.AuthLoginRequest;
 import co.com.ancas.response.AuthTokenResponse;
-import co.com.ancas.uses_cases.user.LoginAdapter;
-import co.com.ancas.uses_cases.user.LogoutAdapter;
+import co.com.ancas.uses_cases.auth.LoginAdapter;
+import co.com.ancas.uses_cases.auth.LogoutAdapter;
 import jakarta.mail.MessagingException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;

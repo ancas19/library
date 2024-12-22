@@ -36,7 +36,7 @@ public class AccountController {
     @Operation(summary = "Create People", description = "Endpoint to create People")
     public ResponseEntity<GeneralResponse<PeopleResponse>> createPeople(
             @Valid @RequestBody PeopleRequest request
-    ) throws MessagingException {
+    ) throws MessagingException, IOException {
         return ResponseEntity
                 .status(HttpStatus.CREATED)
                 .body(
