@@ -10,6 +10,7 @@ import java.time.LocalDate;
 @Getter
 @Setter
 public class AuthorInformation {
+    private Long id;
     private String fullName;
     private String nationality;
     private LocalDate birthdate;

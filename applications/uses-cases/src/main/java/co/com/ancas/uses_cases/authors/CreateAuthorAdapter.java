@@ -7,6 +7,7 @@ import co.com.ancas.uses_cases.images.UploadImageAdapter;
 import co.com.ancas.uses_cases.interfaces.IUseCase;
 import jakarta.mail.MessagingException;
 import lombok.RequiredArgsConstructor;
+import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.stereotype.Component;
 
 import java.io.IOException;
@@ -18,6 +19,7 @@ public class CreateAuthorAdapter implements IUseCase<AuthorCreation, AuthorInfor
     private final AuthorsRepositoryPort authorsRepositoryPort;
     private final UploadImageAdapter uploadImageAdapter;
     @Override
+    @CacheEvict(value = "authors", allEntries = true)
     public AuthorInformation execute(AuthorCreation authorCreation) throws MessagingException, IOException {
         Image imageUploaded=uploadImageAdapter.execute(
                 ImageUpload.builder()
@@ -36,6 +38,7 @@ public class CreateAuthorAdapter implements IUseCase<AuthorCreation, AuthorInfor
                         .build()
         );
         return AuthorInformation.builder()
+                .id(authorCreated.getId())
                 .fullName(authorCreated.getFullName())
                 .nationality(authorCreated.getNationality())
                 .birthdate(authorCreated.getBirthdate())
