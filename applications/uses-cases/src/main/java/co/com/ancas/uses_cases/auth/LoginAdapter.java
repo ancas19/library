@@ -1,19 +1,17 @@
-package co.com.ancas.uses_cases.user;
+package co.com.ancas.uses_cases.auth;
 
 import co.com.ancas.models.enums.Messages;
 import co.com.ancas.models.exceptions.UnauthorizedException;
 import co.com.ancas.models.model.Attempt;
 import co.com.ancas.models.model.AuthToken;
 import co.com.ancas.models.model.AuthLogin;
-import co.com.ancas.models.model.PeopleFullInfomration;
 import co.com.ancas.models.repositories.AttemptRepositoryPort;
-import co.com.ancas.models.repositories.JwtRepositoryPort;
-import co.com.ancas.models.repositories.PeopleRepositoryPort;
 import co.com.ancas.models.repositories.UserRepositoryPort;
 import co.com.ancas.uses_cases.interfaces.IUseCase;
 import co.com.ancas.uses_cases.jwt.JwtAdapter;
 import co.com.ancas.uses_cases.people.ChangeStatusPersonAdapter;
 import co.com.ancas.uses_cases.people.FindPeopleFullInformationAdapter;
+import co.com.ancas.uses_cases.user.UserDetailsAdapter;
 import jakarta.mail.MessagingException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.User;

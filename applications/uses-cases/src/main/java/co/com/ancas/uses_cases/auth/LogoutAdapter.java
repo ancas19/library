@@ -1,6 +1,5 @@
-package co.com.ancas.uses_cases.user;
+package co.com.ancas.uses_cases.auth;
 
-import co.com.ancas.models.repositories.JwtRepositoryPort;
 import co.com.ancas.uses_cases.interfaces.IUseCaseVoid;
 import co.com.ancas.uses_cases.jwt.JwtAdapter;
 import lombok.RequiredArgsConstructor;
