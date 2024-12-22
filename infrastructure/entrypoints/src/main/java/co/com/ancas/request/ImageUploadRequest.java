@@ -3,6 +3,7 @@ package co.com.ancas.request;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
+import jakarta.validation.constraints.Positive;
 import lombok.*;
 
 @AllArgsConstructor
@@ -18,4 +19,7 @@ public class ImageUploadRequest {
     @NotNull(message = "Base64 is required")
     @NotEmpty(message = "Base64 is required")
     private String base64;
+    @NotNull
+    @Positive
+    private Long id;
 }

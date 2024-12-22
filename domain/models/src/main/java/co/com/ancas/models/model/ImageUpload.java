@@ -11,5 +11,6 @@ public class ImageUpload {
     private String nameFile;
     private String base64;
     private Long idImage;
+    private Long id;
 }
 

@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
+import jakarta.validation.constraints.Positive;
 import lombok.*;
 
 import java.time.LocalDate;
@@ -14,6 +15,8 @@ import java.time.LocalDate;
 @Getter
 @Setter
 public class AuthorCreationRequest {
+    @Positive
+    private Long id;
     @NotNull(message = "Name is required")
     @NotEmpty(message = "Name is required")
     @Pattern(regexp = "^[A-ZÁÉÍÓÚÑ ]+$", message = "Name must have only letters and spaces")
