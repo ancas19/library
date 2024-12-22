@@ -25,17 +25,19 @@ INSERT INTO email_templates (subject, body)
 VALUES (
     'USER_AND_PASSWORD',
     '
-	<div class="content" style="margin-bottom: 20px; line-height: 1.6;"> \
-        <h2 style="font-size: 20px; color: #4A90E2; margin-top: 0;">Welcome, <span>:name</span>!</h2> \
-        <p style="margin: 10px 0;">We are excited to have you join our Library App community. Below are your login credentials:</p> \
-        <div class="login-details" style="background-color: #f0f0f0; padding: 10px; border-radius: 8px; margin: 20px 0; font-size: 14px;"> \
-            <p style="margin: 5px 0;"><strong>Username:</strong> <span>:username</span></p> \
-            <p style="margin: 5px 0;"><strong>Password:</strong> <span>:password</span></p> \
-        </div> \
-        <p style="margin: 10px 0;">To get started, click the button below to log in and explore our collection:</p> \
-        <p style="margin: 10px 0;">If you have any questions or need support, feel free to reach out to us at \
-           <a href="mailto:support@yourlibraryapp.com" style="color: #4A90E2;">support@yourlibraryapp.com</a>. \
-        </p> \
-        <p style="margin: 10px 0;">Happy reading!</p> \
-    </div>'
+    <div class="content" style="margin-bottom: 20px; line-height: 1.6;">
+        <h2 style="font-size: 20px; color: #4A90E2; margin-top: 0;">Welcome, <span>:name</span>!</h2>
+        <p style="margin: 10px 0;">We are excited to have you join our Library App community. Below are your login credentials:</p>
+        <div class="login-details" style="background-color: #f0f0f0; padding: 10px; border-radius: 8px; margin: 20px 0; font-size: 14px;">
+            <p style="margin: 5px 0;"><strong>Username:</strong> <span>:username</span></p>
+            <p style="margin: 5px 0;"><strong>Password:</strong> <span>:password</span></p>
+        </div>
+        <p style="margin: 10px 0;">To get started, click the button below to log in and explore our collection:</p>
+        <p style="margin: 10px 0;">If you have any questions or need support, feel free to reach out to us at
+           <a href="mailto:support@yourlibraryapp.com" style="color: #4A90E2;">support@yourlibraryapp.com</a>.
+        </p>
+        <p style="margin: 10px 0;">Happy reading!</p>
+    </div>
+
+	'
 );

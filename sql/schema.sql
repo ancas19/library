@@ -3,6 +3,7 @@ CREATE TABLE images (
   id SERIAL PRIMARY KEY,
   file_name VARCHAR(255),
   file_path VARCHAR(255),
+  id_server VARCHAR(255),
   created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
   user_created VARCHAR(255),
   updated_user VARCHAR(255),
