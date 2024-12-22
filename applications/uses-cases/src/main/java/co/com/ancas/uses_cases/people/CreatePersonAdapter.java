@@ -12,6 +12,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.stereotype.Component;
 
+import java.io.IOException;
+
 import static co.com.ancas.models.enums.Constants.ACTIVE;
 import static co.com.ancas.models.enums.Messages.MESSAGE_ERROR_DNI_ALREADY_EXISTS;
 import static co.com.ancas.models.enums.Messages.MESSAGE_ERROR_EMAIL_ALREADY_EXISTS;
@@ -23,7 +25,7 @@ public class CreatePersonAdapter implements IUseCase<PeopleCreation,People> {
     private final CreateUserAdapter createUserAdapter;
     @Override
     @CacheEvict(value = "people", allEntries = true)
-    public People execute(PeopleCreation people) throws MessagingException {
+    public People execute(PeopleCreation people) throws MessagingException, IOException {
         if(this.peopleRepositoryPort.verifyDni(people.getDni())){
             throw new BadRequestException(MESSAGE_ERROR_DNI_ALREADY_EXISTS.getMessage());
         }
