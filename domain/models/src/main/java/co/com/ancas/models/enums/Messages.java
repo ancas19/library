@@ -20,6 +20,8 @@ public enum Messages {
     MESSAGES_EMAIL_NOT_FOUND("The email address you entered is not registered. Please double-check or sign up for a new account."),
     MESSAGE_LOGIN_FAILED("Login failed, please check your credentials"),
     MESSAGE_AUTHOR_NOT_FOUND("Authors not found"),
+    MESSAGE_AUTHOR_NOT_FOUND_BY_ID("Author not found"),
+    MESSAGE_ERROR_AUTHOR_NAME_ALREADY_EXISTS("Author name already exists"),
 
     //Success messages
     MESSAGE_PEOPLE_FULL_INFOMRATION("Person found successfully"),
@@ -37,7 +39,9 @@ public enum Messages {
     MESSAGE_LOGIN_SUCCESS("Login success"),
     MESSAGE_LOGOUT_SUCCESSFUL("Logout successful"),
     MESSAGE_AUTHOR_CREATED("Author created successfully"),
-    MESSAGE_AUTHOR_FOUND("Authors found successfully"),;
+    MESSAGE_AUTHOR_FOUND("Authors found successfully"),
+    MESSAGE_AUTHOR_IMAGE_UPDATED("Author image updated successfully"),
+    MESSAGE_AUTHOR_UPDATED("Author updated successfully"),;
     private final String message;
 
     Messages(String message) {
