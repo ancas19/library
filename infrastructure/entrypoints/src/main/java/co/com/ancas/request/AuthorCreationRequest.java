@@ -15,8 +15,6 @@ import java.time.LocalDate;
 @Getter
 @Setter
 public class AuthorCreationRequest {
-    @Positive
-    private Long id;
     @NotNull(message = "Name is required")
     @NotEmpty(message = "Name is required")
     @Pattern(regexp = "^[A-ZÁÉÍÓÚÑ ]+$", message = "Name must have only letters and spaces")
@@ -30,7 +28,7 @@ public class AuthorCreationRequest {
     private LocalDate birthdate;
     @NotNull
     @NotEmpty
-    @Pattern(regexp = "^[a-zA-ZÁÉÍÓÚÑáéíóúñ0-9., @()]+$", message = "Name must have only letters and spaces")
+    @Pattern(regexp = "^[a-zA-ZÁÉÍÓÚÑáéíóúñ0-9., @()_-]+$", message = "Bio must have only letters, spaces and special characters")
     private String bio;
     @NotNull(message = "Name file is required")
     @NotEmpty(message = "Name file is required")
