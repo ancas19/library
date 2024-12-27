@@ -26,6 +26,7 @@ public interface AuthorRepository extends JpaRepository<AuthorsEntity,Long> {
             FROM AuthorsEntity a
             INNER JOIN ImagesEntity i ON a.imageId = i.id
             WHERE LOWER(a.fullName) LIKE %:search%
+            AND LOWER(a.nationality) LIKE %:search%
             """
     )
     Page<AuthorInformation> findAuthorsByCriteria(@Param("search") String search, Pageable pageable);
@@ -46,4 +47,7 @@ public interface AuthorRepository extends JpaRepository<AuthorsEntity,Long> {
             """
     )
     Optional<AuthorInformation> findAuthorById(@Param("idAuthor") Long idAuthor);
+
+    boolean existsByfullNameAndIdNot(String fullName, Long id);
+    boolean existsByfullName(String fullName);
 }

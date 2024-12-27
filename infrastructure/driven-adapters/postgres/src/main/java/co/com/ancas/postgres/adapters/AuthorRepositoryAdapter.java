@@ -35,4 +35,19 @@ public class AuthorRepositoryAdapter implements AuthorsRepositoryPort {
     public Optional<AuthorInformation> findAuthorById(Long aLong) {
         return this.authorRepository.findAuthorById(aLong);
     }
+
+    @Override
+    public Optional<Author> findById(Long id) {
+        return this.authorRepository.findById(id).map(author -> Mapper.map(author, Author.class));
+    }
+
+    @Override
+    public boolean existsByNameAndNotId(String fullName, Long id) {
+        return this.authorRepository.existsByfullNameAndIdNot(fullName, id);
+    }
+
+    @Override
+    public boolean existsByName(String fullName) {
+        return this.authorRepository.existsByfullName(fullName);
+    }
 }

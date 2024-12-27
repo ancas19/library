@@ -12,4 +12,7 @@ public interface AuthorsRepositoryPort {
     Author save(Author build);
     Page<AuthorInformation> findAuthorsByCriteria(AuthorsSearchCriteria authorsSearchCriteria);
     Optional<AuthorInformation> findAuthorById(Long aLong);
+    Optional<Author> findById(Long id);
+    boolean existsByNameAndNotId(String fullName, Long id);
+    boolean existsByName(String fullName);
 }
