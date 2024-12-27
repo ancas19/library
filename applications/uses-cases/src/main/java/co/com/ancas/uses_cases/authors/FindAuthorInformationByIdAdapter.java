@@ -14,7 +14,7 @@ import java.util.Optional;
 
 @Component
 @RequiredArgsConstructor
-public class FindAuthorsByIdAdapter implements IUseCase<Long, AuthorInformation> {
+public class FindAuthorInformationByIdAdapter implements IUseCase<Long, AuthorInformation> {
     private final AuthorsRepositoryPort authorsRepositoryPort;
     @Override
     public AuthorInformation execute(Long aLong) throws MessagingException, IOException {

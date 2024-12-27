@@ -1,5 +1,7 @@
 package co.com.ancas.uses_cases.authors;
 
+import co.com.ancas.models.enums.Messages;
+import co.com.ancas.models.exceptions.BadRequestException;
 import co.com.ancas.models.model.*;
 import co.com.ancas.models.repositories.AuthorsRepositoryPort;
 import co.com.ancas.models.utils.Mapper;
@@ -21,13 +23,16 @@ public class CreateAuthorAdapter implements IUseCase<AuthorCreation, AuthorInfor
     @Override
     @CacheEvict(value = "authors", allEntries = true)
     public AuthorInformation execute(AuthorCreation authorCreation) throws MessagingException, IOException {
+        boolean existsByName=this.authorsRepositoryPort.existsByName(authorCreation.getFullName());
+        if(existsByName){
+            throw new BadRequestException(Messages.MESSAGE_ERROR_AUTHOR_NAME_ALREADY_EXISTS.getMessage());
+        }
         Image imageUploaded=uploadImageAdapter.execute(
                 ImageUpload.builder()
                         .base64(authorCreation.getBase64())
                         .nameFile(authorCreation.getNameFile())
                         .build()
         );
-
         Author authorCreated=this.authorsRepositoryPort.save(
                 Author.builder()
                         .fullName(authorCreation.getFullName())
