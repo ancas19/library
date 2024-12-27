@@ -1,17 +1,20 @@
 package co.com.ancas.service;
 
+import co.com.ancas.models.model.Author;
 import co.com.ancas.models.model.AuthorCreation;
 import co.com.ancas.models.model.AuthorsSearchCriteria;
+import co.com.ancas.models.model.ImageUpload;
 import co.com.ancas.models.utils.Mapper;
 import co.com.ancas.request.AuthorCreationRequest;
+import co.com.ancas.request.AuthorInformationRequest;
+import co.com.ancas.request.ImageUploadRequest;
 import co.com.ancas.request.SearchParameterRequest;
 import co.com.ancas.response.AuthorInformationResponse;
 import co.com.ancas.response.PaginationResponse;
-import co.com.ancas.uses_cases.authors.CreateAuthorAdapter;
-import co.com.ancas.uses_cases.authors.FindAuthorsAdapter;
-import co.com.ancas.uses_cases.authors.FindAuthorsByIdAdapter;
+import co.com.ancas.uses_cases.authors.*;
 import co.com.ancas.utils.Pagination;
 import jakarta.mail.MessagingException;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
@@ -23,7 +26,9 @@ import java.io.IOException;
 public class AuthorAppService {
     private final CreateAuthorAdapter createAuthorAdapter;
     private final FindAuthorsAdapter findAuthors;
-    private final FindAuthorsByIdAdapter findAuthorsByIdAdapter;
+    private final FindAuthorInformationByIdAdapter findAuthorInformationByIdAdapter;
+    private final UpdateAuthorImageAdapter updateAuthorImageAdapter;
+    private final UpdateAuthorInformationAdapter authorInformationAdapter;
 
     @Transactional(value = "libraryTransactionManager",rollbackFor = Exception.class)
     public AuthorInformationResponse createAuthor(AuthorCreationRequest authorCreationRequest) throws MessagingException, IOException {
@@ -43,6 +48,16 @@ public class AuthorAppService {
 
     @Transactional(value = "libraryTransactionManager",readOnly = true,rollbackFor = Exception.class)
     public AuthorInformationResponse findById(Long id) throws MessagingException, IOException {
-        return Mapper.map(this.findAuthorsByIdAdapter.execute(id),AuthorInformationResponse.class);
+        return Mapper.map(this.findAuthorInformationByIdAdapter.execute(id),AuthorInformationResponse.class);
+    }
+
+    @Transactional(value = "libraryTransactionManager",rollbackFor = Exception.class)
+    public AuthorInformationResponse updateImageAuthor(ImageUploadRequest imageUploadRequest) throws MessagingException, IOException {
+        return  Mapper.map(this.updateAuthorImageAdapter.execute(Mapper.map(imageUploadRequest, ImageUpload.class)),AuthorInformationResponse.class);
+    }
+
+    @Transactional(value = "libraryTransactionManager",rollbackFor = Exception.class)
+    public AuthorInformationResponse updateAuthorInformation(AuthorInformationRequest authorInformationRequest) throws MessagingException, IOException {
+        return Mapper.map(this.authorInformationAdapter.execute(Mapper.map(authorInformationRequest, Author.class)),AuthorInformationResponse.class);
     }
 }
