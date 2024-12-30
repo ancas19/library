@@ -13,4 +13,7 @@ public interface BookRepositoryPort {
     Book save(Book build);
     Page<BookInformation> findBooksByCriteria(BookSearchCriteria bookSearchCriteria);
     Optional<BookInformation> findBookInformationById(Long id);
+    Optional<Book> findById(Long bookId);
+    boolean existsByIsbnAndIdNot(String isbn, Long id);
+    boolean existsByTitleAndIdNot(String isbn, Long id);
 }

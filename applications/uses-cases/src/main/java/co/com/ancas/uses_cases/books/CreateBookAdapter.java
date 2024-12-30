@@ -51,6 +51,7 @@ public class CreateBookAdapter  implements IUseCase<BookCreation, BookInformatio
                         .genreId(genreFound.getId())
                         .availableCopies(bookCreation.getAvailableCopies())
                         .blurb(bookCreation.getBlurb())
+                        .available(bookCreation.getAvailable())
                         .imageId(imageUploaded.getId())
                         .build()
         );

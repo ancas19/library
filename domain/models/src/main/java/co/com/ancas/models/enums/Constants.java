@@ -14,7 +14,9 @@ public enum Constants {
     CHARACTERS("ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$&*"),
     INACTIVE("INACTIVE"),
     ROLE("ROLE_%s"),
-    UNBLOCK_USER("UNBLOCK_USER"),;
+    UNBLOCK_USER("UNBLOCK_USER"),
+    YES("YES"),
+    NO("NO"),;
 
     private final String constant;
 

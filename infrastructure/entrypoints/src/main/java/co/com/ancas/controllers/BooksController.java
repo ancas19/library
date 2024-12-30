@@ -3,6 +3,8 @@ package co.com.ancas.controllers;
 import co.com.ancas.models.enums.Messages;
 import co.com.ancas.request.BookCreationRequest;
 import co.com.ancas.request.BookSearchCriteriaRequest;
+import co.com.ancas.request.BookUpdateRequest;
+import co.com.ancas.request.ImageUploadRequest;
 import co.com.ancas.response.BookInformationResponse;
 import co.com.ancas.response.GeneralResponse;
 import co.com.ancas.response.PaginationResponse;
@@ -64,6 +66,47 @@ public class BooksController {
                 GeneralResponse.<PaginationResponse<BookInformationResponse>>builder()
                         .message(Messages.MESSAGE_BOOK_FOUND.getMessage())
                         .data(this.booksAppservice.findBooksByCriteria(bookSearchCriteriaRequest, page, size))
+                        .build()
+        );
+    }
+
+    @PutMapping("/information")
+    @Operation(summary = "Update book information")
+    public ResponseEntity<GeneralResponse<BookInformationResponse>> updateBookInformation(
+            @Valid @RequestBody BookUpdateRequest bookUpdateRequest
+    ) throws MessagingException, IOException {
+        return ResponseEntity.ok(
+                GeneralResponse.<BookInformationResponse>builder()
+                        .message(Messages.MESSAGE_BOOK_UPDATED.getMessage())
+                        .data(this.booksAppservice.updateBookInformation(bookUpdateRequest))
+                        .build()
+        );
+    }
+
+
+    @PutMapping("/image")
+    @Operation(summary = "Update book image")
+    public ResponseEntity<GeneralResponse<BookInformationResponse>> updateImageBook(
+            @Valid @RequestBody ImageUploadRequest imageUploadRequest
+            ) throws MessagingException, IOException {
+        return ResponseEntity.ok(
+                GeneralResponse.<BookInformationResponse>builder()
+                        .message(Messages.MESSAGE_BOOK_IMAGE_UPDATED.getMessage())
+                        .data(this.booksAppservice.updateImageBook(imageUploadRequest))
+                        .build()
+        );
+    }
+
+    @DeleteMapping("/{id}")
+    @Operation(summary = "Change the status of a book to inactive")
+    public ResponseEntity<GeneralResponse<String>> deleteBook(
+            @PathVariable Long id
+    ) throws MessagingException, IOException {
+        this.booksAppservice.changeBookStatus(id);
+        return ResponseEntity.ok(
+                GeneralResponse.<String>builder()
+                        .message(Messages.MESSAGE_CHANGE_BOOK_STATUS.getMessage())
+                        .data(Messages.MESSAGE_CHANGE_BOOK_STATUS.getMessage())
                         .build()
         );
     }

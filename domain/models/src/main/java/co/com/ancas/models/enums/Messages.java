@@ -51,7 +51,10 @@ public enum Messages {
     MESSAGE_AUTHOR_UPDATED("Author updated successfully"),
     MESSAGE_GENRES_FOUND("Genres found"),
     MESSAGE_BOOK_CREATED("Book created successfully"),
-    MESSAGE_BOOK_FOUND("Books found successfully"),;
+    MESSAGE_BOOK_FOUND("Books found successfully"),
+    MESSAGE_BOOK_UPDATED("Book updated successfully"),
+    MESSAGE_BOOK_IMAGE_UPDATED("Book image updated successfully"),
+    MESSAGE_CHANGE_BOOK_STATUS("Book status changed successfully"),;
     private final String message;
 
     Messages(String message) {
