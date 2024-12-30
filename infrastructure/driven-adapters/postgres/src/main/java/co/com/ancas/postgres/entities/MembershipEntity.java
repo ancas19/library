@@ -28,4 +28,7 @@ public class MembershipEntity extends AuditEntity {
 
     @Column(name = "grace_period_days", nullable = false)
     private Integer gracePeriodDays;
+
+    @Column(name = "fine_per_day", nullable = false)
+    private Double finePerDay;
 }
