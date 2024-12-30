@@ -60,4 +60,9 @@ public class BookRepositoryAdapter implements BookRepositoryPort {
     public boolean existsByTitleAndIdNot(String isbn, Long id) {
         return this.bookRepository.existsByTitleAndIdNot(isbn, id);
     }
+
+    @Override
+    public Optional<Book> findBookByIsbn(String isbn) {
+        return this.bookRepository.findByIsbn(isbn).map(book -> Mapper.map(book, Book.class));
+    }
 }

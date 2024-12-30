@@ -1,6 +1,7 @@
 package co.com.ancas.postgres.repositories;
 
 import co.com.ancas.models.model.BookInformation;
+import co.com.ancas.models.utils.Mapper;
 import co.com.ancas.postgres.entities.BooksEntity;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -83,4 +84,6 @@ public interface BookRepository extends JpaRepository<BooksEntity, Long> {
 
     boolean existsByIsbnAndIdNot(String isbn, Long id);
     boolean existsByTitleAndIdNot(String isbn, Long id);
+
+    Optional<BooksEntity> findByIsbn(String isbn);
 }
