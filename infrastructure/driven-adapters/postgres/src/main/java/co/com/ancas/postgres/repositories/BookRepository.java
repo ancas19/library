@@ -9,6 +9,8 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
+import java.util.Optional;
+
 @Repository
 public interface BookRepository extends JpaRepository<BooksEntity, Long> {
     boolean existsByIsbn(String isbn);
@@ -45,4 +47,35 @@ public interface BookRepository extends JpaRepository<BooksEntity, Long> {
             """
     )
     Page<BookInformation> findBooksByCriteria(@Param("search") String lowerCase, @Param("author") String author, @Param("genre") String genre, Pageable pageable);
+
+
+    @Query(
+            """
+            SELECT new co.com.ancas.models.model.BookInformation(
+                b.id,
+                b.title,
+                b.isbn,
+                b.publishDate,
+                g.value,
+                b.availableCopies,
+                b.blurb,
+                (
+                    SELECT i.filePath
+                    FROM ImagesEntity i
+                    WHERE i.id = b.imageId
+                ),
+                a.fullName,
+                (
+                    SELECT i.filePath
+                    FROM ImagesEntity i
+                    WHERE i.id = a.imageId
+                )    
+            )
+            FROM BooksEntity b
+            INNER JOIN AuthorsEntity a ON b.authorId = a.id
+            INNER JOIN GenresEntity g ON b.genreId = g.id
+            WHERE b.id = :id
+            """
+    )
+    Optional<BookInformation> findBookById(@Param("id") Long id);
 }

@@ -40,6 +40,19 @@ public class BooksController {
         );
     }
 
+    @GetMapping("/{id}")
+    @Operation(summary = "Find a book by id")
+    public ResponseEntity<GeneralResponse<BookInformationResponse>> findBookById(
+            @PathVariable Long id
+    ) throws MessagingException, IOException {
+        return ResponseEntity.ok(
+                GeneralResponse.<BookInformationResponse>builder()
+                        .message(Messages.MESSAGE_BOOK_FOUND.getMessage())
+                        .data(this.booksAppservice.findBookById(id))
+                        .build()
+        );
+    }
+
     @PostMapping("/all")
     @Operation(summary = "Find all books")
     public ResponseEntity<GeneralResponse<PaginationResponse<BookInformationResponse>>> findBooks(

@@ -13,6 +13,8 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @Service
 @RequiredArgsConstructor
 public class BookRepositoryAdapter implements BookRepositoryPort {
@@ -37,5 +39,10 @@ public class BookRepositoryAdapter implements BookRepositoryPort {
     public Page<BookInformation> findBooksByCriteria(BookSearchCriteria bookSearchCriteria) {
         Pageable pageable = PageRequest.of(bookSearchCriteria.getPage(), bookSearchCriteria.getSize());
         return this.bookRepository.findBooksByCriteria(bookSearchCriteria.getSearch().toLowerCase(),bookSearchCriteria.getAuthor(),bookSearchCriteria.getGenre(), pageable);
+    }
+
+    @Override
+    public Optional<BookInformation> findBookInformationById(Long id) {
+        return this.bookRepository.findBookById(id);
     }
 }
