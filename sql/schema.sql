@@ -106,12 +106,25 @@ CREATE TABLE authors (
   user_created VARCHAR(255),
   updated_user VARCHAR(255),
   updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    constraint fk_authors_images foreign key (image_id) references images(id)
+   constraint fk_authors_images foreign key (image_id) references images(id)
 );
 
 -- Add indexes
 CREATE INDEX idx_authors_nationality ON authors(nationality);
 create  index idz_authors_full_name on authors(full_name);
+
+-- Table: genres
+create table if not exists genres(
+	id serial primary key,
+	value varchar(100),
+	created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+ 	user_created VARCHAR(255),
+  	updated_user VARCHAR(255),
+  	updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+
+);
+create index idx_genres_value on genres(value);
+
 
 -- Table: books
 CREATE TABLE books (
@@ -119,16 +132,18 @@ CREATE TABLE books (
   title VARCHAR(255),
   isbn VARCHAR(255) UNIQUE,
   author_id INT not null,
-  publish_date TIMESTAMP,
-  genre VARCHAR(255),
+  publish_date TIMESTAMP not null,
+  genre_id  int (255) not null,
   available_copies INT,
+  blurb TEXT NOT NULL,
   image_id INT not null,
   created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
   user_created VARCHAR(255),
   updated_user VARCHAR(255),
   updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
   constraint fk_books_authors foreign key (author_id) references authors(id),
-  constraint fk_books_images foreign key (image_id) references images(id)
+  constraint fk_books_images foreign key (image_id) references images(id),
+   constraint fk_books_genres foreign key (genre_id) references genres(id)
 );
 
 -- Add indexes
