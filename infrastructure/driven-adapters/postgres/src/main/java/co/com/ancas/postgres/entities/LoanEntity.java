@@ -2,6 +2,9 @@ package co.com.ancas.postgres.entities;
 
 import jakarta.persistence.*;
 import lombok.*;
+import org.springframework.cglib.core.Local;
+
+import java.time.LocalDate;
 
 @Entity
 @Table(name = "loans")
@@ -23,11 +26,24 @@ public class LoanEntity {
     private Long bookId;
 
     @Column(name = "loan_date")
-    private String loanDate;
+    private LocalDate loanDate;
 
     @Column(name = "due_date")
-    private String dueDate;
+    private LocalDate dueDate;
 
     @Column(name = "return_date")
-    private String returnDate;
+    private LocalDate returnDate;
+
+    @Column(name = "days_delayed")
+    private Integer daysDelayed;
+
+    @Column(name = "comments")
+    private String comments;
+
+    @Column(name = "fine")
+    private Double fine;
+
+    @Column(name = "paid")
+    private String paid;
 }
+
