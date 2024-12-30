@@ -1,6 +1,7 @@
 package co.com.ancas.postgres.repositories;
 
 import co.com.ancas.models.model.AuthorInformation;
+import co.com.ancas.models.utils.Mapper;
 import co.com.ancas.postgres.entities.AuthorsEntity;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -47,7 +48,7 @@ public interface AuthorRepository extends JpaRepository<AuthorsEntity,Long> {
             """
     )
     Optional<AuthorInformation> findAuthorById(@Param("idAuthor") Long idAuthor);
-
     boolean existsByfullNameAndIdNot(String fullName, Long id);
     boolean existsByfullName(String fullName);
+    Optional<AuthorsEntity>findByFullName(String s);
 }

@@ -15,4 +15,5 @@ public interface AuthorsRepositoryPort {
     Optional<Author> findById(Long id);
     boolean existsByNameAndNotId(String fullName, Long id);
     boolean existsByName(String fullName);
+    Optional<Author> findByFullName(String s);
 }

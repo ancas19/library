@@ -50,4 +50,10 @@ public class AuthorRepositoryAdapter implements AuthorsRepositoryPort {
     public boolean existsByName(String fullName) {
         return this.authorRepository.existsByfullName(fullName);
     }
+
+    @Override
+    public Optional<Author> findByFullName(String s) {
+        return this.authorRepository.findByFullName(s)
+                .map(author -> Mapper.map(author, Author.class));
+    }
 }
