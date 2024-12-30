@@ -42,6 +42,30 @@ VALUES (
 	'
 );
 
+
+INSERT INTO public.email_templates
+(id, subject, body, created_at, updated_at)
+VALUES(3, 'BOOK_LOAN', '        <div>
+            <h2>Books Loaded Successfully!</h2>
+            <p>Dear User,</p>
+            <p>Your books have been successfully loaded into the library system. Below is a list of the books along with their start and end dates:</p>
+
+            <table style="width: 100%; border-collapse: collapse; margin-top: 20px;">
+                <thead>
+                    <tr>
+                        <th style="border: 1px solid #ddd; padding: 8px; text-align: left;">Book Name</th>
+                        <th style="border: 1px solid #ddd; padding: 8px; text-align: left;">Start Date</th>
+                        <th style="border: 1px solid #ddd; padding: 8px; text-align: left;">End Date</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- BookListPlaceholder -->
+                </tbody>
+            </table>
+
+            <p>If you have any questions, feel free to contact our support team.</p>
+        </div>', '2024-12-21 20:59:04.565', '2024-12-21 20:59:04.565');
+
 INSERT INTO GENRES (VALUE, USER_CREATED)
 VALUES ('SCIENCE FICTION', 'ADMIN');
 
