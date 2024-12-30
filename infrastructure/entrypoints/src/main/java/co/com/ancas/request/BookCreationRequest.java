@@ -36,6 +36,10 @@ public class BookCreationRequest {
     private Integer availableCopies;
     @NotNull
     @NotEmpty
+    @Pattern(regexp = "SI|NO", message = "Available must be 'SI' or 'NO'")
+    private String available;
+    @NotNull
+    @NotEmpty
     @Pattern(regexp = "^[a-zA-ZÁÉÍÓÚÑáéíóúñ0-9., @()_-]+$", message = "Bio must have only letters, spaces and special characters")
     private String blurb;
     @NotEmpty(message = "Name file is required")

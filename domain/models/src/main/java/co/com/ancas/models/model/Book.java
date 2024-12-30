@@ -20,4 +20,5 @@ public class Book {
     private Integer availableCopies;
     private String blurb;
     private Long imageId;
+    private String available;
 }

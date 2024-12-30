@@ -17,6 +17,7 @@ public class BookCreation {
     private String genre;
     private Integer availableCopies;
     private String blurb;
+    private String available;
     private String nameFile;
     private String base64;
 }

@@ -19,6 +19,7 @@ public class BookInformationResponse implements Serializable {
     private Integer availableCopies;
     private String blurb;
     private String bookImage;
+    private String available;
     private String author;
     private String authorImage;
 }

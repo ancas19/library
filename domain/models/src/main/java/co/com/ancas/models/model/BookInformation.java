@@ -20,4 +20,5 @@ public class BookInformation {
     private String bookImage;
     private String author;
     private String authorImage;
+    private String available;
 }

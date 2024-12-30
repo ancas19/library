@@ -27,6 +27,8 @@ public class BooksEntity {
     private LocalDate publishDate;
     @Column(name = "genre_id", nullable = false)
     private Long genreId;
+    @Column(name="available",nullable = false)
+    private String available;
     @Column(name = "available_copies", nullable = false)
     private Integer availableCopies;
     @Column(name = "blurb",nullable = false)
