@@ -16,7 +16,10 @@ public enum Constants {
     ROLE("ROLE_%s"),
     UNBLOCK_USER("UNBLOCK_USER"),
     YES("YES"),
-    NO("NO"),;
+    NO("NO"),
+    BOOK_LOAN("BOOK_LOAN"),
+    REPLACE_LOANS("<!-- BookListPlaceholder -->"),
+    BOOKS_LOAN("Books loaned"),;
 
     private final String constant;
 

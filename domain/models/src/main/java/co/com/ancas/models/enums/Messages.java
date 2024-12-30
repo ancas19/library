@@ -28,6 +28,10 @@ public enum Messages {
     MESSAGE_GENRES_NOT_FOUND("Genres not found"),
     MESSAGE_ERROR_GENRE_NOT_FOUND_BY_VALUE("Genre not found by value %s"),
     MESSAGE_BOOK_NOT_FOUND("Books not found"),
+    MESSAGE_ERROR_PERSON_NOT_FOUND("No exist person with id %s"),
+    MESSAGE_ERROR_LOAN_LIMIT("The user has reached the limit of active loans"),
+    MESSAGE_ERROR_BOOK_NOT_FOUND_BY_ISBN("No exist book with ISBN %s"),
+
 
 
     //Success messages
@@ -54,7 +58,7 @@ public enum Messages {
     MESSAGE_BOOK_FOUND("Books found successfully"),
     MESSAGE_BOOK_UPDATED("Book updated successfully"),
     MESSAGE_BOOK_IMAGE_UPDATED("Book image updated successfully"),
-    MESSAGE_CHANGE_BOOK_STATUS("Book status changed successfully"),;
+    MESSAGE_CHANGE_BOOK_STATUS("Book status changed successfully"), ;
     private final String message;
 
     Messages(String message) {
