@@ -1,6 +1,7 @@
 package co.com.ancas.postgres.repositories;
 
 import co.com.ancas.models.model.UserInformation;
+import co.com.ancas.models.model.UserMembershipInfo;
 import co.com.ancas.models.utils.Mapper;
 import co.com.ancas.postgres.entities.UserEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -52,4 +53,24 @@ public interface UserRepository extends JpaRepository<UserEntity, Long> {
            """
     )
     Long findPersonIdByUsername(String username);
+
+    @Query(
+           """
+           SELECT new co.com.ancas.models.model.UserMembershipInfo(
+                u.id,
+                u.username,
+                p.email,
+                m.membershipType,
+                m.loanLimit,
+                m.loanPeriodDays,
+                m.gracePeriodDays,
+                m.finePerDay
+           )
+           FROM UserEntity u
+           INNER JOIN PeopleEntity p ON p.id = u.personId
+           INNER JOIN MembershipEntity m ON m.id = u.membershipId
+           WHERE p.dni = :dni
+           """
+    )
+    Optional<UserMembershipInfo> findUserAndMembershipInfo(@Param("dni") String s);
 }

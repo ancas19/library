@@ -2,6 +2,7 @@ package co.com.ancas.postgres.adapters;
 
 import co.com.ancas.models.model.User;
 import co.com.ancas.models.model.UserInformation;
+import co.com.ancas.models.model.UserMembershipInfo;
 import co.com.ancas.models.repositories.UserRepositoryPort;
 import co.com.ancas.models.utils.Mapper;
 import co.com.ancas.postgres.entities.UserEntity;
@@ -47,5 +48,10 @@ public class UserRepositoryAdapter implements UserRepositoryPort {
     @Override
     public Long findPersonIdByUsername(String username) {
         return this.userRepository.findPersonIdByUsername(username);
+    }
+
+    @Override
+    public Optional<UserMembershipInfo> findUserAndMembershipInfo(String s) {
+        return this.userRepository.findUserAndMembershipInfo(s);
     }
 }

@@ -16,4 +16,5 @@ public interface BookRepositoryPort {
     Optional<Book> findById(Long bookId);
     boolean existsByIsbnAndIdNot(String isbn, Long id);
     boolean existsByTitleAndIdNot(String isbn, Long id);
+    Optional<Book> findBookByIsbn(String isbn);
 }
