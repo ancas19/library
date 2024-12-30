@@ -17,7 +17,7 @@ public class BookInformation {
     private String genre;
     private Integer availableCopies;
     private String blurb;
-    private String booImage;
+    private String bookImage;
     private String author;
     private String authorImage;
 }

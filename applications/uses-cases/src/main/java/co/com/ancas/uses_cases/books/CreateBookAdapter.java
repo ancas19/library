@@ -10,6 +10,7 @@ import co.com.ancas.uses_cases.images.UploadImageAdapter;
 import co.com.ancas.uses_cases.interfaces.IUseCase;
 import jakarta.mail.MessagingException;
 import lombok.RequiredArgsConstructor;
+import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.stereotype.Component;
 
 import java.io.IOException;
@@ -23,6 +24,7 @@ public class CreateBookAdapter  implements IUseCase<BookCreation, BookInformatio
     private final FindGenreByValueAdapter findGenreByValueAdapter;
 
     @Override
+    @CacheEvict(value = "books", allEntries = true)
     public BookInformation execute(BookCreation bookCreation) throws MessagingException, IOException {
         boolean exists=this.bookRepositoryPort.existsByIsbn(bookCreation.getIsbn());
         if(exists){
@@ -61,7 +63,7 @@ public class CreateBookAdapter  implements IUseCase<BookCreation, BookInformatio
                 .genre(genreFound.getValue())
                 .availableCopies(bookCreated.getAvailableCopies())
                 .blurb(bookCreation.getBlurb())
-                .booImage(imageUploaded.getFilePath())
+                .bookImage(imageUploaded.getFilePath())
                 .build();
     }
 }

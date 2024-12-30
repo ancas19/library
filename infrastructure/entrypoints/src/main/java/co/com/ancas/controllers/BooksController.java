@@ -2,8 +2,10 @@ package co.com.ancas.controllers;
 
 import co.com.ancas.models.enums.Messages;
 import co.com.ancas.request.BookCreationRequest;
+import co.com.ancas.request.BookSearchCriteriaRequest;
 import co.com.ancas.response.BookInformationResponse;
 import co.com.ancas.response.GeneralResponse;
+import co.com.ancas.response.PaginationResponse;
 import co.com.ancas.service.BooksAppservice;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -12,10 +14,7 @@ import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
 
@@ -37,6 +36,21 @@ public class BooksController {
                 GeneralResponse.<BookInformationResponse>builder()
                         .data(this.booksAppservice.createBook(bookCreationRequest))
                         .message(Messages.MESSAGE_BOOK_CREATED.getMessage())
+                        .build()
+        );
+    }
+
+    @PostMapping("/all")
+    @Operation(summary = "Find all books")
+    public ResponseEntity<GeneralResponse<PaginationResponse<BookInformationResponse>>> findBooks(
+            @Valid @RequestBody BookSearchCriteriaRequest bookSearchCriteriaRequest,
+            @RequestParam(defaultValue = "0", required = false, name = "page") Integer page,
+            @RequestParam(defaultValue = "10", required = false, name = "size") Integer size
+    ) throws MessagingException, IOException {
+        return ResponseEntity.ok(
+                GeneralResponse.<PaginationResponse<BookInformationResponse>>builder()
+                        .message(Messages.MESSAGE_BOOK_FOUND.getMessage())
+                        .data(this.booksAppservice.findBooksByCriteria(bookSearchCriteriaRequest, page, size))
                         .build()
         );
     }

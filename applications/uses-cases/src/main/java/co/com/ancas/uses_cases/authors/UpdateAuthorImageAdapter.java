@@ -11,6 +11,7 @@ import co.com.ancas.uses_cases.images.UploadImageAdapter;
 import co.com.ancas.uses_cases.interfaces.IUseCase;
 import jakarta.mail.MessagingException;
 import lombok.RequiredArgsConstructor;
+import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.stereotype.Component;
 
 import java.io.IOException;
@@ -24,6 +25,7 @@ public class UpdateAuthorImageAdapter implements IUseCase<ImageUpload,AuthorInfo
 
 
     @Override
+    @CacheEvict(value = "authors", allEntries = true)
     public AuthorInformation execute(ImageUpload imageUpload) throws MessagingException, IOException {
         Author authorFound=this.findAuthorByIdAdater.execute(imageUpload.getId());
         imageUpload.setIdImage(authorFound.getImageId());

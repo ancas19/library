@@ -8,6 +8,7 @@ import co.com.ancas.models.repositories.AuthorsRepositoryPort;
 import co.com.ancas.uses_cases.interfaces.IUseCase;
 import jakarta.mail.MessagingException;
 import lombok.RequiredArgsConstructor;
+import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.stereotype.Component;
 
 import java.io.IOException;
@@ -20,6 +21,7 @@ public class UpdateAuthorInformationAdapter implements IUseCase<Author, AuthorIn
     private final FindAuthorInformationByIdAdapter findAuthorInformationByIdAdapter;
 
     @Override
+    @CacheEvict(value = "authors", allEntries = true)
     public AuthorInformation execute(Author author) throws MessagingException, IOException {
         Author authorFound = this.findAuthorByIdAdater.execute(author.getId());
         boolean existsByName=this.authorsRepositoryPort.existsByNameAndNotId(author.getFullName(),author.getId());

@@ -27,7 +27,7 @@ public enum Messages {
     MESSAGE_ERROR_TITLE_ALREADY_EXISTS("Already exists a book with this title %s"),
     MESSAGE_GENRES_NOT_FOUND("Genres not found"),
     MESSAGE_ERROR_GENRE_NOT_FOUND_BY_VALUE("Genre not found by value %s"),
-
+    MESSAGE_BOOK_NOT_FOUND("Books not found"),
 
 
     //Success messages
@@ -50,7 +50,8 @@ public enum Messages {
     MESSAGE_AUTHOR_IMAGE_UPDATED("Author image updated successfully"),
     MESSAGE_AUTHOR_UPDATED("Author updated successfully"),
     MESSAGE_GENRES_FOUND("Genres found"),
-    MESSAGE_BOOK_CREATED("Book created successfully"),;
+    MESSAGE_BOOK_CREATED("Book created successfully"),
+    MESSAGE_BOOK_FOUND("Books found successfully"),;
     private final String message;
 
     Messages(String message) {
