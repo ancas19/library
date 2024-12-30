@@ -36,7 +36,8 @@ public interface BookRepository extends JpaRepository<BooksEntity, Long> {
                     SELECT i.filePath
                     FROM ImagesEntity i
                     WHERE i.id = a.imageId
-                )    
+                ),
+                b.available    
             )
             FROM BooksEntity b
             INNER JOIN AuthorsEntity a ON b.authorId = a.id
@@ -69,7 +70,8 @@ public interface BookRepository extends JpaRepository<BooksEntity, Long> {
                     SELECT i.filePath
                     FROM ImagesEntity i
                     WHERE i.id = a.imageId
-                )    
+                ),
+                b.available    
             )
             FROM BooksEntity b
             INNER JOIN AuthorsEntity a ON b.authorId = a.id
@@ -78,4 +80,7 @@ public interface BookRepository extends JpaRepository<BooksEntity, Long> {
             """
     )
     Optional<BookInformation> findBookById(@Param("id") Long id);
+
+    boolean existsByIsbnAndIdNot(String isbn, Long id);
+    boolean existsByTitleAndIdNot(String isbn, Long id);
 }

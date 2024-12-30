@@ -45,4 +45,19 @@ public class BookRepositoryAdapter implements BookRepositoryPort {
     public Optional<BookInformation> findBookInformationById(Long id) {
         return this.bookRepository.findBookById(id);
     }
+
+    @Override
+    public Optional<Book> findById(Long bookId) {
+        return this.bookRepository.findById(bookId).map(book -> Mapper.map(book, Book.class));
+    }
+
+    @Override
+    public boolean existsByIsbnAndIdNot(String isbn, Long id) {
+        return this.bookRepository.existsByIsbnAndIdNot(isbn, id);
+    }
+
+    @Override
+    public boolean existsByTitleAndIdNot(String isbn, Long id) {
+        return this.bookRepository.existsByTitleAndIdNot(isbn, id);
+    }
 }
