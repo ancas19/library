@@ -19,7 +19,9 @@ public enum Constants {
     NO("NO"),
     BOOK_LOAN("BOOK_LOAN"),
     REPLACE_LOANS("<!-- BookListPlaceholder -->"),
-    BOOKS_LOAN("Books loaned"),;
+    BOOKS_LOAN("Books loaned"),
+    DISCOUNT("DISCOUNT"),
+    BOOK_RETURN("BOOK_RETURN");
 
     private final String constant;
 
