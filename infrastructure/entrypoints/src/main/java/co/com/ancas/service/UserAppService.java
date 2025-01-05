@@ -19,14 +19,17 @@ import java.io.IOException;
 public class UserAppService {
     private final UpdatePasswordAdapter updatePasswordAdapter;
     private final FindUserByPersonIdAdapter findUserByPersonIdAdapter;
+    private final CurrentUserAppService currentUserAppService;
 
     @Transactional(value = "libraryTransactionManager",rollbackFor = Exception.class)
     public void updatePassword(ChangePasswordRequest request) throws MessagingException, IOException {
+        currentUserAppService.verifyCurrentUsername(request.getUsername());
         updatePasswordAdapter.execute(Mapper.map(request, UpdatePassword.class));
     }
 
     @Transactional(value = "libraryTransactionManager",readOnly = true,rollbackFor = Exception.class)
     public UserInformationResponse findUserByPersonid(Long id) throws MessagingException, IOException {
+        currentUserAppService.verifyCurrentUserPersonId(id);
         return Mapper.map(this.findUserByPersonIdAdapter.execute(id),UserInformationResponse.class);
     }
 }

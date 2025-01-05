@@ -27,6 +27,8 @@ public class PeopleAppService {
     private final ChangeStatusPersonAdapter changeStatusPersonAdapter;
     private final SendCodeToUnblockPersonAdapter sendCodeToUnblockPersonAdapter;
     private final UnblockPeopleAdapter unblockPeopleAdapter;
+    private final CurrentUserAppService currentUserAppService;
+
     @Transactional(value = "libraryTransactionManager",rollbackFor = Exception.class)
     public PeopleResponse createPeople(PeopleRequest request) throws MessagingException, IOException {
         return Mapper.map(createPersonAdapter.execute(Mapper.map(request, PeopleCreation.class)), PeopleResponse.class);
@@ -42,6 +44,7 @@ public class PeopleAppService {
 
     @Transactional(value = "libraryTransactionManager",rollbackFor = Exception.class ,readOnly = true)
     public PeopleFullInfomrationResponse findById(Long id) throws MessagingException {
+        currentUserAppService.verifyCurrentUserPersonId(id);
         return Mapper.map(findPeopleByIdAdapter.execute(id), PeopleFullInfomrationResponse.class);
     }
 
@@ -52,11 +55,13 @@ public class PeopleAppService {
 
     @Transactional(value = "libraryTransactionManager",rollbackFor = Exception.class)
     public PeopleResponse updatePeople(PeopleInformationRequest request) throws MessagingException, IOException {
+        currentUserAppService.verifyCurrentUserPersonId(request.getId());
         return Mapper.map(updatePersonAdapter.execute(Mapper.map(request, People.class)), PeopleResponse.class);
     }
 
     @Transactional(value = "libraryTransactionManager",rollbackFor = Exception.class)
     public void blockPeople(Long id) throws MessagingException, IOException {
+        currentUserAppService.verifyCurrentUserPersonId(id);
         changeStatusPersonAdapter.execute(id);
     }
 
