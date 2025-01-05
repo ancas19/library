@@ -12,4 +12,5 @@ import java.time.LocalDate;
 public class LoanInfo {
     private String isbn;
     private LocalDate loanDate;
+    private Integer quantity;
 }

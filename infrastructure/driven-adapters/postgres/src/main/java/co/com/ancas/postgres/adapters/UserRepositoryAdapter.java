@@ -1,5 +1,6 @@
 package co.com.ancas.postgres.adapters;
 
+import co.com.ancas.models.model.CurrentUserInformation;
 import co.com.ancas.models.model.User;
 import co.com.ancas.models.model.UserInformation;
 import co.com.ancas.models.model.UserMembershipInfo;
@@ -53,5 +54,10 @@ public class UserRepositoryAdapter implements UserRepositoryPort {
     @Override
     public Optional<UserMembershipInfo> findUserAndMembershipInfo(String s) {
         return this.userRepository.findUserAndMembershipInfo(s);
+    }
+
+    @Override
+    public CurrentUserInformation findCurrentUserInformation(String username) {
+        return this.userRepository.findCurrentUserInformation(username);
     }
 }

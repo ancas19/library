@@ -1,5 +1,6 @@
 package co.com.ancas.postgres.repositories;
 
+import co.com.ancas.models.model.CurrentUserInformation;
 import co.com.ancas.models.model.UserInformation;
 import co.com.ancas.models.model.UserMembershipInfo;
 import co.com.ancas.models.utils.Mapper;
@@ -73,4 +74,21 @@ public interface UserRepository extends JpaRepository<UserEntity, Long> {
            """
     )
     Optional<UserMembershipInfo> findUserAndMembershipInfo(@Param("dni") String s);
+
+    @Query(
+           """
+           SELECT new co.com.ancas.models.model.CurrentUserInformation(
+                u.username,
+                u.id,
+                u.personId,
+                p.dni,
+                r.roleName
+           )
+           FROM UserEntity u
+           INNER JOIN PeopleEntity p ON p.id = u.personId
+           INNER JOIN RolesEntity r ON r.id = u.roleId
+           WHERE u.username = :username
+           """
+    )
+    CurrentUserInformation findCurrentUserInformation(String username);
 }

@@ -1,5 +1,6 @@
 package co.com.ancas.models.repositories;
 
+import co.com.ancas.models.model.CurrentUserInformation;
 import co.com.ancas.models.model.User;
 import co.com.ancas.models.model.UserInformation;
 import co.com.ancas.models.model.UserMembershipInfo;
@@ -15,4 +16,5 @@ public interface UserRepositoryPort {
     String findRoleByUserId(Long id);
     Long findPersonIdByUsername(String username);
     Optional<UserMembershipInfo> findUserAndMembershipInfo(String s);
+    CurrentUserInformation findCurrentUserInformation(String username);
 }
