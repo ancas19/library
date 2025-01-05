@@ -42,29 +42,47 @@ VALUES (
 	'
 );
 
+INSERT INTO public.email_templates
+(id, subject, body, created_at, updated_at)
+VALUES(3, 'BOOK_LOAN', '<div>
+    <h2>Books Loaded Successfully!</h2>
+    <p>Dear User,</p>
+    <p>Your books have been successfully loaded into the library system. Below is a list of the books along with their start and end dates:</p>
+
+    <table style="width: 100%; border-collapse: collapse; margin-top: 20px; border: 1px solid #ddd;">
+        <thead>
+            <tr style="background-color: #f2f2f2;">
+                <th style="border: 1px solid #ddd; padding: 8px; text-align: left;">ISBN</th>
+                <th style="border: 1px solid #ddd; padding: 8px; text-align: left;">Book Name</th>
+                <th style="border: 1px solid #ddd; padding: 8px; text-align: left;">Start Date</th>
+                <th style="border: 1px solid #ddd; padding: 8px; text-align: left;">End Date</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- BookListPlaceholder -->
+        </tbody>
+    </table>
+
+    <p>If you have any questions, feel free to contact our support team.</p>
+</div>', '2024-12-21 20:59:04.565', '2024-12-21 20:59:04.565');
+
 
 INSERT INTO public.email_templates
 (id, subject, body, created_at, updated_at)
-VALUES(3, 'BOOK_LOAN', '        <div>
-            <h2>Books Loaded Successfully!</h2>
-            <p>Dear User,</p>
-            <p>Your books have been successfully loaded into the library system. Below is a list of the books along with their start and end dates:</p>
-
-            <table style="width: 100%; border-collapse: collapse; margin-top: 20px;">
-                <thead>
-                    <tr>
-                        <th style="border: 1px solid #ddd; padding: 8px; text-align: left;">Book Name</th>
-                        <th style="border: 1px solid #ddd; padding: 8px; text-align: left;">Start Date</th>
-                        <th style="border: 1px solid #ddd; padding: 8px; text-align: left;">End Date</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <!-- BookListPlaceholder -->
-                </tbody>
-            </table>
-
-            <p>If you have any questions, feel free to contact our support team.</p>
-        </div>', '2024-12-21 20:59:04.565', '2024-12-21 20:59:04.565');
+VALUES( 'UNBLOCK_USER', '<div class="content" style="margin-bottom: 20px; line-height: 1.6;">
+    <h2 style="font-size: 20px; color: #4A90E2; margin-top: 0;">Verification code to unblock user</h2>
+    <p style="margin: 10px 0;">Hello, <span>:name</span>!</p>
+    <p style="margin: 10px 0;">We received a request to verify your account for the Library App. Use the code below to complete the verification process:</p>
+    <div class="verification-code" style="background-color: #f0f0f0; padding: 10px; border-radius: 8px; margin: 20px 0; font-size: 16px; text-align: center;">
+        <strong style="font-size: 18px; color: #4A90E2;">:verification_code</strong>
+    </div>
+    <p style="margin: 10px 0;">Please enter this code in the app to confirm your account. This code is valid for 10 minutes.</p>
+    <p style="margin: 10px 0;">If you did not request this code, you can safely ignore this message.</p>
+    <p style="margin: 10px 0;">If you have any questions or need support, feel free to reach out to us at
+       <a href="mailto:support@yourlibraryapp.com" style="color: #4A90E2;">support@yourlibraryapp.com</a>.
+    </p>
+    <p style="margin: 10px 0;">Thank you for being a part of our community!</p>
+</div>', '2024-10-27 17:25:22.561', '2024-10-27 17:25:22.561');
 
 INSERT INTO GENRES (VALUE, USER_CREATED)
 VALUES ('SCIENCE FICTION', 'ADMIN');
