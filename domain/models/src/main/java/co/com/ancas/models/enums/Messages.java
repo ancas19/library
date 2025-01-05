@@ -33,6 +33,11 @@ public enum Messages {
     MESSAGE_ERROR_BOOK_NOT_FOUND_BY_ISBN("No exist book with ISBN %s"),
     MESSAGE_ERROR_BOOK_NOT_AVAILABLE("The book(%s) is not available"),
     MESSAGE_ERROR_AVAILABLE_COPIES("Error, calculated available copies"),
+    MESSAGE_ERROR_LOAN_NOT_FOUND("No loans found"),
+    MESSAGE_ERROR_DATE_START_AFTER_FINISH("The start date must be less than the end date"),
+
+
+
 
     //Success messages
     MESSAGE_PEOPLE_FULL_INFOMRATION("Person found successfully"),
@@ -59,7 +64,8 @@ public enum Messages {
     MESSAGE_BOOK_UPDATED("Book updated successfully"),
     MESSAGE_BOOK_IMAGE_UPDATED("Book image updated successfully"),
     MESSAGE_CHANGE_BOOK_STATUS("Book status changed successfully"),
-    MESSAGE_LOAN_CREATED("Loan created successfully"),;
+    MESSAGE_LOAN_CREATED("Loan created successfully"),
+    MESSAGE_LOANS_FOUND("Loans found successfully"),;
     private final String message;
 
     Messages(String message) {

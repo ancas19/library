@@ -1,9 +1,12 @@
 package co.com.ancas.controllers;
 
 import co.com.ancas.models.enums.Messages;
+import co.com.ancas.request.LoanInformationResponse;
 import co.com.ancas.request.LoanRequest;
+import co.com.ancas.request.LoanSearchByUserRequest;
 import co.com.ancas.response.GeneralResponse;
 import co.com.ancas.response.LoanDetailsResponse;
+import co.com.ancas.response.PaginationResponse;
 import co.com.ancas.service.LoanAppService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -12,10 +15,7 @@ import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
 import java.util.List;
@@ -41,4 +41,20 @@ public class LoanController {
                         .build()
         );
     }
+
+    @PostMapping("/users")
+    @Operation(summary = "Find loans by user")
+    public ResponseEntity<GeneralResponse<PaginationResponse<LoanInformationResponse>>> findLoansByUser(
+            @RequestBody @Valid LoanSearchByUserRequest request,
+            @RequestParam(defaultValue = "0", required = false, name = "page") Integer page,
+            @RequestParam(defaultValue = "10", required = false, name = "size") Integer size
+    ) throws MessagingException, IOException {
+        return ResponseEntity.ok(
+                GeneralResponse.<PaginationResponse<LoanInformationResponse>>builder()
+                        .data(loanAppService.findLoansByUser(request, page, size))
+                        .message(Messages.MESSAGE_LOANS_FOUND.getMessage())
+                        .build()
+        );
+    }
+
 }

@@ -1,11 +1,17 @@
 package co.com.ancas.postgres.adapters;
 
 import co.com.ancas.models.model.Loan;
+import co.com.ancas.models.model.LoanInformation;
+import co.com.ancas.models.model.LoanSearchByUser;
 import co.com.ancas.models.repositories.LoanRepositoryPort;
 import co.com.ancas.models.utils.Mapper;
 import co.com.ancas.postgres.entities.LoanEntity;
 import co.com.ancas.postgres.repositories.LoanRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -21,5 +27,11 @@ public class LoanRepositoryAdapter implements LoanRepositoryPort {
     @Override
     public Integer countLoansActive(Long userId) {
         return this.loanRepository.countLoansActive(userId);
+    }
+
+    @Override
+    public Page<LoanInformation> findLoansByUser(LoanSearchByUser loanSearchByUser) {
+        Pageable pageable = PageRequest.of(loanSearchByUser.getPage(), loanSearchByUser.getSize());
+        return this.loanRepository.findLoansByUser(loanSearchByUser.getDni(),loanSearchByUser.getSearchBook(),loanSearchByUser.getStartDate(),loanSearchByUser.getFinishDate(),pageable);
     }
 }
