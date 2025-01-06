@@ -134,7 +134,7 @@ CREATE TABLE books (
   isbn VARCHAR(255) UNIQUE,
   author_id INT not null,
   publish_date TIMESTAMP not null,
-  genre_id  int (255) not null,
+  genre_id  int not null,
   available_copies INT not null,
   available varchar(5) not null,
   blurb TEXT NOT NULL,

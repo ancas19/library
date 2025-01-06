@@ -43,8 +43,8 @@ VALUES (
 );
 
 INSERT INTO public.email_templates
-(id, subject, body, created_at, updated_at)
-VALUES(3, 'BOOK_LOAN', '<div>
+(subject, body)
+VALUES('BOOK_LOAN', '<div>
     <h2>Books Loaded Successfully!</h2>
     <p>Dear User,</p>
     <p>Your books have been successfully loaded into the library system. Below is a list of the books along with their start and end dates:</p>
@@ -64,11 +64,11 @@ VALUES(3, 'BOOK_LOAN', '<div>
     </table>
 
     <p>If you have any questions, feel free to contact our support team.</p>
-</div>', '2024-12-21 20:59:04.565', '2024-12-21 20:59:04.565');
+</div>';
 
 
 INSERT INTO public.email_templates
-(id, subject, body, created_at, updated_at)
+(subject, body)
 VALUES( 'UNBLOCK_USER', '<div class="content" style="margin-bottom: 20px; line-height: 1.6;">
     <h2 style="font-size: 20px; color: #4A90E2; margin-top: 0;">Verification code to unblock user</h2>
     <p style="margin: 10px 0;">Hello, <span>:name</span>!</p>
@@ -82,7 +82,7 @@ VALUES( 'UNBLOCK_USER', '<div class="content" style="margin-bottom: 20px; line-h
        <a href="mailto:support@yourlibraryapp.com" style="color: #4A90E2;">support@yourlibraryapp.com</a>.
     </p>
     <p style="margin: 10px 0;">Thank you for being a part of our community!</p>
-</div>', '2024-10-27 17:25:22.561', '2024-10-27 17:25:22.561');
+</div>');
 
 INSERT INTO GENRES (VALUE, USER_CREATED)
 VALUES ('SCIENCE FICTION', 'ADMIN');
