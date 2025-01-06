@@ -1,8 +1,6 @@
 package co.com.ancas.postgres.repositories;
 
-import co.com.ancas.models.model.People;
 import co.com.ancas.models.model.PeopleFullInfomration;
-import co.com.ancas.models.utils.Mapper;
 import co.com.ancas.postgres.entities.PeopleEntity;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;

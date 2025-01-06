@@ -3,7 +3,6 @@ package co.com.ancas.redis.adapter;
 import co.com.ancas.models.repositories.JwtRepositoryPort;
 import jakarta.annotation.PostConstruct;
 import lombok.RequiredArgsConstructor;
-import ognl.Token;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.ValueOperations;

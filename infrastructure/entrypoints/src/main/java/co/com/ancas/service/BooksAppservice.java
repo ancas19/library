@@ -45,7 +45,7 @@ public class BooksAppservice {
     }
 
     @Transactional(value = "libraryTransactionManager",readOnly = true,rollbackFor = Exception.class)
-    public BookInformationResponse findBookById(Long id) throws MessagingException, IOException {
+    public BookInformationResponse findBookById(Long id) {
         return Mapper.map(findBookByIdAdapter.execute(id),BookInformationResponse.class);
     }
 

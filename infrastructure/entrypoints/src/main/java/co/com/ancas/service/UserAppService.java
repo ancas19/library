@@ -1,7 +1,6 @@
 package co.com.ancas.service;
 
 import co.com.ancas.models.model.UpdatePassword;
-import co.com.ancas.models.model.UserInformation;
 import co.com.ancas.models.utils.Mapper;
 import co.com.ancas.request.ChangePasswordRequest;
 import co.com.ancas.response.UserInformationResponse;

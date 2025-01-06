@@ -19,6 +19,6 @@ public class PersonCodeRequest {
     private String email;
     @NotEmpty(message = "Code is required")
     @NotNull(message = "Code is required")
-    @Pattern(regexp = "^[0-9]{6}$", message = "Code must have 6 digits and only numbers")
+    @Pattern(regexp = "^\\d{6}$", message = "Code must have 6 digits and only numbers")
     private String code;
 }

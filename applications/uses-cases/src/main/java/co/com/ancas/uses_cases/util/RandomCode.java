@@ -1,9 +1,13 @@
 package co.com.ancas.uses_cases.util;
 
+
+import java.util.Random;
+
 public class RandomCode {
-    private RandomCode() {
-    }
+
+    private static final Random random = new Random(); // Make Random instance static
+
     public static String generateRandomCode() {
-        return String.valueOf((int) (Math.random() * 900000) + 100000);
+        return String.valueOf(random.nextInt(900000) + 100000);
     }
 }

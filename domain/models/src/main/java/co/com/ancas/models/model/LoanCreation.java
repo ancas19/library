@@ -2,8 +2,6 @@ package co.com.ancas.models.model;
 
 
 import lombok.*;
-
-import java.time.LocalDate;
 import java.util.List;
 
 @AllArgsConstructor

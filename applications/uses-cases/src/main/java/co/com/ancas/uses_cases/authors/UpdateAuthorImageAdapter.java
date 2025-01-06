@@ -1,7 +1,5 @@
 package co.com.ancas.uses_cases.authors;
 
-import co.com.ancas.models.enums.Messages;
-import co.com.ancas.models.exceptions.NotFoundException;
 import co.com.ancas.models.model.Author;
 import co.com.ancas.models.model.AuthorInformation;
 import co.com.ancas.models.model.Image;

@@ -4,7 +4,6 @@ import co.com.ancas.models.model.Email;
 import co.com.ancas.models.model.User;
 import co.com.ancas.models.model.UserCreation;
 import co.com.ancas.models.repositories.EmailRepositoryPort;
-import co.com.ancas.models.repositories.EmailTemplateRepositoryPort;
 import co.com.ancas.models.repositories.UserRepositoryPort;
 import co.com.ancas.uses_cases.email_template.FindEmailTemplateBySubjectAdapter;
 import co.com.ancas.uses_cases.interfaces.IUseCaseVoid;
@@ -14,11 +13,9 @@ import co.com.ancas.uses_cases.roles.FindIdRoleByNameAdapter;
 import jakarta.mail.MessagingException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
 import java.io.IOException;
-import java.security.SecureRandom;
 
 import static co.com.ancas.models.enums.Constants.*;
 

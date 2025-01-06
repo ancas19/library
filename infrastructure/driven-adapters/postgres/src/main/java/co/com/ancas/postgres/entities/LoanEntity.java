@@ -2,7 +2,6 @@ package co.com.ancas.postgres.entities;
 
 import jakarta.persistence.*;
 import lombok.*;
-import org.springframework.cglib.core.Local;
 
 import java.time.LocalDate;
 

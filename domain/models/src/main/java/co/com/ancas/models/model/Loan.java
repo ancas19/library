@@ -1,6 +1,5 @@
 package co.com.ancas.models.model;
 
-import jakarta.persistence.Column;
 import lombok.*;
 
 import java.time.LocalDate;

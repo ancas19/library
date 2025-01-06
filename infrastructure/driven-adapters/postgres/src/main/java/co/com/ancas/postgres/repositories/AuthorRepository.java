@@ -1,7 +1,6 @@
 package co.com.ancas.postgres.repositories;
 
 import co.com.ancas.models.model.AuthorInformation;
-import co.com.ancas.models.utils.Mapper;
 import co.com.ancas.postgres.entities.AuthorsEntity;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;

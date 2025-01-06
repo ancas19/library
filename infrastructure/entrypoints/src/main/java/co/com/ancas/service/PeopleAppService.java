@@ -10,7 +10,6 @@ import co.com.ancas.uses_cases.people.*;
 import co.com.ancas.utils.Pagination;
 import jakarta.mail.MessagingException;
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
