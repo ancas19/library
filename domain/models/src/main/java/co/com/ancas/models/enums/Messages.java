@@ -69,7 +69,9 @@ public enum Messages {
     MESSAGE_BOOK_IMAGE_UPDATED("Book image updated successfully"),
     MESSAGE_CHANGE_BOOK_STATUS("Book status changed successfully"),
     MESSAGE_LOAN_CREATED("Loan created successfully"),
-    MESSAGE_LOANS_FOUND("Loans found successfully"),;
+    MESSAGE_LOANS_FOUND("Loans found successfully"),
+    MESSAGE_VALUE_TO_PAY_CALCULATED("Value to pay calculated successfully"),
+    MESSAGE_LOAN_RETURNED("Loan returned successfully"),;
     private final String message;
 
     Messages(String message) {
