@@ -9,5 +9,6 @@ import lombok.*;
 @Setter
 public class LoanReturn {
     private Long idLoan;
+    private Double fine;
     private String comment;
 }

@@ -38,8 +38,10 @@ public enum Messages {
     MESSAGE_BOOK_ALREADY_LOANED("The book(%s) is already loaned"),
     MESSAGE_ERROR_LOANS_FOUND("Error, loans not found"),
     MESSAGE_LOAN_RETURN_MULTIPLE_USERS("Error, trying to return loans from different users"),
-
-
+    MESSAGE_ERROR_LOAN_NOT_RETURNED("Error, the user has loans without paying"),
+    MESSAGE_ERROR_EXPIRED_LOANS("Error, the user has expired loans"),
+    MESSAGE_ERROR_LOAN_ALREADY_RETURNED("Error, the loan has already been returned"),
+    MESSAGE_ERROR_TYPE_SEARCH_NOT_FOUND("Error, type search not found"),
 
     //Success messages
     MESSAGE_PEOPLE_FULL_INFOMRATION("Person found successfully"),

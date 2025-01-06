@@ -86,6 +86,7 @@ public interface UserRepository extends JpaRepository<UserEntity, Long> {
                  m.finePerDay
             )
             FROM UserEntity u
+            INNER JOIN PeopleEntity p ON p.id = u.personId
             INNER JOIN MembershipEntity m ON m.id = u.membershipId
             WHERE u.id = :UserId
             """

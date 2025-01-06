@@ -11,6 +11,11 @@ public interface LoanRepositoryPort {
     Loan save(Loan loan);
     Integer countLoansActive(Long userId);
     Page<LoanInformation> findLoansByUser(LoanSearchByUser loanSearchByUser);
+    Page<LoanInformation> findReturnedLoansByUser(LoanSearchByUser loanSearchByUser);
+    Page<LoanInformation> findExpiredLoansByUser(LoanSearchByUser loanSearchByUser);
+    Page<LoanInformation> findActiveLoansByUser(LoanSearchByUser loanSearchByUser);
     boolean existsByBookIdAndReturnDateIsNull(Long id, Long userId);
     List<Loan> findLoansByIds(List<Long> longs);
+    boolean existsLoansWithoutPaid(Long userId);
+    boolean existsExpiredLoans(Long userId);
 }

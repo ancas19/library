@@ -1,18 +1,22 @@
 package co.com.ancas.service;
 
 import co.com.ancas.models.enums.Messages;
+import co.com.ancas.models.enums.TypeSearch;
 import co.com.ancas.models.exceptions.BadRequestException;
-import co.com.ancas.models.model.LoanCreation;
-import co.com.ancas.models.model.LoanInfo;
-import co.com.ancas.models.model.LoanSearchByUser;
+import co.com.ancas.models.model.*;
 import co.com.ancas.models.utils.Mapper;
 import co.com.ancas.request.LoanInformationResponse;
 import co.com.ancas.request.LoanRequest;
+import co.com.ancas.request.LoanReturnRequest;
 import co.com.ancas.request.LoanSearchByUserRequest;
 import co.com.ancas.response.LoanDetailsResponse;
+import co.com.ancas.response.LoanReturnResultResponse;
+import co.com.ancas.response.LoanReturnValueResponse;
 import co.com.ancas.response.PaginationResponse;
+import co.com.ancas.uses_cases.loans.CalculateValueToPayAdapter;
 import co.com.ancas.uses_cases.loans.CreateLoanAdapter;
 import co.com.ancas.uses_cases.loans.FindLoandByUserAdapter;
+import co.com.ancas.uses_cases.loans.ReturnLoanAdapter;
 import co.com.ancas.utils.Pagination;
 import jakarta.mail.MessagingException;
 import jakarta.validation.Valid;
@@ -31,11 +35,23 @@ public class LoanAppService {
     private final CreateLoanAdapter createLoanAdapter;
     private final CurrentUserAppService currentUserAppService;
     private final FindLoandByUserAdapter findLoandByUserAdapter;
+    private final ReturnLoanAdapter returnLoanAdapter;
+    private final CalculateValueToPayAdapter calculateValueToPayAdapter;
 
     @Transactional(value = "libraryTransactionManager",rollbackFor = Exception.class)
     public List<LoanDetailsResponse> createLoan(LoanRequest request) throws MessagingException, IOException {
         currentUserAppService.verifyCurrentUserDni(request.getDni());
         return Mapper.mapAll(createLoanAdapter.execute(mapLoanRequestToLoanCreation(request)),LoanDetailsResponse.class);
+    }
+
+    @Transactional(value = "libraryTransactionManager",rollbackFor = Exception.class)
+    public List<LoanReturnValueResponse> calculateValueToPay(List<Long> idLoans) throws MessagingException, IOException {
+        return Mapper.mapAll(calculateValueToPayAdapter.execute(idLoans), LoanReturnValueResponse.class);
+    }
+
+    @Transactional(value = "libraryTransactionManager",rollbackFor = Exception.class)
+    public LoanReturnResultResponse returnLoan(List<LoanReturnRequest> loanReturnRequests) throws MessagingException, IOException {
+        return  Mapper.map(returnLoanAdapter.execute(Mapper.mapAll(loanReturnRequests, LoanReturn.class)),LoanReturnResultResponse.class);
     }
 
     @Transactional(value = "libraryTransactionManager",rollbackFor = Exception.class)
@@ -50,6 +66,7 @@ public class LoanAppService {
                         .searchBook(request.getSearchBook())
                         .startDate(request.getStartDate())
                         .finishDate(request.getFinishDate())
+                        .typeSearch(TypeSearch.valueOf(request.getTypeSearch().toUpperCase()))
                         .size(size)
                         .page(page)
                         .build()

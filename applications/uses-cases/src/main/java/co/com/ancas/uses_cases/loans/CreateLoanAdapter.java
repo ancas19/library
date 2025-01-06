@@ -34,6 +34,14 @@ public class CreateLoanAdapter implements IUseCase<LoanCreation,List<LoanDetails
     @Override
     public List<LoanDetails> execute(LoanCreation loanCreation) throws MessagingException, IOException {
         UserMembershipInfo userMembershipInfoFound = findUserAndMembershipInfoAdapter.execute(loanCreation.getDni());
+        boolean existsExpiredLoans=loanRepositoryPort.existsExpiredLoans(userMembershipInfoFound.getUserId());
+        if(existsExpiredLoans){
+            throw new BadRequestException(Messages.MESSAGE_ERROR_EXPIRED_LOANS.getMessage());
+        }
+        boolean existsLoansWihtoutPaid=loanRepositoryPort.existsLoansWithoutPaid(userMembershipInfoFound.getUserId());
+        if(existsLoansWihtoutPaid) {
+            throw new BadRequestException(Messages.MESSAGE_ERROR_LOAN_NOT_RETURNED.getMessage());
+        }
         Integer loansActive = loanRepositoryPort.countLoansActive(userMembershipInfoFound.getUserId());
         if(loansActive>=userMembershipInfoFound.getLoanLimit()){
             throw new MessagingException(Messages.MESSAGE_ERROR_LOAN_LIMIT.getMessage());
