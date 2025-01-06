@@ -21,7 +21,11 @@ public enum Constants {
     REPLACE_LOANS("<!-- BookListPlaceholder -->"),
     BOOKS_LOAN("Books loaned"),
     DISCOUNT("DISCOUNT"),
-    BOOK_RETURN("BOOK_RETURN");
+    BOOK_RETURN("BOOK_RETURN"),
+    CLOSE_TD("</td>"),
+    OPEN_TD("<td style='border: 1px solid #ddd; padding: 8px;'>"),
+    OPEN_TR("<tr style='border: 1px solid #ddd;'>"),
+    CLOSE_TR("</tr>"),;
 
     private final String constant;
 

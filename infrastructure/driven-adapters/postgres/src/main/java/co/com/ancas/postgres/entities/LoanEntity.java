@@ -12,7 +12,7 @@ import java.time.LocalDate;
 @Builder
 @Getter
 @Setter
-public class LoanEntity {
+public class LoanEntity extends AuditEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")

@@ -13,6 +13,8 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 @RequiredArgsConstructor
 public class LoanRepositoryAdapter implements LoanRepositoryPort {
@@ -32,5 +34,15 @@ public class LoanRepositoryAdapter implements LoanRepositoryPort {
     public Page<LoanInformation> findLoansByUser(LoanSearchByUser loanSearchByUser) {
         Pageable pageable = PageRequest.of(loanSearchByUser.getPage(), loanSearchByUser.getSize());
         return this.loanRepository.findLoansByUser(loanSearchByUser.getDni(),loanSearchByUser.getSearchBook(),loanSearchByUser.getStartDate(),loanSearchByUser.getFinishDate(),pageable);
+    }
+
+    @Override
+    public boolean existsByBookIdAndReturnDateIsNull(Long id, Long userId) {
+        return this.loanRepository.existsByBookIdAndUserIdAndReturnDateIsNull(id, userId);
+    }
+
+    @Override
+    public List<Loan> findLoansByIds(List<Long> longs) {
+        return this.loanRepository.findAllById(longs).stream().map(loanEntity -> Mapper.map(loanEntity, Loan.class)).toList();
     }
 }

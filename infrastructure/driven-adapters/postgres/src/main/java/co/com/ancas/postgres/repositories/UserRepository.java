@@ -74,6 +74,25 @@ public interface UserRepository extends JpaRepository<UserEntity, Long> {
     Optional<UserMembershipInfo> findUserAndMembershipInfo(@Param("dni") String s);
 
     @Query(
+            """
+            SELECT new co.com.ancas.models.model.UserMembershipInfo(
+                 u.id,
+                 u.username,
+                 p.email,
+                 m.membershipType,
+                 m.loanLimit,
+                 m.loanPeriodDays,
+                 m.gracePeriodDays,
+                 m.finePerDay
+            )
+            FROM UserEntity u
+            INNER JOIN MembershipEntity m ON m.id = u.membershipId
+            WHERE u.id = :UserId
+            """
+    )
+    Optional<UserMembershipInfo> findUserAndMembershipInfoByUserId(@Param("UserId") Long s);
+
+    @Query(
            """
            SELECT new co.com.ancas.models.model.CurrentUserInformation(
                 u.username,

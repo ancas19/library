@@ -29,12 +29,7 @@ public class CurrentUserAppService {
         }
     }
 
-    public void verifyCurrentUserId(Long userId){
-        CurrentUserInformation currentUserInformationFound=currentUserAdapter.execute();
-        if(currentUserInformationFound.getRole().equalsIgnoreCase(Constants.USER.getConstant()) && !currentUserInformationFound.getUserId().equals(userId)){
-            throw new ForbiddenException(Messages.MESSAGE_GENERAL_FORBIDDEN.getMessage());
-        }
-    }
+
 
     public void verifyCurrentUserPersonId(Long personId){
         CurrentUserInformation currentUserInformationFound=currentUserAdapter.execute();

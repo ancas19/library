@@ -35,7 +35,9 @@ public enum Messages {
     MESSAGE_ERROR_AVAILABLE_COPIES("Error, calculated available copies"),
     MESSAGE_ERROR_LOAN_NOT_FOUND("No loans found"),
     MESSAGE_ERROR_DATE_START_AFTER_FINISH("The start date must be less than the end date"),
-
+    MESSAGE_BOOK_ALREADY_LOANED("The book(%s) is already loaned"),
+    MESSAGE_ERROR_LOANS_FOUND("Error, loans not found"),
+    MESSAGE_LOAN_RETURN_MULTIPLE_USERS("Error, trying to return loans from different users"),
 
 
 

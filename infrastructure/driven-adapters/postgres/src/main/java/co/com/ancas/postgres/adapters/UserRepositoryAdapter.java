@@ -60,4 +60,9 @@ public class UserRepositoryAdapter implements UserRepositoryPort {
     public CurrentUserInformation findCurrentUserInformation(String username) {
         return this.userRepository.findCurrentUserInformation(username);
     }
+
+    @Override
+    public Optional<UserMembershipInfo> findUserAndMembershipInfoByUserId(Long s) {
+        return this.userRepository.findUserAndMembershipInfoByUserId(s);
+    }
 }

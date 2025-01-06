@@ -48,4 +48,6 @@ public interface LoanRepository extends JpaRepository<LoanEntity, Long> {
             """
     )
     Page<LoanInformation> findLoansByUser(@Param("dni") String dni,@Param("searchBook") String searchBook,@Param("startDate") LocalDate startDate,@Param("finishDate") LocalDate finishDate, Pageable pageable);
+
+    boolean existsByBookIdAndUserIdAndReturnDateIsNull(Long id, Long userId);
 }

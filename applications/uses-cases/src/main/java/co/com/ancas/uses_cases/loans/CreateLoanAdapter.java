@@ -2,6 +2,7 @@ package co.com.ancas.uses_cases.loans;
 
 import co.com.ancas.models.enums.Constants;
 import co.com.ancas.models.enums.Messages;
+import co.com.ancas.models.exceptions.BadRequestException;
 import co.com.ancas.models.model.*;
 import co.com.ancas.models.repositories.EmailRepositoryPort;
 import co.com.ancas.models.repositories.LoanRepositoryPort;
@@ -37,7 +38,7 @@ public class CreateLoanAdapter implements IUseCase<LoanCreation,List<LoanDetails
         if(loansActive>=userMembershipInfoFound.getLoanLimit()){
             throw new MessagingException(Messages.MESSAGE_ERROR_LOAN_LIMIT.getMessage());
         }
-        loansActive+=loanCreation.getDetails().stream().map(LoanInfo::getQuantity).reduce(0,Integer::sum);
+        loansActive+=loanCreation.getDetails().size();
         if (loansActive>userMembershipInfoFound.getLoanLimit()){
             throw new MessagingException(Messages.MESSAGE_ERROR_LOAN_LIMIT.getMessage());
         }
@@ -63,13 +64,17 @@ public class CreateLoanAdapter implements IUseCase<LoanCreation,List<LoanDetails
         if(bookFound.getAvailableCopies()<=0){
             throw new MessagingException(Messages.MESSAGE_ERROR_BOOK_NOT_AVAILABLE.getMessage().formatted("%s-%s".formatted(bookFound.getIsbn(),bookFound.getTitle())));
         }
+        boolean isBookLoaned = loanRepositoryPort.existsByBookIdAndReturnDateIsNull(bookFound.getId(),userMembershipInfoFound.getUserId());
+        if(isBookLoaned){
+            throw new BadRequestException(Messages.MESSAGE_BOOK_ALREADY_LOANED.getMessage().formatted("%s-%s".formatted(bookFound.getIsbn(),bookFound.getTitle())));
+        }
         LocalDate loanDate =loanInfo.getLoanDate();
         LocalDate dueDate = calculateReturnDate(loanDate, userMembershipInfoFound.getLoanPeriodDays());
         changeCopiesAvailablesPerBookAdapter.execute(
                 AvailableCopiesUpdate.builder()
                         .bookId(bookFound.getId())
                         .action(Constants.DISCOUNT)
-                        .copies(loanInfo.getQuantity())
+                        .copies(1)
                         .build()
         );
         Loan loanCreated=this.loanRepositoryPort.save(
@@ -94,7 +99,7 @@ public class CreateLoanAdapter implements IUseCase<LoanCreation,List<LoanDetails
         if(loanDays <= 0){
             return loanDate;
         }
-        Integer countDays = 0;
+        int countDays = 0;
         while (countDays<loanDays){
             loanDate = loanDate.plusDays(1);
             if(loanDate.getDayOfWeek().getValue()<=5){
@@ -107,12 +112,12 @@ public class CreateLoanAdapter implements IUseCase<LoanCreation,List<LoanDetails
     private String populateTemplate(String template, List<LoanDetails> loansCreated) {
         StringBuilder booksHtml = new StringBuilder();
         for (LoanDetails book : loansCreated) {
-            booksHtml.append("<tr style='border: 1px solid #ddd;'>");
-            booksHtml.append("<td style='border: 1px solid #ddd; padding: 8px;'>").append(book.getIsbn()).append("</td>");
-            booksHtml.append("<td style='border: 1px solid #ddd; padding: 8px;'>").append(book.getTitle()).append("</td>");
-            booksHtml.append("<td style='border: 1px solid #ddd; padding: 8px;'>").append(book.getLoanDate()).append("</td>");
-            booksHtml.append("<td style='border: 1px solid #ddd; padding: 8px;'>").append(book.getReturnDate()).append("</td>");
-            booksHtml.append("</tr>");
+            booksHtml.append(Constants.OPEN_TR.getConstant());
+            booksHtml.append(Constants.OPEN_TD.getConstant()).append(book.getIsbn()).append(Constants.CLOSE_TD.getConstant());
+            booksHtml.append(Constants.OPEN_TD.getConstant()).append(book.getTitle()).append(Constants.CLOSE_TD.getConstant());
+            booksHtml.append(Constants.OPEN_TD.getConstant()).append(book.getLoanDate()).append(Constants.CLOSE_TD.getConstant());
+            booksHtml.append(Constants.OPEN_TD.getConstant()).append(book.getReturnDate()).append(Constants.CLOSE_TD.getConstant());
+            booksHtml.append(Constants.CLOSE_TR.getConstant());
         }
         return template.replace(Constants.REPLACE_LOANS.getConstant(), booksHtml.toString());
     }

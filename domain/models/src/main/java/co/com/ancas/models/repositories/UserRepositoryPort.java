@@ -17,4 +17,5 @@ public interface UserRepositoryPort {
     Long findPersonIdByUsername(String username);
     Optional<UserMembershipInfo> findUserAndMembershipInfo(String s);
     CurrentUserInformation findCurrentUserInformation(String username);
+    Optional<UserMembershipInfo> findUserAndMembershipInfoByUserId(Long s);
 }
