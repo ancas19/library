@@ -1,5 +1,6 @@
 package co.com.ancas.request;
 
+import co.com.ancas.models.enums.TypeSearch;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
@@ -25,4 +26,7 @@ public class LoanSearchByUserRequest {
     private LocalDate startDate;
     @JsonFormat(pattern = "dd/MM/yyyy", shape = JsonFormat.Shape.STRING, timezone = "America/Bogota")
     private LocalDate finishDate;
+    @NotNull
+    @Pattern(regexp = "HISTORICAL|RETURNED|EXPIRED|ACTIVE", message = "Type search must be HISTORICAL, RETURNED, EXPIRED or ACTIVE")
+    private String typeSearch;
 }

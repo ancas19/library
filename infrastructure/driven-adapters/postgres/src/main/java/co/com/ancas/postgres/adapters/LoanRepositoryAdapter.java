@@ -13,6 +13,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @Service
@@ -27,13 +28,31 @@ public class LoanRepositoryAdapter implements LoanRepositoryPort {
 
     @Override
     public Integer countLoansActive(Long userId) {
-        return this.loanRepository.countLoansActive(userId);
+        return this.loanRepository.countLoansActive(userId, LocalDate.now());
     }
 
     @Override
     public Page<LoanInformation> findLoansByUser(LoanSearchByUser loanSearchByUser) {
         Pageable pageable = PageRequest.of(loanSearchByUser.getPage(), loanSearchByUser.getSize());
         return this.loanRepository.findLoansByUser(loanSearchByUser.getDni(),loanSearchByUser.getSearchBook(),loanSearchByUser.getStartDate(),loanSearchByUser.getFinishDate(),pageable);
+    }
+
+    @Override
+    public Page<LoanInformation> findReturnedLoansByUser(LoanSearchByUser loanSearchByUser) {
+        Pageable pageable = PageRequest.of(loanSearchByUser.getPage(), loanSearchByUser.getSize());
+        return this.loanRepository.findReturnedLoansByUser(loanSearchByUser.getDni(),loanSearchByUser.getSearchBook(),loanSearchByUser.getStartDate(),loanSearchByUser.getFinishDate(),pageable);
+    }
+
+    @Override
+    public Page<LoanInformation> findExpiredLoansByUser(LoanSearchByUser loanSearchByUser) {
+        Pageable pageable = PageRequest.of(loanSearchByUser.getPage(), loanSearchByUser.getSize());
+        return this.loanRepository.findExpiredLoansByUser(loanSearchByUser.getDni(),loanSearchByUser.getSearchBook(),loanSearchByUser.getStartDate(),loanSearchByUser.getFinishDate(),LocalDate.now(),pageable);
+    }
+
+    @Override
+    public Page<LoanInformation> findActiveLoansByUser(LoanSearchByUser loanSearchByUser) {
+        Pageable pageable = PageRequest.of(loanSearchByUser.getPage(), loanSearchByUser.getSize());
+        return this.loanRepository.findActiveLoansByUser(loanSearchByUser.getDni(),loanSearchByUser.getSearchBook(),loanSearchByUser.getStartDate(),loanSearchByUser.getFinishDate(),pageable);
     }
 
     @Override
@@ -44,5 +63,17 @@ public class LoanRepositoryAdapter implements LoanRepositoryPort {
     @Override
     public List<Loan> findLoansByIds(List<Long> longs) {
         return this.loanRepository.findAllById(longs).stream().map(loanEntity -> Mapper.map(loanEntity, Loan.class)).toList();
+    }
+
+    @Override
+    public boolean existsLoansWithoutPaid(Long userId) {
+        Integer loansWithoutPaid= this.loanRepository.existsLoansWithoutPaid(userId);
+        return loansWithoutPaid>0;
+    }
+
+    @Override
+    public boolean existsExpiredLoans(Long userId) {
+        Integer expiredLoans= this.loanRepository.existsExpiredLoans(userId, LocalDate.now());
+        return expiredLoans>0;
     }
 }

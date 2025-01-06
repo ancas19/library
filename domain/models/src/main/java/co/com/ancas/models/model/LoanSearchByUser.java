@@ -1,5 +1,6 @@
 package co.com.ancas.models.model;
 
+import co.com.ancas.models.enums.TypeSearch;
 import lombok.*;
 
 import java.time.LocalDate;
@@ -14,6 +15,7 @@ public class LoanSearchByUser {
     private String searchBook;
     private LocalDate startDate;
     private LocalDate finishDate;
+    private TypeSearch typeSearch;
     private Integer page;
     private Integer size;
 }
