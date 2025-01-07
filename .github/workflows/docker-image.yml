@@ -44,7 +44,7 @@ jobs:
       env:
           NEW_VERSION: ${{ steps.version.outputs.version }}
       run: |
-          docker push -t ancas19/docker_library:$NEW_VERSION
+          docker push ancas19/docker_library:$NEW_VERSION
         
 #    - name: Build the Docker image
 #      run: docker build . --file Dockerfile --tag my-image-name:$(date +%s)
