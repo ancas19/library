@@ -1,13 +1,24 @@
 plugins {
     id 'java'
-    id 'org.springframework.boot' version '3.3.4'
+    id 'org.springframework.boot' version '3.3.5'
 }
 
 dependencies {
     implementation project(':models')
     implementation project(':postgres')
+    implementation project(':email')
     implementation project(':uses-cases')
+    implementation project(':images')
+    implementation project(':redis')
 
-    implementation 'org.springframework.boot:spring-boot-starter-web'
-    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    implementation "org.springframework.boot:spring-boot-starter-web:${springVersion}"
+    testImplementation "org.springframework.boot:spring-boot-starter-test:${springVersion}"
+    implementation "org.springframework.boot:spring-boot-starter-validation:${springVersion}"
+    implementation group: 'org.hibernate', name: 'hibernate-entitymanager', version: '5.2.10.Final'
+    implementation group: 'jakarta.validation', name: 'jakarta.validation-api', version: '3.1.0'
+    implementation group: 'org.springdoc', name: 'springdoc-openapi-starter-webmvc-ui', version: '2.6.0'
+
+
+
+
 }

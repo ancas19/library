@@ -1,5 +1,6 @@
 package co.com.ancas.postgres.configuration;
 
+import com.zaxxer.hikari.HikariDataSource;
 import jakarta.persistence.EntityManagerFactory;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
@@ -7,7 +8,6 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
-import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
@@ -40,11 +40,16 @@ public class PostgresConnection {
     private String jdbcPass;
     @Bean
     public DataSource dataSource()  {
-        DriverManagerDataSource dataSource = new DriverManagerDataSource();
+        HikariDataSource dataSource = new HikariDataSource();
         dataSource.setDriverClassName(className);
-        dataSource.setUrl(jdbcUrl);
+        dataSource.setJdbcUrl(jdbcUrl);
         dataSource.setUsername(jdbcUser);
         dataSource.setPassword(jdbcPass);
+        dataSource.setMaximumPoolSize(10);
+        dataSource.setMinimumIdle(5);
+        dataSource.setIdleTimeout(30000);
+        dataSource.setMaxLifetime(1800000);
+        dataSource.setConnectionTimeout(20000);
         return dataSource;
     }
 

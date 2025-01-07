@@ -26,6 +26,12 @@ spring:
       idle-timeout: 10000
       max-lifetime: 1000
       auto-commit: true
+  data:
+    redis:
+      host: ${REDIS_HOST}
+      port: ${REDIS_PORT}
+      timeout: ${REDIS_TIMEOUT}
+      password: ${REDIS_PASS}
 
 ## Logging Configuration
 logging:
@@ -42,3 +48,16 @@ postgres:
   url: jdbc:postgresql://${POSTGRES_HOST}:${POSTGRES_PORT}/${POSTGRES_DB}
   user: ${POSTGRES_USER}
   pass: ${POSTGRES_PASSWORD}
+
+mail:
+  user: ${EMAIL_USER}
+  password: ${EMAIL_PASSWORD}
+
+cloudinary:
+  cloud_name: ${CLOUDINARY_CLOUD_NAME}
+  api_key: ${CLOUDINARY_API_KEY}
+  api_secret: ${CLOUDINARY_API_SECRET}
+
+jwt:
+  secret: ${JWT_SECRET}
+  expiration: ${JWT_EXPIRATION}

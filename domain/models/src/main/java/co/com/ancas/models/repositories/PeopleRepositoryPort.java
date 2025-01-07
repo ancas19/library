@@ -1,0 +1,22 @@
+package co.com.ancas.models.repositories;
+
+import co.com.ancas.models.model.People;
+import co.com.ancas.models.model.PeopleCreation;
+import co.com.ancas.models.model.PeopleFullInfomration;
+import co.com.ancas.models.model.PeopleSearchCriteria;
+import org.springframework.data.domain.Page;
+
+import java.util.Optional;
+
+public interface PeopleRepositoryPort {
+    People save(PeopleCreation people);
+    boolean verifyDni(String dni);
+    boolean verifyEmail(String email);
+    Page<People> findPeopleByCriteria(PeopleSearchCriteria peopleSearchCriteria);
+    Optional<PeopleFullInfomration> findPeopleFullInformation(Long idPeople);
+    Optional<People> findPeopleById(Long aLong);
+    People update(People people);
+    boolean verifyDniExists(String dni, Long id);
+    boolean verifyPersonBlocked(Long personId);
+    Optional<People> findPeopleByEmail(String email);
+}

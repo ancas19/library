@@ -1,7 +1,7 @@
 plugins {
 	id 'java'
     id 'jacoco'
-	id 'org.springframework.boot' version '3.3.4'
+	id 'org.springframework.boot' version '3.3.5'
 	id 'io.spring.dependency-management' version '1.1.6'
 }
 
@@ -37,11 +37,25 @@ subprojects {
 	}
 
 	dependencies {
+		implementation "org.springframework.boot:spring-boot-starter-security:${springVersion}"
 		implementation "org.springframework.boot:spring-boot-starter-web:${springVersion}"
-		compileOnly 'org.projectlombok:lombok'
-		annotationProcessor 'org.projectlombok:lombok'
-		testImplementation 'org.springframework.boot:spring-boot-starter-test'
+		compileOnly "org.projectlombok:lombok:${lombokVersion}"
+		annotationProcessor "org.projectlombok:lombok:${lombokVersion}"
+		testImplementation "org.springframework.boot:spring-boot-starter-test:${springVersion}"
 		testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+		implementation group: 'org.thymeleaf', name: 'thymeleaf', version: '3.1.2.RELEASE'
+		implementation "org.springframework.boot:spring-boot-starter-mail:${springVersion}"
+		implementation "org.springframework.boot:spring-boot-starter-thymeleaf:${springVersion}"
+		implementation "org.springframework.boot:spring-boot-starter-data-jpa:${springVersion}"
+
+		implementation group: 'io.jsonwebtoken', name: 'jjwt-api', version: '0.12.5'
+		runtimeOnly group: 'io.jsonwebtoken', name: 'jjwt-impl', version: '0.12.5'
+		runtimeOnly group: 'io.jsonwebtoken', name: 'jjwt-jackson', version: '0.12.5'
+
+		implementation group: 'io.lettuce', name: 'lettuce-core', version: '6.3.2.RELEASE'
+		implementation "org.springframework.boot:spring-boot-starter-data-redis:${springVersion}"
+		implementation group: 'redis.clients', name: 'jedis', version: '5.2.0'
+
 	}
 
 	sourceSets {
