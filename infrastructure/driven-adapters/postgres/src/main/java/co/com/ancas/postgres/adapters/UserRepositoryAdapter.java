@@ -65,4 +65,9 @@ public class UserRepositoryAdapter implements UserRepositoryPort {
     public Optional<UserMembershipInfo> findUserAndMembershipInfoByUserId(Long s) {
         return this.userRepository.findUserAndMembershipInfoByUserId(s);
     }
+
+    @Override
+    public Optional<User> findUserByEmail(String email) {
+        return this.userRepository.findUserByEmail(email).map(user->Mapper.map(user,User.class));
+    }
 }

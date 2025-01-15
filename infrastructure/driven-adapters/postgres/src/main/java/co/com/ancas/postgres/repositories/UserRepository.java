@@ -3,6 +3,7 @@ package co.com.ancas.postgres.repositories;
 import co.com.ancas.models.model.CurrentUserInformation;
 import co.com.ancas.models.model.UserInformation;
 import co.com.ancas.models.model.UserMembershipInfo;
+import co.com.ancas.models.utils.Mapper;
 import co.com.ancas.postgres.entities.UserEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -109,4 +110,14 @@ public interface UserRepository extends JpaRepository<UserEntity, Long> {
            """
     )
     CurrentUserInformation findCurrentUserInformation(String username);
+
+    @Query(
+           """
+           SELECT u
+           FROM UserEntity u
+           INNER JOIN PeopleEntity p ON p.id = u.personId
+           WHERE p.email = :email
+           """
+    )
+    Optional<UserEntity> findUserByEmail(@Param("email") String email);
 }

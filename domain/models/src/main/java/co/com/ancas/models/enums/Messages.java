@@ -42,6 +42,8 @@ public enum Messages {
     MESSAGE_ERROR_EXPIRED_LOANS("Error, the user has expired loans"),
     MESSAGE_ERROR_LOAN_ALREADY_RETURNED("Error, the loan has already been returned"),
     MESSAGE_ERROR_TYPE_SEARCH_NOT_FOUND("Error, type search not found"),
+    MESSAGE_ERROR_RECOVERY_PASSWORD("Error, trying to recover password"),
+    MESSAGE_ERROR_PASSWORDS_NOT_MATCH("Error, trying to recover password"),
 
     //Success messages
     MESSAGE_PEOPLE_FULL_INFOMRATION("Person found successfully"),
@@ -71,7 +73,8 @@ public enum Messages {
     MESSAGE_LOAN_CREATED("Loan created successfully"),
     MESSAGE_LOANS_FOUND("Loans found successfully"),
     MESSAGE_VALUE_TO_PAY_CALCULATED("Value to pay calculated successfully"),
-    MESSAGE_LOAN_RETURNED("Loan returned successfully"),;
+    MESSAGE_LOAN_RETURNED("Loan returned successfully"),
+    MESSAGE_PASSWORD_CHANGED("Password changed successfully"), ;
     private final String message;
 
     Messages(String message) {

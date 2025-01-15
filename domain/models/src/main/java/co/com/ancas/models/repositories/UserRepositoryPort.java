@@ -18,4 +18,5 @@ public interface UserRepositoryPort {
     Optional<UserMembershipInfo> findUserAndMembershipInfo(String s);
     CurrentUserInformation findCurrentUserInformation(String username);
     Optional<UserMembershipInfo> findUserAndMembershipInfoByUserId(Long s);
+    Optional<User> findUserByEmail(String email);
 }
