@@ -76,4 +76,20 @@ public class LoanRepositoryAdapter implements LoanRepositoryPort {
         Integer expiredLoans= this.loanRepository.existsExpiredLoans(userId, LocalDate.now());
         return expiredLoans>0;
     }
+
+    @Override
+    public List<Loan> findLoanByDni(String dniUser) {
+        return this.loanRepository.findLoanByDni(dniUser)
+                .stream()
+                .map(loanEntity -> Mapper.map(loanEntity, Loan.class))
+                .toList();
+    }
+
+    @Override
+    public List<Loan> findLoanNoPaidByDni(String dniUser) {
+        return this.loanRepository.findLoanNoPaidByDni(dniUser)
+                .stream()
+                .map(loanEntity -> Mapper.map(loanEntity, Loan.class))
+                .toList();
+    }
 }

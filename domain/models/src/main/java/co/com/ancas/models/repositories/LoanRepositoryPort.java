@@ -18,4 +18,6 @@ public interface LoanRepositoryPort {
     List<Loan> findLoansByIds(List<Long> longs);
     boolean existsLoansWithoutPaid(Long userId);
     boolean existsExpiredLoans(Long userId);
+    List<Loan> findLoanByDni(String dniUser);
+    List<Loan> findLoanNoPaidByDni(String dniUser);
 }
