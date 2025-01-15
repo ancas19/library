@@ -2,6 +2,7 @@ package co.com.ancas.uses_cases.people;
 
 import co.com.ancas.models.enums.Messages;
 import co.com.ancas.models.exceptions.BadRequestException;
+import co.com.ancas.models.model.Code;
 import co.com.ancas.models.model.Email;
 import co.com.ancas.models.model.People;
 import co.com.ancas.models.model.PersonAcces;
@@ -16,6 +17,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
 import java.io.IOException;
+import java.util.Objects;
 import java.util.Optional;
 
 import static co.com.ancas.models.enums.Constants.*;
@@ -33,7 +35,7 @@ public class SendCodeToUnblockPersonAdapter implements IUseCaseVoid<PersonAcces>
         if(peopleFound.isEmpty()){
             throw new BadRequestException(Messages.MESSAGES_EMAIL_NOT_FOUND.getMessage());
         }
-        String code= RandomCode.generateRandomCode();
+        String code=generateCode(personAcces.getEmail());
         String emailTemplate = findEmailTemplateBySubjectAdapter.execute(UNBLOCK_USER.getConstant());
         emailTemplate = emailTemplate.replace(":verification_code", code);
         emailTemplate = emailTemplate.replace(":name", peopleFound.get().getFirstName());
@@ -48,6 +50,14 @@ public class SendCodeToUnblockPersonAdapter implements IUseCaseVoid<PersonAcces>
                 .code(code)
                 .email(peopleFound.get().getEmail())
                 .build());
+    }
+
+    private String generateCode(String email) {
+        Code codeFound=codeRepositoryPort.find(email);
+        if(Objects.nonNull(codeFound)){
+            return codeFound.getCode();
+        }
+        return RandomCode.generateRandomCode();
     }
 
 
