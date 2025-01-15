@@ -9,10 +9,7 @@ import co.com.ancas.request.LoanInformationResponse;
 import co.com.ancas.request.LoanRequest;
 import co.com.ancas.request.LoanReturnRequest;
 import co.com.ancas.request.LoanSearchByUserRequest;
-import co.com.ancas.response.LoanDetailsResponse;
-import co.com.ancas.response.LoanReturnResultResponse;
-import co.com.ancas.response.LoanReturnValueResponse;
-import co.com.ancas.response.PaginationResponse;
+import co.com.ancas.response.*;
 import co.com.ancas.uses_cases.loans.CalculateValueToPayAdapter;
 import co.com.ancas.uses_cases.loans.CreateLoanAdapter;
 import co.com.ancas.uses_cases.loans.FindLoandByUserAdapter;
@@ -45,8 +42,9 @@ public class LoanAppService {
     }
 
     @Transactional(value = "libraryTransactionManager",rollbackFor = Exception.class)
-    public List<LoanReturnValueResponse> calculateValueToPay(List<Long> idLoans) throws MessagingException, IOException {
-        return Mapper.mapAll(calculateValueToPayAdapter.execute(idLoans), LoanReturnValueResponse.class);
+    public List<LoanReturnValueResponse> calculateValueToPay(String dni) throws MessagingException, IOException {
+        currentUserAppService.verifyCurrentUserDni(dni);
+        return Mapper.mapAll(calculateValueToPayAdapter.execute(dni), LoanReturnValueResponse.class);
     }
 
     @Transactional(value = "libraryTransactionManager",rollbackFor = Exception.class)

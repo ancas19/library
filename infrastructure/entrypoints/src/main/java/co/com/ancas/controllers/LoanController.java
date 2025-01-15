@@ -1,10 +1,7 @@
 package co.com.ancas.controllers;
 
 import co.com.ancas.models.enums.Messages;
-import co.com.ancas.request.LoanInformationResponse;
-import co.com.ancas.request.LoanRequest;
-import co.com.ancas.request.LoanReturnRequest;
-import co.com.ancas.request.LoanSearchByUserRequest;
+import co.com.ancas.request.*;
 import co.com.ancas.response.*;
 import co.com.ancas.service.LoanAppService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -59,11 +56,11 @@ public class LoanController {
     @PostMapping("/fee")
     @Operation(summary = "Calculate value to pay")
     public ResponseEntity<GeneralResponse<List<LoanReturnValueResponse>>> calculateValueToPay(
-            @RequestBody List<Long> idLoans
+        @Valid @RequestBody DniRequest dniRequest
     ) throws MessagingException, IOException {
         return ResponseEntity.ok(
                 GeneralResponse.<List<LoanReturnValueResponse>>builder()
-                        .data(loanAppService.calculateValueToPay(idLoans))
+                        .data(loanAppService.calculateValueToPay(dniRequest.getDni()))
                         .message(Messages.MESSAGE_VALUE_TO_PAY_CALCULATED.getMessage())
                         .build()
         );

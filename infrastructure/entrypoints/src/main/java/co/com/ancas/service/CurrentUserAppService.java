@@ -6,14 +6,16 @@ import co.com.ancas.models.enums.Messages;
 import co.com.ancas.models.exceptions.ForbiddenException;
 import co.com.ancas.models.model.CurrentUserInformation;
 import co.com.ancas.uses_cases.user.CurrentUserAdapter;
+import jakarta.mail.MessagingException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
+
+import java.io.IOException;
 
 @Component
 @RequiredArgsConstructor
 public class CurrentUserAppService {
     private final CurrentUserAdapter currentUserAdapter;
-
 
     public void  verifyCurrentUserDni(String dni){
         CurrentUserInformation currentUserInformationFound=currentUserAdapter.execute();
@@ -28,8 +30,6 @@ public class CurrentUserAppService {
             throw new ForbiddenException(Messages.MESSAGE_GENERAL_FORBIDDEN.getMessage());
         }
     }
-
-
 
     public void verifyCurrentUserPersonId(Long personId){
         CurrentUserInformation currentUserInformationFound=currentUserAdapter.execute();
