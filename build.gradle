@@ -12,7 +12,7 @@ bootJar{
 
 sonar {
 	properties {
-		property "sonar.projectKey", "ancas19/library"
+		property "sonar.projectKey", "ancas19_library"
 		property "sonar.organization", "ancas19"
 		property "sonar.host.url", "https://sonarcloud.io"
 		property "sonar.modules", "infrastructure/entrypoints/*," +
