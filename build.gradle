@@ -12,8 +12,7 @@ bootJar{
 
 sonarqube {
 	properties {
-		property "sonar.projectKey", "api-library"
-		property "sonar.projectName", "api-library"
+		property "sonar.projectKey", "library"
 		property "sonar.organization", "Castrico"
 		property "sonar.host.url", "https://sonarcloud.io"
 		property "sonar.modules", "infrastructure/entrypoints/*," +
