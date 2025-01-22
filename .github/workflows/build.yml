@@ -3,11 +3,9 @@ name: Build project
 on:
     push:
         branches:
-        - main
         - develop
     pull_request:
         branches:
-        - main
         - develop
 jobs:
   build-and-analyze:
@@ -42,3 +40,15 @@ jobs:
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         run: ./gradlew build sonar --info
+
+      - name: Docker Hub Login
+        uses: docker/login-action@v4
+        with:
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
+
+      - name: Build Docker image
+        run: docker build -t ancas19/docker_library:latest .
+
+      - name: Push Docker image to Docker Hub
+        run: docker push ancas19/docker_library:latest
