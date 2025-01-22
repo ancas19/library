@@ -10,7 +10,7 @@ bootJar{
     mainClass = 'co.com.ancas.Main'
 }
 
-sonarqube {
+sonar {
 	properties {
 		property "sonar.projectKey", "library"
 		property "sonar.organization", "ancas19"
