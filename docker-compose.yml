@@ -1,0 +1,65 @@
+services:
+  postgres:
+    container_name: library_database
+    image: postgres:14.11
+    ports:
+      - "3235:5432"
+    environment:
+      - POSTGRES_USER=ancas19
+      - POSTGRES_PASSWORD=P0stgr3s#P4ssw0rd
+      - POSTGRES_DB=postgres
+    volumes:
+      -  db-data:/var/lib/postgresql/data
+    networks:
+      - app-network
+  redis:
+    container_name: library_redis
+    image: redis:6.2-alpine
+    ports:
+      - "6584:6379"
+    command: /bin/sh -c "redis-server --requirepass $$REDIS_HOST_PASSWORD"
+    depends_on:
+      - postgres
+    environment:
+      - REDIS_HOST_PASSWORD=123456
+    networks:
+      - app-network
+  app:
+      build: .
+      container_name: library_app
+      ports:
+        - "9090:9090"
+      depends_on:
+        - postgres
+      networks:
+        - app-network
+      environment:
+        - APP_PORT=9090
+        - CLOUDINARY_API_KEY=423598284112566
+        - CLOUDINARY_API_SECRET=CmB-sogq0VGJMNx_kNBimwBK2VA
+        - CLOUDINARY_CLOUD_NAME=diil54oei
+        - CONTEXT_PATH=/api/library
+        - EMAIL_PASSWORD=hyby vajn uyxv aakv
+        - EMAIL_USER=andres.cmonsalve@gmail.com
+        - HIBERNATE_DDL_AUTO=none
+        - JWT_EXPIRATION=8
+        - JWT_SECRET=56ef08b4f160f35a4be802ab76801399d06c6a1bb9b40a779201261126184b97a06ae3bac06c108c277b975ee083e6afeccf5f1879e1f3d3a5a48169cdba59489504785d8dd741148f6503cbaf181ad0355938a6b6785f8b4ae3ed7ea456b9460f686248038059b11778d007f1e0e579e39b961a5bda4b1e8dc1fd2047ba3fac4ce71b5c72d02bd4aa2ac3d117cbfd6e4e771407a179806960f4491d9ecdf56656639b8fa1d0ff007e88ef2e29f9bbd0f813cc06210a0f21797c33c2f729eca2bd97eae4342aaaa85ef7bab1dc55c5478cc1e7dddc30d4d600a19b5f0e119a051240a8ba8d45b14831cb5c2685a097a966a04993611864cdc1de70ad9aa03cec
+        - LOGGING_LEVEL=INFO
+        - POSTGRES_DB=postgres
+        - POSTGRES_HOST=library_database
+        - POSTGRES_PASSWORD=P0stgr3s#P4ssw0rd
+        - POSTGRES_PORT=5432
+        - POSTGRES_USER=ancas19
+        - REDIS_HOST=library_redis
+        - REDIS_PASS=123456
+        - REDIS_PORT=6379
+        - REDIS_TIMEOUT=5000
+        - SHOW_SQL=true
+
+networks:
+  app-network:
+    driver: bridge
+
+volumes:
+  db-data:
+    driver: local
