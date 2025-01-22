@@ -12,7 +12,7 @@ bootJar{
 
 sonar {
 	properties {
-		property "sonar.projectKey", "library"
+		property "sonar.projectKey", "ancas19_library"
 		property "sonar.organization", "ancas19"
 		property "sonar.host.url", "https://sonarcloud.io"
 		property "sonar.modules", "infrastructure/entrypoints/*," +
@@ -22,14 +22,15 @@ sonar {
 		property "sonar.languages", "java"
 		property "sonar.sources", "src/main/java"
 		property "sonar.test", "src/test/java"
-		property "sonar.java.binaries", "build/classes"
+		property "sonar.java.binaries", ""
+		property "sonar.junit.reportsPath", ""
+		property "sonar.java.coveragePlugin", "jacoco"
+		property "sonar.coverage.jacoco.xmlReportPaths", "build/reports/jacocoMergedReport/jacocoMergedReport.xml"
 		property "sonar.exclusions","**/Main.java"
 		property "sonar.java.source", "21"
 		property "sonar.sourceEncoding", "UTF-8"
 		property "sonar.exclusions", "**/model/**, **/entity/** **/config/**, **/util/**, **/*Application.java, **/test/**, " +
 				"modular-test/**,  deployment/**, **/data/**, **/configuration/**, **/repository/**,**/json_schema/**, **/impl/**"
-		property "sonar.jacoco.reportPaths", layout.buildDirectory.file("jacoco/jacoco.exec").get().asFile.absolutePath
-		property "sonar.junit.reportPaths", layout.buildDirectory.dir("test-results/test").get().asFile.absolutePath + "/*.xml"
 
 
 	}
