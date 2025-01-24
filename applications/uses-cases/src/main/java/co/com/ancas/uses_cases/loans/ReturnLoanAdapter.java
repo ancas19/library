@@ -56,6 +56,10 @@ public class ReturnLoanAdapter implements IUseCase<List<LoanReturn>, LoanReturnR
         int delayedDays = calculateDelayedDays(loan, membershipInfo);
         loan.setDaysDelayed(delayedDays);
         double fine = membershipInfo.getDailyFine() * delayedDays;
+        if(loanReturn.getFine()>(fine)){
+            throw new BadRequestException(Messages.MESSAGE_ERROR_FINE_GREATER_THAN_REAL.getMessage().formatted(loanReturn.getFine(),fine));
+
+        }
         loan.setFine(fine);
         loan.setPaid(loanReturn.getFine().equals(fine) ? YES.getConstant() : NO.getConstant());
         loan.setComments(loanReturn.getComment());

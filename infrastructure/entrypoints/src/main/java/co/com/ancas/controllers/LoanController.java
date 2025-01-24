@@ -66,7 +66,7 @@ public class LoanController {
         );
     }
 
-    @PutMapping("/checkout-completion")
+    @PatchMapping("/checkout-completion")
     @Operation(summary = "Return loan")
     public ResponseEntity<GeneralResponse<LoanReturnResultResponse>> returnLoan(
            @Valid @RequestBody List<LoanReturnRequest> loanReturnRequests

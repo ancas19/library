@@ -12,6 +12,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
 import java.io.IOException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -35,6 +36,7 @@ public class CalculateValueToPayAdapter  implements IUseCase<String,List<LoanRet
         UserMembershipInfo membershipInfo=findUserAndMembershipInfoByUserIdAdapter.execute(iduser);
         List<LoanReturnValue> loanReturns=new ArrayList<>();
         for (Loan loanProcess:loansFound){
+            loanProcess.setReturnDate(LocalDate.now());
             Book bookFound=findBookByIdAdapter.execute(loanProcess.getBookId());
             Integer daysDelayed=calculateDelayedDays(loanProcess,membershipInfo);
             loanReturns.add(
