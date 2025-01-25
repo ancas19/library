@@ -10,6 +10,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
 import java.util.Optional;
 
 @Repository
@@ -120,4 +121,15 @@ public interface UserRepository extends JpaRepository<UserEntity, Long> {
            """
     )
     Optional<UserEntity> findUserByEmail(@Param("email") String email);
+
+    @Query(
+           """
+           SELECT p.email
+           FROM UserEntity u
+           INNER JOIN PeopleEntity p ON p.id = u.personId
+           INNER JOIN RolesEntity r ON r.id = u.roleId
+           WHERE r.roleName = 'ADMIN'
+           """
+    )
+    List<String> findEmailsAdmins();
 }

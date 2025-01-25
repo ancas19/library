@@ -45,8 +45,9 @@ public enum Messages {
     MESSAGE_ERROR_RECOVERY_PASSWORD("Error, trying to recover password"),
     MESSAGE_ERROR_PASSWORDS_NOT_MATCH("Error, trying to recover password"),
     MESSAGE_ERROR_FINE_GREATER_THAN_REAL("Fee sent is greater(%s) than the real fee(%s)"),
-
-
+    MESSAGE_ERROR_DOWNLOAD_IMAGE("Error downloading image"),
+    MESSAGE_ERROR_AUTHOR_DATA_INVALID("Data hasn't correct lenght"),
+    MESSAGE_ERROR_FILE_PROCESSING("Error processing file"),
 
     //Success messages
     MESSAGE_PEOPLE_FULL_INFOMRATION("Person found successfully"),
@@ -78,7 +79,7 @@ public enum Messages {
     MESSAGE_VALUE_TO_PAY_CALCULATED("Value to pay calculated successfully"),
     MESSAGE_LOAN_RETURNED("Loan returned successfully"),
     MESSAGE_PASSWORD_CHANGED("Password changed successfully"),
-    ;
+    MESSAGE_AUTHOR_FILES_UPLOADED("Authors uploaded by file successfully"), ;
     private final String message;
 
     Messages(String message) {

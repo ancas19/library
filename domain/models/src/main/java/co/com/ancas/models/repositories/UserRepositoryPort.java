@@ -5,6 +5,7 @@ import co.com.ancas.models.model.User;
 import co.com.ancas.models.model.UserInformation;
 import co.com.ancas.models.model.UserMembershipInfo;
 
+import java.util.List;
 import java.util.Optional;
 
 public interface UserRepositoryPort {
@@ -19,4 +20,5 @@ public interface UserRepositoryPort {
     CurrentUserInformation findCurrentUserInformation(String username);
     Optional<UserMembershipInfo> findUserAndMembershipInfoByUserId(Long s);
     Optional<User> findUserByEmail(String email);
+    List<String> findEmailsAdmins();
 }

@@ -25,7 +25,9 @@ public enum Constants {
     CLOSE_TD("</td>"),
     OPEN_TD("<td style='border: 1px solid #ddd; padding: 8px;'>"),
     OPEN_TR("<tr style='border: 1px solid #ddd;'>"),
-    CLOSE_TR("</tr>"),;
+    CLOSE_TR("</tr>"),
+    ERROR_FILE("ERROR_FILE"),
+    FILE_CORRECT("FILE_CORRECT"),;
 
     private final String constant;
 

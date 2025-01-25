@@ -1,20 +1,16 @@
 package co.com.ancas.service;
 
-import co.com.ancas.models.model.Author;
-import co.com.ancas.models.model.AuthorCreation;
-import co.com.ancas.models.model.AuthorsSearchCriteria;
-import co.com.ancas.models.model.ImageUpload;
+import co.com.ancas.models.model.*;
 import co.com.ancas.models.utils.Mapper;
-import co.com.ancas.request.AuthorCreationRequest;
-import co.com.ancas.request.AuthorInformationRequest;
-import co.com.ancas.request.ImageUploadRequest;
-import co.com.ancas.request.SearchParameterRequest;
+import co.com.ancas.request.*;
 import co.com.ancas.response.AuthorInformationResponse;
 import co.com.ancas.response.PaginationResponse;
 import co.com.ancas.uses_cases.authors.*;
 import co.com.ancas.utils.Pagination;
 import jakarta.mail.MessagingException;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -28,6 +24,7 @@ public class AuthorAppService {
     private final FindAuthorInformationByIdAdapter findAuthorInformationByIdAdapter;
     private final UpdateAuthorImageAdapter updateAuthorImageAdapter;
     private final UpdateAuthorInformationAdapter authorInformationAdapter;
+    private final UploadAuthorByFileAdapter uploadAuthorByFileAdapter;
 
     @Transactional(value = "libraryTransactionManager",rollbackFor = Exception.class)
     public AuthorInformationResponse createAuthor(AuthorCreationRequest authorCreationRequest) throws MessagingException, IOException {
@@ -58,5 +55,10 @@ public class AuthorAppService {
     @Transactional(value = "libraryTransactionManager",rollbackFor = Exception.class)
     public AuthorInformationResponse updateAuthorInformation(AuthorInformationRequest authorInformationRequest) throws MessagingException, IOException {
         return Mapper.map(this.authorInformationAdapter.execute(Mapper.map(authorInformationRequest, Author.class)),AuthorInformationResponse.class);
+    }
+
+    @Async
+    public void uploadAuthorsByFile(@Valid FileRequest fileRequest) throws MessagingException, IOException {
+        this.uploadAuthorByFileAdapter.execute(Mapper.map(fileRequest, FileData.class));
     }
 }

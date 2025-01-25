@@ -1,10 +1,7 @@
 package co.com.ancas.controllers;
 
 import co.com.ancas.models.enums.Messages;
-import co.com.ancas.request.AuthorCreationRequest;
-import co.com.ancas.request.AuthorInformationRequest;
-import co.com.ancas.request.ImageUploadRequest;
-import co.com.ancas.request.SearchParameterRequest;
+import co.com.ancas.request.*;
 import co.com.ancas.response.AuthorInformationResponse;
 import co.com.ancas.response.GeneralResponse;
 import co.com.ancas.response.PaginationResponse;
@@ -91,6 +88,20 @@ public class AuthorsController {
                 GeneralResponse.<AuthorInformationResponse>builder()
                         .message(Messages.MESSAGE_AUTHOR_FOUND.getMessage())
                         .data(authorAppService.findById(id))
+                        .build()
+        );
+    }
+
+    @PostMapping("/files")
+    @Operation(summary = "Upload author files")
+    public ResponseEntity<GeneralResponse<String>> uploadFiles(
+            @Valid @RequestBody FileRequest  fileRequest
+    ) throws MessagingException, IOException {
+        authorAppService.uploadAuthorsByFile(fileRequest);
+        return ResponseEntity.ok(
+                GeneralResponse.<String>builder()
+                        .message(Messages.MESSAGE_AUTHOR_FILES_UPLOADED.getMessage())
+                        .data(Messages.MESSAGE_AUTHOR_FILES_UPLOADED.getMessage())
                         .build()
         );
     }
