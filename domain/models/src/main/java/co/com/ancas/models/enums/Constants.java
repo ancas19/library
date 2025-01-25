@@ -10,6 +10,8 @@ public enum Constants {
     CODE_UNBLOCK_PERSON("Code to unblock person"),
     SUBJECT_FILES_PROCESSED("File with authors processed"),
     SUBJECT_ERROR_FILE("Error processing file with authors"),
+    SUBJECT_FILES_PROCESSED_BOOKS("File with books processed"),
+    SUBJECT_ERROR_FILE_BOOKS("Error processing file with books"),
     ATTEMPT("ATTEMPT_%s"),
     TOKEN("TOKEN_%s"),
     CODE("CODE_%s"),

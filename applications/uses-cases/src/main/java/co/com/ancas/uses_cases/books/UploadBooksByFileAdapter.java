@@ -47,7 +47,7 @@ public class UploadBooksByFileAdapter implements IUseCaseVoid<FileData> {
             String[] books = dataAuthor.split("\n");
             for (int i = 1; i < books.length; i++) {
                 String[] bookData = books[i].split("\\|");
-                if (bookData.length != 5) {
+                if (bookData.length != 9) {
                     log.error("Data hasn't the correct length {}", Arrays.toString(bookData));
                     throw new BadRequestException(Messages.MESSAGE_ERROR_AUTHOR_DATA_INVALID.getMessage());
                 }
@@ -58,7 +58,7 @@ public class UploadBooksByFileAdapter implements IUseCaseVoid<FileData> {
             emailRepositoryPort.sendEmail(
                     Email.builder()
                             .recipient(emails)
-                            .subject(SUBJECT_FILES_PROCESSED.getConstant())
+                            .subject(SUBJECT_FILES_PROCESSED_BOOKS.getConstant())
                             .body(emailTemplate)
                             .build()
             );
@@ -69,7 +69,7 @@ public class UploadBooksByFileAdapter implements IUseCaseVoid<FileData> {
             emailRepositoryPort.sendEmail(
                     Email.builder()
                             .recipient(emails)
-                            .subject(SUBJECT_ERROR_FILE.getConstant())
+                            .subject(SUBJECT_ERROR_FILE_BOOKS.getConstant())
                             .body(emailTemplate)
                             .build()
             );
@@ -80,7 +80,7 @@ public class UploadBooksByFileAdapter implements IUseCaseVoid<FileData> {
     private BookCreation processBookData(String[] bookData) {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
         LocalDate birthdate = LocalDate.parse(bookData[3], formatter);
-        String imageBase64 = downloadImageAdapter.downloadImage(bookData[4]);
+        String imageBase64 = downloadImageAdapter.downloadImage(bookData[8]);
         return BookCreation.builder()
                 .title(bookData[0].toUpperCase())
                 .isbn(bookData[1])
