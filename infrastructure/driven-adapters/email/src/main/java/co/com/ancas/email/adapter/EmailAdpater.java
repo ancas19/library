@@ -12,6 +12,8 @@ import org.springframework.stereotype.Service;
 import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.context.Context;
 
+import java.util.List;
+
 @RequiredArgsConstructor
 @Service
 @Slf4j
@@ -23,7 +25,7 @@ public class EmailAdpater implements EmailRepositoryPort {
     public void sendEmail(Email email) throws MessagingException {
         MimeMessage message = javaMailSender.createMimeMessage();
         MimeMessageHelper helper = new MimeMessageHelper(message, true, "UTF-8");
-        helper.setTo(email.getRecipient());
+        helper.setTo(email.getRecipient().toArray(new String[0]));
         helper.setSubject(email.getSubject());
 
         Context context = new Context();

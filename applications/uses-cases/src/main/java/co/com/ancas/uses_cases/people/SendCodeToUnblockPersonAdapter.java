@@ -17,6 +17,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
 import java.io.IOException;
+import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 
@@ -41,7 +42,7 @@ public class SendCodeToUnblockPersonAdapter implements IUseCaseVoid<PersonAcces>
         emailTemplate = emailTemplate.replace(":name", peopleFound.get().getFirstName());
         this.emailRepositoryPort.sendEmail(
                 Email.builder()
-                        .recipient(peopleFound.get().getEmail())
+                        .recipient(List.of(peopleFound.get().getEmail()))
                         .subject(CODE_UNBLOCK_PERSON.getConstant())
                         .body(emailTemplate)
                         .build()
