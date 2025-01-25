@@ -98,3 +98,22 @@ VALUES ('ROMANCE', 'ADMIN');
 
 INSERT INTO GENRES (VALUE, USER_CREATED)
 VALUES ('THRILLER', 'ADMIN');
+
+
+
+INSERT INTO public.email_templates
+(subject, body)
+VALUES('ERROR_FILE', '<h2 style="color: #e74c3c; text-align: center;">Error Processing File</h2>
+    <p style="color: #555; font-size: 16px; text-align: center;">
+        We''re sorry, but there was an issue while processing your file. Please try again or contact support if the problem persists.
+    </p>
+    <p style="font-size: 16px; text-align: center;">
+        <strong>Error Details:</strong> <span th:text="${errorDetails}">Error details go here...</span>
+    </p>');
+INSERT INTO public.email_templates
+(subject, body)
+VALUES('FILE_CORRECT', '  <h2 style="color: #2ecc71; text-align: center;">File Processed Successfully</h2>
+    <p style="color: #555; font-size: 16px; text-align: center;">
+        Your file has been successfully processed. You can now proceed with the next steps.
+    </p>
+    ');
