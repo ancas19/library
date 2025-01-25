@@ -8,6 +8,8 @@ public enum Constants {
     USER_AND_PASSWORD("USER_AND_PASSWORD"),
     SUBJECT_USER_AND_PASSWORD("User and password"),
     CODE_UNBLOCK_PERSON("Code to unblock person"),
+    SUBJECT_FILES_PROCESSED("File with authors processed"),
+    SUBJECT_ERROR_FILE("Error processing file with authors"),
     ATTEMPT("ATTEMPT_%s"),
     TOKEN("TOKEN_%s"),
     CODE("CODE_%s"),

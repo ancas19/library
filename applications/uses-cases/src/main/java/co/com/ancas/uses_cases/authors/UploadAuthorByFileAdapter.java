@@ -25,8 +25,7 @@ import java.util.Arrays;
 import java.util.Base64;
 import java.util.List;
 
-import static co.com.ancas.models.enums.Constants.ERROR_FILE;
-import static co.com.ancas.models.enums.Constants.FILE_CORRECT;
+import static co.com.ancas.models.enums.Constants.*;
 
 @Slf4j
 @Component
@@ -60,7 +59,7 @@ public class UploadAuthorByFileAdapter  implements IUseCaseVoid<FileData> {
             emailRepositoryPort.sendEmail(
                     Email.builder()
                             .recipient(emails)
-                            .subject("File with authors processed")
+                            .subject(SUBJECT_FILES_PROCESSED.getConstant())
                             .body(emailTemplate)
                             .build()
             );
@@ -71,7 +70,7 @@ public class UploadAuthorByFileAdapter  implements IUseCaseVoid<FileData> {
             emailRepositoryPort.sendEmail(
                     Email.builder()
                             .recipient(emails)
-                            .subject("Error processing file with authors")
+                            .subject(SUBJECT_ERROR_FILE.getConstant())
                             .body(emailTemplate)
                             .build()
             );
