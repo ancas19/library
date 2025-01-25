@@ -79,7 +79,8 @@ public enum Messages {
     MESSAGE_VALUE_TO_PAY_CALCULATED("Value to pay calculated successfully"),
     MESSAGE_LOAN_RETURNED("Loan returned successfully"),
     MESSAGE_PASSWORD_CHANGED("Password changed successfully"),
-    MESSAGE_AUTHOR_FILES_UPLOADED("Authors uploaded by file successfully"), ;
+    MESSAGE_AUTHOR_FILES_UPLOADED("Authors uploaded by file successfully"),
+    MESSAGE_BOOK_FILES_UPLOADED("Books uploaded by file successfully"),;
     private final String message;
 
     Messages(String message) {

@@ -1,10 +1,7 @@
 package co.com.ancas.controllers;
 
 import co.com.ancas.models.enums.Messages;
-import co.com.ancas.request.BookCreationRequest;
-import co.com.ancas.request.BookSearchCriteriaRequest;
-import co.com.ancas.request.BookUpdateRequest;
-import co.com.ancas.request.ImageUploadRequest;
+import co.com.ancas.request.*;
 import co.com.ancas.response.BookInformationResponse;
 import co.com.ancas.response.GeneralResponse;
 import co.com.ancas.response.PaginationResponse;
@@ -107,6 +104,20 @@ public class BooksController {
                 GeneralResponse.<String>builder()
                         .message(Messages.MESSAGE_CHANGE_BOOK_STATUS.getMessage())
                         .data(Messages.MESSAGE_CHANGE_BOOK_STATUS.getMessage())
+                        .build()
+        );
+    }
+
+    @PostMapping("/files")
+    @Operation(summary = "Upload book files")
+    public ResponseEntity<GeneralResponse<String>> uploadFiles(
+            @Valid @RequestBody FileRequest fileRequest
+    ) throws MessagingException, IOException {
+        this.booksAppservice.uploadBooksFiles(fileRequest);
+        return ResponseEntity.ok(
+                GeneralResponse.<String>builder()
+                        .message(Messages.MESSAGE_BOOK_FILES_UPLOADED.getMessage())
+                        .data(Messages.MESSAGE_BOOK_FILES_UPLOADED.getMessage())
                         .build()
         );
     }
