@@ -1,5 +1,6 @@
 package co.com.ancas.request;
 
+import co.com.ancas.models.utils.Constants;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
@@ -12,20 +13,20 @@ import lombok.*;
 @Getter
 @Setter
 public class PasswordRecoveryRequest {
-    @NotEmpty(message = "Email is required")
-    @NotNull(message = "Email is required")
+    @NotEmpty(message = Constants.EMAIL_REQUIRED)
+    @NotNull(message =  Constants.EMAIL_REQUIRED)
     @Email
     private String email;
-    @NotEmpty(message = "Code is required")
-    @NotNull(message = "Code is required")
-    @Pattern(regexp = "^\\d{6}$", message = "Code must have 6 digits and only numbers")
+    @NotEmpty(message = Constants.CODE_REQUIRED)
+    @NotNull(message = Constants.CODE_REQUIRED)
+    @Pattern(regexp = Constants.CODE, message = Constants.CODE_INVALID)
     private String code;
-    @NotNull(message = "Password is required")
-    @NotEmpty(message = "Password is required")
-    @Pattern(regexp = "^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$", message = "Password must have at least one uppercase letter, one lowercase letter, one number and one special character")
+    @NotNull(message = Constants.PASSWORD_REQUIRED)
+    @NotEmpty(message =  Constants.PASSWORD_REQUIRED)
+    @Pattern(regexp = Constants.PASSWORD, message = Constants.PASSWORD_INVALID)
     private String password;
-    @NotNull(message = "Password is required")
-    @NotEmpty(message = "Password is required")
-    @Pattern(regexp = "^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$", message = "Password must have at least one uppercase letter, one lowercase letter, one number and one special character")
+    @NotNull(message = Constants.CONFIRM_PASSWORD_REQUIRED)
+    @NotEmpty(message =  Constants.CONFIRM_PASSWORD_REQUIRED)
+    @Pattern(regexp = Constants.PASSWORD, message = Constants.PASSWORD_INVALID)
     private String passwordRepeat;
 }

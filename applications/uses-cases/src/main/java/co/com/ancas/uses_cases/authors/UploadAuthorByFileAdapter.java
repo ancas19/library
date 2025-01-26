@@ -83,13 +83,12 @@ public class UploadAuthorByFileAdapter  implements IUseCaseVoid<FileData> {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
         LocalDate birthdate = LocalDate.parse(authorData[2], formatter);
         String imageBase64 = downloadImageAdapter.downloadImage(authorData[4]);
-        return AuthorCreation.builder()
-                .fullName(authorData[0].toUpperCase())
-                .nationality(authorData[1].toUpperCase())
-                .birthdate(birthdate)
-                .bio(authorData[3])
-                .nameFile("%s-%s".formatted(authorData[0], authorData[2]))
-                .base64(imageBase64)
-                .build();
+        return AuthorCreation.authroFromFile(
+                        authorData[0].toUpperCase(),
+                        authorData[1].toUpperCase(),
+                        birthdate,
+                        authorData[3],
+                        "%s-%s".formatted(authorData[0], authorData[2]),
+                        imageBase64);
     }
 }

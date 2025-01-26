@@ -5,7 +5,7 @@ import co.com.ancas.models.enums.TypeSearch;
 import co.com.ancas.models.exceptions.BadRequestException;
 import co.com.ancas.models.model.*;
 import co.com.ancas.models.utils.Mapper;
-import co.com.ancas.request.LoanInformationResponse;
+import co.com.ancas.response.LoanInformationResponse;
 import co.com.ancas.request.LoanRequest;
 import co.com.ancas.request.LoanReturnRequest;
 import co.com.ancas.request.LoanSearchByUserRequest;

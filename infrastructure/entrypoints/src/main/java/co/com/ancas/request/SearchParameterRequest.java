@@ -1,6 +1,7 @@
 package co.com.ancas.request;
 
 
+import co.com.ancas.models.utils.Constants;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
 import lombok.*;
@@ -11,7 +12,7 @@ import lombok.*;
 @Getter
 @Setter
 public class SearchParameterRequest {
-    @NotNull(message = "Search parameter is required")
-    @Pattern(regexp = "^[A-Za-z0-9 ]*$", message = "Search parameter must have only letters, numbers and spaces")
+    @NotNull(message = Constants.SEARCH_PARAMETERS_REQUIRED)
+    @Pattern(regexp = Constants.SEARCH_PARAMETERS, message = Constants.SEARCH_PARAMETERS_INVALID)
     private String search;
 }

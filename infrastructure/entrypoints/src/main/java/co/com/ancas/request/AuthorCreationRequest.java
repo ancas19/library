@@ -1,5 +1,6 @@
 package co.com.ancas.request;
 
+import co.com.ancas.models.utils.Constants;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
@@ -14,26 +15,26 @@ import java.time.LocalDate;
 @Getter
 @Setter
 public class AuthorCreationRequest {
-    @NotNull(message = "Name is required")
-    @NotEmpty(message = "Name is required")
-    @Pattern(regexp = "^[A-ZÁÉÍÓÚÑ ]+$", message = "Name must have only letters and spaces")
+    @NotNull(message = Constants.NAME_REQUIRED)
+    @NotEmpty(message = Constants.NAME_REQUIRED)
+    @Pattern(regexp = Constants.LETTERS, message = Constants.NAME_INVALID)
     private String fullName;
-    @NotNull(message = "Name is required")
-    @NotEmpty(message = "Name is required")
-    @Pattern(regexp = "^[A-Z ]+$", message = "Name must have only letters and spaces")
+    @NotNull(message = Constants.NATIONALITY_REQUIRED)
+    @NotEmpty(message = Constants.NATIONALITY_REQUIRED)
+    @Pattern(regexp = Constants.NATIONALITY, message = Constants.NATIONALITY_INVALID)
     private String nationality;
     @NotNull
     @JsonFormat(pattern = "dd/MM/yyyy", shape = JsonFormat.Shape.STRING, timezone = "America/Bogota")
     private LocalDate birthdate;
     @NotNull
     @NotEmpty
-    @Pattern(regexp = "^[a-zA-ZÁÉÍÓÚÑáéíóúñ0-9., @()_-]+$", message = "Bio must have only letters, spaces and special characters")
+    @Pattern(regexp = Constants.LETTERS_AND_SPECIAL_CHARACTERS, message = Constants.BIO_INVALID)
     private String bio;
-    @NotNull(message = "Name file is required")
-    @NotEmpty(message = "Name file is required")
-    @Pattern(regexp = "^[a-zA-Z0-9.]+$", message = "Name file must have only letters and numbers")
+    @NotNull(message = Constants.NAME_FILE_REQUIRED)
+    @NotEmpty(message = Constants.NAME_FILE_REQUIRED)
+    @Pattern(regexp = Constants.NAME_FILE, message = Constants.NAME_FILE_INVALID)
     private String nameFile;
-    @NotNull(message = "Base64 is required")
-    @NotEmpty(message = "Base64 is required")
+    @NotNull(message = Constants.BASE64_REQUIRED)
+    @NotEmpty(message = Constants.BASE64_REQUIRED)
     private String base64;
 }

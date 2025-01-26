@@ -1,5 +1,6 @@
 package co.com.ancas.request;
 
+import co.com.ancas.models.utils.Constants;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.validation.constraints.*;
 import lombok.*;
@@ -14,7 +15,7 @@ import java.time.LocalDate;
 public class LoanInfoRequest {
     @NotNull
     @NotEmpty
-    @Pattern(regexp = "^(?:\\d{9}X|\\d{10}|\\d{13})$", message = "ISBN must have 10 or 13 digits")
+    @Pattern(regexp = Constants.ISBN, message =Constants.ISBN_INVALID)
     private String isbn;
     @NotNull
     @FutureOrPresent

@@ -8,6 +8,14 @@ springdoc:
   swagger-ui:
     path: /swagger-ui/index.html
 
+cors:
+  allowed:
+    paths: ${PATHS}
+    origins: ${ORIGINS}
+    methods: ${METHODS}
+    headers: ${HEADERS}
+    uris: ${ALLOW_URIS}
+
 spring:
   application:
     name: spring-security-course

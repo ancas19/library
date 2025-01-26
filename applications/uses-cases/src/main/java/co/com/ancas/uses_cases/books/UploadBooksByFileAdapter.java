@@ -81,17 +81,16 @@ public class UploadBooksByFileAdapter implements IUseCaseVoid<FileData> {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
         LocalDate birthdate = LocalDate.parse(bookData[3], formatter);
         String imageBase64 = downloadImageAdapter.downloadImage(bookData[8]);
-        return BookCreation.builder()
-                .title(bookData[0].toUpperCase())
-                .isbn(bookData[1])
-                .author(bookData[2].toUpperCase())
-                .publishDate(birthdate)
-                .genre(bookData[4].toUpperCase())
-                .availableCopies(Integer.parseInt(bookData[5]))
-                .blurb(bookData[6])
-                .available(bookData[7])
-                .nameFile("%s-%s".formatted(bookData[0],LocalDate.now()))
-                .base64(imageBase64)
-                .build();
+        return BookCreation.bookFromFile(
+                bookData[0].toUpperCase(),
+                        bookData[1],
+                        bookData[2].toUpperCase(),
+                        birthdate,
+                        bookData[4].toUpperCase(),
+                        Integer.parseInt(bookData[5]),
+                        bookData[6],
+                        bookData[7],
+                        "%s-%s".formatted(bookData[0],LocalDate.now()),
+                        imageBase64);
     }
 }
