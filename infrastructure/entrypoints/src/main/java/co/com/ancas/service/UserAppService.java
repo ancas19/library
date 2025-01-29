@@ -28,7 +28,7 @@ public class UserAppService {
 
     @Transactional(value = "libraryTransactionManager",readOnly = true,rollbackFor = Exception.class)
     public UserInformationResponse findUserByPersonid(Long id) throws MessagingException, IOException {
-        currentUserAppService.verifyCurrentUserPersonId(id);
+        currentUserAppService.verifyCurrentUserPersonIdAndRole(id);
         return Mapper.map(this.findUserByPersonIdAdapter.execute(id),UserInformationResponse.class);
     }
 }

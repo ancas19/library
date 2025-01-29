@@ -17,23 +17,31 @@ import java.io.IOException;
 public class CurrentUserAppService {
     private final CurrentUserAdapter currentUserAdapter;
 
-    public void  verifyCurrentUserDni(String dni){
+    public void  verifyCurrentUserDniAndRole(String dni){
         CurrentUserInformation currentUserInformationFound=currentUserAdapter.execute();
         if(currentUserInformationFound.getRole().equalsIgnoreCase(Constants.USER.getConstant()) && !currentUserInformationFound.getDni().equalsIgnoreCase(dni)){
             throw new ForbiddenException(Messages.MESSAGE_GENERAL_FORBIDDEN.getMessage());
         }
     }
 
+
     public void verifyCurrentUsername(String username){
         CurrentUserInformation currentUserInformationFound=currentUserAdapter.execute();
-        if(currentUserInformationFound.getRole().equalsIgnoreCase(Constants.USER.getConstant()) && !currentUserInformationFound.getUsername().equalsIgnoreCase(username)){
+        if(!currentUserInformationFound.getUsername().equalsIgnoreCase(username)){
             throw new ForbiddenException(Messages.MESSAGE_GENERAL_FORBIDDEN.getMessage());
         }
     }
 
-    public void verifyCurrentUserPersonId(Long personId){
+    public void verifyCurrentUserPersonIdAndRole(Long personId){
         CurrentUserInformation currentUserInformationFound=currentUserAdapter.execute();
         if(currentUserInformationFound.getRole().equalsIgnoreCase(Constants.USER.getConstant()) && !currentUserInformationFound.getPersonId().equals(personId)){
+            throw new ForbiddenException(Messages.MESSAGE_GENERAL_FORBIDDEN.getMessage());
+        }
+    }
+
+    public void verifyCurrentPersonId(Long personId){
+        CurrentUserInformation currentUserInformationFound=currentUserAdapter.execute();
+        if(!currentUserInformationFound.getPersonId().equals(personId)){
             throw new ForbiddenException(Messages.MESSAGE_GENERAL_FORBIDDEN.getMessage());
         }
     }

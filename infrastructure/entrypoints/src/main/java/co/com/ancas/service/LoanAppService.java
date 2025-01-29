@@ -37,13 +37,12 @@ public class LoanAppService {
 
     @Transactional(value = "libraryTransactionManager",rollbackFor = Exception.class)
     public List<LoanDetailsResponse> createLoan(LoanRequest request) throws MessagingException, IOException {
-        currentUserAppService.verifyCurrentUserDni(request.getDni());
         return Mapper.mapAll(createLoanAdapter.execute(mapLoanRequestToLoanCreation(request)),LoanDetailsResponse.class);
     }
 
     @Transactional(value = "libraryTransactionManager",rollbackFor = Exception.class)
     public List<LoanReturnValueResponse> calculateValueToPay(String dni) throws MessagingException, IOException {
-        currentUserAppService.verifyCurrentUserDni(dni);
+        currentUserAppService.verifyCurrentUserDniAndRole(dni);
         return Mapper.mapAll(calculateValueToPayAdapter.execute(dni), LoanReturnValueResponse.class);
     }
 
@@ -54,7 +53,7 @@ public class LoanAppService {
 
     @Transactional(value = "libraryTransactionManager",rollbackFor = Exception.class)
     public PaginationResponse<LoanInformationResponse> findLoansByUser(@Valid LoanSearchByUserRequest request, Integer page, Integer size) throws MessagingException, IOException {
-        currentUserAppService.verifyCurrentUserDni(request.getDni());
+        currentUserAppService.verifyCurrentUserDniAndRole(request.getDni());
         request.setStartDate(startDateNull(request.getStartDate()));
         request.setFinishDate(finishDateNull(request.getFinishDate()));
         verifyDates(request.getStartDate(), request.getFinishDate());

@@ -45,24 +45,25 @@ public class PeopleAppService {
 
     @Transactional(value = "libraryTransactionManager",rollbackFor = Exception.class ,readOnly = true)
     public PeopleFullInfomrationResponse findById(Long id) throws MessagingException {
-        currentUserAppService.verifyCurrentUserPersonId(id);
+        currentUserAppService.verifyCurrentUserPersonIdAndRole(id);
         return Mapper.map(findPeopleByIdAdapter.execute(id), PeopleFullInfomrationResponse.class);
     }
 
     @Transactional(value = "libraryTransactionManager",rollbackFor = Exception.class)
     public void uploadProfileImage(ImageUploadRequest imageUpload) throws MessagingException, IOException {
+        currentUserAppService.verifyCurrentPersonId(imageUpload.getId());
         this.uploadProfileImageAdapter.execute(Mapper.map(imageUpload, ImageUpload.class));
     }
 
     @Transactional(value = "libraryTransactionManager",rollbackFor = Exception.class)
     public PeopleResponse updatePeople(PeopleInformationRequest request) throws MessagingException, IOException {
-        currentUserAppService.verifyCurrentUserPersonId(request.getId());
+        currentUserAppService.verifyCurrentUserPersonIdAndRole(request.getId());
         return Mapper.map(updatePersonAdapter.execute(Mapper.map(request, People.class)), PeopleResponse.class);
     }
 
     @Transactional(value = "libraryTransactionManager",rollbackFor = Exception.class)
     public void blockPeople(Long id) throws MessagingException, IOException {
-        currentUserAppService.verifyCurrentUserPersonId(id);
+        currentUserAppService.verifyCurrentUserPersonIdAndRole(id);
         changeStatusPersonAdapter.execute(id);
     }
 
