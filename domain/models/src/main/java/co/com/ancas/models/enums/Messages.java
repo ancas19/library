@@ -48,6 +48,7 @@ public enum Messages {
     MESSAGE_ERROR_DOWNLOAD_IMAGE("Error downloading image"),
     MESSAGE_ERROR_AUTHOR_DATA_INVALID("Data hasn't correct lenght"),
     MESSAGE_ERROR_FILE_PROCESSING("Error processing file"),
+    MESSAGE_MEMBERSHIP_NOT_FOUND("Membership with id(%S) not found"),
 
     //Success messages
     MESSAGE_PEOPLE_FULL_INFOMRATION("Person found successfully"),
