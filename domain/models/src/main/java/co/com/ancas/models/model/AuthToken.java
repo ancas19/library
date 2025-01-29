@@ -10,5 +10,6 @@ import lombok.*;
 public class AuthToken {
     private String message;
     private String token;
+    private boolean changePassword;
     private PeopleFullInfomration peopleFullInfomration;
 }
