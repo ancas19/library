@@ -25,6 +25,7 @@ import static co.com.ancas.models.enums.Messages.MESSAGE_PASSWORD_UPDATED;
 public class UserController {
     private final UserAppService userAppService;
 
+
     @PatchMapping("/password")
     public ResponseEntity<GeneralResponse<String>> changePassword(
             @Valid @RequestBody ChangePasswordRequest request

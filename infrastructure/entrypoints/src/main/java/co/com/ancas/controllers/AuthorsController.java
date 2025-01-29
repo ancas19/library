@@ -12,6 +12,7 @@ import jakarta.mail.MessagingException;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
@@ -28,6 +29,7 @@ public class AuthorsController {
 
 
     @PostMapping()
+    @PreAuthorize("hasRole('ADMIN','EMPLOYEE')")
     @Operation(summary = "Create a new author")
     public ResponseEntity<GeneralResponse<AuthorInformationResponse>> createAuthpr(
             @Valid @RequestBody AuthorCreationRequest authorCreationRequest) throws MessagingException, IOException {
@@ -55,6 +57,7 @@ public class AuthorsController {
     }
 
     @PutMapping("/information")
+    @PreAuthorize("hasRole('ADMIN','EMPLOYEE')")
     @Operation(summary = "Update author information")
     public ResponseEntity<GeneralResponse<AuthorInformationResponse>> updateAuthor(
             @Valid @RequestBody AuthorInformationRequest authorInformationRequest
@@ -68,6 +71,7 @@ public class AuthorsController {
     }
 
     @PutMapping("/image")
+    @PreAuthorize("hasRole('ADMIN')")
     @Operation(summary = "Update author image")
     public ResponseEntity<GeneralResponse<AuthorInformationResponse>> updateImageAuthor(
             @Valid @RequestBody ImageUploadRequest imageUploadRequest
@@ -93,6 +97,7 @@ public class AuthorsController {
     }
 
     @PostMapping("/files")
+    @PreAuthorize("hasRole('ADMIN')")
     @Operation(summary = "Upload author files")
     public ResponseEntity<GeneralResponse<String>> uploadFiles(
             @Valid @RequestBody FileRequest  fileRequest

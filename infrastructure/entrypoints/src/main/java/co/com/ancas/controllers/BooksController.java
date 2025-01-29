@@ -12,6 +12,7 @@ import jakarta.mail.MessagingException;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
@@ -27,6 +28,7 @@ public class BooksController {
     private final BooksAppservice booksAppservice;
 
     @PostMapping
+    @PreAuthorize("hasRole('ADMIN','EMPLOYEE')")
     @Operation(summary = "Create a book")
     public ResponseEntity<GeneralResponse<BookInformationResponse>> createBook(
             @Valid @RequestBody BookCreationRequest bookCreationRequest
@@ -68,6 +70,7 @@ public class BooksController {
     }
 
     @PutMapping("/information")
+    @PreAuthorize("hasRole('ADMIN','EMPLOYEE')")
     @Operation(summary = "Update book information")
     public ResponseEntity<GeneralResponse<BookInformationResponse>> updateBookInformation(
             @Valid @RequestBody BookUpdateRequest bookUpdateRequest
@@ -82,6 +85,7 @@ public class BooksController {
 
 
     @PutMapping("/image")
+    @PreAuthorize("hasRole('ADMIN')")
     @Operation(summary = "Update book image")
     public ResponseEntity<GeneralResponse<BookInformationResponse>> updateImageBook(
             @Valid @RequestBody ImageUploadRequest imageUploadRequest
@@ -95,6 +99,7 @@ public class BooksController {
     }
 
     @DeleteMapping("/{id}")
+    @PreAuthorize("hasRole('ADMIN')")
     @Operation(summary = "Change the status of a book to inactive")
     public ResponseEntity<GeneralResponse<String>> deleteBook(
             @PathVariable Long id
@@ -109,6 +114,7 @@ public class BooksController {
     }
 
     @PostMapping("/files")
+    @PreAuthorize("hasRole('ADMIN')")
     @Operation(summary = "Upload book files")
     public ResponseEntity<GeneralResponse<String>> uploadFiles(
             @Valid @RequestBody FileRequest fileRequest

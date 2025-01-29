@@ -10,6 +10,7 @@ import jakarta.mail.MessagingException;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
@@ -26,6 +27,7 @@ public class LoanController {
     private final LoanAppService loanAppService;
 
     @PostMapping
+    @PreAuthorize("hasRole('ADMIN','EMPLOYEE')")
     @Operation(summary = "Create a loan")
     public ResponseEntity<GeneralResponse<List<LoanDetailsResponse>>> createLoan(
             @RequestBody @Valid LoanRequest request
@@ -67,6 +69,7 @@ public class LoanController {
     }
 
     @PatchMapping("/checkout-completion")
+    @PreAuthorize("hasRole('ADMIN','EMPLOYEE')")
     @Operation(summary = "Return loan")
     public ResponseEntity<GeneralResponse<LoanReturnResultResponse>> returnLoan(
            @Valid @RequestBody List<LoanReturnRequest> loanReturnRequests
