@@ -76,4 +76,14 @@ public class UserRepositoryAdapter implements UserRepositoryPort {
     public List<String> findEmailsAdmins() {
         return this.userRepository.findEmailsAdmins();
     }
+
+    @Override
+    public Optional<User> findUserFindDni(String s) {
+        return this.userRepository.findUserFindDni(s).map(user->Mapper.map(user,User.class));
+    }
+
+    @Override
+    public boolean findChangePasswordByUsername(String username) {
+        return this.userRepository.findChangePasswordByUsername(username);
+    }
 }

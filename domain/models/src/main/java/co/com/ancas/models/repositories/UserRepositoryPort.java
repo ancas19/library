@@ -21,4 +21,6 @@ public interface UserRepositoryPort {
     Optional<UserMembershipInfo> findUserAndMembershipInfoByUserId(Long s);
     Optional<User> findUserByEmail(String email);
     List<String> findEmailsAdmins();
+    Optional<User> findUserFindDni(String s);
+    boolean findChangePasswordByUsername(String username);
 }

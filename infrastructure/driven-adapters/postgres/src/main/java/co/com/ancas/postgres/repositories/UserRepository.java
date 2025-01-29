@@ -132,4 +132,23 @@ public interface UserRepository extends JpaRepository<UserEntity, Long> {
            """
     )
     List<String> findEmailsAdmins();
+
+    @Query(
+           """
+           SELECT u
+           FROM UserEntity u
+           INNER JOIN PeopleEntity p ON p.id = u.personId
+           WHERE p.dni = :dni
+           """
+    )
+    Optional<UserEntity> findUserFindDni(@Param("dni") String s);
+
+    @Query(
+           """
+           SELECT u.changePassword
+           FROM UserEntity u
+           WHERE u.username = :username
+           """
+    )
+    boolean findChangePasswordByUsername(String username);
 }
