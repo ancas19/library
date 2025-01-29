@@ -44,6 +44,7 @@ public class LoginAdapter implements IUseCase<AuthLogin, AuthToken> {
         jwtAdapter.saveToken(token, token);
         return AuthToken.builder()
                 .token(token)
+                .changePassword(userRepositoryPort.findChangePasswordByUsername(authLogin.getUsername()))
                 .message(Messages.MESSAGE_LOGIN_SUCCESS.getMessage())
                 .peopleFullInfomration(findPeopleFullInformationAdapter.execute(personId))
                 .build();

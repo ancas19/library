@@ -13,5 +13,6 @@ import java.io.Serializable;
 public class AuthTokenResponse  implements Serializable {
     private String message;
     private String token;
+    private boolean changePassword;
     private PeopleFullInfomration peopleFullInfomration;
 }

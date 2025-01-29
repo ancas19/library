@@ -32,6 +32,10 @@ public class UserDetailsAdapter implements UserDetailsService {
         if(peopleRepositoryPort.verifyPersonBlocked(userFound.get().getPersonId())){
             throw new UnauthorizedException(Messages.MESSAGE_USER_BLOCKED.getMessage());
         }
+        if(!userFound.get().isEmailVerified()){
+            userFound.get().setEmailVerified(true);
+            userRepositoryPort.save(userFound.get());
+        }
         return new org.springframework.security.core.userdetails.User(userFound.get().getUsername(), userFound.get().getPassword(), getAuthority(userFound.get()));
     }
 
