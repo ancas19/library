@@ -2,9 +2,7 @@ package co.com.ancas.uses_cases.auth;
 
 import co.com.ancas.models.enums.Messages;
 import co.com.ancas.models.exceptions.UnauthorizedException;
-import co.com.ancas.models.model.Attempt;
-import co.com.ancas.models.model.AuthToken;
-import co.com.ancas.models.model.AuthLogin;
+import co.com.ancas.models.model.*;
 import co.com.ancas.models.repositories.AttemptRepositoryPort;
 import co.com.ancas.models.repositories.UserRepositoryPort;
 import co.com.ancas.uses_cases.interfaces.IUseCase;
@@ -40,13 +38,24 @@ public class LoginAdapter implements IUseCase<AuthLogin, AuthToken> {
             verifyAttempts(authLogin.getUsername(), personId);
             throw new UnauthorizedException(Messages.MESSAGE_LOGIN_FAILED.getMessage());
         }
+        PeopleFullInfomration peopleFullInfomrationFound=findPeopleFullInformationAdapter.execute(personId);
         String token = jwtAdapter.generateToken(user);
-        jwtAdapter.saveToken(token, token);
+        jwtAdapter.saveToken(token,
+                    TokenInformation.builder()
+                            .token(token)
+                            .username(peopleFullInfomrationFound.getUsername())
+                            .email(peopleFullInfomrationFound.getEmail())
+                            .dni(peopleFullInfomrationFound.getDni())
+                            .role(peopleFullInfomrationFound.getRole())
+                            .idPersona(peopleFullInfomrationFound.getId())
+                            .idUser(peopleFullInfomrationFound.getUserId())
+                            .build()
+                );
         return AuthToken.builder()
                 .token(token)
                 .changePassword(userRepositoryPort.findChangePasswordByUsername(authLogin.getUsername()))
                 .message(Messages.MESSAGE_LOGIN_SUCCESS.getMessage())
-                .peopleFullInfomration(findPeopleFullInformationAdapter.execute(personId))
+                .peopleFullInfomration(peopleFullInfomrationFound)
                 .build();
     }
     private boolean verifyPassword(String enteredPassword, String storedPassword) {
