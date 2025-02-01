@@ -31,10 +31,10 @@ import static co.com.ancas.models.enums.Constants.*;
 @Component
 @RequiredArgsConstructor
 public class UploadAuthorByFileAdapter  implements IUseCaseVoid<FileData> {
-    private final CreateAuthorAdapter createAuthorAdapter;
-    private final DownloadImageAdapter downloadImageAdapter;
-    private final EmailRepositoryPort emailRepositoryPort;
     private final FindEmailTemplateBySubjectAdapter findEmailTemplateBySubjectAdapter;
+    private final DownloadImageAdapter downloadImageAdapter;
+    private final CreateAuthorAdapter createAuthorAdapter;
+    private final EmailRepositoryPort emailRepositoryPort;
     private final UserRepositoryPort userRepositoryPort;
 
 

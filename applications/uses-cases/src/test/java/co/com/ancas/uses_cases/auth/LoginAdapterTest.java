@@ -28,8 +28,7 @@ import java.io.IOException;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyString;
-import static org.mockito.Mockito.doNothing;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
 class LoginAdapterTest {
@@ -58,10 +57,11 @@ class LoginAdapterTest {
     @BeforeEach
     void setUp() {
         authLogin= TestMock.authLogin();
-        user= TestMock.user();
+        user= mock(User.class);
         peopleFullInfomration= TestMock.peopleFullInfomration();
         attemptCaptor=ArgumentCaptor.forClass(Attempt.class);
         attempt=TestMock.attempt();
+        when(user.getPassword()).thenReturn("data");
     }
 
     @Test

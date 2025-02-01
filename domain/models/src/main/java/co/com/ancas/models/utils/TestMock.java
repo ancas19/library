@@ -1,10 +1,8 @@
 package co.com.ancas.models.utils;
 
 import co.com.ancas.models.model.*;
-import org.springframework.security.core.userdetails.User;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
 
 public class TestMock {
      private TestMock () {
@@ -18,9 +16,6 @@ public class TestMock {
                  .build();
      }
 
-     public static User user(){
-         return new User("username", null, new ArrayList<>());
-     }
 
      public static PeopleFullInfomration peopleFullInfomration(){
          return PeopleFullInfomration.builder()
