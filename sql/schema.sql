@@ -185,6 +185,8 @@ CREATE TABLE email_templates (
     subject VARCHAR(255) NOT NULL UNIQUE,
     body TEXT NOT NULL,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    user_created VARCHAR(255),
+    updated_user VARCHAR(255)
 );
 
