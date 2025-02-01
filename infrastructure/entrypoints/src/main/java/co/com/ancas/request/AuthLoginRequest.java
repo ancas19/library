@@ -18,6 +18,6 @@ public class AuthLoginRequest {
     private String username;
     @NotNull(message =Constants.PASSWORD_REQUIRED )
     @NotEmpty(message = Constants.PASSWORD_REQUIRED)
-    @Pattern(regexp = Constants.PASSWORD_REGEX, message = Constants.PASSWORD_INVALID)
+    @Pattern(regexp = Constants.REGEX_PASS, message = Constants.PASSWORD_INVALID)
     private String password;
 }
