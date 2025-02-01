@@ -18,6 +18,7 @@ import java.io.IOException;
 public class CreateAuthorAdapter implements IUseCase<AuthorCreation, AuthorInformation> {
     private final AuthorsRepositoryPort authorsRepositoryPort;
     private final UploadImageAdapter uploadImageAdapter;
+
     @Override
     @CacheEvict(value = "authors", allEntries = true)
     public AuthorInformation execute(AuthorCreation authorCreation) throws MessagingException, IOException {
