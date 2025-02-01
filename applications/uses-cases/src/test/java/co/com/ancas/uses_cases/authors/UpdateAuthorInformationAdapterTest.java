@@ -45,9 +45,9 @@ class UpdateAuthorInformationAdapterTest {
         when(authorsRepositoryPort.save(any())).thenReturn(author);
         when(findAuthorInformationByIdAdapter.execute(any())).thenReturn(authorInformation);
         //Act
-        AuthorInformation authorInformation = updateAuthorInformationAdapter.execute(author);
+        AuthorInformation authorInformationResult = updateAuthorInformationAdapter.execute(author);
         //Assert
-        assertNotNull(authorInformation);
+        assertNotNull(authorInformationResult);
     }
 
     @Test

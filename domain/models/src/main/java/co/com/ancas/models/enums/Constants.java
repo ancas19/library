@@ -32,7 +32,8 @@ public enum Constants {
     ERROR_FILE("ERROR_FILE"),
     FILE_CORRECT("FILE_CORRECT"),
     MEMBERSHIP("MEMBERSHIP"),
-    SUBJECT_MEMBERSHIP("Membership"),;
+    SUBJECT_MEMBERSHIP("Membership"),
+    AUTHORIZATION("Authorization"),;
 
     private final String constant;
 

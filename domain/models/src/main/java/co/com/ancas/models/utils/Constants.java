@@ -3,6 +3,8 @@ package co.com.ancas.models.utils;
 public class Constants {
 
 
+
+
     private Constants() {
     }
     public static final String PHONE ="^\\+[1-9][0-9]{1,3}[0-9]{6,14}$" ;
@@ -25,6 +27,7 @@ public class Constants {
     public static final String ROLE="EMPLOYEE|USER|ADMIN" ;
 
 
+    public static final String SYSTEM = "SYSTEM";
     public static final String SEARCH_REQUIRED ="Search is required";
     public static final String ROLE_INVALID="User type must be 'ADMIN', 'EMPLOYEE' or 'USER'";
     public static final String ID_REQUIRED = "Id is required";

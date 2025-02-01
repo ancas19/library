@@ -10,15 +10,16 @@ public class TestMock {
      private TestMock () {
      }
 
+
      public static AuthLogin authLogin(){
          return AuthLogin.builder()
-                 .password("password")
-                 .username("username")
+                 .password("uwijbskow2")
+                 .username("anasdla")
                  .build();
      }
 
      public static User user(){
-         return new User("username", "password", new ArrayList<>());
+         return new User("username", null, new ArrayList<>());
      }
 
      public static PeopleFullInfomration peopleFullInfomration(){
@@ -30,7 +31,7 @@ public class TestMock {
                  .phone("123-456-7890")
                  .role("Admin")
                  .membership("Premium")
-                 .profileImage("profile.jpg")
+                 .profileImage("image.jpg")
                  .username("johndoe")
                  .status("Active")
                  .build();
@@ -46,10 +47,10 @@ public class TestMock {
      public static AuthorCreation authorCreation(){
          return AuthorCreation.builder()
                  .id(1L)
-                 .fullName("Gabriel García Márquez")
+                 .fullName("Gabriel Márquez")
                  .nationality("Colombian")
                  .birthdate(LocalDate.of(1927, 3, 6))
-                 .bio("Colombian novelist, short-story writer, and journalist, known for 'One Hundred Years of Solitude'.")
+                 .bio("Colombian dsdsdsdsdsd, short-story writer, and journalist, known for 'One Hundred Years of Solitude'.")
                  .nameFile("profile.jpg")
                  .base64("base64EncodedStringHere")
                  .build();
@@ -67,10 +68,10 @@ public class TestMock {
      public static Author author(){
          return  Author.builder()
                  .id(1L)
-                 .fullName("Gabriel García Márquez")
-                 .nationality("Colombian")
+                 .fullName("Gabriel Perez Márquez")
+                 .nationality("Venezuelan")
                  .birthdate(LocalDate.of(1927, 3, 6))
-                 .bio("Colombian novelist, short-story writer, and journalist, known for 'One Hundred Years of Solitude'.")
+                 .bio(" known for 'One Hundred Years of Solitude'.")
                  .imageId(101L)  // Reference to an image stored elsewhere
                  .build();
      }
@@ -81,7 +82,7 @@ public class TestMock {
                 .fullName("Gabriel García Márquez")
                 .nationality("Colombian")
                 .birthdate(LocalDate.of(1927, 3, 6))
-                .bio("Colombian novelist, short-story writer, and journalist, known for 'One Hundred Years of Solitude'.")
+                .bio("Colombian novelist")
                 .image("https://example.com/images/gabo.jpg") // URL or base64 string
                 .build();
      }
@@ -96,7 +97,7 @@ public class TestMock {
 
      public static ImageUpload imageUpload(){
          return ImageUpload.builder()
-                 .nameFile("profile.jpg")
+                 .nameFile("peep.jpg")
                  .base64("base64EncodedStringHere")
                  .idImage(1L)
                  .id(1L)
