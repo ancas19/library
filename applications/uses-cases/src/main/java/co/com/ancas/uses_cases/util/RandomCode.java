@@ -4,6 +4,8 @@ package co.com.ancas.uses_cases.util;
 import java.util.Random;
 
 public class RandomCode {
+    private RandomCode() {
+    }
 
     private static final Random random = new Random(); // Make Random instance static
 

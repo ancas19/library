@@ -45,7 +45,7 @@ public class BooksController {
     @Operation(summary = "Find a book by id")
     public ResponseEntity<GeneralResponse<BookInformationResponse>> findBookById(
             @PathVariable Long id
-    ) throws MessagingException, IOException {
+    )  {
         return ResponseEntity.ok(
                 GeneralResponse.<BookInformationResponse>builder()
                         .message(Messages.MESSAGE_BOOK_FOUND.getMessage())

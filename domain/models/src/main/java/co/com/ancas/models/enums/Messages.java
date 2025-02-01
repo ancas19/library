@@ -49,6 +49,8 @@ public enum Messages {
     MESSAGE_ERROR_AUTHOR_DATA_INVALID("Data hasn't correct lenght"),
     MESSAGE_ERROR_FILE_PROCESSING("Error processing file"),
     MESSAGE_MEMBERSHIP_NOT_FOUND("Membership with id(%S) not found"),
+    MESSAGE_ERROR_UPDATE_MEMBERSHIP("It is impossible to update the membership"),
+
 
     //Success messages
     MESSAGE_PEOPLE_FULL_INFOMRATION("Person found successfully"),
@@ -81,7 +83,8 @@ public enum Messages {
     MESSAGE_LOAN_RETURNED("Loan returned successfully"),
     MESSAGE_PASSWORD_CHANGED("Password changed successfully"),
     MESSAGE_AUTHOR_FILES_UPLOADED("Authors uploaded by file successfully"),
-    MESSAGE_BOOK_FILES_UPLOADED("Books uploaded by file successfully"),;
+    MESSAGE_BOOK_FILES_UPLOADED("Books uploaded by file successfully"),
+    MESSAGE_USER_MEMBERSHIP_UPDATED("User membership updated successfully"),;
     private final String message;
 
     Messages(String message) {

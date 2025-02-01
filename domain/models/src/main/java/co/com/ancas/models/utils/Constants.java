@@ -3,8 +3,6 @@ package co.com.ancas.models.utils;
 public class Constants {
 
 
-     ;
-
     private Constants() {
     }
     public static final String PHONE ="^\\+[1-9][0-9]{1,3}[0-9]{6,14}$" ;

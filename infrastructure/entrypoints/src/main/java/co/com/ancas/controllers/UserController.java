@@ -2,6 +2,7 @@ package co.com.ancas.controllers;
 
 import co.com.ancas.models.enums.Messages;
 import co.com.ancas.request.ChangePasswordRequest;
+import co.com.ancas.request.DniRequest;
 import co.com.ancas.response.GeneralResponse;
 import co.com.ancas.response.UserInformationResponse;
 import co.com.ancas.service.UserAppService;
@@ -43,7 +44,7 @@ public class UserController {
 
     @GetMapping("/{id}/people")
     @Operation(summary = "Find user information by id person", description = "Endpoint to find user information by id person")
-    public ResponseEntity<GeneralResponse<UserInformationResponse>> findUserByPersonid(@PathVariable Long id) throws MessagingException, IOException {
+    public ResponseEntity<GeneralResponse<UserInformationResponse>> findUserByPersonId(@PathVariable Long id) throws MessagingException, IOException {
         return ResponseEntity
                 .status(HttpStatus.OK)
                 .body(
@@ -54,4 +55,19 @@ public class UserController {
                 );
     }
 
+    @PatchMapping("/memberships")
+    @Operation(summary = "Update user memberships", description = "Endpoint to update user memberships")
+    public ResponseEntity<GeneralResponse<String>> updateUserMembership(
+            @Valid @RequestBody DniRequest dniRequest
+    ) throws MessagingException, IOException {
+        this.userAppService.updateUserMembership(dniRequest.getDni());
+        return ResponseEntity
+                .status(HttpStatus.OK)
+                .body(
+                        GeneralResponse.<String>builder()
+                                .message(Messages.MESSAGE_USER_MEMBERSHIP_UPDATED.getMessage())
+                                .data(Messages.MESSAGE_USER_MEMBERSHIP_UPDATED.getMessage())
+                                .build()
+                );
+    }
 }

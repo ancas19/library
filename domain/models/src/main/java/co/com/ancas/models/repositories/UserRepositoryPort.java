@@ -9,7 +9,6 @@ import java.util.List;
 import java.util.Optional;
 
 public interface UserRepositoryPort {
-
     boolean verifyExistsUserName(String userName);
     void save(User build);
     Optional<User> findUserByUsername(String username);
@@ -23,4 +22,6 @@ public interface UserRepositoryPort {
     List<String> findEmailsAdmins();
     Optional<User> findUserFindDni(String s);
     boolean findChangePasswordByUsername(String username);
+    String findEmailByUser(String username);
+    boolean verifyEmployee(Long id);
 }

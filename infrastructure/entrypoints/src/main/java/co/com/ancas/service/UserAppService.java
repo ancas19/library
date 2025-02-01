@@ -6,6 +6,7 @@ import co.com.ancas.request.ChangePasswordRequest;
 import co.com.ancas.response.UserInformationResponse;
 import co.com.ancas.uses_cases.user.FindUserByPersonIdAdapter;
 import co.com.ancas.uses_cases.user.UpdatePasswordAdapter;
+import co.com.ancas.uses_cases.user.UpdateUserMembershipAdapter;
 import jakarta.mail.MessagingException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -19,6 +20,7 @@ public class UserAppService {
     private final UpdatePasswordAdapter updatePasswordAdapter;
     private final FindUserByPersonIdAdapter findUserByPersonIdAdapter;
     private final CurrentUserAppService currentUserAppService;
+    private final UpdateUserMembershipAdapter updateUserMembershipAdapter;
 
     @Transactional(value = "libraryTransactionManager",rollbackFor = Exception.class)
     public void updatePassword(ChangePasswordRequest request) throws MessagingException, IOException {
@@ -30,5 +32,10 @@ public class UserAppService {
     public UserInformationResponse findUserByPersonid(Long id) throws MessagingException, IOException {
         currentUserAppService.verifyCurrentUserPersonIdAndRole(id);
         return Mapper.map(this.findUserByPersonIdAdapter.execute(id),UserInformationResponse.class);
+    }
+
+    @Transactional(value = "libraryTransactionManager",rollbackFor = Exception.class)
+    public void updateUserMembership(String username) throws MessagingException, IOException {
+        updateUserMembershipAdapter.execute(username);
     }
 }

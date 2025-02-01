@@ -6,11 +6,9 @@ import co.com.ancas.models.enums.Messages;
 import co.com.ancas.models.exceptions.ForbiddenException;
 import co.com.ancas.models.model.CurrentUserInformation;
 import co.com.ancas.uses_cases.user.CurrentUserAdapter;
-import jakarta.mail.MessagingException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
-import java.io.IOException;
 
 @Component
 @RequiredArgsConstructor

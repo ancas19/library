@@ -1,6 +1,5 @@
 package co.com.ancas.request;
 
-import co.com.ancas.models.enums.TypeSearch;
 import co.com.ancas.models.utils.Constants;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.validation.constraints.NotEmpty;

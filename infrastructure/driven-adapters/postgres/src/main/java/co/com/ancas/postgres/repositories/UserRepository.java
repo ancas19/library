@@ -3,7 +3,6 @@ package co.com.ancas.postgres.repositories;
 import co.com.ancas.models.model.CurrentUserInformation;
 import co.com.ancas.models.model.UserInformation;
 import co.com.ancas.models.model.UserMembershipInfo;
-import co.com.ancas.models.utils.Mapper;
 import co.com.ancas.postgres.entities.UserEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -150,5 +149,26 @@ public interface UserRepository extends JpaRepository<UserEntity, Long> {
            WHERE u.username = :username
            """
     )
-    boolean findChangePasswordByUsername(String username);
+    boolean findChangePasswordByUsername(@Param("username")String username);
+
+    @Query(
+           """
+           SELECT p.email
+           FROM UserEntity u
+           INNER JOIN PeopleEntity p ON p.id = u.personId
+           WHERE u.username = :username
+           """
+    )
+    String findEmailByUser(@Param("username") String username);
+
+    @Query(
+           """
+           SELECT COUNT(u)
+           FROM UserEntity u
+           INNER JOIN MembershipEntity m ON u.membershipId = m.id
+           WHERE u.id = :id
+           AND (m.membershipType = 'EMPLOYEE' OR m.membershipType = 'ADMIN')
+           """
+    )
+    Integer verifyEmployee(Long id);
 }

@@ -1,6 +1,5 @@
 package co.com.ancas.response;
 
-import co.com.ancas.models.model.LoanReturnResult;
 import lombok.*;
 
 import java.io.Serializable;

@@ -86,4 +86,15 @@ public class UserRepositoryAdapter implements UserRepositoryPort {
     public boolean findChangePasswordByUsername(String username) {
         return this.userRepository.findChangePasswordByUsername(username);
     }
+
+    @Override
+    public String findEmailByUser(String username) {
+        return this.userRepository.findEmailByUser(username);
+    }
+
+    @Override
+    public boolean verifyEmployee(Long id) {
+        Integer quantity= this.userRepository.verifyEmployee(id);
+        return quantity>0;
+    }
 }
