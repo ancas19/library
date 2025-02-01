@@ -52,6 +52,6 @@ class UpdateAuthorImageAdapterTest {
         //Act
         AuthorInformation authorInformation = updateAuthorImageAdapter.execute(imageUpload);
         //Assert
-        assertDoesNotThrow(() -> updateAuthorImageAdapter.execute(imageUpload));
+        assertNotNull(authorInformation);
     }
 }
