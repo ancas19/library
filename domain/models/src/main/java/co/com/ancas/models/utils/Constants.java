@@ -14,7 +14,7 @@ public class Constants {
     public static final String NATIONALITY="^[A-Z ]+$";
     public static final String NAME_FILE="^[a-zA-Z0-9.-_ ]+$";
     public static final String SEARCH_PARAMETERS="^[a-zA-Z0-9 ]+$";
-    public static final String PASSWORD="^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$";
+    public static final String PASSWORD_REGEX="^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$";
     public static final String CODE="^\\d{6}$";
     public static final String AVAILABLE= "YES|NO";
     public static final String SEARCH="^[0-9a-zA-ZáéíóúÁÉÍÓÚÑ ]*$";

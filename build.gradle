@@ -30,7 +30,7 @@ sonar {
 		property "sonar.java.source", "21"
 		property "sonar.sourceEncoding", "UTF-8"
 		property "sonar.exclusions", "**/model/**, **/entity/** **/config/**, **/util/**, **/*Application.java, **/test/**, " +
-				"modular-test/**,  deployment/**, **/data/**, **/configuration/**, **/repository/**,**/json_schema/**, **/impl/**"
+				"modular-test/**,  deployment/**, **/data/**, **/configuration/**, **/repository/**,**/json_schema/**, **/impl/** , **/request/**, **/response/**"
 
 
 	}

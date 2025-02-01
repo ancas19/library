@@ -18,10 +18,10 @@ public class ChangePasswordRequest {
     private String username;
     @NotNull(message = Constants.PASSWORD_REQUIRED)
     @NotEmpty(message =  Constants.PASSWORD_REQUIRED)
-    @Pattern(regexp = Constants.PASSWORD, message = Constants.PASSWORD_INVALID)
+    @Pattern(regexp = Constants.PASSWORD_REGEX, message = Constants.PASSWORD_INVALID)
     private String password;
     @NotNull(message = Constants.CONFIRM_PASSWORD_REQUIRED)
     @NotEmpty(message = Constants.CONFIRM_PASSWORD_REQUIRED)
-    @Pattern(regexp = Constants.PASSWORD, message = Constants.PASSWORD_INVALID)
+    @Pattern(regexp = Constants.PASSWORD_REGEX, message = Constants.PASSWORD_INVALID)
     private String confirmPassword;
 }
