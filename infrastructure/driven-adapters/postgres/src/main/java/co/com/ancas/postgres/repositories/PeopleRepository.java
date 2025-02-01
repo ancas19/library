@@ -48,7 +48,8 @@ public interface PeopleRepository extends JpaRepository<PeopleEntity,Long> {
                     WHERE i.id=p.profileImage
                 ),
                 u.username,
-                p.status
+                p.status,
+                u.id
             )
             FROM PeopleEntity p
             INNER JOIN UserEntity u ON p.id = u.personId
