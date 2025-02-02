@@ -2,6 +2,7 @@ package co.com.ancas.uses_cases.user;
 
 import co.com.ancas.models.enums.Constants;
 import co.com.ancas.models.enums.Messages;
+import co.com.ancas.models.exceptions.BadRequestException;
 import co.com.ancas.models.model.Email;
 import co.com.ancas.models.model.Membership;
 import co.com.ancas.models.model.User;
@@ -14,7 +15,6 @@ import co.com.ancas.uses_cases.membership.FindMembershipByIdAdapter;
 import jakarta.mail.MessagingException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.coyote.BadRequestException;
 import org.springframework.stereotype.Component;
 
 import java.io.IOException;

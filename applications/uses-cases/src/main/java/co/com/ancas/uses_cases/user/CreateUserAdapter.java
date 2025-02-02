@@ -23,13 +23,13 @@ import static co.com.ancas.models.enums.Constants.*;
 @RequiredArgsConstructor
 @Component
 public class CreateUserAdapter implements IUseCaseVoid<UserCreation> {
-    private final FindIdRoleByNameAdapter findIdRoleByNameAdapter;
-    private final FindIdMembershipByNameAdapter findIdMembershipByNameAdapter;
-    private final UserRepositoryPort userRepositoryport;
     private final FindEmailTemplateBySubjectAdapter findEmailTemplateBySubjectAdapter;
-    private final EmailRepositoryPort emailRepositoryPort;
-    private final BCryptPasswordEncoder passwordEncoder;
+    private final FindIdMembershipByNameAdapter findIdMembershipByNameAdapter;
     private final PasswordGeneratorAdapter passwordGeneratorAdapter;
+    private final FindIdRoleByNameAdapter findIdRoleByNameAdapter;
+    private final EmailRepositoryPort emailRepositoryPort;
+    private final UserRepositoryPort userRepositoryport;
+    private final BCryptPasswordEncoder passwordEncoder;
 
     @Override
     public void execute(UserCreation userCreation) throws MessagingException, IOException {

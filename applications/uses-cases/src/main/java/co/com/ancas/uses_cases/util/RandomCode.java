@@ -6,7 +6,6 @@ import java.util.Random;
 public class RandomCode {
     private RandomCode() {
     }
-
     private static final Random random = new Random();
 
     public static String generateRandomCode() {
