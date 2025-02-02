@@ -49,6 +49,9 @@ class UpdateBookInformationAdapterTest {
         when(findBookByIdAdapter.execute(bookUpdate.getId())).thenReturn(bookFound);
         when(bookRepositoryPort.existsByIsbnAndIdNot(bookUpdate.getIsbn(), bookFound.getId())).thenReturn(false);
         when(bookRepositoryPort.existsByTitleAndIdNot(bookUpdate.getTitle(), bookFound.getId())).thenReturn(false);
+        when(findGenreByValueAdapter.execute(bookUpdate.getGenre())).thenReturn(TestMock.genre());
+        when(findAuthorByFullNameAdapter.execute(bookUpdate.getAuthor())).thenReturn(TestMock.author());
+        when(findBookInformationByIdAdapter.execute(bookFound.getId())).thenReturn(TestMock.bookInformation());
         //Act
         BookInformation result = updateBookInformationAdapter.execute(bookUpdate);
         //Assert
