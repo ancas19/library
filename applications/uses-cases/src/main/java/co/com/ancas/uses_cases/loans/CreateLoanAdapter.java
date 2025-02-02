@@ -59,7 +59,7 @@ public class CreateLoanAdapter implements IUseCase<LoanCreation,List<LoanDetails
         templateFound=populateTemplate(templateFound, loansCreated);
         this.emailRepositoryPort.sendEmail(
                 Email.builder()
-                        .recipient(userMembershipInfoFound.getEmail())
+                        .recipient(List.of(userMembershipInfoFound.getEmail()))
                         .subject(Constants.BOOKS_LOAN.getConstant())
                         .body(templateFound)
                         .build()

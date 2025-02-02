@@ -25,7 +25,7 @@ public class CodeRepositoryAdapter implements CodeRepositoryPort {
 
     @Override
     public void save(Code code) {
-        String key=CODE.getConstant();
+        String key=CODE.getConstant().formatted(code.getEmail());
         valueOperations.set(key, code);
         redisTemplate.expire(key, 10, TimeUnit.MINUTES);
     }

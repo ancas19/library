@@ -19,6 +19,50 @@ VALUES(2, 'EMPLOYEE', '2024-10-18 23:04:09.887', 'SYSTEM', NULL, '2024-10-18 23:
 INSERT INTO public.roles
 (id, role_name, created_at, user_created, updated_user, updated_at)
 VALUES(3, 'ADMIN', '2024-10-18 23:04:09.902', 'SYSTEM', NULL, '2024-10-18 23:04:09.902');
+---- genres
+
+INSERT INTO GENRES (VALUE, USER_CREATED)
+VALUES ('SCIENCE FICTION', 'ADMIN');
+
+INSERT INTO GENRES (VALUE, USER_CREATED)
+VALUES ('FANTASY', 'ADMIN');
+
+INSERT INTO GENRES (VALUE, USER_CREATED)
+VALUES ('MYSTERY', 'ADMIN');
+
+INSERT INTO GENRES (VALUE, USER_CREATED)
+VALUES ('ROMANCE', 'ADMIN');
+
+INSERT INTO GENRES (VALUE, USER_CREATED)
+VALUES ('THRILLER', 'ADMIN');
+
+----- email template
+
+
+INSERT INTO public.email_templates
+(subject, body)
+VALUES('ERROR_FILE', '<h2 style="color: #e74c3c; text-align: center;">Error Processing File</h2>
+    <p style="color: #555; font-size: 16px; text-align: center;">
+        We''re sorry, but there was an issue while processing your file. Please try again or contact support if the problem persists.
+    </p>
+    <p style="font-size: 16px; text-align: center;">
+        <strong>Error Details:</strong> <span th:text="${errorDetails}">Error details go here...</span>
+    </p>');
+
+INSERT INTO public.email_templates
+(subject, body)
+VALUES('FILE_CORRECT', '  <h2 style="color: #2ecc71; text-align: center;">File Processed Successfully</h2>
+    <p style="color: #555; font-size: 16px; text-align: center;">
+        Your file has been successfully processed. You can now proceed with the next steps.
+    </p>');
+
+INSERT INTO public.email_templates
+(subject, body)
+VALUES('MEMBERSHIP', '<div class="content">
+            <h2>Congratulations, <span>:user</span>!</h2>
+            <p>Your library membership has been successfully upgraded to <strong>:membership</strong>.</p>
+            <p>Enjoy exclusive benefits, including extended borrowing periods, priority reservations, and access to premium collections.</p>
+        </div>');
 
 
 INSERT INTO email_templates (subject, body)
@@ -83,18 +127,3 @@ VALUES( 'UNBLOCK_USER', '<div class="content" style="margin-bottom: 20px; line-h
     </p>
     <p style="margin: 10px 0;">Thank you for being a part of our community!</p>
 </div>');
-
-INSERT INTO GENRES (VALUE, USER_CREATED)
-VALUES ('SCIENCE FICTION', 'ADMIN');
-
-INSERT INTO GENRES (VALUE, USER_CREATED)
-VALUES ('FANTASY', 'ADMIN');
-
-INSERT INTO GENRES (VALUE, USER_CREATED)
-VALUES ('MYSTERY', 'ADMIN');
-
-INSERT INTO GENRES (VALUE, USER_CREATED)
-VALUES ('ROMANCE', 'ADMIN');
-
-INSERT INTO GENRES (VALUE, USER_CREATED)
-VALUES ('THRILLER', 'ADMIN');

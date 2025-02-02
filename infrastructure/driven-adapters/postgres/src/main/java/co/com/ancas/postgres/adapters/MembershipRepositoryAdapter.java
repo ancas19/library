@@ -1,6 +1,8 @@
 package co.com.ancas.postgres.adapters;
 
+import co.com.ancas.models.model.Membership;
 import co.com.ancas.models.repositories.MembershipRepositoryPort;
+import co.com.ancas.models.utils.Mapper;
 import co.com.ancas.postgres.repositories.MembershipRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -14,6 +16,11 @@ public class MembershipRepositoryAdapter implements MembershipRepositoryPort {
     @Override
     public Long findIdMembershipByName(String membershipName) {
         return this.membershipRepository.findIdMembershipByName(membershipName);
+    }
+
+    @Override
+    public Optional<Membership> findMembershipById(Long id) {
+        return this.membershipRepository.findById(id).map(membership -> Mapper.map(membership, Membership.class));
     }
 
 

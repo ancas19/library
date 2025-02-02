@@ -1,5 +1,6 @@
 package co.com.ancas.request;
 
+import co.com.ancas.models.utils.Constants;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.validation.constraints.*;
 import lombok.*;
@@ -15,30 +16,34 @@ public class BookUpdateRequest {
     @NotNull
     @Positive
     private Long id;
-    @NotNull(message = "Title is required")
-    @NotEmpty(message = "Title is required")
-    @Pattern(regexp = "^[0-9A-ZÁÉÍÓÚÑ ]+$", message = "Title must have only letters and spaces")
+    @NotNull(message = Constants.TITLE_REQUIRED)
+    @NotEmpty(message = Constants.TITLE_REQUIRED)
+    @Pattern(regexp = Constants.LETTERS_AND_NUMBERS, message = Constants.TITLE_INVALID)
     private String title;
     @NotNull
     @NotEmpty
-    @Pattern(regexp = "^(?:\\d{9}X|\\d{10}|\\d{13})$", message = "ISBN must have 10 or 13 digits")
+    @Pattern(regexp =Constants.ISBN, message = Constants.ISBN_INVALID)
     private String isbn;
-    @NotNull(message = "Name is required")
-    @NotEmpty(message = "Name is required")
-    @Pattern(regexp = "^[A-ZÁÉÍÓÚÑ ]+$", message = "Name must have only letters and spaces")
-    private String author;
     @NotNull
     @Past
     @JsonFormat(pattern = "dd/MM/yyyy", shape = JsonFormat.Shape.STRING, timezone = "America/Bogota")
     private LocalDate publishDate;
+    @NotNull(message = Constants.AUTHOR_REQUIRED)
+    @NotEmpty(message = Constants.AUTHOR_REQUIRED)
+    @Pattern(regexp = Constants.LETTERS, message = Constants.AUTHOR_INVALID)
+    private String author;
     @NotNull
-    @Pattern(regexp = "^[A-ZÁÉÍÓÚÑ ]+$", message = "Genre must have only letters and spaces")
+    @Pattern(regexp =Constants.LETTERS, message = Constants.GENRE_INVALID)
     private String genre;
-    @NotNull
+    @NotNull()
     @PositiveOrZero
     private Integer availableCopies;
     @NotNull
     @NotEmpty
-    @Pattern(regexp = "^[a-zA-ZÁÉÍÓÚÑáéíóúñ0-9., @()_-]+$", message = "Bio must have only letters, spaces and special characters")
+    @Pattern(regexp =Constants.AVAILABLE, message = Constants.AVAILABLE_INVALID)
+    private String available;
+    @NotNull
+    @NotEmpty
+    @Pattern(regexp = Constants.LETTERS_AND_SPECIAL_CHARACTERS, message = Constants.BLURB_INVALID)
     private String blurb;
 }

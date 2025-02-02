@@ -2,6 +2,7 @@ package co.com.ancas.redis.config;
 
 import co.com.ancas.models.model.Attempt;
 import co.com.ancas.models.model.Code;
+import co.com.ancas.models.model.TokenInformation;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.redis.connection.RedisConnectionFactory;
@@ -31,5 +32,12 @@ public class RedisConfig {
         return template;
     }
 
-
+    @Bean
+    public RedisTemplate<String, TokenInformation> redisTemplateTokerInformation(RedisConnectionFactory connectionFactory) {
+        RedisTemplate<String, TokenInformation> template = new RedisTemplate<>();
+        template.setConnectionFactory(connectionFactory);
+        template.setKeySerializer(new StringRedisSerializer());
+        template.setValueSerializer(new Jackson2JsonRedisSerializer<>(TokenInformation.class));
+        return template;
+    }
 }

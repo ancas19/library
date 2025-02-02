@@ -42,6 +42,15 @@ public enum Messages {
     MESSAGE_ERROR_EXPIRED_LOANS("Error, the user has expired loans"),
     MESSAGE_ERROR_LOAN_ALREADY_RETURNED("Error, the loan has already been returned"),
     MESSAGE_ERROR_TYPE_SEARCH_NOT_FOUND("Error, type search not found"),
+    MESSAGE_ERROR_RECOVERY_PASSWORD("Error, trying to recover password"),
+    MESSAGE_ERROR_PASSWORDS_NOT_MATCH("Error, trying to recover password"),
+    MESSAGE_ERROR_FINE_GREATER_THAN_REAL("Fee sent is greater(%s) than the real fee(%s)"),
+    MESSAGE_ERROR_DOWNLOAD_IMAGE("Error downloading image"),
+    MESSAGE_ERROR_AUTHOR_DATA_INVALID("Data hasn't correct lenght"),
+    MESSAGE_ERROR_FILE_PROCESSING("Error processing file"),
+    MESSAGE_MEMBERSHIP_NOT_FOUND("Membership with id(%S) not found"),
+    MESSAGE_ERROR_UPDATE_MEMBERSHIP("It is impossible to update the membership"),
+
 
     //Success messages
     MESSAGE_PEOPLE_FULL_INFOMRATION("Person found successfully"),
@@ -71,7 +80,11 @@ public enum Messages {
     MESSAGE_LOAN_CREATED("Loan created successfully"),
     MESSAGE_LOANS_FOUND("Loans found successfully"),
     MESSAGE_VALUE_TO_PAY_CALCULATED("Value to pay calculated successfully"),
-    MESSAGE_LOAN_RETURNED("Loan returned successfully"),;
+    MESSAGE_LOAN_RETURNED("Loan returned successfully"),
+    MESSAGE_PASSWORD_CHANGED("Password changed successfully"),
+    MESSAGE_AUTHOR_FILES_UPLOADED("Authors uploaded by file successfully"),
+    MESSAGE_BOOK_FILES_UPLOADED("Books uploaded by file successfully"),
+    MESSAGE_USER_MEMBERSHIP_UPDATED("User membership updated successfully"),;
     private final String message;
 
     Messages(String message) {

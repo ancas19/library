@@ -1,5 +1,6 @@
 package co.com.ancas.request;
 
+import co.com.ancas.models.utils.Constants;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
@@ -15,7 +16,7 @@ import java.util.List;
 public class LoanRequest {
     @NotNull
     @NotEmpty
-    @Pattern(regexp = "^[0-9]{10,15}$", message = "DNI must have beetween 10 and 15 digits")
+    @Pattern(regexp = Constants.DNI, message = Constants.DNI_INVALID)
     private String dni;
     @NotNull
     private List<LoanInfoRequest> loanInfo;

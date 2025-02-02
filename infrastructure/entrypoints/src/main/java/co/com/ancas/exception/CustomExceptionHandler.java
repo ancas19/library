@@ -11,6 +11,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.InternalAuthenticationServiceException;
+import org.springframework.security.authorization.AuthorizationDeniedException;
 import org.springframework.validation.FieldError;
 import org.springframework.web.HttpRequestMethodNotSupportedException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
@@ -24,6 +25,8 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.Map;
+
+import static co.com.ancas.models.enums.Messages.MESSAGE_GENERAL_FORBIDDEN;
 
 @Slf4j
 @RestControllerAdvice
@@ -89,7 +92,7 @@ public class CustomExceptionHandler {
         return ResponseEntity.status(HttpStatus.FORBIDDEN).
                 body(
                         GeneralResponse.<ErrorResponse>builder()
-                                .message(Messages.MESSAGE_GENERAL_FORBIDDEN.getMessage())
+                                .message(MESSAGE_GENERAL_FORBIDDEN.getMessage())
                                 .data(
                                         ErrorResponse.builder()
                                                 .timeStamp(LocalDate.now())
@@ -144,7 +147,25 @@ public class CustomExceptionHandler {
         return ResponseEntity.status(HttpStatus.UNAUTHORIZED).
                 body(
                         GeneralResponse.<ErrorResponse>builder()
-                                .message("Internal Authentication Service Exception")
+                                .message(MESSAGE_GENERAL_FORBIDDEN.getMessage())
+                                .data(
+                                        ErrorResponse.builder()
+                                                .timeStamp(LocalDate.now())
+                                                .details(request.getDescription(false))
+                                                .message(ex.getMessage())
+                                                .build()
+                                )
+                                .build()
+                );
+    }
+
+    @ExceptionHandler(AuthorizationDeniedException.class)
+    public ResponseEntity<GeneralResponse<ErrorResponse>> handleAuthorizationDeniedException(AuthorizationDeniedException ex, WebRequest request) {
+        log.error("Authorization Denied Exception: {}", ex.getMessage(),ex);
+        return ResponseEntity.status(HttpStatus.FORBIDDEN).
+                body(
+                        GeneralResponse.<ErrorResponse>builder()
+                                .message(MESSAGE_GENERAL_FORBIDDEN.getMessage())
                                 .data(
                                         ErrorResponse.builder()
                                                 .timeStamp(LocalDate.now())

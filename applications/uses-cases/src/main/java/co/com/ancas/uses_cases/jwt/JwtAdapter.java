@@ -1,5 +1,6 @@
 package co.com.ancas.uses_cases.jwt;
 
+import co.com.ancas.models.model.TokenInformation;
 import co.com.ancas.models.repositories.JwtRepositoryPort;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
@@ -24,7 +25,7 @@ public class JwtAdapter {
 
     private final JwtRepositoryPort jwtRepositoryPort;
 
-    public void saveToken(String token, String data) {
+    public void saveToken(String token, TokenInformation data) {
         jwtRepositoryPort.save(token, data);
     }
 
@@ -34,6 +35,9 @@ public class JwtAdapter {
 
     public boolean verifyToken(String token) {
         return Objects.isNull(jwtRepositoryPort.find(token));
+    }
+    public TokenInformation getTokenInformation(String token) {
+        return jwtRepositoryPort.find(token);
     }
     public String generateToken(UserDetails userDetails ) {
         Date issuedAt = new Date(System.currentTimeMillis());

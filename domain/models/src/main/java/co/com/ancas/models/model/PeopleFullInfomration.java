@@ -19,4 +19,5 @@ public class PeopleFullInfomration {
     private String profileImage;
     private String username;
     private String status;
+    private Long userId;
 }

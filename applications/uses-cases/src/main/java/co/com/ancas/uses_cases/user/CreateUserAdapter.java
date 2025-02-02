@@ -16,6 +16,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Component;
 
 import java.io.IOException;
+import java.util.List;
 
 import static co.com.ancas.models.enums.Constants.*;
 
@@ -53,7 +54,7 @@ public class CreateUserAdapter implements IUseCaseVoid<UserCreation> {
         templateFound=templateFound.replace(":password",password);
         this.emailRepositoryPort.sendEmail(
                 Email.builder()
-                        .recipient(userCreation.getEmail())
+                        .recipient(List.of(userCreation.getEmail()))
                         .subject(SUBJECT_USER_AND_PASSWORD.getConstant())
                         .body(templateFound)
                         .build()

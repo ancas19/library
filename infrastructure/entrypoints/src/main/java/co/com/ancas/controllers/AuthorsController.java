@@ -1,10 +1,7 @@
 package co.com.ancas.controllers;
 
 import co.com.ancas.models.enums.Messages;
-import co.com.ancas.request.AuthorCreationRequest;
-import co.com.ancas.request.AuthorInformationRequest;
-import co.com.ancas.request.ImageUploadRequest;
-import co.com.ancas.request.SearchParameterRequest;
+import co.com.ancas.request.*;
 import co.com.ancas.response.AuthorInformationResponse;
 import co.com.ancas.response.GeneralResponse;
 import co.com.ancas.response.PaginationResponse;
@@ -15,6 +12,7 @@ import jakarta.mail.MessagingException;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
@@ -31,6 +29,7 @@ public class AuthorsController {
 
 
     @PostMapping()
+    @PreAuthorize("hasRole('ADMIN','EMPLOYEE')")
     @Operation(summary = "Create a new author")
     public ResponseEntity<GeneralResponse<AuthorInformationResponse>> createAuthpr(
             @Valid @RequestBody AuthorCreationRequest authorCreationRequest) throws MessagingException, IOException {
@@ -58,6 +57,7 @@ public class AuthorsController {
     }
 
     @PutMapping("/information")
+    @PreAuthorize("hasRole('ADMIN','EMPLOYEE')")
     @Operation(summary = "Update author information")
     public ResponseEntity<GeneralResponse<AuthorInformationResponse>> updateAuthor(
             @Valid @RequestBody AuthorInformationRequest authorInformationRequest
@@ -71,6 +71,7 @@ public class AuthorsController {
     }
 
     @PutMapping("/image")
+    @PreAuthorize("hasRole('ADMIN')")
     @Operation(summary = "Update author image")
     public ResponseEntity<GeneralResponse<AuthorInformationResponse>> updateImageAuthor(
             @Valid @RequestBody ImageUploadRequest imageUploadRequest
@@ -91,6 +92,21 @@ public class AuthorsController {
                 GeneralResponse.<AuthorInformationResponse>builder()
                         .message(Messages.MESSAGE_AUTHOR_FOUND.getMessage())
                         .data(authorAppService.findById(id))
+                        .build()
+        );
+    }
+
+    @PostMapping("/files")
+    @PreAuthorize("hasRole('ADMIN')")
+    @Operation(summary = "Upload author files")
+    public ResponseEntity<GeneralResponse<String>> uploadFiles(
+            @Valid @RequestBody FileRequest  fileRequest
+    ) throws MessagingException, IOException {
+        authorAppService.uploadAuthorsByFile(fileRequest);
+        return ResponseEntity.ok(
+                GeneralResponse.<String>builder()
+                        .message(Messages.MESSAGE_AUTHOR_FILES_UPLOADED.getMessage())
+                        .data(Messages.MESSAGE_AUTHOR_FILES_UPLOADED.getMessage())
                         .build()
         );
     }

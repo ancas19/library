@@ -1,4 +1,5 @@
 package co.com.ancas.request;
+import co.com.ancas.models.utils.Constants;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
@@ -12,11 +13,11 @@ import java.io.Serializable;
 @Getter
 @Setter
 public class PeopleSearchCriteriaRequest implements Serializable {
-    @NotNull(message = "Search is required")
-    @Pattern(regexp = "^[0-9a-zA-ZáéíóúÁÉÍÓÚÑ ]*$", message = "Search must have only letters, digits and spaces")
+    @NotNull(message =Constants.SEARCH_REQUIRED)
+    @Pattern(regexp =  Constants.SEARCH, message = Constants.SEARCH_INVALID)
     private String search;
-    @NotNull(message = "Role is required")
-    @NotEmpty(message = "Role is required")
-    @Pattern(regexp = "ADMIN|USER|EMPLOYEE", message = "Role must be 'ADMIN', 'EMPLOYEE' or 'USER'")
+    @NotNull(message = Constants.ROLE_REQUIRED)
+    @NotEmpty(message = Constants.ROLE_REQUIRED)
+    @Pattern(regexp = Constants.ROLE, message = Constants.ROLE_INVALID)
     private String role;
 }

@@ -1,5 +1,6 @@
 package co.com.ancas.request;
 
+import co.com.ancas.models.utils.Constants;
 import jakarta.validation.constraints.*;
 import lombok.*;
 
@@ -9,21 +10,22 @@ import lombok.*;
 @Getter
 @Setter
 public class PeopleInformationRequest {
-    @NotNull(message = "Id is required")
-    @Positive(message = "Id is required and must be positive")
+    @NotNull()
+    @Positive()
     private Long id;
-    @NotNull(message = "DNI is required")
-    @NotEmpty(message = "DNI is required")
-    @Pattern(regexp = "^[0-9]{10,15}$", message = "DNI must have beetween 10 and 15 digits")
+    @NotNull(message = Constants.DNI_REQUIRED)
+    @NotEmpty(message = Constants.DNI_REQUIRED)
+    @Pattern(regexp = Constants.DNI, message = Constants.DNI_INVALID)
     private String dni;
-    @NotNull(message = "Name is required")
-    @NotEmpty(message = "Name is required")
-    @Pattern(regexp = "^[A-ZÁÉÍÓÚÑ ]+$", message = "Name must have only letters and spaces")
+    @NotNull(message = Constants.NAME_REQUIRED)
+    @NotEmpty(message = Constants.NAME_REQUIRED)
+    @Pattern(regexp = Constants.LETTERS, message = Constants.NAME_INVALID)
     private String firstName;
-    @NotNull(message = "Last name is required")
-    @NotEmpty(message = "Last name is required")
-    @Pattern(regexp = "^[A-ZÁÉÍÓÚÑ ]+$", message = "Last name must have only letters and spaces")
+    @NotNull(message = Constants.LAST_NAME_REQUIRED)
+    @NotEmpty(message = Constants.LAST_NAME_REQUIRED)
+    @Pattern(regexp = Constants.LETTERS, message = Constants.LAST_NAME_INVALID)
     private String lastName;
-    @Pattern(regexp = "^\\+[1-9][0-9]{1,3}[0-9]{6,14}$", message = "Phone must have 10 digits")
+    @NotNull(message = Constants.PHONE_REQUIRED)
+    @Pattern(regexp = Constants.PHONE, message = Constants.PHONE_INVALID)
     private String phone;
 }

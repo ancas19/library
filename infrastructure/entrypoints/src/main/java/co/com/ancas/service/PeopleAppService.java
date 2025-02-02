@@ -7,6 +7,7 @@ import co.com.ancas.response.PaginationResponse;
 import co.com.ancas.response.PeopleFullInfomrationResponse;
 import co.com.ancas.response.PeopleResponse;
 import co.com.ancas.uses_cases.people.*;
+import co.com.ancas.uses_cases.user.RecoveryPasswordAdapter;
 import co.com.ancas.utils.Pagination;
 import jakarta.mail.MessagingException;
 import lombok.RequiredArgsConstructor;
@@ -27,6 +28,7 @@ public class PeopleAppService {
     private final SendCodeToUnblockPersonAdapter sendCodeToUnblockPersonAdapter;
     private final UnblockPeopleAdapter unblockPeopleAdapter;
     private final CurrentUserAppService currentUserAppService;
+    private final RecoveryPasswordAdapter recoveryPasswordAdapter;
 
     @Transactional(value = "libraryTransactionManager",rollbackFor = Exception.class)
     public PeopleResponse createPeople(PeopleRequest request) throws MessagingException, IOException {
@@ -43,24 +45,25 @@ public class PeopleAppService {
 
     @Transactional(value = "libraryTransactionManager",rollbackFor = Exception.class ,readOnly = true)
     public PeopleFullInfomrationResponse findById(Long id) throws MessagingException {
-        currentUserAppService.verifyCurrentUserPersonId(id);
+        currentUserAppService.verifyCurrentUserPersonIdAndRole(id);
         return Mapper.map(findPeopleByIdAdapter.execute(id), PeopleFullInfomrationResponse.class);
     }
 
     @Transactional(value = "libraryTransactionManager",rollbackFor = Exception.class)
     public void uploadProfileImage(ImageUploadRequest imageUpload) throws MessagingException, IOException {
+        currentUserAppService.verifyCurrentPersonId(imageUpload.getId());
         this.uploadProfileImageAdapter.execute(Mapper.map(imageUpload, ImageUpload.class));
     }
 
     @Transactional(value = "libraryTransactionManager",rollbackFor = Exception.class)
     public PeopleResponse updatePeople(PeopleInformationRequest request) throws MessagingException, IOException {
-        currentUserAppService.verifyCurrentUserPersonId(request.getId());
+        currentUserAppService.verifyCurrentUserPersonIdAndRole(request.getId());
         return Mapper.map(updatePersonAdapter.execute(Mapper.map(request, People.class)), PeopleResponse.class);
     }
 
     @Transactional(value = "libraryTransactionManager",rollbackFor = Exception.class)
     public void blockPeople(Long id) throws MessagingException, IOException {
-        currentUserAppService.verifyCurrentUserPersonId(id);
+        currentUserAppService.verifyCurrentUserPersonIdAndRole(id);
         changeStatusPersonAdapter.execute(id);
     }
 
@@ -72,5 +75,10 @@ public class PeopleAppService {
     @Transactional(value = "libraryTransactionManager",rollbackFor = Exception.class)
     public void unblockPeople(PersonCodeRequest personCodeRequest) throws MessagingException, IOException {
         this.unblockPeopleAdapter.execute(Mapper.map(personCodeRequest, PersonCode.class));
+    }
+
+    @Transactional(value = "libraryTransactionManager",rollbackFor = Exception.class)
+    public void recoveryPassword(PasswordRecoveryRequest passwordRecoveryRequest) throws MessagingException, IOException {
+        this.recoveryPasswordAdapter.execute(Mapper.map(passwordRecoveryRequest, PasswordRecovery.class));
     }
 }

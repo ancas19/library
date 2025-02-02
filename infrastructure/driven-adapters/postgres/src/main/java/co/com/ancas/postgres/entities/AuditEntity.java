@@ -1,5 +1,6 @@
 package co.com.ancas.postgres.entities;
 
+import co.com.ancas.models.utils.Constants;
 import jakarta.persistence.Column;
 import jakarta.persistence.MappedSuperclass;
 import jakarta.persistence.PrePersist;
@@ -8,8 +9,10 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.springframework.security.core.context.SecurityContextHolder;
 
 import java.time.LocalDateTime;
+import java.util.Objects;
 
 @Getter
 @Setter
@@ -31,13 +34,15 @@ public class AuditEntity {
 
     @PreUpdate
     public void preUpdateFunction(){
+        String user =  SecurityContextHolder.getContext().getAuthentication().getName();
         this.updatedAt = LocalDateTime.now();
-        this.userUpdated ="SYSTEM";
+        this.userUpdated = Objects.isNull(user)? Constants.SYSTEM: user;
     }
 
     @PrePersist
     public void prePersistFunction(){
+        String user =  SecurityContextHolder.getContext().getAuthentication().getName();
         this.createdAt = LocalDateTime.now();
-        this.userCreated ="SYSTEM";
+        this.userCreated =Objects.isNull(user)? Constants.SYSTEM: user;
     }
 }

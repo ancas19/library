@@ -14,6 +14,7 @@ import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
@@ -30,6 +31,7 @@ public class PeopleController {
     private final PeopleAppService peopleService;
 
     @PostMapping("/all")
+    @PreAuthorize("hasRole('ADMIN')")
     @Operation(summary = "Find all People", description = "Endpoint to find all People")
     public ResponseEntity<GeneralResponse<PaginationResponse<PeopleResponse>>> findAll(
             @Valid @RequestBody PeopleSearchCriteriaRequest request,
@@ -45,7 +47,7 @@ public class PeopleController {
                                 .build()
                 );
     }
-    //TODO: Determinate rolwe to update all people or only myself
+
     @GetMapping("/{id}")
     @Operation(summary = "Find People by id", description = "Endpoint to find People by id")
     public ResponseEntity<GeneralResponse<PeopleFullInfomrationResponse>> findById(
@@ -61,7 +63,7 @@ public class PeopleController {
                 );
     }
 
-    //@PreAuthorize("hasRole('ADMIN')")
+
     @PatchMapping
     @Operation(summary = "Update People", description = "Endpoint to update People")
     public ResponseEntity<GeneralResponse<PeopleResponse>> updatePeople(
@@ -96,6 +98,7 @@ public class PeopleController {
 
 
     @DeleteMapping("/status/{id}")
+    @PreAuthorize("hasRole('ADMIN')")
     @Operation(summary = "Block a person", description = "Endpoint to delete block a person")
     public ResponseEntity<GeneralResponse<String>> blockPeople(@PathVariable Long id) throws MessagingException, IOException {
         peopleService.blockPeople(id);

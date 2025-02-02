@@ -3,12 +3,11 @@ package co.com.ancas.uses_cases.loans;
 import co.com.ancas.models.enums.Constants;
 import co.com.ancas.models.enums.Messages;
 import co.com.ancas.models.exceptions.BadRequestException;
-import co.com.ancas.models.exceptions.ForbiddenException;
 import co.com.ancas.models.exceptions.NotFoundException;
 import co.com.ancas.models.model.*;
 import co.com.ancas.models.repositories.LoanRepositoryPort;
+import co.com.ancas.uses_cases.books.ChangeCopiesAvailablesPerBookAdapter;
 import co.com.ancas.uses_cases.interfaces.IUseCase;
-import co.com.ancas.uses_cases.user.CurrentUserAdapter;
 import co.com.ancas.uses_cases.user.FindUserAndMembershipInfoByUserIdAdapter;
 import jakarta.mail.MessagingException;
 import lombok.RequiredArgsConstructor;
@@ -24,8 +23,9 @@ import static co.com.ancas.models.enums.Constants.YES;
 @Component
 @RequiredArgsConstructor
 public class ReturnLoanAdapter implements IUseCase<List<LoanReturn>, LoanReturnResult> {
-    private final CurrentUserAdapter currentUserAdapter;
     private final LoanRepositoryPort loanRepositoryPort;
+    private final VerifyUserIdDifferentAdapter verifyUserIdDifferentAdapter;
+    private final ChangeCopiesAvailablesPerBookAdapter changeCopiesAvailablesPerBookAdapter;
     private final FindUserAndMembershipInfoByUserIdAdapter findUserAndMembershipInfoByUserIdAdapter;
 
     @Override
@@ -34,9 +34,8 @@ public class ReturnLoanAdapter implements IUseCase<List<LoanReturn>, LoanReturnR
         if(loansFound.isEmpty() || loansFound.size()!=loanReturns.size()){
             throw new BadRequestException(Messages.MESSAGE_ERROR_LOANS_FOUND.getMessage());
         }
-        verifyUserIdDifferent(loansFound);
+        verifyUserIdDifferentAdapter.execute(loansFound);
         Long iduser = loansFound.getFirst().getUserId();
-        verifyCurrentUserId(iduser);
         UserMembershipInfo membershipInfo=findUserAndMembershipInfoByUserIdAdapter.execute(iduser);
         int totalDelayedDays=0;
         double totalFine=0.0;
@@ -47,6 +46,11 @@ public class ReturnLoanAdapter implements IUseCase<List<LoanReturn>, LoanReturnR
             totalDelayedDays += paid?loan.getDaysDelayed():0;
             totalFine += paid?loan.getFine():0.0;
             loanRepositoryPort.save(loan);
+            changeCopiesAvailablesPerBookAdapter.execute(AvailableCopiesUpdate.builder()
+                    .bookId(loan.getBookId())
+                    .copies(1)
+                    .action(Constants.INCREASE)
+                    .build());
         }
         return LoanReturnResult.builder()
                 .delayedDays(totalDelayedDays)
@@ -59,10 +63,12 @@ public class ReturnLoanAdapter implements IUseCase<List<LoanReturn>, LoanReturnR
         loan.setReturnDate(LocalDate.now());
         int delayedDays = calculateDelayedDays(loan, membershipInfo);
         loan.setDaysDelayed(delayedDays);
-
         double fine = membershipInfo.getDailyFine() * delayedDays;
-        loan.setFine(fine);
+        if(loanReturn.getFine()>(fine)){
+            throw new BadRequestException(Messages.MESSAGE_ERROR_FINE_GREATER_THAN_REAL.getMessage().formatted(loanReturn.getFine(),fine));
 
+        }
+        loan.setFine(fine);
         loan.setPaid(loanReturn.getFine().equals(fine) ? YES.getConstant() : NO.getConstant());
         loan.setComments(loanReturn.getComment());
     }
@@ -73,25 +79,6 @@ public class ReturnLoanAdapter implements IUseCase<List<LoanReturn>, LoanReturnR
         }
         int delayedDays= (int) (loan.getReturnDate().toEpochDay()-loan.getDueDate().toEpochDay());
         return delayedDays>userMembershipInfoFound.getGracePeriodDays()?delayedDays:0;
-    }
-
-    private void verifyUserIdDifferent(List<Loan> loansFound) {
-        Set<Long> userIds = new HashSet<>();
-        for (Loan loan : loansFound) {
-            if(Objects.nonNull(loan.getReturnDate())){
-                throw new BadRequestException(Messages.MESSAGE_ERROR_LOAN_ALREADY_RETURNED.getMessage());
-            }
-            userIds.add(loan.getUserId());
-        }
-        if (userIds.size() > 1) {
-            throw new BadRequestException(Messages.MESSAGE_LOAN_RETURN_MULTIPLE_USERS.getMessage());
-        }
-    }
-    public void verifyCurrentUserId(Long userId){
-        CurrentUserInformation currentUserInformationFound=currentUserAdapter.execute();
-        if(currentUserInformationFound.getRole().equalsIgnoreCase(Constants.USER.getConstant()) && !currentUserInformationFound.getUserId().equals(userId)){
-            throw new ForbiddenException(Messages.MESSAGE_GENERAL_FORBIDDEN.getMessage());
-        }
     }
 
     private LoanReturn findLoanReturn(List<LoanReturn> loans, Loan loan) {

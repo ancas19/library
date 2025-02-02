@@ -1,5 +1,6 @@
 package co.com.ancas.request;
 
+import co.com.ancas.models.utils.Constants;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Positive;
@@ -18,6 +19,6 @@ public class LoanReturnRequest {
     @NotNull
     @PositiveOrZero
     private Double fine;
-    @Pattern(regexp = "^[\\p{L}0-9.,:;!?()'\" \\t\\n\\-]+$\n", message = "Comment must be a valid string")
+    @Pattern(regexp = Constants.COMMENT, message = Constants.COMMENT_INVALID)
     private String comment;
 }

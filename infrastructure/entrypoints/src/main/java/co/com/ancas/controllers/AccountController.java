@@ -1,5 +1,6 @@
 package co.com.ancas.controllers;
 
+import co.com.ancas.request.PasswordRecoveryRequest;
 import co.com.ancas.request.PeopleRequest;
 import co.com.ancas.request.PersonAccessRequest;
 import co.com.ancas.request.PersonCodeRequest;
@@ -14,10 +15,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
 
@@ -47,7 +45,7 @@ public class AccountController {
                 );
     }
     @PostMapping("/code")
-    @Operation(summary = "Send code to unblock people", description = "Endpoint to send code to unblock people")
+    @Operation(summary = "Send code to unblock people or change password", description = "Endpoint to send code to unblock people")
     public ResponseEntity<GeneralResponse<String>> sendCodeToUnblockPeople(
             @Valid @RequestBody PersonAccessRequest personAccessRequest
     ) throws MessagingException, IOException {
@@ -74,6 +72,22 @@ public class AccountController {
                         GeneralResponse.<String>builder()
                                 .message(MESSAGE_PEOPLE_UNBLOCKED.getMessage())
                                 .data(MESSAGE_PEOPLE_UNBLOCKED.getMessage())
+                                .build()
+                );
+    }
+
+    @PutMapping("/passwords")
+    @Operation(summary = "Change password", description = "Endpoint to change password")
+    public ResponseEntity<GeneralResponse<String>> changePassword(
+            @Valid @RequestBody PasswordRecoveryRequest passwordRecoveryRequest
+    ) throws MessagingException, IOException {
+        peopleAppService.recoveryPassword(passwordRecoveryRequest);
+        return ResponseEntity
+                .status(HttpStatus.OK)
+                .body(
+                        GeneralResponse.<String>builder()
+                                .message(MESSAGE_PASSWORD_CHANGED.getMessage())
+                                .data(MESSAGE_PASSWORD_CHANGED.getMessage())
                                 .build()
                 );
     }

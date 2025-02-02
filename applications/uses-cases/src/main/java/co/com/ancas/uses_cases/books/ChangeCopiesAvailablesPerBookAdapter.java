@@ -18,7 +18,7 @@ import java.io.IOException;
 @Component
 @RequiredArgsConstructor
 public class ChangeCopiesAvailablesPerBookAdapter  implements IUseCaseVoid<AvailableCopiesUpdate> {
-   private final BookRepositoryPort bookRepositoryPort;
+    private final BookRepositoryPort bookRepositoryPort;
     private final FindBookByIdAdapter findBookByIdAdapter;
 
     @Override

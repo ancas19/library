@@ -1,10 +1,7 @@
 package co.com.ancas.controllers;
 
 import co.com.ancas.models.enums.Messages;
-import co.com.ancas.request.BookCreationRequest;
-import co.com.ancas.request.BookSearchCriteriaRequest;
-import co.com.ancas.request.BookUpdateRequest;
-import co.com.ancas.request.ImageUploadRequest;
+import co.com.ancas.request.*;
 import co.com.ancas.response.BookInformationResponse;
 import co.com.ancas.response.GeneralResponse;
 import co.com.ancas.response.PaginationResponse;
@@ -15,6 +12,7 @@ import jakarta.mail.MessagingException;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
@@ -30,6 +28,7 @@ public class BooksController {
     private final BooksAppservice booksAppservice;
 
     @PostMapping
+    @PreAuthorize("hasRole('ADMIN','EMPLOYEE')")
     @Operation(summary = "Create a book")
     public ResponseEntity<GeneralResponse<BookInformationResponse>> createBook(
             @Valid @RequestBody BookCreationRequest bookCreationRequest
@@ -46,7 +45,7 @@ public class BooksController {
     @Operation(summary = "Find a book by id")
     public ResponseEntity<GeneralResponse<BookInformationResponse>> findBookById(
             @PathVariable Long id
-    ) throws MessagingException, IOException {
+    )  {
         return ResponseEntity.ok(
                 GeneralResponse.<BookInformationResponse>builder()
                         .message(Messages.MESSAGE_BOOK_FOUND.getMessage())
@@ -71,6 +70,7 @@ public class BooksController {
     }
 
     @PutMapping("/information")
+    @PreAuthorize("hasRole('ADMIN','EMPLOYEE')")
     @Operation(summary = "Update book information")
     public ResponseEntity<GeneralResponse<BookInformationResponse>> updateBookInformation(
             @Valid @RequestBody BookUpdateRequest bookUpdateRequest
@@ -85,6 +85,7 @@ public class BooksController {
 
 
     @PutMapping("/image")
+    @PreAuthorize("hasRole('ADMIN')")
     @Operation(summary = "Update book image")
     public ResponseEntity<GeneralResponse<BookInformationResponse>> updateImageBook(
             @Valid @RequestBody ImageUploadRequest imageUploadRequest
@@ -98,6 +99,7 @@ public class BooksController {
     }
 
     @DeleteMapping("/{id}")
+    @PreAuthorize("hasRole('ADMIN')")
     @Operation(summary = "Change the status of a book to inactive")
     public ResponseEntity<GeneralResponse<String>> deleteBook(
             @PathVariable Long id
@@ -107,6 +109,21 @@ public class BooksController {
                 GeneralResponse.<String>builder()
                         .message(Messages.MESSAGE_CHANGE_BOOK_STATUS.getMessage())
                         .data(Messages.MESSAGE_CHANGE_BOOK_STATUS.getMessage())
+                        .build()
+        );
+    }
+
+    @PostMapping("/files")
+    @PreAuthorize("hasRole('ADMIN')")
+    @Operation(summary = "Upload book files")
+    public ResponseEntity<GeneralResponse<String>> uploadFiles(
+            @Valid @RequestBody FileRequest fileRequest
+    ) throws MessagingException, IOException {
+        this.booksAppservice.uploadBooksFiles(fileRequest);
+        return ResponseEntity.ok(
+                GeneralResponse.<String>builder()
+                        .message(Messages.MESSAGE_BOOK_FILES_UPLOADED.getMessage())
+                        .data(Messages.MESSAGE_BOOK_FILES_UPLOADED.getMessage())
                         .build()
         );
     }

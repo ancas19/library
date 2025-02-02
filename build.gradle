@@ -1,12 +1,39 @@
 plugins {
 	id 'java'
     id 'jacoco'
-	id 'org.springframework.boot' version '3.3.5'
+	id 'org.sonarqube' version "${sonarVersion}"
+	id 'org.springframework.boot' version "${springVersion}"
 	id 'io.spring.dependency-management' version '1.1.6'
 }
 
 bootJar{
     mainClass = 'co.com.ancas.Main'
+}
+
+sonar {
+	properties {
+		property "sonar.projectKey", "ancas19_library"
+		property "sonar.organization", "ancas19"
+		property "sonar.host.url", "https://sonarcloud.io"
+		property "sonar.modules", "infrastructure/entrypoints/*," +
+				"infrastructure/driven-adapters/postgres/*, infrastructure/driven-adapters/email/* ,infrastructure/driven-adapters/images/*,"+
+				"infrastructure/driven-adapters/redis/*, applications/use-cases/*, domain/models/*, infrastructure/entrypoints/*"
+		property "sonar.projectVersion", "Last"
+		property "sonar.languages", "java"
+		property "sonar.sources", "src/main/java"
+		property "sonar.test", "src/test/java"
+		property "sonar.java.binaries", ""
+		property "sonar.junit.reportsPath", ""
+		property "sonar.java.coveragePlugin", "jacoco"
+		property "sonar.coverage.jacoco.xmlReportPaths", "build/reports/jacocoMergedReport/jacocoMergedReport.xml"
+		property "sonar.exclusions","**/Main.java"
+		property "sonar.java.source", "21"
+		property "sonar.sourceEncoding", "UTF-8"
+		property "sonar.exclusions", "**/model/**, **/entity/** **/config/**, **/util/**, **/*Application.java, **/test/**, " +
+				"modular-test/**,  deployment/**, **/data/**, **/configuration/**, **/repository/**,**/json_schema/**, **/impl/** , **/request/**, **/response/**"
+
+
+	}
 }
 
 allprojects {
@@ -16,10 +43,9 @@ allprojects {
 	}
 }
 
-
-
 subprojects {
 	apply plugin: 'java'
+	apply plugin: 'jacoco'
     apply plugin: 'java-library'
 	apply plugin: 'org.springframework.boot'
 	apply plugin: 'io.spring.dependency-management'
@@ -58,6 +84,15 @@ subprojects {
 
 	}
 
+	test.finalizedBy(project.tasks.jacocoTestReport)
+
+	jacocoTestReport {
+		reports {
+			xml.required = true
+			html.outputLocation = layout.buildDirectory.dir('jacocoHtml')
+		}
+	}
+
 	sourceSets {
 		main{
 			java {
@@ -83,3 +118,20 @@ subprojects {
 
 }
 
+jacoco {
+	toolVersion = jacocoVersion
+	reportsDirectory = layout.buildDirectory.dir("reports/jacoco").get().asFile
+}
+task jacocoMergedReport(type: JacocoReport) {
+	dependsOn = subprojects.jacocoTestReport
+	additionalSourceDirs.setFrom files(subprojects.sourceSets.main.allSource.srcDirs)
+	sourceDirectories.setFrom files(subprojects.sourceSets.main.allSource.srcDirs)
+	classDirectories.setFrom files(subprojects.sourceSets.main.output)
+	executionData.setFrom project.fileTree(dir: '.', include: '**/build/jacoco/test.exec')
+}
+
+tasks.withType(JavaCompile) {
+	options.compilerArgs = [
+			'-Amapstruct.suppressGeneratorTimestamp=true'
+	]
+}

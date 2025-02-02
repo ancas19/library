@@ -15,7 +15,6 @@ import java.util.Optional;
 public class FindBookInformationByIdAdapter implements IUseCase<Long, BookInformation> {
     private final BookRepositoryPort bookRepositoryPort;
 
-
     @Override
     public BookInformation execute(Long id) {
         Optional<BookInformation> bookFound=bookRepositoryPort.findBookInformationById(id);

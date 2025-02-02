@@ -10,6 +10,7 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import java.time.LocalDate;
+import java.util.List;
 
 @Repository
 public interface LoanRepository extends JpaRepository<LoanEntity, Long> {
@@ -158,4 +159,26 @@ public interface LoanRepository extends JpaRepository<LoanEntity, Long> {
             """
     )
     Integer existsExpiredLoans(Long userId, LocalDate currentDate);
+
+    @Query(
+            """
+            SELECT l FROM LoanEntity l
+            INNER JOIN UserEntity u ON l.userId = u.id
+            INNER JOIN PeopleEntity p ON u.personId = p.id
+            WHERE p.dni = :dniUser
+            AND l.returnDate IS NULL
+            """
+    )
+    List<LoanEntity> findLoanByDni(@Param("dniUser") String dniUser);
+
+    @Query(
+            """
+            SELECT l FROM LoanEntity l
+            INNER JOIN UserEntity u ON l.userId = u.id
+            INNER JOIN PeopleEntity p ON u.personId = p.id
+            WHERE p.dni = :dniUser
+            AND l.paid='NO'
+            """
+    )
+    List<LoanEntity> findLoanNoPaidByDni(@Param("dniUser") String dniUser);
 }

@@ -1,5 +1,6 @@
 package co.com.ancas.request;
 
+import co.com.ancas.models.utils.Constants;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
 import lombok.*;
@@ -11,12 +12,12 @@ import lombok.*;
 @Setter
 public class BookSearchCriteriaRequest {
     @NotNull
-    @Pattern(regexp = "^[0-9a-zA-ZáéíóúÁÉÍÓÚÑ ]*$", message = "Search must have only letters, digits and spaces")
+    @Pattern(regexp = Constants.SEARCH, message = Constants.SEARCH_INVALID)
     private String search;
     @NotNull
-    @Pattern(regexp = "^[A-ZÁÉÍÓÚÑ ]*$", message = "Name must have only letters and spaces")
+    @Pattern(regexp = Constants.LETTERS, message = Constants.AUTHOR_INVALID)
     private String author;
     @NotNull
-    @Pattern(regexp = "^[A-ZÁÉÍÓÚÑ ]*$", message = "Genre must have only letters and spaces")
+    @Pattern(regexp =  Constants.LETTERS, message = Constants.GENRE_INVALID)
     private String genre;
 }

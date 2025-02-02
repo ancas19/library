@@ -48,7 +48,8 @@ public interface PeopleRepository extends JpaRepository<PeopleEntity,Long> {
                     WHERE i.id=p.profileImage
                 ),
                 u.username,
-                p.status
+                p.status,
+                u.id
             )
             FROM PeopleEntity p
             INNER JOIN UserEntity u ON p.id = u.personId
@@ -65,5 +66,5 @@ public interface PeopleRepository extends JpaRepository<PeopleEntity,Long> {
 
     boolean existsByIdAndStatus(Long personId, String constant);
 
-    Optional<PeopleEntity> findByEmailAndStatus(String email, String constant);
+    Optional<PeopleEntity> findByEmail(String email);
 }

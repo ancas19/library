@@ -5,13 +5,17 @@ public enum Constants {
     ACTIVE("ACTIVE"),
     USER("USER"),
     EMPLOYEE("EMPLOYEE"),
+    PREMIUM("PREMIUM"),
     USER_AND_PASSWORD("USER_AND_PASSWORD"),
     SUBJECT_USER_AND_PASSWORD("User and password"),
     CODE_UNBLOCK_PERSON("Code to unblock person"),
+    SUBJECT_FILES_PROCESSED("File with authors processed"),
+    SUBJECT_ERROR_FILE("Error processing file with authors"),
+    SUBJECT_FILES_PROCESSED_BOOKS("File with books processed"),
+    SUBJECT_ERROR_FILE_BOOKS("Error processing file with books"),
     ATTEMPT("ATTEMPT_%s"),
     TOKEN("TOKEN_%s"),
     CODE("CODE_%s"),
-    CHARACTERS("ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$&*"),
     INACTIVE("INACTIVE"),
     ROLE("ROLE_%s"),
     UNBLOCK_USER("UNBLOCK_USER"),
@@ -21,11 +25,16 @@ public enum Constants {
     REPLACE_LOANS("<!-- BookListPlaceholder -->"),
     BOOKS_LOAN("Books loaned"),
     DISCOUNT("DISCOUNT"),
-    BOOK_RETURN("BOOK_RETURN"),
     CLOSE_TD("</td>"),
     OPEN_TD("<td style='border: 1px solid #ddd; padding: 8px;'>"),
     OPEN_TR("<tr style='border: 1px solid #ddd;'>"),
-    CLOSE_TR("</tr>"),;
+    CLOSE_TR("</tr>"),
+    ERROR_FILE("ERROR_FILE"),
+    FILE_CORRECT("FILE_CORRECT"),
+    MEMBERSHIP("MEMBERSHIP"),
+    SUBJECT_MEMBERSHIP("Membership"),
+    AUTHORIZATION("Authorization"),
+    INCREASE("INCREASE"),;
 
     private final String constant;
 

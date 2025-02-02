@@ -5,10 +5,10 @@ import co.com.ancas.models.model.User;
 import co.com.ancas.models.model.UserInformation;
 import co.com.ancas.models.model.UserMembershipInfo;
 
+import java.util.List;
 import java.util.Optional;
 
 public interface UserRepositoryPort {
-
     boolean verifyExistsUserName(String userName);
     void save(User build);
     Optional<User> findUserByUsername(String username);
@@ -18,4 +18,10 @@ public interface UserRepositoryPort {
     Optional<UserMembershipInfo> findUserAndMembershipInfo(String s);
     CurrentUserInformation findCurrentUserInformation(String username);
     Optional<UserMembershipInfo> findUserAndMembershipInfoByUserId(Long s);
+    Optional<User> findUserByEmail(String email);
+    List<String> findEmailsAdmins();
+    Optional<User> findUserFindDni(String s);
+    boolean findChangePasswordByUsername(String username);
+    String findEmailByUser(String username);
+    boolean verifyEmployee(Long id);
 }

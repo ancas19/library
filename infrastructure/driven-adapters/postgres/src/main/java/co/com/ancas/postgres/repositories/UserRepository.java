@@ -9,6 +9,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
 import java.util.Optional;
 
 @Repository
@@ -109,4 +110,65 @@ public interface UserRepository extends JpaRepository<UserEntity, Long> {
            """
     )
     CurrentUserInformation findCurrentUserInformation(String username);
+
+    @Query(
+           """
+           SELECT u
+           FROM UserEntity u
+           INNER JOIN PeopleEntity p ON p.id = u.personId
+           WHERE p.email = :email
+           """
+    )
+    Optional<UserEntity> findUserByEmail(@Param("email") String email);
+
+    @Query(
+           """
+           SELECT p.email
+           FROM UserEntity u
+           INNER JOIN PeopleEntity p ON p.id = u.personId
+           INNER JOIN RolesEntity r ON r.id = u.roleId
+           WHERE r.roleName = 'ADMIN'
+           """
+    )
+    List<String> findEmailsAdmins();
+
+    @Query(
+           """
+           SELECT u
+           FROM UserEntity u
+           INNER JOIN PeopleEntity p ON p.id = u.personId
+           WHERE p.dni = :dni
+           """
+    )
+    Optional<UserEntity> findUserFindDni(@Param("dni") String s);
+
+    @Query(
+           """
+           SELECT u.changePassword
+           FROM UserEntity u
+           WHERE u.username = :username
+           """
+    )
+    boolean findChangePasswordByUsername(@Param("username")String username);
+
+    @Query(
+           """
+           SELECT p.email
+           FROM UserEntity u
+           INNER JOIN PeopleEntity p ON p.id = u.personId
+           WHERE u.username = :username
+           """
+    )
+    String findEmailByUser(@Param("username") String username);
+
+    @Query(
+           """
+           SELECT COUNT(u)
+           FROM UserEntity u
+           INNER JOIN MembershipEntity m ON u.membershipId = m.id
+           WHERE u.id = :id
+           AND (m.membershipType = 'EMPLOYEE' OR m.membershipType = 'ADMIN')
+           """
+    )
+    Integer verifyEmployee(Long id);
 }

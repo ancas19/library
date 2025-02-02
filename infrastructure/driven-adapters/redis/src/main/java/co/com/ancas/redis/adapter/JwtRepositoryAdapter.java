@@ -1,5 +1,6 @@
 package co.com.ancas.redis.adapter;
 
+import co.com.ancas.models.model.TokenInformation;
 import co.com.ancas.models.repositories.JwtRepositoryPort;
 import jakarta.annotation.PostConstruct;
 import lombok.RequiredArgsConstructor;
@@ -17,22 +18,22 @@ import static co.com.ancas.models.enums.Constants.TOKEN;
 public class JwtRepositoryAdapter  implements JwtRepositoryPort {
     @Value("${jwt.expiration}")
     private Integer expirationTime;
+    private final RedisTemplate<String, TokenInformation> redisTemplate;
+    private ValueOperations<String,TokenInformation> valueOperations;
 
-    private final RedisTemplate<String, String> redisTemplate;
-    private ValueOperations<String,String> valueOperations;
     @PostConstruct
     public void init() {
         valueOperations = redisTemplate.opsForValue();
     }
     @Override
-    public void save(String key, String value) {
+    public void save(String key, TokenInformation value) {
         String realKey = TOKEN.getConstant().formatted(key);
         valueOperations.set(realKey, value);
-        redisTemplate.expire(key, expirationTime, TimeUnit.MINUTES);
+        redisTemplate.expire(realKey, expirationTime, TimeUnit.MINUTES);
     }
 
     @Override
-    public String find(String key) {
+    public TokenInformation find(String key) {
         String realKey = TOKEN.getConstant().formatted(key);
         return valueOperations.get(realKey);
     }

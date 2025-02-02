@@ -3,6 +3,7 @@ package co.com.ancas.response;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.*;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 
 @AllArgsConstructor
@@ -10,7 +11,7 @@ import java.time.LocalDate;
 @Builder
 @Getter
 @Setter
-public class AuthorInformationResponse {
+public class AuthorInformationResponse implements Serializable {
     private Long id;
     private String fullName;
     private String nationality;

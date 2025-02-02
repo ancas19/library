@@ -1,7 +1,8 @@
-package co.com.ancas.request;
+package co.com.ancas.response;
 
 import lombok.*;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 
 @AllArgsConstructor
@@ -9,7 +10,7 @@ import java.time.LocalDate;
 @Builder
 @Getter
 @Setter
-public class LoanInformationResponse {
+public class LoanInformationResponse implements Serializable {
     private Long id;
     private String isbn;
     private String title;

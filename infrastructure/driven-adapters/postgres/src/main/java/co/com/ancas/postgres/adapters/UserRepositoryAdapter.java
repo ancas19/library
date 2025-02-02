@@ -11,6 +11,7 @@ import co.com.ancas.postgres.repositories.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -64,5 +65,36 @@ public class UserRepositoryAdapter implements UserRepositoryPort {
     @Override
     public Optional<UserMembershipInfo> findUserAndMembershipInfoByUserId(Long s) {
         return this.userRepository.findUserAndMembershipInfoByUserId(s);
+    }
+
+    @Override
+    public Optional<User> findUserByEmail(String email) {
+        return this.userRepository.findUserByEmail(email).map(user->Mapper.map(user,User.class));
+    }
+
+    @Override
+    public List<String> findEmailsAdmins() {
+        return this.userRepository.findEmailsAdmins();
+    }
+
+    @Override
+    public Optional<User> findUserFindDni(String s) {
+        return this.userRepository.findUserFindDni(s).map(user->Mapper.map(user,User.class));
+    }
+
+    @Override
+    public boolean findChangePasswordByUsername(String username) {
+        return this.userRepository.findChangePasswordByUsername(username);
+    }
+
+    @Override
+    public String findEmailByUser(String username) {
+        return this.userRepository.findEmailByUser(username);
+    }
+
+    @Override
+    public boolean verifyEmployee(Long id) {
+        Integer quantity= this.userRepository.verifyEmployee(id);
+        return quantity>0;
     }
 }
