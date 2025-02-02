@@ -23,6 +23,7 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyString;
+import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
@@ -59,6 +60,7 @@ class UploadAuthorByFileAdapterTest {
         when(downloadImageAdapter.downloadImage(anyString())).thenReturn("data");
         when(createAuthorAdapter.execute(argumentCaptor.capture())).thenReturn(new AuthorInformation());
         when(findEmailTemplateBySubjectAdapter.execute(anyString())).thenReturn("data");
+        doNothing().when(emailRepositoryPort).sendEmail(any());
         //Act
         uploadAuthorByFileAdapter.execute(fileData);
         //Assert
@@ -72,16 +74,18 @@ class UploadAuthorByFileAdapterTest {
         when(downloadImageAdapter.downloadImage(anyString())).thenReturn("data");
         when(createAuthorAdapter.execute(argumentCaptor.capture())).thenThrow(new BadRequestException("Error"));
         when(findEmailTemplateBySubjectAdapter.execute(anyString())).thenReturn("data");
+        doNothing().when(emailRepositoryPort).sendEmail(any());
         //Act
         assertThrows(BadRequestException.class, () -> uploadAuthorByFileAdapter.execute(fileData));
     }
 
     @Test
-    void uploadAuthorByFileTestWithException2()  {
+    void uploadAuthorByFileTestWithException2() throws MessagingException {
         //Arrange
         fileData.setBase64("VGl0bGV8aXNibnxhdXRob3J8cHVibGlzaCBkYXRlfGdlbnJlfGF2YWlsYWJsZSBjb3BpZXN8Ymx1cmJ8YXZhaWxhYmxlfGltYWdlClBSSURFIEFORCBQUkVKVURJQ0V8OTc4MDE0MTQzOTUxOHxKQU5FIEFVU1RFTnwyOC8wMS8xODEzfFJPTUFOQ0V8NXxBIHN0b3J5IG9mIGxvdmUsIGNsYXNzLCBhbmQgZmFtaWx5IGluIGVhcmx5IDE5dGgtY2VudHVyeSBFbmdsYW5kLnxZRVN8aHR0cHM6Ly91cGxvYWQud2lraW1lZGlhLm9yZy93aWtpcGVkaWEvY29tbW9ucy9kL2Q0L1ByaWRlYW5kUHJlanVkaWNlQ0gzZGV0YWlsLmpwZwpFTU1BfDk3ODAxNDE0Mzk1ODd8SkFORSBBVVNURU58MjMvMTIvMTgxNXxST01BTkNFfDR8Rm9sbG93cyBFbW1hIFdvb2Rob3VzZSBhbmQgaGVyIG1hdGNobWFraW5nIGVmZm9ydHMgaW4gaGVyIHNvY2lhbCBjaXJjbGUufFlFU3xodHRwczovL3VwbG9hZC53aWtpbWVkaWEub3JnL3dpa2lwZWRpYS9jb21tb25zL3RodW1iL2YvZjIvRW1tYVRpdGxlUGFnZS5qcGcvMTgwcHgtRW1tYVRpdGxlUGFnZS5qcGcKQURWRU5UVVJFUyBPRiBIVUNLTEVCRVJSWSBGSU5OfDk3ODAxNDI0MzcxNzl8TUFSSyBUV0FJTnwxOC8wMi8xODg0fEFEVkVOVFVSRXw4fFRoZSBzdG9yeSBvZiBIdWNrIGFuZCBKaW3igJlzIGpvdXJuZXkgb24gdGhlIE1pc3Npc3NpcHBpIFJpdmVyLnxZRVN8aHR0cHM6Ly91cGxvYWQud2lraW1lZGlhLm9yZy93aWtpcGVkaWEvY29tbW9ucy90aHVtYi82LzYxL0h1Y2tsZWJlcnJ5X0Zpbm5fYm9vay5KUEcvMjAwcHgtSHVja2xlYmVycnlfRmlubl9ib29rLkpQRwpHUkVBVCBFWFBFQ1RBVElPTlN8OTc4MDE0MTQzOTU2M3xDSEFSTEVTIERJQ0tFTlN8MDEvMTEvMTg2MXxGSUNUSU9OfDZ8QSB5b3VuZyBib3kgbmFtZWQgUGlwIG1hdHVyZXMgdGhyb3VnaCBteXN0ZXJ5LCB3ZWFsdGgsIGFuZCBwZXJzb25hbCBncm93dGgufFlFU3xodHRwczovL3VwbG9hZC53aWtpbWVkaWEub3JnL3dpa2lwZWRpYS9jb21tb25zL3RodW1iLzgvOGQvR3JlYXRleHBlY3RhdGlvbnNfdm9sMS5qcGcvODAwcHgtR3JlYXRleHBlY3RhdGlvbnNfdm9sMS5qcGcKSSBLTk9XIFdIWSBUSEUgQ0FHRUQgQklSRCBTSU5HU3w5NzgwMzQ1NTE0NDAwfE1BWUEgQU5HRUxPVXwyNS8wMy8xOTY5fE1FTU9JUnw1fEFuZ2Vsb3XigJlzIGF1dG9iaW9ncmFwaGljYWwgYWNjb3VudCBvZiBoZXIgZWFybHkgbGlmZSBhbmQgdGhlIGhhcmRzaGlwcyBzaGUgZmFjZWQufFlFU3xodHRwczovL3VwbG9hZC53aWtpbWVkaWEub3JnL3dpa2lwZWRpYS9jb21tb25zL3RodW1iLzEvMTcvSV9Lbm93X1doeV90aGVfQ2FnZWRfQmlyZF9TaW5nc19mcm9udF9jb3ZlciUyQ18xOTY5X2ZpcnN0X2VkaXRpb24uanBnLzgwMHB4LUlfS25vd19XaHlfdGhlX0NhZ2VkX0JpcmRfU2luZ3NfZnJvbnRfY292ZXIlMkNfMTk2OV9maXJzdF9lZGl0aW9uLmpwZwpHQVRIRVIgVE9HRVRIRVIgSU4gTVkgTkFNRXw5NzgwMzQ1NTMxMDU2fE1BWUEgQU5HRUxPVXwwMy8wNC8xOTc0fE1FTU9JUnw0fEZvbGxvd3MgQW5nZWxvdeKAmXMgbGlmZSBhcyBhIHlvdW5nIGFkdWx0IGFuZCBzaW5nbGUgbW90aGVyLnxZRVN8aHR0cHM6Ly91cGxvYWQud2lraW1lZGlhLm9yZy93aWtpcGVkaWEvY29tbW9ucy9kL2QzL0dhdGhlcl9Ub2dldGhlcl9pbl9NeV9OYW1lX2Zyb250X2NvdmVyJTJDXzE5NzRfZmlyc3RfZWRpdGlvbi5qcGcK");
         when(this.userRepositoryPort.findEmailsAdmins()).thenReturn(List.of("data"));
         when(findEmailTemplateBySubjectAdapter.execute(anyString())).thenReturn("data");
+        doNothing().when(emailRepositoryPort).sendEmail(any());
         //Act
         assertThrows(BadRequestException.class, () -> uploadAuthorByFileAdapter.execute(fileData));
     }

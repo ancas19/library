@@ -1,6 +1,6 @@
 package co.com.ancas.uses_cases.interfaces;
 
 @FunctionalInterface
-public interface IUseCaseResult<Output> {
-    Output execute();
+public interface IUseCaseResult<OUTPUT> {
+    OUTPUT execute();
 }

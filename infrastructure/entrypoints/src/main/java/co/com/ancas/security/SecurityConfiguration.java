@@ -22,7 +22,7 @@ public class SecurityConfiguration {
     private String[] uris;
 
     private final JwtAuthenticationFilter jwtUtility;
-    private final CustomAccessDeniedException customAccessDeniedException;
+    private final CustomAccessDenied customAccessDenied;
     private final UnauthorizedEntryPoint customAutheticationEntryPoint;
 
     @Bean
@@ -42,7 +42,7 @@ public class SecurityConfiguration {
                 .exceptionHandling(
                         exceptionConf-> {
                             exceptionConf.authenticationEntryPoint(customAutheticationEntryPoint);
-                            exceptionConf.accessDeniedHandler(customAccessDeniedException);
+                            exceptionConf.accessDeniedHandler(customAccessDenied);
                         }
                 )
                 .build();

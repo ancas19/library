@@ -8,7 +8,8 @@ import org.springframework.stereotype.Component;
 
 import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
-import java.net.URL;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.Base64;
 
 @Slf4j
@@ -18,7 +19,7 @@ public class DownloadImageAdapter {
 
     public String downloadImage(String url) {
         try {
-            InputStream inputStream= new URL(url).openStream();
+            InputStream inputStream=  Files.newInputStream(Paths.get(url));
 
             ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
             byte[] buffer = new byte[2048];

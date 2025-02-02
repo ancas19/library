@@ -75,7 +75,7 @@ public class TestMock {
     public static AuthorInformation authorInformation() {
         return AuthorInformation.builder()
                 .id(1L)
-                .fullName("Gabriel García Márquez")
+                .fullName("Pwpw Márquez")
                 .nationality("Colombian")
                 .birthdate(LocalDate.of(1927, 3, 6))
                 .bio("Colombian novelist")
@@ -85,7 +85,7 @@ public class TestMock {
 
      public static  AuthorsSearchCriteria authorsSearchCriteria(){
          return AuthorsSearchCriteria.builder()
-                 .search("Gabriel García Márquez")
+                 .search("Martes García Márquez")
                  .page(1)
                  .size(10)
                  .build();
@@ -103,7 +103,7 @@ public class TestMock {
      public static Book book(){
          return Book.builder()
                  .id(1L)
-                 .title("One Hundred Years of Solitude")
+                 .title("One of Solitude")
                  .isbn("978-0-307-27789-1")
                  .authorId(1L) // Reference to an author stored elsewhere
                  .genreId(1l)
@@ -126,13 +126,13 @@ public class TestMock {
      public static BookCreation bookCreation(){
          return BookCreation.builder()
                  .title("Alice's Adventures in Wonderland")
-                 .isbn("978-0-307-27789-1")
+                 .isbn("978-0-787878787-27789-1")
                  .author("Lewis Carroll")
-                 .genre("Fantasy")
+                 .genre("Mistery")
                  .publishDate(LocalDate.of(1967, 5, 30))
                  .available("YES")
                  .availableCopies(5)
-                 .blurb("A novel by Colombian author Gabriel García Márquez")
+                 .blurb("A novel by English author Lewis Carroll")
                  .nameFile("cover.jpg")
                  .base64("base64EncodedStringHere")
                  .build();
@@ -148,13 +148,13 @@ public class TestMock {
     public static BookInformation bookInformation() {
          return BookInformation.builder()
                  .id(1L)
-                 .title("One Hundred Years of Solitude")
-                 .isbn("978-0-307-27789-1")
+                 .title("Litte prince")
+                 .isbn("978-7878787878-307-27789-1")
                  .author("Gabriel García Márquez")
-                 .genre("Fantasy")
+                 .genre("Humor")
                  .publishDate(LocalDate.of(1967, 5, 30))
                  .availableCopies(5)
-                 .blurb("A novel by Colombian author Gabriel García Márquez")
+                 .blurb("A novel by British author Lewis Carroll")
                  .bookImage("https://example.com/images/one-hundred-years.jpg") // URL or base64 string
                  .build();
     }
@@ -170,8 +170,8 @@ public class TestMock {
     public static BookUpdate bookUpdate() {
         return BookUpdate.builder()
                 .id(1L)
-                .title("One Hundred Years of Solitude")
-                .isbn("978-0-307-27789-1")
+                .title("The Alchemist")
+                .isbn("978-44333688-307-27789-1")
                 .author("Paulo Coelho")
                 .genre("Fantasy")
                 .publishDate(LocalDate.of(1967, 5, 30))
@@ -179,4 +179,27 @@ public class TestMock {
                 .blurb("A novel by Colombian author Paul Coelho")
                 .build();
      }
+
+    public static TokenInformation tokrnInformation() {
+        return TokenInformation.builder()
+                .token("TOKEN")
+                .username("USERNAME")
+                .email("ANDRES.CMONSALVE@GMAIL.COM")
+                .dni("12121212")
+                .role("ROLES")
+                .idPersona(1L)
+                .idUser(2L)
+                .build();
+     }
+
+    public static Membership membership() {
+        return Membership.builder()
+                .id(1L)
+                .membershipType("MEMBERSHIP")
+                .loanLimit(5)
+                .loanPeriodDays(23)
+                .gracePeriodDays(2)
+                .finePerDay(3.0)
+                .build();
+    }
 }

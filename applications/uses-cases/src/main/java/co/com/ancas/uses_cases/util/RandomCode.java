@@ -7,7 +7,7 @@ public class RandomCode {
     private RandomCode() {
     }
 
-    private static final Random random = new Random(); // Make Random instance static
+    private static final Random random = new Random();
 
     public static String generateRandomCode() {
         return String.valueOf(random.nextInt(900000) + 100000);

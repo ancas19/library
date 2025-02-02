@@ -14,10 +14,6 @@ public class AuthorsSearchCriteria {
 
     @Override
     public String toString() {
-        return "AuthorsSearchCriteria{" +
-                "search='" + search + '\'' +
-                ", page=" + page +
-                ", size=" + size +
-                '}';
+        return String.format("search:%s|page:%d|size:%d", search, page, size);
     }
 }

@@ -1,7 +1,6 @@
 package co.com.ancas.uses_cases.books;
 
 import co.com.ancas.models.exceptions.BadRequestException;
-import co.com.ancas.models.model.Book;
 import co.com.ancas.models.model.BookCreation;
 import co.com.ancas.models.model.BookInformation;
 import co.com.ancas.models.model.FileData;
