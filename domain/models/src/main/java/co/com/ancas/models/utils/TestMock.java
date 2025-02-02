@@ -184,7 +184,7 @@ public class TestMock {
         return TokenInformation.builder()
                 .token("TOKEN")
                 .username("USERNAME")
-                .email("ANDRES.CMONSALVE@GMAIL.COM")
+                .email("PEPEQUINTE@GMAIL.COM")
                 .dni("12121212")
                 .role("ROLES")
                 .idPersona(1L)
@@ -202,4 +202,88 @@ public class TestMock {
                 .finePerDay(3.0)
                 .build();
     }
+
+    public static UserCreation userCreation() {
+        return UserCreation.builder()
+                .id(1L)
+                .firstName("John")
+                .lastName("Doe")
+                .email("john.doe@example.com")
+                .userType("ADMIN")
+                .build();
+    }
+
+    public static User user() {
+        return User.builder()
+                .id(1L)
+                .personId(1L)
+                .username("johndoe")
+                .password("password")
+                .roleId(1L)
+                .membershipId(1L)
+                .emailVerified(false)
+                .changePassword(true)
+                .build();
+    }
+
+
+    public static  TokenInformation tokenInformation() {
+        return TokenInformation.builder()
+                .token("TOKEN")
+                .username("USERNAME")
+                .email("PEPEQUINTE@GMAIL.COM")
+                .dni("12121212")
+                .role("ROLES")
+                .idPersona(1L)
+                .idUser(2L)
+                .build();
+    }
+
+    public static UserMembershipInfo userMembershipInfo() {
+        return UserMembershipInfo.builder()
+                .userId(1L)
+                .username("johndoe")
+                .email("johndoe@example.com")
+                .membershipType("Premium")
+                .loanLimit(5)
+                .loanPeriodDays(14)
+                .gracePeriodDays(3)
+                .dailyFine(1.50)
+                .build();
+     }
+
+    public static UserInformation userInformation() {
+        return UserInformation.builder()
+                .id(1L)
+                .username("johndoe")
+                .role("ADMIN")
+                .membership("Premium")
+                .emailVerified(true)
+                .changePassword(false)
+                .build();
+     }
+
+    public static Code code() {
+        return Code.builder()
+                .email("PEPEQINTE@GMAIL.COM")
+                .code("123456")
+                .build();
+     }
+
+    public static PasswordRecovery passwordRecovery() {
+        return PasswordRecovery.builder()
+                .email("PEPEQINTE@GMAIL.COM")
+                .code("123456")
+                .password("password")
+                .passwordRepeat("password")
+                .build();
+     }
+
+    public static UpdatePassword updatePassword() {
+        return UpdatePassword.builder()
+                .username("johndoe")
+                .password("password")
+                .confirmPassword("password")
+                .build();
+     }
 }
