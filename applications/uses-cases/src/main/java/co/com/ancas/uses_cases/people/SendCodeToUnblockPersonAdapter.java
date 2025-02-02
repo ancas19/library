@@ -5,7 +5,7 @@ import co.com.ancas.models.exceptions.BadRequestException;
 import co.com.ancas.models.model.Code;
 import co.com.ancas.models.model.Email;
 import co.com.ancas.models.model.People;
-import co.com.ancas.models.model.PersonAcces;
+import co.com.ancas.models.model.PersonAccess;
 import co.com.ancas.models.repositories.CodeRepositoryPort;
 import co.com.ancas.models.repositories.EmailRepositoryPort;
 import co.com.ancas.models.repositories.PeopleRepositoryPort;
@@ -25,18 +25,18 @@ import static co.com.ancas.models.enums.Constants.*;
 
 @RequiredArgsConstructor
 @Component
-public class SendCodeToUnblockPersonAdapter implements IUseCaseVoid<PersonAcces> {
-    private final PeopleRepositoryPort peopleRepositoryPort;
+public class SendCodeToUnblockPersonAdapter implements IUseCaseVoid<PersonAccess> {
     private final FindEmailTemplateBySubjectAdapter findEmailTemplateBySubjectAdapter;
+    private final PeopleRepositoryPort peopleRepositoryPort;
     private final EmailRepositoryPort emailRepositoryPort;
     private final CodeRepositoryPort codeRepositoryPort;
     @Override
-    public void execute(PersonAcces personAcces) throws MessagingException, IOException {
-        Optional<People> peopleFound = peopleRepositoryPort.findPeopleByEmail(personAcces.getEmail());
+    public void execute(PersonAccess personAccess) throws MessagingException, IOException {
+        Optional<People> peopleFound = peopleRepositoryPort.findPeopleByEmail(personAccess.getEmail());
         if(peopleFound.isEmpty()){
             throw new BadRequestException(Messages.MESSAGES_EMAIL_NOT_FOUND.getMessage());
         }
-        String code=generateCode(personAcces.getEmail());
+        String code=generateCode(personAccess.getEmail());
         String emailTemplate = findEmailTemplateBySubjectAdapter.execute(UNBLOCK_USER.getConstant());
         emailTemplate = emailTemplate.replace(":verification_code", code);
         emailTemplate = emailTemplate.replace(":name", peopleFound.get().getFirstName());

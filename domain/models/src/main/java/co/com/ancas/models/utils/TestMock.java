@@ -286,4 +286,43 @@ public class TestMock {
                 .confirmPassword("password")
                 .build();
      }
+
+    public static People people() {
+        return  People.builder()
+                .id(1L)
+                .dni("12345678")
+                .firstName("John")
+                .lastName("Doe")
+                .email("johndoe@example.com")
+                .phone("+1234567890")
+                .status("ACTIVE")
+                .profileImage(101L)
+                .build();
+     }
+
+    public static PeopleCreation peopleCreation() {
+       return PeopleCreation.builder()
+               .dni("12345678A")
+               .firstName("John")
+               .lastName("Doe")
+               .email("john.doe@example.com")
+               .phone("123-456-7890")
+               .userType("Admin")
+               .status("Active")
+               .build();
+     }
+
+    public static PeopleSearchCriteria peopleSearchCriteria() {
+        return PeopleSearchCriteria.builder()
+                .search("John Doe")
+                .page(1)
+                .size(10)
+                .build();
+     }
+
+    public static PersonAccess personAccess() {
+        return PersonAccess.builder()
+                .email("pepe@email.com")
+                .build();
+    }
 }

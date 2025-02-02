@@ -17,6 +17,7 @@ import java.io.IOException;
 public class UpdatePersonAdapter implements IUseCase<People,People> {
     private final FindPeopleByIdAdapter findPeopleByIdAdapter;
     private final PeopleRepositoryPort peopleRepositoryPort;
+
     @Override
     @CacheEvict(value = "people", allEntries = true)
     public People execute(People people) throws MessagingException, IOException {
