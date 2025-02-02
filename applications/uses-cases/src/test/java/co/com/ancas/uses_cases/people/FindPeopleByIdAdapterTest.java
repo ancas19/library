@@ -1,5 +1,6 @@
 package co.com.ancas.uses_cases.people;
 
+import co.com.ancas.models.exceptions.NotFoundException;
 import co.com.ancas.models.model.People;
 import co.com.ancas.models.repositories.PeopleRepositoryPort;
 import co.com.ancas.models.utils.TestMock;
@@ -44,7 +45,7 @@ class FindPeopleByIdAdapterTest {
         //Arrange
         when(peopleRepositoryPort.findPeopleById(1L)).thenReturn(Optional.empty());
         //Act and Assert
-        assertThrows(NullPointerException.class, () -> findPeopleByIdAdapter.execute(1L));
+        assertThrows(NotFoundException.class, () -> findPeopleByIdAdapter.execute(1L));
     }
 
 }

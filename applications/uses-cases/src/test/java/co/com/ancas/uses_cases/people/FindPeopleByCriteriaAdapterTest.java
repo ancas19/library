@@ -1,5 +1,6 @@
 package co.com.ancas.uses_cases.people;
 
+import co.com.ancas.models.exceptions.NotFoundException;
 import co.com.ancas.models.model.People;
 import co.com.ancas.models.model.PeopleSearchCriteria;
 import co.com.ancas.models.repositories.PeopleRepositoryPort;
@@ -49,6 +50,6 @@ class FindPeopleByCriteriaAdapterTest {
         //Arrange
         when(peopleRepositoryPort.findPeopleByCriteria(peopleSearchCriteria)).thenReturn(Page.empty());
         //Act and Assert
-        assertThrows(NullPointerException.class, () -> findPeopleByCriteriaAdapter.execute(peopleSearchCriteria));
+        assertThrows(NotFoundException.class, () -> findPeopleByCriteriaAdapter.execute(peopleSearchCriteria));
     }
 }

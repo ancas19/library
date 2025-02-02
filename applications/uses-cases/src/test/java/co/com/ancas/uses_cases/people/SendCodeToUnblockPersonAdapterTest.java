@@ -74,7 +74,7 @@ class SendCodeToUnblockPersonAdapterTest {
         when( findEmailTemplateBySubjectAdapter.execute(anyString())).thenReturn("Template");
         doNothing().when(codeRepositoryPort).save(codeArgumentCaptor.capture());
         doNothing().when(emailRepositoryPort).sendEmail(emailArgumentCaptor.capture());
-        when(codeRepositoryPort.find(anyString())).thenReturn(new Code());
+        when(codeRepositoryPort.find(anyString())).thenReturn(TestMock.code());
         //Act
         sendCodeToUnblockPersonAdapter.execute(personAccess);
         //Assert
