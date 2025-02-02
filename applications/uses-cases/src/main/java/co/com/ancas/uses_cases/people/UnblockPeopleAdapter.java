@@ -35,5 +35,6 @@ public class UnblockPeopleAdapter implements IUseCaseVoid<PersonCode> {
         }
         peopleFound.get().setStatus(ACTIVE.getConstant());
         this.peopleRepositoryPort.update(peopleFound.get());
+        codeRepositoryPort.delete(personCode.getEmail());
     }
 }

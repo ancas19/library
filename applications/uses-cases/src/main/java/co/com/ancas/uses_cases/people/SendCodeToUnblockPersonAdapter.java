@@ -2,6 +2,7 @@ package co.com.ancas.uses_cases.people;
 
 import co.com.ancas.models.enums.Messages;
 import co.com.ancas.models.exceptions.BadRequestException;
+import co.com.ancas.models.exceptions.NotFoundException;
 import co.com.ancas.models.model.Code;
 import co.com.ancas.models.model.Email;
 import co.com.ancas.models.model.People;
@@ -34,7 +35,7 @@ public class SendCodeToUnblockPersonAdapter implements IUseCaseVoid<PersonAccess
     public void execute(PersonAccess personAccess) throws MessagingException, IOException {
         Optional<People> peopleFound = peopleRepositoryPort.findPeopleByEmail(personAccess.getEmail());
         if(peopleFound.isEmpty()){
-            throw new BadRequestException(Messages.MESSAGES_EMAIL_NOT_FOUND.getMessage());
+            throw new NotFoundException(Messages.MESSAGES_EMAIL_NOT_FOUND.getMessage());
         }
         String code=generateCode(personAccess.getEmail());
         String emailTemplate = findEmailTemplateBySubjectAdapter.execute(UNBLOCK_USER.getConstant());

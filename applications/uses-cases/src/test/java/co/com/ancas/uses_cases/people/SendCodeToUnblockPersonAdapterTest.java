@@ -1,5 +1,6 @@
 package co.com.ancas.uses_cases.people;
 
+import co.com.ancas.models.exceptions.NotFoundException;
 import co.com.ancas.models.model.Code;
 import co.com.ancas.models.model.Email;
 import co.com.ancas.models.model.People;
@@ -22,6 +23,7 @@ import java.io.IOException;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.when;
@@ -80,5 +82,13 @@ class SendCodeToUnblockPersonAdapterTest {
         //Assert
         assertNotNull(codeArgumentCaptor.getValue());
         assertNotNull(emailArgumentCaptor.getValue());
+    }
+
+    @Test
+    void executeNotFound() {
+        //Arrange
+        when(peopleRepositoryPort.findPeopleByEmail(anyString())).thenReturn(Optional.empty());
+        //Act and Assert
+        assertThrows(NotFoundException.class, () -> sendCodeToUnblockPersonAdapter.execute(personAccess));
     }
 }

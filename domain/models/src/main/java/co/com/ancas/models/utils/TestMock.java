@@ -325,4 +325,11 @@ public class TestMock {
                 .email("pepe@email.com")
                 .build();
     }
+
+    public static PersonCode personCode() {
+        return PersonCode.builder()
+                .email("person@email.com")
+                .code("123456")
+                .build();
+     }
 }
