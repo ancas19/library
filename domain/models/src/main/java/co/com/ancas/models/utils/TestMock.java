@@ -1,5 +1,6 @@
 package co.com.ancas.models.utils;
 
+import co.com.ancas.models.enums.Constants;
 import co.com.ancas.models.model.*;
 
 import java.time.LocalDate;
@@ -97,5 +98,85 @@ public class TestMock {
                  .idImage(1L)
                  .id(1L)
                  .build();
+     }
+
+     public static Book book(){
+         return Book.builder()
+                 .id(1L)
+                 .title("One Hundred Years of Solitude")
+                 .isbn("978-0-307-27789-1")
+                 .authorId(1L) // Reference to an author stored elsewhere
+                 .genreId(1l)
+                 .publishDate(LocalDate.of(1967, 5, 30))
+                 .available("YES")
+                 .availableCopies(5)
+                 .imageId(101L)
+                    .blurb("A novel by Colombian author Gabriel García Márquez")
+                 .build();
+     }
+
+     public static AvailableCopiesUpdate availableCopiesUpdate(){
+         return AvailableCopiesUpdate.builder()
+                 .bookId(1L)
+                 .copies(2)
+                 .action(Constants.DISCOUNT)
+                 .build();
+     }
+
+     public static BookCreation bookCreation(){
+         return BookCreation.builder()
+                 .title("Alice's Adventures in Wonderland")
+                 .isbn("978-0-307-27789-1")
+                 .author("Lewis Carroll")
+                 .genre("Fantasy")
+                 .publishDate(LocalDate.of(1967, 5, 30))
+                 .available("YES")
+                 .availableCopies(5)
+                 .blurb("A novel by Colombian author Gabriel García Márquez")
+                 .nameFile("cover.jpg")
+                 .base64("base64EncodedStringHere")
+                 .build();
+     }
+
+     public static Genre genre(){
+         return Genre.builder()
+                 .id(1L)
+                 .value("Fantasy")
+                 .build();
+     }
+
+    public static BookInformation bookInformation() {
+         return BookInformation.builder()
+                 .id(1L)
+                 .title("One Hundred Years of Solitude")
+                 .isbn("978-0-307-27789-1")
+                 .author("Gabriel García Márquez")
+                 .genre("Fantasy")
+                 .publishDate(LocalDate.of(1967, 5, 30))
+                 .availableCopies(5)
+                 .blurb("A novel by Colombian author Gabriel García Márquez")
+                 .bookImage("https://example.com/images/one-hundred-years.jpg") // URL or base64 string
+                 .build();
+    }
+
+    public static BookSearchCriteria bookSearchCriteria() {
+            return BookSearchCriteria.builder()
+                    .search("One Hundred Years of Solitude")
+                    .page(1)
+                    .size(10)
+                    .build();
+     }
+
+    public static BookUpdate bookUpdate() {
+        return BookUpdate.builder()
+                .id(1L)
+                .title("One Hundred Years of Solitude")
+                .isbn("978-0-307-27789-1")
+                .author("Paulo Coelho")
+                .genre("Fantasy")
+                .publishDate(LocalDate.of(1967, 5, 30))
+                .availableCopies(5)
+                .blurb("A novel by Colombian author Paul Coelho")
+                .build();
      }
 }

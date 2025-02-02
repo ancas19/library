@@ -1,10 +1,12 @@
 package co.com.ancas.uses_cases.loans;
 
+import co.com.ancas.models.enums.Constants;
 import co.com.ancas.models.enums.Messages;
 import co.com.ancas.models.exceptions.BadRequestException;
 import co.com.ancas.models.exceptions.NotFoundException;
 import co.com.ancas.models.model.*;
 import co.com.ancas.models.repositories.LoanRepositoryPort;
+import co.com.ancas.uses_cases.books.ChangeCopiesAvailablesPerBookAdapter;
 import co.com.ancas.uses_cases.interfaces.IUseCase;
 import co.com.ancas.uses_cases.user.FindUserAndMembershipInfoByUserIdAdapter;
 import jakarta.mail.MessagingException;
@@ -23,6 +25,7 @@ import static co.com.ancas.models.enums.Constants.YES;
 public class ReturnLoanAdapter implements IUseCase<List<LoanReturn>, LoanReturnResult> {
     private final LoanRepositoryPort loanRepositoryPort;
     private final VerifyUserIdDifferentAdapter verifyUserIdDifferentAdapter;
+    private final ChangeCopiesAvailablesPerBookAdapter changeCopiesAvailablesPerBookAdapter;
     private final FindUserAndMembershipInfoByUserIdAdapter findUserAndMembershipInfoByUserIdAdapter;
 
     @Override
@@ -43,6 +46,11 @@ public class ReturnLoanAdapter implements IUseCase<List<LoanReturn>, LoanReturnR
             totalDelayedDays += paid?loan.getDaysDelayed():0;
             totalFine += paid?loan.getFine():0.0;
             loanRepositoryPort.save(loan);
+            changeCopiesAvailablesPerBookAdapter.execute(AvailableCopiesUpdate.builder()
+                    .bookId(loan.getBookId())
+                    .copies(1)
+                    .action(Constants.INCREASE)
+                    .build());
         }
         return LoanReturnResult.builder()
                 .delayedDays(totalDelayedDays)

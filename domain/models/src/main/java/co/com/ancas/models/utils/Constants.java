@@ -8,10 +8,10 @@ public class Constants {
     private Constants() {
     }
     public static final String PHONE ="^\\+[1-9][0-9]{1,3}[0-9]{6,14}$" ;
-    public static final String ISBN ="\"^(?:\\\\d{9}X|\\\\d{10}|\\\\d{13})$";
+    public static final String ISBN ="^(?:97[89])?\\d{9}(\\d|X)$";
     public static final String LETTERS_AND_NUMBERS ="^[0-9A-ZÁÉÍÓÚÑ ]+$";
     public static final String LETTERS ="^[A-ZÁÉÍÓÚÑ ]+$";
-    public static final String LETTERS_AND_SPECIAL_CHARACTERS ="^[a-zA-ZÁÉÍÓÚÑáéíóúñ0-9., @()_-]+$";
+    public static final String LETTERS_AND_SPECIAL_CHARACTERS ="^[a-zA-ZÁÉÍÓÚÑáéíóúñ0-9., @()_'’_-]+$";
     public static final String USERNAME="^[A-Z0-9.]+$";
     public static final String NATIONALITY="^[A-Z ]+$";
     public static final String NAME_FILE="^[a-zA-Z0-9.-_ ]+$";

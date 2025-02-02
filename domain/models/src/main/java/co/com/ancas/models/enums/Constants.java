@@ -33,7 +33,8 @@ public enum Constants {
     FILE_CORRECT("FILE_CORRECT"),
     MEMBERSHIP("MEMBERSHIP"),
     SUBJECT_MEMBERSHIP("Membership"),
-    AUTHORIZATION("Authorization"),;
+    AUTHORIZATION("Authorization"),
+    INCREASE("INCREASE"),;
 
     private final String constant;
 

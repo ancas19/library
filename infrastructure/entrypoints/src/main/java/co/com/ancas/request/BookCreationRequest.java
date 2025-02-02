@@ -19,7 +19,7 @@ public class BookCreationRequest {
     private String title;
     @NotNull
     @NotEmpty
-    @Pattern(regexp =Constants.ISBN, message = "ISBN must have 10 or 13 digits")
+    @Pattern(regexp =Constants.ISBN, message = Constants.ISBN_INVALID)
     private String isbn;
     @NotNull
     @Past

@@ -24,7 +24,6 @@ import java.util.Base64;
 import java.util.List;
 
 import static co.com.ancas.models.enums.Constants.*;
-import static co.com.ancas.models.enums.Constants.SUBJECT_FILES_PROCESSED;
 
 @Slf4j
 @Component
