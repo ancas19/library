@@ -1,5 +1,6 @@
 package co.com.ancas.uses_cases.membership;
 
+import co.com.ancas.models.exceptions.NotFoundException;
 import co.com.ancas.models.repositories.MembershipRepositoryPort;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -34,6 +35,6 @@ class FindIdMembershipByNameAdapterTest {
         //Arrange
         when(membershipRepositoryPort.findIdMembershipByName(anyString())).thenReturn(null);
         //Act
-        assertThrows(NullPointerException.class, () -> findIdMembershipByNameAdapter.execute("Membership"));
+        assertThrows(NotFoundException.class, () -> findIdMembershipByNameAdapter.execute("Membership"));
     }
 }

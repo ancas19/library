@@ -1,5 +1,6 @@
 package co.com.ancas.uses_cases.membership;
 
+import co.com.ancas.models.exceptions.NotFoundException;
 import co.com.ancas.models.model.Membership;
 import co.com.ancas.models.repositories.MembershipRepositoryPort;
 import co.com.ancas.models.utils.TestMock;
@@ -44,6 +45,6 @@ class FindMembershipByIdAdapterTest {
         //Arrange
         when(membershipRepositoryPort.findMembershipById(1L)).thenReturn(Optional.empty());
         //Act
-        assertThrows(NullPointerException.class, () -> findMembershipByIdAdapter.execute(1L));
+        assertThrows(NotFoundException.class, () -> findMembershipByIdAdapter.execute(1L));
     }
 }
