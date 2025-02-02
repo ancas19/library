@@ -5,7 +5,7 @@ import jakarta.mail.MessagingException;
 import java.io.IOException;
 
 @FunctionalInterface
-public interface IUseCase<INPUT, OUTPUT> {
+public interface IUseCase<Input, Output> {
 
-    OUTPUT execute(INPUT input) throws MessagingException, IOException;
+    Output execute(Input input) throws MessagingException, IOException;
 }
