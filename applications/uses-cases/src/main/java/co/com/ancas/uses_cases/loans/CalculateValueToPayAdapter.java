@@ -76,7 +76,7 @@ public class CalculateValueToPayAdapter  implements IUseCase<String,List<LoanRet
             return 0;
         }
         int delayedDays= (int) (loan.getReturnDate().toEpochDay()-loan.getDueDate().toEpochDay());
-        return delayedDays>userMembershipInfoFound.getGracePeriodDays()?delayedDays:0;
+        return delayedDays>userMembershipInfoFound.getGracePeriodDays()?(delayedDays- userMembershipInfoFound.getGracePeriodDays()):0;
     }
 
 }

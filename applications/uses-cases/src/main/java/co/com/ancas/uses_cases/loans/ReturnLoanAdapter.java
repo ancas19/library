@@ -78,7 +78,7 @@ public class ReturnLoanAdapter implements IUseCase<List<LoanReturn>, LoanReturnR
             return 0;
         }
         int delayedDays= (int) (loan.getReturnDate().toEpochDay()-loan.getDueDate().toEpochDay());
-        return delayedDays>userMembershipInfoFound.getGracePeriodDays()?delayedDays:0;
+        return  delayedDays>userMembershipInfoFound.getGracePeriodDays()?(delayedDays- userMembershipInfoFound.getGracePeriodDays()):0;
     }
 
     private LoanReturn findLoanReturn(List<LoanReturn> loans, Loan loan) {

@@ -1,6 +1,7 @@
 package co.com.ancas.models.utils;
 
 import co.com.ancas.models.enums.Constants;
+import co.com.ancas.models.enums.TypeSearch;
 import co.com.ancas.models.model.*;
 
 import java.time.LocalDate;
@@ -330,6 +331,48 @@ public class TestMock {
         return PersonCode.builder()
                 .email("person@email.com")
                 .code("123456")
+                .build();
+     }
+
+    public static Loan loan() {
+        return Loan.builder()
+                .id(1L)
+                .userId(123L)
+                .bookId(456L)
+                .loanDate(LocalDate.now().minusWeeks(3))
+                .dueDate(null)
+                .returnDate(null) // Not returned yet
+                .daysDelayed(0)
+                .comments("No issues so far")
+                .fine(0.0)
+                .paid("No")
+                .build();
+     }
+
+    public static LoanInformation loanInformation() {
+        return LoanInformation.builder()
+                .id(1L)
+                .isbn("978-1234567890")
+                .title("Spring Framework Essentials")
+                .loanDate(LocalDate.now())
+                .dueDate(LocalDate.now().plusWeeks(2))
+                .returnDate(null) // Not returned yet
+                .daysDelayed(0)
+                .comments("No issues so far")
+                .fine(0.0)
+                .paid("No")
+                .build();
+     }
+
+    public static LoanSearchByUser loanSearchByUser() {
+        return LoanSearchByUser.builder()
+                .dni("12345678A")
+                .searchBook("Spring Framework")
+                .startDate(LocalDate.now().minusMonths(1))
+                .finishDate(LocalDate.now())
+                .typeSearch(TypeSearch.ACTIVE)
+                .page(1)
+                .size(10)
                 .build();
      }
 }
