@@ -247,7 +247,7 @@ public class TestMock {
                 .email("johndoe@example.com")
                 .membershipType("Premium")
                 .loanLimit(5)
-                .loanPeriodDays(14)
+                .loanPeriodDays(8)
                 .gracePeriodDays(3)
                 .dailyFine(1.50)
                 .build();
@@ -339,8 +339,8 @@ public class TestMock {
                 .id(1L)
                 .userId(123L)
                 .bookId(456L)
-                .loanDate(LocalDate.now().minusWeeks(3))
-                .dueDate(null)
+                .loanDate(LocalDate.now().minusWeeks(2))
+                .dueDate(LocalDate.now().minusDays(10))
                 .returnDate(null) // Not returned yet
                 .daysDelayed(0)
                 .comments("No issues so far")

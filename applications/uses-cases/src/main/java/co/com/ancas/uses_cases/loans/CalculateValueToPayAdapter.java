@@ -50,7 +50,7 @@ public class CalculateValueToPayAdapter  implements IUseCase<String,List<LoanRet
             );
         }
         loansFound=this.loanRepositoryPort.findLoanNoPaidByDni(dniUser);
-        if(loansFound.isEmpty()){
+        if(!loansFound.isEmpty()){
             addLoansNoPaid(loanReturns,loansFound);
         }
         return loanReturns;
