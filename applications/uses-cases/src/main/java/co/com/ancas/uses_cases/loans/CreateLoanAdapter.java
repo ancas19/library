@@ -44,11 +44,11 @@ public class CreateLoanAdapter implements IUseCase<LoanCreation,List<LoanDetails
         }
         Integer loansActive = loanRepositoryPort.countLoansActive(userMembershipInfoFound.getUserId());
         if(loansActive>=userMembershipInfoFound.getLoanLimit()){
-            throw new MessagingException(Messages.MESSAGE_ERROR_LOAN_LIMIT.getMessage());
+            throw new BadRequestException(Messages.MESSAGE_ERROR_LOAN_LIMIT.getMessage());
         }
         loansActive+=loanCreation.getDetails().size();
         if (loansActive>userMembershipInfoFound.getLoanLimit()){
-            throw new MessagingException(Messages.MESSAGE_ERROR_LOAN_LIMIT.getMessage());
+            throw new BadRequestException(Messages.MESSAGE_ERROR_LOAN_LIMIT.getMessage());
         }
         List<LoanDetails> loansCreated= new ArrayList<>();
         for (LoanInfo loanInfo: loanCreation.getDetails()){
@@ -70,7 +70,7 @@ public class CreateLoanAdapter implements IUseCase<LoanCreation,List<LoanDetails
     private LoanDetails processLoan(LoanInfo loanInfo, UserMembershipInfo userMembershipInfoFound) throws MessagingException, IOException {
         Book bookFound =findBookByIsbnAdapter.execute(loanInfo.getIsbn());
         if(bookFound.getAvailableCopies()<=0){
-            throw new MessagingException(Messages.MESSAGE_ERROR_BOOK_NOT_AVAILABLE.getMessage().formatted("%s-%s".formatted(bookFound.getIsbn(),bookFound.getTitle())));
+            throw new BadRequestException(Messages.MESSAGE_ERROR_BOOK_NOT_AVAILABLE.getMessage().formatted("%s-%s".formatted(bookFound.getIsbn(),bookFound.getTitle())));
         }
         boolean isBookLoaned = loanRepositoryPort.existsByBookIdAndReturnDateIsNull(bookFound.getId(),userMembershipInfoFound.getUserId());
         if(isBookLoaned){
