@@ -30,9 +30,9 @@ import java.util.Objects;
 @RequiredArgsConstructor
 public class LoanAppService {
     private final CreateLoanAdapter createLoanAdapter;
+    private final ReturnLoanAdapter returnLoanAdapter;
     private final CurrentUserAppService currentUserAppService;
     private final FindLoandByUserAdapter findLoandByUserAdapter;
-    private final ReturnLoanAdapter returnLoanAdapter;
     private final CalculateValueToPayAdapter calculateValueToPayAdapter;
 
     @Transactional(value = "libraryTransactionManager",rollbackFor = Exception.class)
@@ -52,7 +52,7 @@ public class LoanAppService {
     }
 
     @Transactional(value = "libraryTransactionManager",rollbackFor = Exception.class)
-    public PaginationResponse<LoanInformationResponse> findLoansByUser(@Valid LoanSearchByUserRequest request, Integer page, Integer size) throws MessagingException, IOException {
+    public PaginationResponse<LoanInformationResponse> findLoansByUser( LoanSearchByUserRequest request, Integer page, Integer size) throws MessagingException, IOException {
         currentUserAppService.verifyCurrentUserDniAndRole(request.getDni());
         request.setStartDate(startDateNull(request.getStartDate()));
         request.setFinishDate(finishDateNull(request.getFinishDate()));
@@ -71,7 +71,7 @@ public class LoanAppService {
     }
 
     private void verifyDates(LocalDate startDate, LocalDate finishDate) {
-        if (startDate.isAfter(finishDate)) {
+        if (startDate.isBefore(finishDate)) {
             throw new BadRequestException(Messages.MESSAGE_ERROR_DATE_START_AFTER_FINISH.getMessage());
         }
     }
@@ -81,7 +81,7 @@ public class LoanAppService {
     }
 
     private LocalDate startDateNull(LocalDate startDate) {
-        return Objects.isNull(startDate) ? LocalDate.now().minusMonths(12) : startDate;
+        return Objects.isNull(startDate) ? LocalDate.now().minusMonths(1) : startDate;
     }
 
 
