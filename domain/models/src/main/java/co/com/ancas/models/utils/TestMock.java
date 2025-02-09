@@ -5,6 +5,7 @@ import co.com.ancas.models.enums.TypeSearch;
 import co.com.ancas.models.model.*;
 
 import java.time.LocalDate;
+import java.util.*;
 
 public class TestMock {
      private TestMock () {
@@ -373,6 +374,46 @@ public class TestMock {
                 .typeSearch(TypeSearch.ACTIVE)
                 .page(1)
                 .size(10)
+                .build();
+     }
+
+    public static LoanCreation loanCreation() {
+        LoanCreation loan=LoanCreation.builder()
+                .dni("23232323")
+                .details(new ArrayList<>())
+                .build();
+        loan.getDetails().add(
+                LoanInfo.builder()
+                        .isbn("978-1234567890")
+                        .loanDate(LocalDate.now())
+                        .build()
+        );
+        return loan;
+     }
+
+    public static LoanReturn loanReturn() {
+        return LoanReturn.builder()
+                .idLoan(1L)
+                .fine(10.5)
+                .comment("No issues so far")
+                .build();
+     }
+
+    public static Email email() {
+         return Email.builder()
+                    .recipient(List.of("main@correo.com"))
+                    .subject("Subject")
+                    .body("Body")
+                 .build();
+    }
+
+    public static CurrentUserInformation currentUserInformation() {
+        return CurrentUserInformation.builder()
+                .username("johndoe")
+                .userId(1L)
+                .role("ADMIN")
+                .personId(1L)
+                .dni("12345678")
                 .build();
      }
 }
