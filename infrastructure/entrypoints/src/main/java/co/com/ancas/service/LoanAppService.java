@@ -77,11 +77,11 @@ public class LoanAppService {
     }
 
     private LocalDate finishDateNull(LocalDate finishDate) {
-        return Objects.isNull(finishDate) ? LocalDate.now() : finishDate;
+        return Objects.isNull(finishDate) ? LocalDate.now().minusMonths(1) : finishDate;
     }
 
     private LocalDate startDateNull(LocalDate startDate) {
-        return Objects.isNull(startDate) ? LocalDate.now().minusMonths(1) : startDate;
+        return Objects.isNull(startDate) ? LocalDate.now(): startDate;
     }
 
 
