@@ -16,7 +16,6 @@ import co.com.ancas.uses_cases.loans.FindLoandByUserAdapter;
 import co.com.ancas.uses_cases.loans.ReturnLoanAdapter;
 import co.com.ancas.utils.Pagination;
 import jakarta.mail.MessagingException;
-import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
