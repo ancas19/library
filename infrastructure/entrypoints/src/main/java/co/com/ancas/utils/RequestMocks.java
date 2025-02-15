@@ -18,10 +18,10 @@ public class RequestMocks {
     public static PeopleRequest peopleRequest(){
         return PeopleRequest.builder()
                 .dni("12345678")
-                .firstName("John")
-                .lastName("Doe")
+                .firstName("JOHN")
+                .lastName("DOE")
                 .email("john.doe@example.com")
-                .phone("1234567890")
+                .phone("+1234567890")
                 .userType("ADMIN")
                 .build();
     }
@@ -68,8 +68,8 @@ public class RequestMocks {
         return PasswordRecoveryRequest.builder()
                 .email("email@email.com")
                 .code("123456")
-                .password("password")
-                .passwordRepeat("password")
+                .password("Password123@")
+                .passwordRepeat("Password123@")
                 .build();
     }
 
@@ -107,15 +107,15 @@ public class RequestMocks {
 
     public static AuthLoginRequest authLoginRequest() {
         return AuthLoginRequest.builder()
-                .username("username")
-                .password("password")
+                .username("USERNAME.TODOS1")
+                .password("Password123@")
                 .build();
     }
 
     public static AuthorCreationRequest authorCreationRequest() {
         return AuthorCreationRequest.builder()
-                .fullName("Gabriel García Márquez")
-                .nationality("Colombian")
+                .fullName("GABRIEL GARCIA MARQUEZ")
+                .nationality("COLOMBIA")
                 .birthdate(LocalDate.of(1927, 3, 6))
                 .bio("Renowned author of magical realism.")
                 .nameFile("profile_picture.jpg")
@@ -132,9 +132,10 @@ public class RequestMocks {
     public static AuthorInformationRequest authorInformationRequest() {
         return AuthorInformationRequest.builder()
                 .id(1L)
-                .fullName("Gabriel García Márquez")
-                .nationality("Colombian")
+                .fullName("TOMAS CARRASQUILLA")
+                .nationality("COLOMBIA")
                 .birthdate(LocalDate.of(1927, 3, 6))
+                .bio("Renowned author of magical realism.")
                 .build();
     }
 
@@ -142,16 +143,17 @@ public class RequestMocks {
         return FileRequest.builder()
                 .nameFile("authors.csv")
                 .base64("base64EncodedStringHere")
+                .extension("csv")
                 .build();
     }
 
     public static  BookCreationRequest bookCreationRequest(){
         return BookCreationRequest.builder()
-                .title("One Hundred Years of Solitude")
-                .isbn("978-3-16-148410-0")
+                .title("ALICES ADVENTURES IN WONDERLAND")
+                .isbn("9783161484100")
                 .publishDate(LocalDate.of(1967, 5, 30))
-                .author("Gabriel García Márquez")
-                .genre("Magical Realism")
+                .author("PETER PAN")
+                .genre("FAIRYTALE")
                 .availableCopies(10)
                 .available("YES")
                 .blurb("A masterpiece of Latin American literature.")
@@ -163,22 +165,23 @@ public class RequestMocks {
     public static BookSearchCriteriaRequest bookSearchCriteriaRequest(){
         return BookSearchCriteriaRequest.builder()
                 .search("search")
-                .genre("Magical Realism")
-                .author("Gabriel García Márquez")
+                .genre("ROMANTIC")
+                .author("GA")
                 .build();
     }
 
     public static BookUpdateRequest bookUpdateRequest(){
         return BookUpdateRequest.builder()
                 .id(1L)
-                .title("One Hundred Years of Solitude")
-                .isbn("978-3-16-148410-0")
+                .title("PRINCIPE")
+                .isbn("9783161484100")
                 .publishDate(LocalDate.of(1967, 5, 30))
-                .author("Gabriel García Márquez")
-                .genre("Magical Realism")
+                .author("TOMAS CARRASQUILLA")
+                .genre("ROMANTIC")
                 .availableCopies(10)
                 .available("YES")
                 .blurb("A masterpiece of Latin American literature.")
                 .build();
     }
+
 }

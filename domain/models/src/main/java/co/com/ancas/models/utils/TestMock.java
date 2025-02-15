@@ -182,17 +182,6 @@ public class TestMock {
                 .build();
      }
 
-    public static TokenInformation tokrnInformation() {
-        return TokenInformation.builder()
-                .token("TOKEN")
-                .username("USERNAME")
-                .email("PEPEQUINTE@GMAIL.COM")
-                .dni("12121212")
-                .role("ROLES")
-                .idPersona(1L)
-                .idUser(2L)
-                .build();
-     }
 
     public static Membership membership() {
         return Membership.builder()
@@ -416,4 +405,6 @@ public class TestMock {
                 .dni("12345678")
                 .build();
      }
+
+
 }

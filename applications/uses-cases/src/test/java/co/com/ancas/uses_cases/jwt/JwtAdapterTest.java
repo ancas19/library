@@ -35,7 +35,7 @@ class JwtAdapterTest {
     void setUp() {
         ReflectionTestUtils.setField(jwtAdapter,"secret","sdlkfjjjlkiojsadfsldkfansdlkfnklsdfjsdfjsdlkfjlsdkfj");
         ReflectionTestUtils.setField(jwtAdapter,"expirationTime",8);
-        tokenInformation= TestMock.tokrnInformation();
+        tokenInformation= TestMock.tokenInformation();
         tokenInformationArgumentCaptor= ArgumentCaptor.forClass(TokenInformation.class);
     }
 

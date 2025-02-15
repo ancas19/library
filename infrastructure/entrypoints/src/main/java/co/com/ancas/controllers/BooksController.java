@@ -21,7 +21,6 @@ import java.io.IOException;
 
 @Validated
 @RestController
-@Tag(name = "Books")
 @RequiredArgsConstructor
 @RequestMapping("/v1.0/books")
 public class BooksController {
