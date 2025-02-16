@@ -50,6 +50,7 @@ class RecoveryPasswordAdapterTest {
     @Test
     void execute() throws MessagingException, IOException {
         //Arrange
+        code.setCode(passwordRecovery.getCode());
         when(userRepositoryPort.findUserByEmail(anyString())).thenReturn(Optional.of(user));
         when(codeRepositoryPort.find(anyString())).thenReturn(code);
         when(passwordEncoder.encode(anyString())).thenReturn("password");

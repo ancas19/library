@@ -49,6 +49,7 @@ class UnblockPeopleAdapterTest {
     @Test
     void execute() throws MessagingException, IOException {
         // Arrange
+        code.setCode(personCode.getCode());
         when(codeRepositoryPort.find(anyString())).thenReturn(code);
         when(peopleRepositoryPort.findPeopleByEmail(anyString())).thenReturn(Optional.of(people));
         doNothing().when(codeRepositoryPort).delete(any());
@@ -72,6 +73,7 @@ class UnblockPeopleAdapterTest {
     @Test
     void executePeopleNotFound() {
         // Arrange
+        code.setCode(personCode.getCode());
         when(codeRepositoryPort.find(anyString())).thenReturn(code);
         when(peopleRepositoryPort.findPeopleByEmail(anyString())).thenReturn(Optional.empty());
         // Act and Assert
