@@ -11,6 +11,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.InternalAuthenticationServiceException;
 import org.springframework.security.authorization.AuthorizationDeniedException;
@@ -49,7 +50,7 @@ class CustomExceptionHandlerTest {
         ResponseEntity<GeneralResponse<ErrorResponse>> result = customExceptionHandler.handelGeneralException(exception,request);
         //Assert
         assertNotNull(result);
-        assertEquals(500, result.getStatusCode());
+        assertEquals(HttpStatus.INTERNAL_SERVER_ERROR, result.getStatusCode());
     }
 
     @Test
@@ -61,7 +62,7 @@ class CustomExceptionHandlerTest {
         ResponseEntity<GeneralResponse<ErrorResponse>> result = customExceptionHandler.handleAuthorizationDeniedException(authorizationDeniedException,request);
         //Assert
         assertNotNull(result);
-        assertEquals(403, result.getStatusCode());
+        assertEquals(HttpStatus.FORBIDDEN, result.getStatusCode());
     }
 
 
@@ -74,7 +75,7 @@ class CustomExceptionHandlerTest {
         ResponseEntity<GeneralResponse<ErrorResponse>> result = customExceptionHandler.handleInternalAuthenticationServiceException(exception,request);
         //Assert
         assertNotNull(result);
-        assertEquals(401, result.getStatusCode());
+        assertEquals(HttpStatus.UNAUTHORIZED, result.getStatusCode());
     }
 
     @Test
@@ -86,7 +87,7 @@ class CustomExceptionHandlerTest {
         ResponseEntity<GeneralResponse<ErrorResponse>> result = customExceptionHandler.handleMethodNotSupported(exception,request);
         //Assert
         assertNotNull(result);
-        assertEquals(405, result.getStatusCode());
+        assertEquals(HttpStatus.METHOD_NOT_ALLOWED, result.getStatusCode());
     }
 
     @Test
@@ -98,7 +99,7 @@ class CustomExceptionHandlerTest {
         ResponseEntity<GeneralResponse<ErrorResponse>> result = customExceptionHandler.handleNoHandlerFoundException(exception,request);
         //Assert
         assertNotNull(result);
-        assertEquals(401, result.getStatusCode());
+        assertEquals(HttpStatus.UNAUTHORIZED, result.getStatusCode());
     }
 
     @Test
@@ -110,7 +111,7 @@ class CustomExceptionHandlerTest {
         ResponseEntity<GeneralResponse<ErrorResponse>> result = customExceptionHandler.handleForbiddenException(exception,request);
         //Assert
         assertNotNull(result);
-        assertEquals(403, result.getStatusCode());
+        assertEquals(HttpStatus.FORBIDDEN, result.getStatusCode());
     }
 
     @Test
@@ -122,7 +123,7 @@ class CustomExceptionHandlerTest {
         ResponseEntity<GeneralResponse<ErrorResponse>> result = customExceptionHandler.handleNotFoundException(exception,request);
         //Assert
         assertNotNull(result);
-        assertEquals(404, result.getStatusCode());
+        assertEquals(HttpStatus.NOT_FOUND, result.getStatusCode());
     }
 
     @Test
@@ -134,7 +135,7 @@ class CustomExceptionHandlerTest {
         ResponseEntity<GeneralResponse<ErrorResponse>> result = customExceptionHandler.handleBadRequestException(exception,request);
         //Assert
         assertNotNull(result);
-        assertEquals(400, result.getStatusCode());
+        assertEquals(HttpStatus.BAD_REQUEST, result.getStatusCode());
     }
 
     @Test
@@ -147,6 +148,6 @@ class CustomExceptionHandlerTest {
         ResponseEntity<GeneralResponse<Map<String,String>>> result = customExceptionHandler.handleMethodArgumentNotValidException(methodArgumentNotValidException,request);
         //Assert
         assertNotNull(result);
-        assertEquals(400, result.getStatusCode());
+        assertEquals(HttpStatus.BAD_REQUEST, result.getStatusCode());
     }
 }
