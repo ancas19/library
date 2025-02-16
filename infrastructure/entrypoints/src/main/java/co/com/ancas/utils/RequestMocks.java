@@ -9,9 +9,9 @@ public class RequestMocks {
     private RequestMocks() {}
     public  static ChangePasswordRequest changePasswordRequest(){
         return ChangePasswordRequest.builder()
-                .username("username")
-                .password("password")
-                .confirmPassword("password")
+                .username("USERNAME.PEPE1")
+                .password("Password123@")
+                .confirmPassword("Password123@")
                 .build();
     }
 
@@ -45,9 +45,9 @@ public class RequestMocks {
         return PeopleInformationRequest.builder()
                 .id(1L)
                 .dni("12345678")
-                .firstName("John")
-                .lastName("Doe")
-                .phone("1234567890")
+                .firstName("JOHN")
+                .lastName("DOE")
+                .phone("+1234567890")
                 .build();
     }
 
@@ -184,4 +184,9 @@ public class RequestMocks {
                 .build();
     }
 
+    public static DniRequest dniRequest() {
+        return DniRequest.builder()
+                .dni("12345678")
+                .build();
+    }
 }

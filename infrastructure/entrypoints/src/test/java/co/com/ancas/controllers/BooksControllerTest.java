@@ -25,6 +25,7 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import java.util.List;
 
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
@@ -97,6 +98,44 @@ class BooksControllerTest {
         ResultActions response=mockMvc.perform(put(url+"/information")
                         .contentType("application/json")
                         .content(objectMapper.writeValueAsString(RequestMocks.bookUpdateRequest())));
+        // Assert
+        response.andExpect(status().isOk())
+                .andDo(print());
+    }
+
+    @Test
+    void updateImageBook() throws Exception {
+        // Arrange
+        when(booksAppservice.updateImageBook(any())).thenReturn(new BookInformationResponse());
+        // Act
+        ResultActions response=mockMvc.perform(put(url+"/image")
+                        .contentType("application/json")
+                        .content(objectMapper.writeValueAsString(RequestMocks.imageUploadRequest())));
+        // Assert
+        response.andExpect(status().isOk())
+                .andDo(print());
+    }
+
+    @Test
+    void deleteBook() throws Exception {
+        // Arrange
+        doNothing().when(booksAppservice).changeBookStatus(any());
+
+        // Act
+        ResultActions response=mockMvc.perform(delete(url+"/1"));
+        // Assert
+        response.andExpect(status().isOk())
+                .andDo(print());
+    }
+
+    @Test
+    void uploadFiles() throws Exception {
+        // Arrange
+        doNothing().when(booksAppservice).uploadBooksFiles(any());
+        // Act
+        ResultActions response=mockMvc.perform(post(url+"/files")
+                        .contentType("application/json")
+                        .content(objectMapper.writeValueAsString(RequestMocks.fileRequest())));
         // Assert
         response.andExpect(status().isOk())
                 .andDo(print());
