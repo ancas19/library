@@ -25,12 +25,12 @@ public class TestMock {
                  .dni("123456789")
                  .firstName("John")
                  .lastName("Doe")
-                 .email("john.doe@example.com")
+                 .email("john@example.com")
                  .phone("123-456-7890")
                  .role("Admin")
-                 .membership("Premium")
+                 .membership("NORMAL")
                  .profileImage("image.jpg")
-                 .username("johndoe")
+                 .username("pepegrillo")
                  .status("Active")
                  .build();
      }
@@ -50,7 +50,7 @@ public class TestMock {
                  .birthdate(LocalDate.of(1927, 3, 6))
                  .bio("Colombian dsdsdsdsdsd, short-story writer, and journalist, known for 'One Hundred Years of Solitude'.")
                  .nameFile("profile.jpg")
-                 .base64("base64EncodedStringHere")
+                 .base64("Baskljhkljhasdlfkdjhwiukdfjsdhlkjfhsdfklj")
                  .build();
      }
 
@@ -199,8 +199,8 @@ public class TestMock {
                 .id(1L)
                 .firstName("John")
                 .lastName("Doe")
-                .email("john.doe@example.com")
-                .userType("ADMIN")
+                .email("duque.doe@example.com")
+                .userType("PROFESSOR")
                 .build();
     }
 
@@ -208,8 +208,8 @@ public class TestMock {
         return User.builder()
                 .id(1L)
                 .personId(1L)
-                .username("johndoe")
-                .password("password")
+                .username("yuquita")
+                .password("password1212")
                 .roleId(1L)
                 .membershipId(1L)
                 .emailVerified(false)
@@ -233,9 +233,9 @@ public class TestMock {
     public static UserMembershipInfo userMembershipInfo() {
         return UserMembershipInfo.builder()
                 .userId(1L)
-                .username("johndoe")
+                .username("pepere")
                 .email("johndoe@example.com")
-                .membershipType("Premium")
+                .membershipType("PREMIUM")
                 .loanLimit(5)
                 .loanPeriodDays(8)
                 .gracePeriodDays(3)
@@ -246,9 +246,9 @@ public class TestMock {
     public static UserInformation userInformation() {
         return UserInformation.builder()
                 .id(1L)
-                .username("johndoe")
+                .username("aguacate")
                 .role("ADMIN")
-                .membership("Premium")
+                .membership("FAKE")
                 .emailVerified(true)
                 .changePassword(false)
                 .build();
@@ -257,24 +257,24 @@ public class TestMock {
     public static Code code() {
         return Code.builder()
                 .email("PEPEQINTE@GMAIL.COM")
-                .code("123456")
+                .code("1234569")
                 .build();
      }
 
     public static PasswordRecovery passwordRecovery() {
         return PasswordRecovery.builder()
                 .email("PEPEQINTE@GMAIL.COM")
-                .code("123456")
-                .password("password")
-                .passwordRepeat("password")
+                .code("54128")
+                .password("pepe12")
+                .passwordRepeat("pepe12")
                 .build();
      }
 
     public static UpdatePassword updatePassword() {
         return UpdatePassword.builder()
-                .username("johndoe")
-                .password("password")
-                .confirmPassword("password")
+                .username("pollito")
+                .password("jojo13")
+                .confirmPassword("jojo13")
                 .build();
      }
 
@@ -296,7 +296,7 @@ public class TestMock {
                .dni("12345678A")
                .firstName("John")
                .lastName("Doe")
-               .email("john.doe@example.com")
+               .email("juan.doe@example.com")
                .phone("123-456-7890")
                .userType("Admin")
                .status("Active")
@@ -320,7 +320,7 @@ public class TestMock {
     public static PersonCode personCode() {
         return PersonCode.builder()
                 .email("person@email.com")
-                .code("123456")
+                .code("786541")
                 .build();
      }
 
@@ -348,7 +348,7 @@ public class TestMock {
                 .dueDate(LocalDate.now().plusWeeks(2))
                 .returnDate(null) // Not returned yet
                 .daysDelayed(0)
-                .comments("No issues so far")
+                .comments("No problems so far")
                 .fine(0.0)
                 .paid("No")
                 .build();
@@ -384,7 +384,7 @@ public class TestMock {
         return LoanReturn.builder()
                 .idLoan(1L)
                 .fine(10.5)
-                .comment("No issues so far")
+                .comment("There are a lot of pages missing")
                 .build();
      }
 
@@ -398,9 +398,9 @@ public class TestMock {
 
     public static CurrentUserInformation currentUserInformation() {
         return CurrentUserInformation.builder()
-                .username("johndoe")
+                .username("ricardo12")
                 .userId(1L)
-                .role("ADMIN")
+                .role("USER")
                 .personId(1L)
                 .dni("12345678")
                 .build();

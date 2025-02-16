@@ -52,9 +52,9 @@ class JwtRepositoryAdapterTest {
         //Arrange
         when(valueOperations.get(any(String.class))).thenReturn(tokenInformation);
         //Act
-        TokenInformation tokenInformation = jwtRepositoryAdapter.find("key");
+        TokenInformation tokenInformationResponse = jwtRepositoryAdapter.find("key");
         //Assert
-        assertNotNull(tokenInformation);
+        assertNotNull(tokenInformationResponse);
     }
 
 

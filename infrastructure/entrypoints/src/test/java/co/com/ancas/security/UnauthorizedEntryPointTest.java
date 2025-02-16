@@ -11,8 +11,6 @@ import org.springframework.security.core.AuthenticationException;
 
 import java.io.IOException;
 
-import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.verify;

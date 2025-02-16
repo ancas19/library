@@ -69,9 +69,9 @@ class AuthorRepositoryAdapterTest {
         //Arrange
         when(authorRepository.findAuthorById(1L)).thenReturn(Optional.of(authorInformation));
         //Act
-        Optional<AuthorInformation> author = authorRepositoryAdapter.findAuthorById(1L);
+        Optional<AuthorInformation> authorResponse = authorRepositoryAdapter.findAuthorById(1L);
         //Assert
-        assertNotNull(author);
+        assertNotNull(authorResponse);
     }
 
     @Test
@@ -79,9 +79,9 @@ class AuthorRepositoryAdapterTest {
         //Arrange
         when(authorRepository.findById(1L)).thenReturn(Optional.of(authorEntity));
         //Act
-        Optional<Author> author = authorRepositoryAdapter.findById(1L);
+        Optional<Author> authorResponse = authorRepositoryAdapter.findById(1L);
         //Assert
-        assertNotNull(author);
+        assertNotNull(authorResponse);
     }
 
     @Test
@@ -109,9 +109,9 @@ class AuthorRepositoryAdapterTest {
         //Arrange
         when(authorRepository.findByFullName("name")).thenReturn(Optional.of(authorEntity));
         //Act
-        Optional<Author> author = authorRepositoryAdapter.findByFullName("name");
+        Optional<Author> authorResponse = authorRepositoryAdapter.findByFullName("name");
         //Assert
-        assertNotNull(author);
+        assertNotNull(authorResponse);
     }
 
 }

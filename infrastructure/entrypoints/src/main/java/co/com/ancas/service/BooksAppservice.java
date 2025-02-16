@@ -8,7 +8,6 @@ import co.com.ancas.response.PaginationResponse;
 import co.com.ancas.uses_cases.books.*;
 import co.com.ancas.utils.Pagination;
 import jakarta.mail.MessagingException;
-import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Component;

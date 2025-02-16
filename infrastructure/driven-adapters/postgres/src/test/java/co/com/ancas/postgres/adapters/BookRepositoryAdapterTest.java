@@ -88,9 +88,9 @@ class BookRepositoryAdapterTest {
         //Arrange
         when(bookRepository.findBookById(1L)).thenReturn(java.util.Optional.of(bookInformation));
         //Act
-        java.util.Optional<BookInformation> book = bookRepositoryAdapter.findBookInformationById(1L);
+        java.util.Optional<BookInformation> bookResponse = bookRepositoryAdapter.findBookInformationById(1L);
         //Assert
-        assertNotNull(book);
+        assertNotNull(bookResponse);
     }
 
     @Test
@@ -98,9 +98,9 @@ class BookRepositoryAdapterTest {
         //Arrange
         when(bookRepository.findById(1L)).thenReturn(Optional.of(bookEntity));
         //Act
-        Optional<Book> book = bookRepositoryAdapter.findById(1L);
+        Optional<Book> bookResponse = bookRepositoryAdapter.findById(1L);
         //Assert
-        assertNotNull(book);
+        assertNotNull(bookResponse);
     }
 
     @Test
@@ -128,8 +128,8 @@ class BookRepositoryAdapterTest {
         //Arrange
         when(bookRepository.findByIsbn("isbn")).thenReturn(Optional.of(bookEntity));
         //Act
-        Optional<Book> book = bookRepositoryAdapter.findBookByIsbn("isbn");
+        Optional<Book> bookResponse = bookRepositoryAdapter.findBookByIsbn("isbn");
         //Assert
-        assertNotNull(book);
+        assertNotNull(bookResponse);
     }
 }

@@ -1,7 +1,6 @@
 package co.com.ancas.uses_cases.user;
 
 import co.com.ancas.models.enums.Messages;
-import co.com.ancas.models.exceptions.BadRequestException;
 import co.com.ancas.models.exceptions.NotFoundException;
 import co.com.ancas.models.model.UserMembershipInfo;
 import co.com.ancas.models.repositories.UserRepositoryPort;

@@ -12,9 +12,6 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.security.core.AuthenticationException;
 
 import java.io.IOException;
-import java.io.OutputStream;
-
-import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)

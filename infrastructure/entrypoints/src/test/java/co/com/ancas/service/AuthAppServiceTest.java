@@ -1,7 +1,6 @@
 package co.com.ancas.service;
 
 import co.com.ancas.models.model.AuthToken;
-import co.com.ancas.models.utils.TestMock;
 import co.com.ancas.request.AuthLoginRequest;
 import co.com.ancas.response.AuthTokenResponse;
 import co.com.ancas.uses_cases.auth.LoginAdapter;
@@ -35,7 +34,7 @@ class AuthAppServiceTest {
 
     @BeforeEach
     void setUp() {
-        authLoginRequest = RequestMocks.authLoginRequest();;
+        authLoginRequest = RequestMocks.authLoginRequest();
     }
     @Test
     void login() throws MessagingException, IOException {

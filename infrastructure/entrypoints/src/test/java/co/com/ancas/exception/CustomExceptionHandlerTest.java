@@ -49,7 +49,7 @@ class CustomExceptionHandlerTest {
         ResponseEntity<GeneralResponse<ErrorResponse>> result = customExceptionHandler.handelGeneralException(exception,request);
         //Assert
         assertNotNull(result);
-        assertEquals(500, result.getStatusCodeValue());
+        assertEquals(500, result.getStatusCode());
     }
 
     @Test
@@ -61,7 +61,7 @@ class CustomExceptionHandlerTest {
         ResponseEntity<GeneralResponse<ErrorResponse>> result = customExceptionHandler.handleAuthorizationDeniedException(authorizationDeniedException,request);
         //Assert
         assertNotNull(result);
-        assertEquals(403, result.getStatusCodeValue());
+        assertEquals(403, result.getStatusCode());
     }
 
 
@@ -74,7 +74,7 @@ class CustomExceptionHandlerTest {
         ResponseEntity<GeneralResponse<ErrorResponse>> result = customExceptionHandler.handleInternalAuthenticationServiceException(exception,request);
         //Assert
         assertNotNull(result);
-        assertEquals(401, result.getStatusCodeValue());
+        assertEquals(401, result.getStatusCode());
     }
 
     @Test
@@ -86,7 +86,7 @@ class CustomExceptionHandlerTest {
         ResponseEntity<GeneralResponse<ErrorResponse>> result = customExceptionHandler.handleMethodNotSupported(exception,request);
         //Assert
         assertNotNull(result);
-        assertEquals(405, result.getStatusCodeValue());
+        assertEquals(405, result.getStatusCode());
     }
 
     @Test
@@ -98,7 +98,7 @@ class CustomExceptionHandlerTest {
         ResponseEntity<GeneralResponse<ErrorResponse>> result = customExceptionHandler.handleNoHandlerFoundException(exception,request);
         //Assert
         assertNotNull(result);
-        assertEquals(401, result.getStatusCodeValue());
+        assertEquals(401, result.getStatusCode());
     }
 
     @Test
@@ -110,7 +110,7 @@ class CustomExceptionHandlerTest {
         ResponseEntity<GeneralResponse<ErrorResponse>> result = customExceptionHandler.handleForbiddenException(exception,request);
         //Assert
         assertNotNull(result);
-        assertEquals(403, result.getStatusCodeValue());
+        assertEquals(403, result.getStatusCode());
     }
 
     @Test
@@ -122,7 +122,7 @@ class CustomExceptionHandlerTest {
         ResponseEntity<GeneralResponse<ErrorResponse>> result = customExceptionHandler.handleNotFoundException(exception,request);
         //Assert
         assertNotNull(result);
-        assertEquals(404, result.getStatusCodeValue());
+        assertEquals(404, result.getStatusCode());
     }
 
     @Test
@@ -134,7 +134,7 @@ class CustomExceptionHandlerTest {
         ResponseEntity<GeneralResponse<ErrorResponse>> result = customExceptionHandler.handleBadRequestException(exception,request);
         //Assert
         assertNotNull(result);
-        assertEquals(400, result.getStatusCodeValue());
+        assertEquals(400, result.getStatusCode());
     }
 
     @Test
@@ -147,6 +147,6 @@ class CustomExceptionHandlerTest {
         ResponseEntity<GeneralResponse<Map<String,String>>> result = customExceptionHandler.handleMethodArgumentNotValidException(methodArgumentNotValidException,request);
         //Assert
         assertNotNull(result);
-        assertEquals(400, result.getStatusCodeValue());
+        assertEquals(400, result.getStatusCode());
     }
 }

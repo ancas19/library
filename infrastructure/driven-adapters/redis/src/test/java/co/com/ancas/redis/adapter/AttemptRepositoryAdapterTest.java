@@ -47,9 +47,9 @@ class AttemptRepositoryAdapterTest {
         //Arrange
         when(valueOperations.get(any(String.class))).thenReturn(attempt);
         //Act
-        Attempt attempt = attemptRepositoryAdapter.find("key");
+        Attempt attemptResponse = attemptRepositoryAdapter.find("key");
         //Assert
-        assertNotNull(attempt);
+        assertNotNull(attemptResponse);
     }
 
     @Test

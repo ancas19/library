@@ -50,9 +50,9 @@ class CodeRepositoryAdapterTest {
         //Arrange
         when(valueOperations.get(any(String.class))).thenReturn(code);
         //Act
-        Code code = codeRepositoryAdapter.find("key");
+        Code codeResponse = codeRepositoryAdapter.find("key");
         //Assert
-        assertNotNull(code);
+        assertNotNull(codeResponse);
     }
 
     @Test

@@ -98,9 +98,9 @@ class UserRepositoryAdapterTest {
         //Arrange
         when(userRepository.findUserAndMembershipInfo(anyString())).thenReturn(Optional.of(userMembershipInfo));
         //Act
-        Optional<UserMembershipInfo> userMembershipInfo=userRepositoryAdapter.findUserAndMembershipInfo("username");
+        Optional<UserMembershipInfo> userMembershipResponse=userRepositoryAdapter.findUserAndMembershipInfo("username");
         //Assert
-        assertTrue(userMembershipInfo.isPresent());
+        assertTrue(userMembershipResponse.isPresent());
     }
 
 
@@ -109,9 +109,9 @@ class UserRepositoryAdapterTest {
         //Arrange
         when(userRepository.findCurrentUserInformation(anyString())).thenReturn(currentUserInformation);
         //Act
-        CurrentUserInformation currentUserInformation=userRepositoryAdapter.findCurrentUserInformation("username");
+        CurrentUserInformation currentUserInformationResponse=userRepositoryAdapter.findCurrentUserInformation("username");
         //Assert
-        assertNotNull(currentUserInformation);
+        assertNotNull(currentUserInformationResponse);
     }
 
     @Test
@@ -119,9 +119,9 @@ class UserRepositoryAdapterTest {
         //Arrange
         when(userRepository.findUserAndMembershipInfoByUserId(anyLong())).thenReturn(Optional.of(userMembershipInfo));
         //Act
-        Optional<UserMembershipInfo> userMembershipInfo=userRepositoryAdapter.findUserAndMembershipInfoByUserId(1L);
+        Optional<UserMembershipInfo> userMembershipResponse=userRepositoryAdapter.findUserAndMembershipInfoByUserId(1L);
         //Assert
-        assertTrue(userMembershipInfo.isPresent());
+        assertTrue(userMembershipResponse.isPresent());
     }
 
     @Test

@@ -1,7 +1,5 @@
 package co.com.ancas.uses_cases.user;
 
-import co.com.ancas.models.exceptions.BadRequestException;
-import co.com.ancas.models.exceptions.NotFoundException;
 import co.com.ancas.models.exceptions.UnauthorizedException;
 import co.com.ancas.models.model.Code;
 import co.com.ancas.models.model.PasswordRecovery;

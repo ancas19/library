@@ -2,14 +2,11 @@ package co.com.ancas.controllers;
 
 import co.com.ancas.exception.CustomExceptionHandler;
 import co.com.ancas.models.enums.Messages;
-import co.com.ancas.models.utils.Mapper;
-import co.com.ancas.models.utils.TestMock;
 import co.com.ancas.request.AuthLoginRequest;
 import co.com.ancas.response.AuthTokenResponse;
 import co.com.ancas.service.AuthAppService;
 import co.com.ancas.utils.RequestMocks;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import jakarta.mail.MessagingException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -19,10 +16,6 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.ResultActions;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
-
-import java.io.IOException;
-
-import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.when;
