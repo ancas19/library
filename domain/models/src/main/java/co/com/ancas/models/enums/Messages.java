@@ -84,7 +84,8 @@ public enum Messages {
     MESSAGE_PASSWORD_CHANGED("Password changed successfully"),
     MESSAGE_AUTHOR_FILES_UPLOADED("Authors uploaded by file successfully"),
     MESSAGE_BOOK_FILES_UPLOADED("Books uploaded by file successfully"),
-    MESSAGE_USER_MEMBERSHIP_UPDATED("User membership updated successfully"),;
+    MESSAGE_USER_MEMBERSHIP_UPDATED("User membership updated successfully"),
+    MESSAGE_LOGIN_SUCCESSFUL("Login successful");
     private final String message;
 
     Messages(String message) {

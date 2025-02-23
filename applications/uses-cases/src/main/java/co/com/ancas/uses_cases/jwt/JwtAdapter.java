@@ -22,7 +22,6 @@ public class JwtAdapter {
     private String secret;
     @Value("${jwt.expiration}")
     private Integer expirationTime;
-
     private final JwtRepositoryPort jwtRepositoryPort;
 
     public void saveToken(String token, TokenInformation data) {
@@ -36,9 +35,11 @@ public class JwtAdapter {
     public boolean verifyToken(String token) {
         return Objects.isNull(jwtRepositoryPort.find(token));
     }
+
     public TokenInformation getTokenInformation(String token) {
         return jwtRepositoryPort.find(token);
     }
+
     public String generateToken(UserDetails userDetails ) {
         Date issuedAt = new Date(System.currentTimeMillis());
         Date expiration = new Date(issuedAt.getTime() + expirationTime * 60* 60 * 1000);

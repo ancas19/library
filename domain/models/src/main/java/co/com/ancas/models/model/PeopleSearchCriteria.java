@@ -16,11 +16,6 @@ public class PeopleSearchCriteria {
 
     @Override
     public String toString() {
-        return "PeopleSearchCriteria{" +
-                "search='" + search + '\'' +
-                ", role='" + role + '\'' +
-                ", page=" + page +
-                ", size=" + size +
-                '}';
+        return String.format("search:%s|role:%s|page:%d|size:%d", search, role, page, size);
     }
 }

@@ -38,6 +38,7 @@ public class PostgresConnection {
     private String jdbcUser;
     @Value("${postgres.pass}")
     private String jdbcPass;
+
     @Bean
     public DataSource dataSource()  {
         HikariDataSource dataSource = new HikariDataSource();

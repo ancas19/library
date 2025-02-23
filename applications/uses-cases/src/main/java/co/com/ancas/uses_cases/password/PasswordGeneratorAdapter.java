@@ -9,12 +9,12 @@ import java.security.SecureRandom;
 
 @Component
 public class PasswordGeneratorAdapter implements IUseCase<Integer,String> {
-    private  final String UPPERCASE = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-    private  final String LOWERCASE = "abcdefghijklmnopqrstuvwxyz";
-    private  final String DIGITS = "0123456789";
-    private  final String SPECIAL_CHARACTERS = "#?!@$%^&*-";
-    private  final String ALL_CHARACTERS = UPPERCASE + LOWERCASE + DIGITS + SPECIAL_CHARACTERS;
-    private SecureRandom random = new SecureRandom();
+    private static final String UPPERCASE = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+    private static final String LOWERCASE = "abcdefghijklmnopqrstuvwxyz";
+    private static final String DIGITS = "0123456789";
+    private static final String SPECIAL_CHARACTERS = "#?!@$%^&*-";
+    private static final String ALL_CHARACTERS = UPPERCASE + LOWERCASE + DIGITS + SPECIAL_CHARACTERS;
+    private  final SecureRandom random = new SecureRandom();
     @Override
     public String execute(Integer integer) throws MessagingException, IOException {
         StringBuilder password = new StringBuilder();

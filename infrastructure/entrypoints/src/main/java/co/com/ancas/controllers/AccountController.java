@@ -30,7 +30,7 @@ import static co.com.ancas.models.enums.Messages.MESSAGE_PEOPLE_UNBLOCKED;
 public class AccountController {
     private final PeopleAppService peopleAppService;
 
-    @PostMapping("/sing-up")
+    @PostMapping("/sign-up")
     @Operation(summary = "Create People", description = "Endpoint to create People")
     public ResponseEntity<GeneralResponse<PeopleResponse>> createPeople(
             @Valid @RequestBody PeopleRequest request
@@ -44,6 +44,7 @@ public class AccountController {
                                 .build()
                 );
     }
+
     @PostMapping("/code")
     @Operation(summary = "Send code to unblock people or change password", description = "Endpoint to send code to unblock people")
     public ResponseEntity<GeneralResponse<String>> sendCodeToUnblockPeople(

@@ -1,0 +1,63 @@
+services:
+  postgres:
+    container_name: library_database
+    image: postgres:14.11
+    ports:
+      - "3235:5432"
+    environment:
+      - POSTGRES_USER=
+      - POSTGRES_PASSWORD=
+      - POSTGRES_DB=
+    volumes:
+      -  db-data:/var/lib/postgresql/data
+    networks:
+      - app-network
+  redis:
+    container_name: library_redis
+    image: redis:6.2-alpine
+    ports:
+      - "6584:6379"
+    command: /bin/sh -c "redis-server --requirepass $$REDIS_HOST_PASSWORD"
+    depends_on:
+      - postgres
+    environment:
+      - REDIS_HOST_PASSWORD=
+    networks:
+      - app-network
+  app:
+    image: ancas19/docker_library:latest
+    container_name: library_app
+    ports:
+      - "9090:9090"
+    depends_on:
+      - postgres
+    networks:
+      - app-network
+    environment:
+      - APP_PORT=
+      - CLOUDINARY_API_KEY=
+      - CLOUDINARY_API_SECRET=
+      - CLOUDINARY_CLOUD_NAME=
+      - CONTEXT_PATH=/api/library
+      - EMAIL_PASSWORD=
+      - EMAIL_USER=
+      - HIBERNATE_DDL_AUTO=none
+      - JWT_EXPIRATION=
+       - JWT_SECRET=
+      - LOGGING_LEVEL=INFO
+      - POSTGRES_DB=
+      - POSTGRES_HOST=
+      - POSTGRES_PASSWORD=
+      - POSTGRES_PORT=
+      - POSTGRES_USER=
+      - REDIS_HOST=library_redis
+      - REDIS_PASS=
+      - REDIS_PORT=
+      - REDIS_TIMEOUT=5000
+      - SHOW_SQL=true
+networks:
+  app-network:
+    driver: bridge
+volumes:
+  db-data:
+    driver: local

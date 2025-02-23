@@ -47,7 +47,7 @@ class FindBooksByCriteriaAdapterTest {
     }
 
     @Test
-    void executeNotFound() throws MessagingException, IOException {
+    void executeNotFound() {
         //Arrange
         when(bookRepositoryPort.findBooksByCriteria(bookSearchCriteria)).thenReturn(new PageImpl<>(List.of()));
         //Act

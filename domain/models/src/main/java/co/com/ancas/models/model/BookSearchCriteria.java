@@ -16,12 +16,6 @@ public class BookSearchCriteria {
 
     @Override
     public String toString() {
-        return "BookSearchCriteria{" +
-                "search='" + search + '\'' +
-                ", author='" + author + '\'' +
-                ", genre='" + genre + '\'' +
-                ", page=" + page +
-                ", size=" + size +
-                '}';
+        return String.format("search:%s|author:%s|genre:%s|page:%d|size:%d", search, author, genre, page, size);
     }
 }

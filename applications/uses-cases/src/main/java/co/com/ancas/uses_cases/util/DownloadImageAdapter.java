@@ -8,6 +8,8 @@ import org.springframework.stereotype.Component;
 
 import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
+import java.net.HttpURLConnection;
+import java.net.URI;
 import java.net.URL;
 import java.util.Base64;
 
@@ -16,10 +18,12 @@ import java.util.Base64;
 @RequiredArgsConstructor
 public class DownloadImageAdapter {
 
-    public String downloadImage(String url) {
+    public String downloadImage(String imageUrl) {
         try {
-            InputStream inputStream= new URL(url).openStream();
-
+            URL url = URI.create(imageUrl).toURL();
+            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+            connection.setRequestMethod("GET");
+            InputStream inputStream = connection.getInputStream();
             ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
             byte[] buffer = new byte[2048];
             int bytesRead;

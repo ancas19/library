@@ -2,6 +2,7 @@ package co.com.ancas.uses_cases.user;
 
 import co.com.ancas.models.enums.Messages;
 import co.com.ancas.models.exceptions.BadRequestException;
+import co.com.ancas.models.exceptions.NotFoundException;
 import co.com.ancas.models.exceptions.UnauthorizedException;
 import co.com.ancas.models.model.Code;
 import co.com.ancas.models.model.PasswordRecovery;
@@ -31,7 +32,7 @@ public class RecoveryPasswordAdapter implements IUseCaseVoid<PasswordRecovery> {
         Optional<User> userFound=this.userRepositoryPort.findUserByEmail(passwordRecovery.getEmail());
         if (userFound.isEmpty()){
             log.error("User not found with email {}", passwordRecovery.getEmail());
-            throw new BadRequestException(Messages.MESSAGE_ERROR_RECOVERY_PASSWORD.getMessage());
+            throw new UnauthorizedException(Messages.MESSAGE_ERROR_RECOVERY_PASSWORD.getMessage());
         }
         if(!passwordRecovery.getPassword().equals(passwordRecovery.getPasswordRepeat())){
             log.error("Passwords do not match");
@@ -40,7 +41,7 @@ public class RecoveryPasswordAdapter implements IUseCaseVoid<PasswordRecovery> {
         Code codeFound=codeRepositoryPort.find(passwordRecovery.getEmail());
         if(Objects.isNull(codeFound) || !codeFound.getCode().equals(passwordRecovery.getCode())){
             log.error("Code not found or does not match");
-            throw new BadRequestException(Messages.MESSAGE_ERROR_RECOVERY_PASSWORD.getMessage());
+            throw new UnauthorizedException(Messages.MESSAGE_ERROR_RECOVERY_PASSWORD.getMessage());
         }
         userFound.get().setPassword(passwordEncoder.encode(passwordRecovery.getPassword()));
         this.userRepositoryPort.save(userFound.get());

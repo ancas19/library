@@ -15,13 +15,14 @@ import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
 
-@Tag(name = "Auth")
+@Validated
 @RestController
+@Tag(name = "Auth")
 @RequiredArgsConstructor
 @RequestMapping("/v1.0/auth")
-@Validated
 public class AuthLoginController {
     private final AuthAppService authService;
+
     @PostMapping("/login")
     public ResponseEntity<GeneralResponse<AuthTokenResponse>> login(
             @Valid @RequestBody AuthLoginRequest request
@@ -29,7 +30,7 @@ public class AuthLoginController {
         return ResponseEntity.ok(
                 GeneralResponse.<AuthTokenResponse>builder()
                         .data(authService.login(request))
-                        .message("Login successful")
+                        .message(Messages.MESSAGE_LOGIN_SUCCESSFUL.getMessage())
                         .build()
         );
     }
@@ -49,3 +50,4 @@ public class AuthLoginController {
     }
 
 }
+

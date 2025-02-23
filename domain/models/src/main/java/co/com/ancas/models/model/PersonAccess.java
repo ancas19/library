@@ -7,6 +7,6 @@ import lombok.*;
 @Builder
 @Getter
 @Setter
-public class PersonAcces {
+public class PersonAccess {
     private String email;
 }

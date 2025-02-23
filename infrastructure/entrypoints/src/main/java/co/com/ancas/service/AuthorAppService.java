@@ -8,7 +8,6 @@ import co.com.ancas.response.PaginationResponse;
 import co.com.ancas.uses_cases.authors.*;
 import co.com.ancas.utils.Pagination;
 import jakarta.mail.MessagingException;
-import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Component;
@@ -58,7 +57,7 @@ public class AuthorAppService {
     }
 
     @Async
-    public void uploadAuthorsByFile(@Valid FileRequest fileRequest) throws MessagingException, IOException {
+    public void uploadAuthorsByFile(FileRequest fileRequest) throws MessagingException, IOException {
         this.uploadAuthorByFileAdapter.execute(Mapper.map(fileRequest, FileData.class));
     }
 }

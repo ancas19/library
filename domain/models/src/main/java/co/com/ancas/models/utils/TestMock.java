@@ -1,9 +1,11 @@
 package co.com.ancas.models.utils;
 
 import co.com.ancas.models.enums.Constants;
+import co.com.ancas.models.enums.TypeSearch;
 import co.com.ancas.models.model.*;
 
 import java.time.LocalDate;
+import java.util.*;
 
 public class TestMock {
      private TestMock () {
@@ -23,12 +25,12 @@ public class TestMock {
                  .dni("123456789")
                  .firstName("John")
                  .lastName("Doe")
-                 .email("john.doe@example.com")
+                 .email("john@example.com")
                  .phone("123-456-7890")
                  .role("Admin")
-                 .membership("Premium")
+                 .membership("NORMAL")
                  .profileImage("image.jpg")
-                 .username("johndoe")
+                 .username("pepegrillo")
                  .status("Active")
                  .build();
      }
@@ -48,7 +50,7 @@ public class TestMock {
                  .birthdate(LocalDate.of(1927, 3, 6))
                  .bio("Colombian dsdsdsdsdsd, short-story writer, and journalist, known for 'One Hundred Years of Solitude'.")
                  .nameFile("profile.jpg")
-                 .base64("base64EncodedStringHere")
+                 .base64("Baskljhkljhasdlfkdjhwiukdfjsdhlkjfhsdfklj")
                  .build();
      }
 
@@ -75,7 +77,7 @@ public class TestMock {
     public static AuthorInformation authorInformation() {
         return AuthorInformation.builder()
                 .id(1L)
-                .fullName("Gabriel García Márquez")
+                .fullName("Pwpw Márquez")
                 .nationality("Colombian")
                 .birthdate(LocalDate.of(1927, 3, 6))
                 .bio("Colombian novelist")
@@ -85,7 +87,7 @@ public class TestMock {
 
      public static  AuthorsSearchCriteria authorsSearchCriteria(){
          return AuthorsSearchCriteria.builder()
-                 .search("Gabriel García Márquez")
+                 .search("Martes García Márquez")
                  .page(1)
                  .size(10)
                  .build();
@@ -103,7 +105,7 @@ public class TestMock {
      public static Book book(){
          return Book.builder()
                  .id(1L)
-                 .title("One Hundred Years of Solitude")
+                 .title("One of Solitude")
                  .isbn("978-0-307-27789-1")
                  .authorId(1L) // Reference to an author stored elsewhere
                  .genreId(1l)
@@ -126,13 +128,13 @@ public class TestMock {
      public static BookCreation bookCreation(){
          return BookCreation.builder()
                  .title("Alice's Adventures in Wonderland")
-                 .isbn("978-0-307-27789-1")
+                 .isbn("978-0-787878787-27789-1")
                  .author("Lewis Carroll")
-                 .genre("Fantasy")
+                 .genre("Mistery")
                  .publishDate(LocalDate.of(1967, 5, 30))
                  .available("YES")
                  .availableCopies(5)
-                 .blurb("A novel by Colombian author Gabriel García Márquez")
+                 .blurb("A novel by English author Lewis Carroll")
                  .nameFile("cover.jpg")
                  .base64("base64EncodedStringHere")
                  .build();
@@ -148,13 +150,13 @@ public class TestMock {
     public static BookInformation bookInformation() {
          return BookInformation.builder()
                  .id(1L)
-                 .title("One Hundred Years of Solitude")
-                 .isbn("978-0-307-27789-1")
+                 .title("Litte prince")
+                 .isbn("978-7878787878-307-27789-1")
                  .author("Gabriel García Márquez")
-                 .genre("Fantasy")
+                 .genre("Humor")
                  .publishDate(LocalDate.of(1967, 5, 30))
                  .availableCopies(5)
-                 .blurb("A novel by Colombian author Gabriel García Márquez")
+                 .blurb("A novel by British author Lewis Carroll")
                  .bookImage("https://example.com/images/one-hundred-years.jpg") // URL or base64 string
                  .build();
     }
@@ -170,8 +172,8 @@ public class TestMock {
     public static BookUpdate bookUpdate() {
         return BookUpdate.builder()
                 .id(1L)
-                .title("One Hundred Years of Solitude")
-                .isbn("978-0-307-27789-1")
+                .title("The Alchemist")
+                .isbn("978-44333688-307-27789-1")
                 .author("Paulo Coelho")
                 .genre("Fantasy")
                 .publishDate(LocalDate.of(1967, 5, 30))
@@ -179,4 +181,230 @@ public class TestMock {
                 .blurb("A novel by Colombian author Paul Coelho")
                 .build();
      }
+
+
+    public static Membership membership() {
+        return Membership.builder()
+                .id(1L)
+                .membershipType("MEMBERSHIP")
+                .loanLimit(5)
+                .loanPeriodDays(23)
+                .gracePeriodDays(2)
+                .finePerDay(3.0)
+                .build();
+    }
+
+    public static UserCreation userCreation() {
+        return UserCreation.builder()
+                .id(1L)
+                .firstName("John")
+                .lastName("Doe")
+                .email("duque.doe@example.com")
+                .userType("PROFESSOR")
+                .build();
+    }
+
+    public static User user() {
+        return User.builder()
+                .id(1L)
+                .personId(1L)
+                .username("yuquita")
+                .password("password1212")
+                .roleId(1L)
+                .membershipId(1L)
+                .emailVerified(false)
+                .changePassword(true)
+                .build();
+    }
+
+
+    public static  TokenInformation tokenInformation() {
+        return TokenInformation.builder()
+                .token("TOKEN")
+                .username("USERNAME")
+                .email("PEPEQUINTE@GMAIL.COM")
+                .dni("12121212")
+                .role("ROLES")
+                .idPersona(1L)
+                .idUser(2L)
+                .build();
+    }
+
+    public static UserMembershipInfo userMembershipInfo() {
+        return UserMembershipInfo.builder()
+                .userId(1L)
+                .username("pepere")
+                .email("johndoe@example.com")
+                .membershipType("PREMIUM")
+                .loanLimit(5)
+                .loanPeriodDays(8)
+                .gracePeriodDays(3)
+                .dailyFine(1.50)
+                .build();
+     }
+
+    public static UserInformation userInformation() {
+        return UserInformation.builder()
+                .id(1L)
+                .username("aguacate")
+                .role("ADMIN")
+                .membership("FAKE")
+                .emailVerified(true)
+                .changePassword(false)
+                .build();
+     }
+
+    public static Code code() {
+        return Code.builder()
+                .email("PEPEQINTE@GMAIL.COM")
+                .code("1234569")
+                .build();
+     }
+
+    public static PasswordRecovery passwordRecovery() {
+        return PasswordRecovery.builder()
+                .email("PEPEQINTE@GMAIL.COM")
+                .code("54128")
+                .password("pepe12")
+                .passwordRepeat("pepe12")
+                .build();
+     }
+
+    public static UpdatePassword updatePassword() {
+        return UpdatePassword.builder()
+                .username("pollito")
+                .password("jojo13")
+                .confirmPassword("jojo13")
+                .build();
+     }
+
+    public static People people() {
+        return  People.builder()
+                .id(1L)
+                .dni("12345678")
+                .firstName("John")
+                .lastName("Doe")
+                .email("johndoe@example.com")
+                .phone("+1234567890")
+                .status("ACTIVE")
+                .profileImage(101L)
+                .build();
+     }
+
+    public static PeopleCreation peopleCreation() {
+       return PeopleCreation.builder()
+               .dni("12345678A")
+               .firstName("John")
+               .lastName("Doe")
+               .email("juan.doe@example.com")
+               .phone("123-456-7890")
+               .userType("Admin")
+               .status("Active")
+               .build();
+     }
+
+    public static PeopleSearchCriteria peopleSearchCriteria() {
+        return PeopleSearchCriteria.builder()
+                .search("John Doe")
+                .page(1)
+                .size(10)
+                .build();
+     }
+
+    public static PersonAccess personAccess() {
+        return PersonAccess.builder()
+                .email("pepe@email.com")
+                .build();
+    }
+
+    public static PersonCode personCode() {
+        return PersonCode.builder()
+                .email("person@email.com")
+                .code("786541")
+                .build();
+     }
+
+    public static Loan loan() {
+        return Loan.builder()
+                .id(1L)
+                .userId(123L)
+                .bookId(456L)
+                .loanDate(LocalDate.now().minusWeeks(2))
+                .dueDate(LocalDate.now().minusDays(10))
+                .returnDate(null) // Not returned yet
+                .daysDelayed(0)
+                .comments("No issues so far")
+                .fine(0.0)
+                .paid("No")
+                .build();
+     }
+
+    public static LoanInformation loanInformation() {
+        return LoanInformation.builder()
+                .id(1L)
+                .isbn("978-1234567890")
+                .title("Spring Framework Essentials")
+                .loanDate(LocalDate.now())
+                .dueDate(LocalDate.now().plusWeeks(2))
+                .returnDate(null) // Not returned yet
+                .daysDelayed(0)
+                .comments("No problems so far")
+                .fine(0.0)
+                .paid("No")
+                .build();
+     }
+
+    public static LoanSearchByUser loanSearchByUser() {
+        return LoanSearchByUser.builder()
+                .dni("12345678A")
+                .searchBook("Spring Framework")
+                .startDate(LocalDate.now().minusMonths(1))
+                .finishDate(LocalDate.now())
+                .typeSearch(TypeSearch.ACTIVE)
+                .page(1)
+                .size(10)
+                .build();
+     }
+
+    public static LoanCreation loanCreation() {
+        LoanCreation loan=LoanCreation.builder()
+                .dni("23232323")
+                .details(new ArrayList<>())
+                .build();
+        loan.getDetails().add(
+                LoanInfo.builder()
+                        .isbn("978-1234567890")
+                        .loanDate(LocalDate.now())
+                        .build()
+        );
+        return loan;
+     }
+
+    public static LoanReturn loanReturn() {
+        return LoanReturn.builder()
+                .idLoan(1L)
+                .fine(10.5)
+                .comment("There are a lot of pages missing")
+                .build();
+     }
+
+    public static Email email() {
+         return Email.builder()
+                    .recipient(List.of("main@correo.com"))
+                    .subject("Subject")
+                    .body("Body")
+                 .build();
+    }
+
+    public static CurrentUserInformation currentUserInformation() {
+        return CurrentUserInformation.builder()
+                .username("ricardo12")
+                .userId(1L)
+                .role("USER")
+                .personId(1L)
+                .dni("12345678")
+                .build();
+     }
+
+
 }

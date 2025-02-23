@@ -15,13 +15,18 @@ import java.time.Duration;
 public class CacheConfig {
     @Bean
     public RedisCacheManager cacheManager(RedisConnectionFactory connectionFactory) {
-        RedisCacheConfiguration cacheConfig = RedisCacheConfiguration.defaultCacheConfig()
-                .entryTtl(Duration.ofMinutes(10)) // TTL of 10 minutes for all caches
+        RedisCacheConfiguration defaultCacheConfig = RedisCacheConfiguration.defaultCacheConfig()
+                .entryTtl(Duration.ofMinutes(30))
                 .serializeValuesWith(RedisSerializationContext.SerializationPair.fromSerializer(new GenericJackson2JsonRedisSerializer()));
+        RedisCacheConfiguration peopleCacheConfig = defaultCacheConfig.entryTtl(Duration.ofMinutes(15));
+        RedisCacheConfiguration authorCacheConfig = defaultCacheConfig.entryTtl(Duration.ofMinutes(20));
+        RedisCacheConfiguration booksCacheConfig = defaultCacheConfig.entryTtl(Duration.ofMinutes(30));
 
         return RedisCacheManager.builder(connectionFactory)
-                .cacheDefaults(cacheConfig)
-                .withCacheConfiguration("people", cacheConfig) // Apply TTL specifically for the "people" cache
+                .cacheDefaults(defaultCacheConfig)
+                .withCacheConfiguration("people", peopleCacheConfig)
+                .withCacheConfiguration("authors", authorCacheConfig)
+                .withCacheConfiguration("books", booksCacheConfig)
                 .build();
     }
 
@@ -29,7 +34,7 @@ public class CacheConfig {
     public RedisTemplate<String, Object> redisTemplate(RedisConnectionFactory connectionFactory) {
         RedisTemplate<String, Object> template = new RedisTemplate<>();
         template.setConnectionFactory(connectionFactory);
-        template.setDefaultSerializer(new GenericJackson2JsonRedisSerializer()); // Serializer for storing objects in Redis
+        template.setDefaultSerializer(new GenericJackson2JsonRedisSerializer());
         return template;
     }
 }

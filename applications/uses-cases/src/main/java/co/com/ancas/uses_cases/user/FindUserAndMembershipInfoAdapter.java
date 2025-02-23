@@ -1,7 +1,7 @@
 package co.com.ancas.uses_cases.user;
 
 import co.com.ancas.models.enums.Messages;
-import co.com.ancas.models.exceptions.BadRequestException;
+import co.com.ancas.models.exceptions.NotFoundException;
 import co.com.ancas.models.model.UserMembershipInfo;
 import co.com.ancas.models.repositories.UserRepositoryPort;
 import co.com.ancas.uses_cases.interfaces.IUseCase;
@@ -22,7 +22,7 @@ public class FindUserAndMembershipInfoAdapter implements IUseCase<String, UserMe
     public UserMembershipInfo execute(String s) throws MessagingException, IOException {
         Optional<UserMembershipInfo> userMembershipInfoFound = userRepositoryPort.findUserAndMembershipInfo(s);
         if (userMembershipInfoFound.isEmpty()){
-            throw new BadRequestException(Messages.MESSAGE_ERROR_PERSON_NOT_FOUND.getMessage().formatted(s));
+            throw new NotFoundException(Messages.MESSAGE_ERROR_PERSON_NOT_FOUND.getMessage().formatted(s));
         }
         return userMembershipInfoFound.get();
     }

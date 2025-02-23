@@ -69,7 +69,7 @@ public class PeopleAppService {
 
     @Transactional(value = "libraryTransactionManager",rollbackFor = Exception.class)
     public void sendCodeToUnblockPeople(PersonAccessRequest personAccessRequest) throws MessagingException, IOException {
-        sendCodeToUnblockPersonAdapter.execute(Mapper.map(personAccessRequest, PersonAcces.class));
+        sendCodeToUnblockPersonAdapter.execute(Mapper.map(personAccessRequest, PersonAccess.class));
     }
 
     @Transactional(value = "libraryTransactionManager",rollbackFor = Exception.class)
