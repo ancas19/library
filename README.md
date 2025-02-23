@@ -1,3 +1,4 @@
+
 # Library APP
 ___
 This is a REST API for a library management sysrtem. The project is designed to help me to practice my backend development skills with Java and Spring Boot. It provides functionalities to manage books, authors, and users. The API is secured with JWT and has a role-based access control system.
